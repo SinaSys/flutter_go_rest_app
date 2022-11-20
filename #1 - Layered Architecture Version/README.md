@@ -22,7 +22,7 @@ User screen                |  Create-update User       |        Todo screen     
 
 
 
-Date picker                    |   Time picker             |  Post list Screen    |  Comment Screen
+Date picker                    |   Time picker             |  Create-update post    |  Comment Screen
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 ![](https://github.com/SinaSys/flutter_go_rest_app/blob/master/screenshots/date_picker.png?raw=true)|![](https://github.com/SinaSys/flutter_go_rest_app/blob/master/screenshots/time_picker.png?raw=true)|![](https://github.com/SinaSys/flutter_go_rest_app/blob/master/screenshots/create_update_post_screen.png?raw=true)|![](https://github.com/SinaSys/flutter_go_rest_app/blob/master/screenshots/post_detail_screen.png?raw=true)
 
