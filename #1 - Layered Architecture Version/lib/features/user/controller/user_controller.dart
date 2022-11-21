@@ -40,58 +40,31 @@ class UserController extends GetxController with StateMixin<List<User>> {
     return false;
   }
 
-  Future<bool> createUser(User user) async {
+  //Method template for crete/update and delete operation
+  void userOperationTemplate(Future<Either<String, bool>> apiCallback) async {
     dialogStatus.value = StatusX.loading;
-    Either<String, bool> failureOrSuccess = (await _userApi.createUser(user));
+    Either<String, bool> failureOrSuccess = await apiCallback;
+
     failureOrSuccess.fold(
       (String failure) {
         dialogStatus.value = StatusX.error;
         errorMessage = failure.obs;
-        return false;
       },
       (bool success) {
         dialogStatus.value = StatusX.success;
-        return true;
       },
     );
-    return false;
   }
 
-  Future<bool> deleteUser(User user) async {
-    dialogStatus.value = StatusX.loading;
-    Either<String, bool> failureOrSuccess = (await _userApi.deleteUser(user));
-
-    failureOrSuccess.fold(
-      (String failure) {
-        dialogStatus.value = StatusX.error;
-        errorMessage = failure.obs;
-        return false;
-      },
-      (bool success) {
-        dialogStatus.value = StatusX.success;
-        return true;
-      },
-    );
-
-    return false;
+  void createUser(User user) {
+    userOperationTemplate(_userApi.createUser(user));
   }
 
-  Future<bool> updateUser(User user) async {
-    dialogStatus.value = StatusX.loading;
-    Either<String, bool> failureOrSuccess = (await _userApi.updateUser(user));
+  void deleteUser(User user) {
+    userOperationTemplate(_userApi.deleteUser(user));
+  }
 
-    failureOrSuccess.fold(
-      (String failure) {
-        dialogStatus.value = StatusX.error;
-        errorMessage = failure.obs;
-        return false;
-      },
-      (bool success) {
-        dialogStatus.value = StatusX.success;
-        return true;
-      },
-    );
-
-    return false;
+  void updateUser(User user) {
+    userOperationTemplate(_userApi.updateUser(user));
   }
 }

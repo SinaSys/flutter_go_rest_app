@@ -36,54 +36,31 @@ class PostController extends GetxController with StateMixin<List<Post>> {
     return false;
   }
 
-  Future<bool> createPost(Post post) async {
+  //Method template for crete/update and delete operation
+  void postOperationTemplate(Future<Either<String, bool>> apiCallback) async {
     postStatus.value = PostStatus.loading;
-    Either<String, bool> failureOrSuccess = await _postApi.createPost(post);
+    Either<String, bool> failureOrSuccess = await apiCallback;
+
     failureOrSuccess.fold(
       (String failure) {
         postStatus.value = PostStatus.failure;
         errorMessage = failure.obs;
-        return false;
       },
       (bool success) {
         postStatus.value = PostStatus.success;
-        return true;
       },
     );
-    return false;
   }
 
-  Future<bool> updatePost(Post post) async {
-    postStatus.value = PostStatus.loading;
-    Either<String, bool> failureOrSuccess = await _postApi.updatePost(post);
-    failureOrSuccess.fold(
-      (String failure) {
-        postStatus.value = PostStatus.failure;
-        errorMessage = failure.obs;
-        return false;
-      },
-      (bool success) {
-        postStatus.value = PostStatus.success;
-        return true;
-      },
-    );
-    return false;
+  void createPost(Post post) {
+    postOperationTemplate(_postApi.createPost(post));
   }
 
-  Future<bool> deletePost(Post post) async {
-    postStatus.value = PostStatus.loading;
-    Either<String, bool> failureOrSuccess = await _postApi.deletePost(post);
-    failureOrSuccess.fold(
-      (String failure) {
-        postStatus.value = PostStatus.failure;
-        errorMessage = failure.obs;
-        return false;
-      },
-      (bool success) {
-        postStatus.value = PostStatus.success;
-        return true;
-      },
-    );
-    return false;
+  void updatePost(Post post) async {
+    postOperationTemplate(_postApi.updatePost(post));
+  }
+
+  void deletePost(Post post) async {
+    postOperationTemplate(_postApi.deletePost(post));
   }
 }

@@ -36,57 +36,32 @@ class ToDoController extends GetxController with StateMixin<List<ToDo>> {
     return false;
   }
 
-  Future<bool> createTodo(ToDo todo) async {
+  //Method template for crete/update and delete operation
+  void todoOperationTemplate(Future<Either<String, bool>> apiCallback) async {
     statusX.value = StatusX.loading;
-    Either<String, bool> failureOrSuccess = await _todoApi.createTodo(todo);
+    Either<String, bool> failureOrSuccess = await apiCallback;
+
     failureOrSuccess.fold(
-      (String failure) {
+          (String failure) {
+            statusX.value = StatusX.error;
         errorMessage = failure.obs;
-        statusX.value = StatusX.error;
-        return false;
       },
-      (bool success) {
-        statusX.value = StatusX.success;
-        return true;
+          (bool success) {
+            statusX.value = StatusX.success;
       },
     );
-    return false;
   }
 
-  Future<bool> deleteTodo(ToDo todoObject) async {
-    statusX.value = StatusX.loading;
-    Either<String, bool> failureOrSuccess =
-        await _todoApi.deleteTodo(todoObject);
-    failureOrSuccess.fold(
-      (String failure) {
-        statusX.value = StatusX.error;
-        errorMessage = failure.obs;
-        return false;
-      },
-      (bool success) {
-        statusX.value = StatusX.success;
-        return true;
-      },
-    );
-    return false;
+  void createTodo(ToDo todo) async {
+    todoOperationTemplate(_todoApi.createTodo(todo));
   }
 
-  Future<bool> updateTodo(ToDo todoObject) async {
-    statusX.value = StatusX.loading;
-    Either<String, bool> failureOrSuccess =
-        await _todoApi.updateTodo(todoObject);
-    failureOrSuccess.fold(
-      (String failure) {
-        statusX.value = StatusX.error;
-        errorMessage = failure.obs;
+  void deleteTodo(ToDo todo) async {
+    todoOperationTemplate(_todoApi.deleteTodo(todo));
 
-        return false;
-      },
-      (bool success) {
-        statusX.value = StatusX.success;
-        return true;
-      },
-    );
-    return false;
+  }
+
+  void updateTodo(ToDo todo) async {
+    todoOperationTemplate(_todoApi.updateTodo(todo));
   }
 }

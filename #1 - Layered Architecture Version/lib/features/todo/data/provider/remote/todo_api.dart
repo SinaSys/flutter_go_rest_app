@@ -3,14 +3,12 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-import '../../../../../common/network/dio_client.dart';
+import '../../../../../common/network/api_base.dart';
 import '../../../../../common/network/dio_exception.dart';
 import '../../../../../core/api_config.dart';
 import '../../model/todo.dart';
 
-class ToDoApi {
-  final DioClient dioClient = DioClient();
-
+class ToDoApi extends ApiBase {
   Future<Either<String, List<ToDo>>> getTodos(
     int userId, {
     Status? status,
@@ -36,37 +34,20 @@ class ToDoApi {
   }
 
   Future<Either<String, bool>> createTodo(ToDo todo) async {
-    try {
-      await dioClient.dio!.post(ApiConfig.todos, data: todo.toJson());
-
-      return right(true);
-    } on DioError catch (e) {
-      final errorMessage = DioExceptions.fromDioError(e).toString();
-      return left(errorMessage);
-    }
+    return await requestMethodTemplate(
+      dioClient.dio!.post(ApiConfig.todos, data: todo),
+    );
   }
 
   Future<Either<String, bool>> deleteTodo(ToDo todo) async {
-    try {
-      await dioClient.dio!.delete("${ApiConfig.todos}/${todo.id}");
-
-      return right(true);
-    } on DioError catch (e) {
-      final errorMessage = DioExceptions.fromDioError(e).toString();
-      return left(errorMessage);
-    }
+    return await requestMethodTemplate(
+      dioClient.dio!.delete("${ApiConfig.todos}/${todo.id}"),
+    );
   }
 
   Future<Either<String, bool>> updateTodo(ToDo todo) async {
-    try {
-      await dioClient.dio!.put(
-        "${ApiConfig.todos}/${todo.id}",
-        data: todo.toJson(),
-      );
-      return right(true);
-    } on DioError catch (e) {
-      final errorMessage = DioExceptions.fromDioError(e).toString();
-      return left(errorMessage);
-    }
+    return await requestMethodTemplate(
+      dioClient.dio!.put("${ApiConfig.todos}/${todo.id}", data: todo),
+    );
   }
 }
