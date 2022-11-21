@@ -2,6 +2,7 @@ import 'package:layered_architecture/core/app_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../common/controller/api_operation.dart';
 import '../../../../common/dialog/progress_dialog.dart';
 import '../../../../common/dialog/retry_dialog.dart';
 import '../../../../common/widget/text_input.dart';
@@ -110,12 +111,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         builder: (_) {
                           return Obx(
                             () {
-                              switch (postController.postStatus.value) {
-                                case PostStatus.loading:
+                              switch (postController.apiStatus.value) {
+                                case ApiState.loading:
                                   return ProgressDialog(
                                       title: "${widget.mode.name}ing post...",
                                       isProgressed: true);
-                                case PostStatus.success:
+                                case ApiState.success:
                                   return ProgressDialog(
                                       title:
                                           "successfully ${widget.mode.name}ed",
@@ -124,7 +125,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                         Navigator.pop(context, true);
                                       },
                                       isProgressed: false);
-                                case PostStatus.failure:
+                                case ApiState.failure:
                                   return RetryDialog(
                                     title: postController.errorMessage.value,
                                     onRetryPressed: () {

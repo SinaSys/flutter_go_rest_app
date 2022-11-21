@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:layered_architecture/core/app_extension.dart';
 
+import '../../../../common/controller/api_operation.dart';
 import '../../../../common/widget/date_time_picker.dart';
 import '../../../../common/widget/drop_down.dart';
 import '../../../../common/widget/empty_widget.dart';
 import '../../../../common/widget/popup_menu.dart';
 import '../../../../common/widget/spinkit_indicator.dart';
 import '../../../../common/widget/text_input.dart';
-import '../../../user/controller/user_controller.dart';
 import '../../../../common/dialog/retry_dialog.dart';
 import '../../../../common/dialog/progress_dialog.dart';
 import '../../../user/data/model/user.dart';
@@ -112,11 +112,11 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
       builder: (_) {
         return Obx(
           () {
-            switch (_controller.statusX.value) {
-              case StatusX.loading:
+            switch (_controller.apiStatus.value) {
+              case ApiState.loading:
                 return ProgressDialog(
                     title: "${mode.name}ing task...", isProgressed: true);
-              case StatusX.success:
+              case ApiState.success:
                 return ProgressDialog(
                     title: "successfully ${mode.name}ed",
                     onPressed: () {
@@ -124,7 +124,7 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                       Navigator.pop(context);
                     },
                     isProgressed: false);
-              case StatusX.error:
+              case ApiState.failure:
                 return RetryDialog(
                   title: _controller.errorMessage.value,
                   onRetryPressed: () {
@@ -231,11 +231,11 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
           builder: (_) {
             return Obx(
               () {
-                switch (_controller.statusX.value) {
-                  case StatusX.loading:
+                switch (_controller.apiStatus.value) {
+                  case ApiState.loading:
                     return const ProgressDialog(
                         title: "Deleting task...", isProgressed: true);
-                  case StatusX.success:
+                  case ApiState.success:
                     return ProgressDialog(
                         title: "successfully deleted",
                         onPressed: () {
@@ -243,7 +243,7 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                           Navigator.pop(context);
                         },
                         isProgressed: false);
-                  case StatusX.error:
+                  case ApiState.failure:
                     return RetryDialog(
                       title: _controller.errorMessage.value,
                       onRetryPressed: () => _controller.deleteTodo(todo),

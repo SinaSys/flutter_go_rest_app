@@ -9,13 +9,12 @@ class CommentController extends GetxController with StateMixin<List<Comment>> {
 
   final CommentApi _commentApi = CommentApi();
 
-  Future<bool> getUserComments(int postId) async {
+  Future<void> getUserComments(int postId) async {
     change(null, status: RxStatus.loading());
     comments = (await _commentApi.getUserComments(postId)).obs;
     comments?.value.fold(
       (String failure) {
         change(null, status: RxStatus.error(failure));
-        return false;
       },
       (List<Comment> comments) {
         if (comments.isEmpty) {
@@ -23,10 +22,8 @@ class CommentController extends GetxController with StateMixin<List<Comment>> {
           return true;
         } else {
           change(comments, status: RxStatus.success());
-          return true;
         }
       },
     );
-    return false;
   }
 }

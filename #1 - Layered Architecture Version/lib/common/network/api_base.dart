@@ -7,6 +7,7 @@ import 'dio_exception.dart';
 abstract class ApiBase {
   final DioClient dioClient = DioClient();
 
+  //Method template for crete/update and delete operation on Api classes
   Future<Either<String, bool>> requestMethodTemplate(
       Future<Response<dynamic>> apiCallback) async {
     try {

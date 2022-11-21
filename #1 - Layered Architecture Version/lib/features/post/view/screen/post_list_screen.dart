@@ -3,6 +3,7 @@ import 'package:layered_architecture/features/post/view/screen/post_detail_scree
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../common/controller/api_operation.dart';
 import '../../../../common/dialog/progress_dialog.dart';
 import '../../../../common/dialog/retry_dialog.dart';
 import '../../../../common/widget/empty_widget.dart';
@@ -115,11 +116,11 @@ class _PostListScreenState extends State<PostListScreen> {
       builder: (_) {
         return Obx(
           () {
-            switch (postController.postStatus.value) {
-              case PostStatus.loading:
+            switch (postController.apiStatus.value) {
+              case ApiState.loading:
                 return const ProgressDialog(
                     title: "Deleting post...", isProgressed: true);
-              case PostStatus.success:
+              case ApiState.success:
                 return ProgressDialog(
                     title: "successfully deleted",
                     onPressed: () {
@@ -127,7 +128,7 @@ class _PostListScreenState extends State<PostListScreen> {
                       Navigator.pop(context);
                     },
                     isProgressed: false);
-              case PostStatus.failure:
+              case ApiState.failure:
                 return RetryDialog(
                   title: postController.errorMessage.value,
                   onRetryPressed: () => postController.deletePost(post),

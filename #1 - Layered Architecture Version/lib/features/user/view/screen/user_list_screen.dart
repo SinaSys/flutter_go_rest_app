@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../common/controller/api_operation.dart';
 import '../../../../common/dialog/create_dialog.dart';
 import '../../../../common/dialog/delete_dialog.dart';
 import '../../../../common/dialog/progress_dialog.dart';
@@ -71,11 +72,11 @@ class _UserListScreenState extends State<UserListScreen> {
             builder: (_) {
               return Obx(
                 () {
-                  switch (_controller.dialogStatus.value) {
-                    case StatusX.loading:
+                  switch (_controller.apiStatus.value) {
+                    case ApiState.loading:
                       return const ProgressDialog(
                           title: "Creating user...", isProgressed: true);
-                    case StatusX.success:
+                    case ApiState.success:
                       return ProgressDialog(
                           title: "successfully created",
                           onPressed: () {
@@ -83,7 +84,7 @@ class _UserListScreenState extends State<UserListScreen> {
                             Navigator.pop(context);
                           },
                           isProgressed: false);
-                    case StatusX.error:
+                    case ApiState.failure:
                       return RetryDialog(
                         title: _controller.errorMessage.value,
                         onRetryPressed: () {
@@ -164,11 +165,11 @@ class _UserListScreenState extends State<UserListScreen> {
         builder: (_) {
           return Obx(
             () {
-              switch (_controller.dialogStatus.value) {
-                case StatusX.loading:
+              switch (_controller.apiStatus.value) {
+                case ApiState.loading:
                   return const ProgressDialog(
                       title: "Deleting user...", isProgressed: true);
-                case StatusX.success:
+                case ApiState.success:
                   return ProgressDialog(
                       title: "successfully deleted",
                       onPressed: () {
@@ -176,7 +177,7 @@ class _UserListScreenState extends State<UserListScreen> {
                         Navigator.pop(context);
                       },
                       isProgressed: false);
-                case StatusX.error:
+                case ApiState.failure:
                   return RetryDialog(
                     title: _controller.errorMessage.value,
                     onRetryPressed: () {
@@ -209,11 +210,11 @@ class _UserListScreenState extends State<UserListScreen> {
         builder: (_) {
           return Obx(
             () {
-              switch (_controller.dialogStatus.value) {
-                case StatusX.loading:
+              switch (_controller.apiStatus.value) {
+                case ApiState.loading:
                   return const ProgressDialog(
                       title: "Updating user...", isProgressed: true);
-                case StatusX.success:
+                case ApiState.success:
                   return ProgressDialog(
                       title: "successfully updated",
                       onPressed: () {
@@ -221,7 +222,7 @@ class _UserListScreenState extends State<UserListScreen> {
                         Navigator.pop(context);
                       },
                       isProgressed: false);
-                case StatusX.error:
+                case ApiState.failure:
                   return RetryDialog(
                     title: _controller.errorMessage.value,
                     onRetryPressed: () {

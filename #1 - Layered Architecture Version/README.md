@@ -70,7 +70,10 @@ Error state                    |   Empty state             |  Warning dialog    
 📂lib
  │───main.dart  
  │───📂common  
+ │   │───📂controller
+ │   │   └──api_operation.dart
  │   │───📂network
+ │   │   │──api_base.dart
  │   │   │──dio_client.dart
  │   │   │──dio_exception.dart
  │   │   └──dio_interceptor.dart
