@@ -1,13 +1,16 @@
 # 🔥 Go Rest app
 
+![](https://github.com/SinaSys/flutter_go_rest_app/blob/master/screenshots/go_rest.jpg?raw=true)
 
-In this project, we are going to build a user management app using flutter. we have used [go rest](https://gorest.co.in/) api to make http request methods. This API provides all sorts of methods that we wanted: GET, POST, PUT and DELETE. We will call all End-points (users/todos/posts/comments) provided to us by go rest api using the Dio package in our app. we have performed different operations like select, add, edit, and remove user and also user posts/todos and comments.
+
+
+In this project, we are going to build a user management app using flutter. we have used [go rest](https://gorest.co.in/) api to make http request methods. This API provides all sorts of methods that we wanted: GET, POST, PUT and DELETE. We will call all End-points (users/todos/posts/comments) provided to us by go rest api using the Dio package in our app. We have performed different operations like select, add, edit, and remove user and also user posts/todos and comments.
 <br/><br/><br/>
 
 
 ## ❗️ Api limitation 
 
-• In user endpoint there are ten user objects by default. if you delete any of them, it will be replaced with new json object. This means that the length of user list will always equal to ten and you can't create more than ten user objects. This will also be true for when you want to add query parameter to the users.
+• In user endpoint there are ten user objects by default. If you delete any of them, it will be replaced with new json object. This means that the length of user list will always equal to ten and you can't create more than ten user objects. This will also be true for when you want to add query parameter to the users.
 
 • Request methods PUT, POST, PATCH, DELETE needs access token, which needs to be passed with "Authorization" header as Bearer token that I have already put my own token inside app, but if you get Unauthorized Error (401) go to this [link](https://gorest.co.in/consumer/login) and get new token and replace it with old token in api_config file inside core directory.
 
