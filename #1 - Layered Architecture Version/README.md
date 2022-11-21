@@ -36,7 +36,7 @@ Error state                    |   Empty state             |  Warning dialog    
 
 ## 🧩 Entity Relationship Diagram (ERD)
 <p align="center">
-  <img src="https://github.com/SinaSys/root/blob/master/screenshots/erd.png?raw=true">
+  <img src="https://github.com/SinaSys/flutter_go_rest_app/blob/master/screenshots/erd.png?raw=true">
 </p>
 
 
