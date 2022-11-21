@@ -1,14 +1,10 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 
 import '../../../../../common/network/api_base.dart';
-import '../../../../../common/network/dio_exception.dart';
 import '../../../../../core/api_config.dart';
 import '../../model/todo.dart';
 
-class ToDoApi extends ApiBase {
+class ToDoApi extends ApiBase<ToDo> {
   Future<Either<String, List<ToDo>>> getTodos(
     int userId, {
     Status? status,
@@ -20,17 +16,12 @@ class ToDoApi extends ApiBase {
     if (status != null && status != Status.all) {
       queryParameters.addAll({'status': status.name});
     }
+    Future<Either<String, List<ToDo>>> result = getData(
+      dioClient.dio!.get(ApiConfig.todos, queryParameters: queryParameters),
+      ToDo.fromJson,
+    );
 
-    try {
-      final Response response = await dioClient.dio!
-          .get(ApiConfig.todos, queryParameters: queryParameters);
-
-      final List<ToDo> todos = toDoFromJson(json.encode(response.data));
-      return right(todos);
-    } on DioError catch (e) {
-      final errorMessage = DioExceptions.fromDioError(e).toString();
-      return left(errorMessage);
-    }
+    return result;
   }
 
   Future<Either<String, bool>> createTodo(ToDo todo) async {

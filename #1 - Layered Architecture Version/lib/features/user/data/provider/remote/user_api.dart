@@ -1,17 +1,15 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:layered_architecture/common/network/api_base.dart';
 
 import '../../../../../core/api_config.dart';
 import '../../model/user.dart';
-import '../../../../../common/network/dio_exception.dart';
 
-class UserApi extends ApiBase {
+class UserApi extends ApiBase<User> {
   //Get user list | Filter user list by gender or status
-  Future<Either<String, List<User>>> getUserList(
-      {Gender? gender, UserStatus? status}) async {
+  Future<Either<String, List<User>>> getUserList({
+    Gender? gender,
+    UserStatus? status,
+  }) async {
     Map<String, String> queryParameters = <String, String>{};
 
     if (gender != null && gender != Gender.all) {
@@ -22,16 +20,12 @@ class UserApi extends ApiBase {
       queryParameters.addAll({'status': status.name});
     }
 
-    try {
-      final Response response = await dioClient.dio!
-          .get(ApiConfig.users, queryParameters: queryParameters);
+    Future<Either<String, List<User>>> result = getData(
+      dioClient.dio!.get(ApiConfig.users, queryParameters: queryParameters),
+      User.fromJson,
+    );
 
-      final List<User> users = userFromJson(json.encode(response.data));
-      return right(users);
-    } on DioError catch (e) {
-      final errorMessage = DioExceptions.fromDioError(e).toString();
-      return left(errorMessage);
-    }
+    return result;
   }
 
   //Create new user

@@ -1,14 +1,7 @@
-import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/foundation.dart' show immutable;
 
 part 'post.g.dart';
-
-List<Post> postFromJson(String str) =>
-    List<Post>.from(json.decode(str).map((x) => Post.fromJson(x)));
-
-String postToJson(List<Post> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 @immutable
 @JsonSerializable()

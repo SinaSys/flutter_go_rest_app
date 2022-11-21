@@ -1,13 +1,8 @@
-import 'dart:convert';
-
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:flutter/foundation.dart' show immutable;
 
 part 'todo.g.dart';
-
-List<ToDo> toDoFromJson(String str) =>
-    List<ToDo>.from(json.decode(str).map((x) => ToDo.fromJson(x)));
 
 @immutable
 @JsonSerializable()

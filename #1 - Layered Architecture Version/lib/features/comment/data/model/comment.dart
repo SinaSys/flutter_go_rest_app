@@ -1,15 +1,8 @@
-import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:flutter/foundation.dart' show immutable;
 
 part 'comment.g.dart';
-
-List<Comment> commentFromJson(String str) =>
-    List<Comment>.from(json.decode(str).map((x) => Comment.fromJson(x)));
-
-String commentToJson(List<Comment> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 @immutable
 @JsonSerializable()
