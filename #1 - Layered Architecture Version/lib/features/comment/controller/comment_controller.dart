@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 
+import '../../../common/controller/api_operation.dart';
 import '../data/model/comment.dart';
 import '../data/provider/remote/comment_api.dart';
 
-class CommentController extends GetxController with StateMixin<List<Comment>> {
+class CommentController extends GetxController
+    with StateMixin<List<Comment>>, ApiOperationMixin {
   Rx<Either<String, List<Comment>>>? comments;
 
   final CommentApi _commentApi = CommentApi();
@@ -25,5 +27,13 @@ class CommentController extends GetxController with StateMixin<List<Comment>> {
         }
       },
     );
+  }
+
+  void createComment(Comment comment) {
+    requestMethodTemplate(_commentApi.createComment(comment));
+  }
+
+  void deleteComment(Comment comment) {
+    requestMethodTemplate(_commentApi.deleteComment(comment));
   }
 }

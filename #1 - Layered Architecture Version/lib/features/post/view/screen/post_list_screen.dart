@@ -3,8 +3,6 @@ import 'package:layered_architecture/features/post/view/screen/post_detail_scree
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../common/controller/api_operation.dart';
-import '../../../../common/dialog/progress_dialog.dart';
 import '../../../../common/dialog/retry_dialog.dart';
 import '../../../../common/widget/empty_widget.dart';
 import '../../../../common/widget/spinkit_indicator.dart';
@@ -109,37 +107,6 @@ class _PostListScreenState extends State<PostListScreen> {
     );
   }
 
-  void deletePost(Post post) {
-    postController.deletePost(post);
-    showDialog(
-      context: context,
-      builder: (_) {
-        return Obx(
-          () {
-            switch (postController.apiStatus.value) {
-              case ApiState.loading:
-                return const ProgressDialog(
-                    title: "Deleting post...", isProgressed: true);
-              case ApiState.success:
-                return ProgressDialog(
-                    title: "successfully deleted",
-                    onPressed: () {
-                      postController.getPosts(widget.user);
-                      Navigator.pop(context);
-                    },
-                    isProgressed: false);
-              case ApiState.failure:
-                return RetryDialog(
-                  title: postController.errorMessage.value,
-                  onRetryPressed: () => postController.deletePost(post),
-                );
-            }
-          },
-        );
-      },
-    );
-  }
-
   Widget userPostItem(List<Post> posts) {
     return Expanded(
       child: ListView.builder(
@@ -147,101 +114,52 @@ class _PostListScreenState extends State<PostListScreen> {
         itemCount: posts.length,
         itemBuilder: (_, index) {
           Post post = posts[index];
-          return Dismissible(
-            key: Key("$index"),
-            onDismissed: (DismissDirection direction) async {
-              if (direction == DismissDirection.startToEnd) {
-                deletePost(post);
-              }
-
-              if (direction == DismissDirection.endToStart) {
-                var resultFromCreatePostScreen = await Navigator.push(
+          return Center(
+            child: GestureDetector(
+              onTap: () async {
+                var resultFromPostDetailScreen = await Navigator.push(
                   _,
                   MaterialPageRoute(
                     builder: (_) {
-                      return CreatePostScreen(
-                          user: widget.user, post: post, mode: PostMode.update);
+                      return PostDetailScreen(post: post, user: widget.user);
                     },
                   ),
                 );
-                if (resultFromCreatePostScreen != null &&
-                    resultFromCreatePostScreen) {
+
+                if (resultFromPostDetailScreen != null &&
+                    resultFromPostDetailScreen) {
                   postController.getPosts(widget.user);
                 }
-              }
-            },
-            background: Row(
-              children: [
-                const SizedBox(width: 10),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.redAccent,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Icon(Icons.delete, color: Colors.white),
+              },
+              child: Card(
+                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
                 ),
-              ],
-            ),
-            secondaryBackground: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF4CAF50),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Icon(Icons.edit, color: Colors.white),
-                ),
-                const SizedBox(width: 10),
-              ],
-            ),
-            child: Center(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    _,
-                    MaterialPageRoute(
-                      builder: (_) {
-                        return PostDetailScreen(post: post);
-                      },
-                    ),
-                  );
-                },
-                child: Card(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                post.title,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(height: 10),
-                              Text(post.body,
-                                  maxLines: 3, overflow: TextOverflow.ellipsis)
-                            ],
-                          ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              post.title,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(post.body,
+                                maxLines: 3, overflow: TextOverflow.ellipsis)
+                          ],
                         ),
-                        const Icon(Icons.arrow_forward_ios_sharp)
-                      ],
-                    ),
+                      ),
+                      const Icon(Icons.arrow_forward_ios_sharp)
+                    ],
                   ),
                 ),
               ),

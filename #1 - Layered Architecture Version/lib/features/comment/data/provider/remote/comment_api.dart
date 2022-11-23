@@ -14,4 +14,16 @@ class CommentApi extends ApiBase<Comment> {
 
     return result;
   }
+
+  Future<Either<String, bool>> createComment(Comment comment) async {
+    return await requestMethodTemplate(
+      dioClient.dio!.post(ApiConfig.comments, data: comment),
+    );
+  }
+
+  Future<Either<String, bool>> deleteComment(Comment comment) async {
+    return await requestMethodTemplate(
+      dioClient.dio!.delete("${ApiConfig.comments}/${comment.id}"),
+    );
+  }
 }

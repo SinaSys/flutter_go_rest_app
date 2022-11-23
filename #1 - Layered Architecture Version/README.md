@@ -59,8 +59,7 @@ Error state                    |   Empty state             |  Warning dialog    
 • Read, create, update and delete user todos
 • Filter todos by status 
 • Read, create, update and delete user posts
-• Deleting and updating post items by swipe them to right or left side
-• Displaying user comments for each post 
+• Display, create and delete user comments for each post 
 • Get date/time from user by Date/Time picker
 • State management with GetX 
 ```

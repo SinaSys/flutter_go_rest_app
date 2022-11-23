@@ -12,8 +12,6 @@ import '../../data/model/post.dart';
 
 enum PostMode { create, update }
 
-final formKey = GlobalKey<FormState>();
-
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen(
       {Key? key, required this.user, this.mode = PostMode.create, this.post})
@@ -32,6 +30,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   String postTitle = "";
   String postBody = "";
   int postId = 0;
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -121,8 +120,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                       title:
                                           "successfully ${widget.mode.name}ed",
                                       onPressed: () {
-                                        Navigator.pop(context);
-                                        Navigator.pop(context, true);
+                                        if (widget.mode == PostMode.update) {
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                          Navigator.pop(context, true);
+                                        } else {
+                                          Navigator.pop(context);
+                                          Navigator.pop(context, true);
+                                        }
                                       },
                                       isProgressed: false);
                                 case ApiState.failure:
