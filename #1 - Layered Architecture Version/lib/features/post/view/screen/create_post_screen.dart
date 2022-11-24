@@ -118,15 +118,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                 case ApiState.success:
                                   return ProgressDialog(
                                       title:
-                                          "successfully ${widget.mode.name}ed",
+                                          "Successfully ${widget.mode.name}ed",
                                       onPressed: () {
                                         if (widget.mode == PostMode.update) {
-                                          Navigator.pop(context);
-                                          Navigator.pop(context);
-                                          Navigator.pop(context, true);
+                                          pop(context, 3);
                                         } else {
-                                          Navigator.pop(context);
-                                          Navigator.pop(context, true);
+                                          pop(context, 2);
                                         }
                                       },
                                       isProgressed: false);

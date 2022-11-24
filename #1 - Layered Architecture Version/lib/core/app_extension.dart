@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'app_asset.dart';
 
 extension StringExtension on String {
@@ -37,5 +39,13 @@ extension MapExtension on Map {
       var mapValues = entries.first.value;
       return "?$firstKey=$mapValues";
     }
+  }
+}
+
+
+//Helper functions
+void pop(BuildContext context, int returnedLevel) {
+  for (var i = 0; i < returnedLevel; ++i) {
+    Navigator.pop(context, true);
   }
 }

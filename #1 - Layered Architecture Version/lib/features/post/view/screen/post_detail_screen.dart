@@ -9,6 +9,7 @@ import '../../../../common/dialog/retry_dialog.dart';
 import '../../../../common/widget/empty_widget.dart';
 import '../../../../common/widget/spinkit_indicator.dart';
 import '../../../../core/app_asset.dart';
+import '../../../../core/app_extension.dart';
 import '../../../comment/controller/comment_controller.dart';
 import '../../../user/data/model/user.dart';
 import '../../controller/post_controller.dart';
@@ -173,10 +174,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
               case ApiState.success:
                 return ProgressDialog(
                   title: "successfully deleted",
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.pop(context, true);
-                  },
+                  onPressed: () => pop(context, 2),
                   isProgressed: false,
                 );
               case ApiState.failure:
