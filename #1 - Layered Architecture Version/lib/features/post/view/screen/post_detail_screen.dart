@@ -199,15 +199,9 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
         ),
         content: Row(
           children: [
-            const Icon(
-              Icons.info,
-              color: Color(0xFF2f87e8),
-            ),
+            const Icon(Icons.info, color: Color(0xFF2f87e8)),
             const SizedBox(width: 10),
-            Text(
-              message,
-              style: const TextStyle(color: Colors.white),
-            )
+            Text(message, style: const TextStyle(color: Colors.white))
           ],
         ),
         behavior: SnackBarBehavior.floating,

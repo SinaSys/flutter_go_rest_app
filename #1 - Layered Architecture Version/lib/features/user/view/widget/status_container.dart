@@ -22,10 +22,11 @@ class StatusContainer extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: status == UserStatus.inactive
-                    ? const Color(0xffc5d0e3)
-                    : const Color(0xFF7d90b2)),
+              shape: BoxShape.circle,
+              color: status == UserStatus.inactive
+                  ? const Color(0xffc5d0e3)
+                  : const Color(0xFF7d90b2),
+            ),
             width: 15,
             height: 15,
           ),

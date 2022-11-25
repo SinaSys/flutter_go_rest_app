@@ -59,9 +59,7 @@ class _PostListScreenState extends State<PostListScreen> {
         var resultFromCreatePostScreen = await Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) {
-              return CreatePostScreen(user: widget.user);
-            },
+            builder: (_) => CreatePostScreen(user: widget.user),
           ),
         );
         if (resultFromCreatePostScreen != null && resultFromCreatePostScreen) {

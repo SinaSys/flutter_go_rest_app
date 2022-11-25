@@ -68,10 +68,7 @@ class TodoListItem extends StatelessWidget {
                 IconButton(
                   splashRadius: 20.0,
                   onPressed: () => onDeletePressed(item),
-                  icon: const Icon(
-                    Icons.delete,
-                    color: Color(0xFFF44336),
-                  ),
+                  icon: const Icon(Icons.delete, color: Color(0xFFF44336)),
                 ),
               ],
             ),

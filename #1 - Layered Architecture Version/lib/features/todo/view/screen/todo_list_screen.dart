@@ -37,9 +37,7 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
         icon: const Icon(Icons.arrow_back),
       ),
       centerTitle: true,
-      title: const Text(
-        "Todos",
-      ),
+      title: const Text("Todos"),
     );
   }
 
