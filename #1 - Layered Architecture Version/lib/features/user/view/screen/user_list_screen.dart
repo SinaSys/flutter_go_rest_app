@@ -45,9 +45,7 @@ class _UserListScreenState extends State<UserListScreen> {
         PopupMenu<Gender>(
           icon: Icons.filter_alt_outlined,
           items: Gender.values,
-          onChanged: (Gender value) {
-            _controller.getUserList(gender: value);
-          },
+          onChanged: (Gender value) => _controller.getUserList(gender: value),
         )
       ],
       title: const Text("Users"),
@@ -78,18 +76,17 @@ class _UserListScreenState extends State<UserListScreen> {
                           title: "Creating user...", isProgressed: true);
                     case ApiState.success:
                       return ProgressDialog(
-                          title: "successfully created",
-                          onPressed: () {
-                            _controller.getUserList();
-                            Navigator.pop(context);
-                          },
-                          isProgressed: false);
+                        title: "Successfully created",
+                        onPressed: () {
+                          _controller.getUserList();
+                          Navigator.pop(context);
+                        },
+                        isProgressed: false,
+                      );
                     case ApiState.failure:
                       return RetryDialog(
                         title: _controller.errorMessage.value,
-                        onRetryPressed: () {
-                          _controller.createUser(user);
-                        },
+                        onRetryPressed: () => _controller.createUser(user),
                       );
                   }
                 },
@@ -115,18 +112,20 @@ class _UserListScreenState extends State<UserListScreen> {
                 Text(
                   user.name,
                   style: const TextStyle(
-                      fontSize: 16,
-                      overflow: TextOverflow.ellipsis,
-                      fontWeight: FontWeight.w700),
+                    fontSize: 16,
+                    overflow: TextOverflow.ellipsis,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
                 const SizedBox(height: 10),
                 Text(
                   user.email,
                   style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                      overflow: TextOverflow.ellipsis,
-                      fontWeight: FontWeight.w500),
+                    color: Colors.grey,
+                    fontSize: 12,
+                    overflow: TextOverflow.ellipsis,
+                    fontWeight: FontWeight.w500,
+                  ),
                 )
               ],
             ),
@@ -168,21 +167,22 @@ class _UserListScreenState extends State<UserListScreen> {
               switch (_controller.apiStatus.value) {
                 case ApiState.loading:
                   return const ProgressDialog(
-                      title: "Deleting user...", isProgressed: true);
+                    title: "Deleting user...",
+                    isProgressed: true,
+                  );
                 case ApiState.success:
                   return ProgressDialog(
-                      title: "successfully deleted",
-                      onPressed: () {
-                        _controller.getUserList();
-                        Navigator.pop(context);
-                      },
-                      isProgressed: false);
+                    title: "Successfully deleted",
+                    onPressed: () {
+                      _controller.getUserList();
+                      Navigator.pop(context);
+                    },
+                    isProgressed: false,
+                  );
                 case ApiState.failure:
                   return RetryDialog(
                     title: _controller.errorMessage.value,
-                    onRetryPressed: () {
-                      _controller.deleteUser(user);
-                    },
+                    onRetryPressed: () => _controller.deleteUser(user),
                   );
               }
             },
@@ -213,21 +213,22 @@ class _UserListScreenState extends State<UserListScreen> {
               switch (_controller.apiStatus.value) {
                 case ApiState.loading:
                   return const ProgressDialog(
-                      title: "Updating user...", isProgressed: true);
+                    title: "Updating user...",
+                    isProgressed: true,
+                  );
                 case ApiState.success:
                   return ProgressDialog(
-                      title: "successfully updated",
-                      onPressed: () {
-                        _controller.getUserList();
-                        Navigator.pop(context);
-                      },
-                      isProgressed: false);
+                    title: "Successfully updated",
+                    onPressed: () {
+                      _controller.getUserList();
+                      Navigator.pop(context);
+                    },
+                    isProgressed: false,
+                  );
                 case ApiState.failure:
                   return RetryDialog(
                     title: _controller.errorMessage.value,
-                    onRetryPressed: () {
-                      _controller.updateUser(userObj);
-                    },
+                    onRetryPressed: () => _controller.updateUser(userObj),
                   );
               }
             },
@@ -253,18 +254,21 @@ class _UserListScreenState extends State<UserListScreen> {
       floatingActionButton: floatingActionButton,
       appBar: _appBar,
       body: _controller.obx(
-          (state) => ListView.builder(
-                shrinkWrap: true,
-                itemCount: state?.length,
-                itemBuilder: (_, index) {
-                  User user = state![index];
-                  return userListItem(user).marginSymmetric(horizontal: 10);
-                },
-              ),
-          onLoading: const SpinKitIndicator(type: SpinKitType.circle),
-          onError: (error) => RetryDialog(
-              title: "$error", onRetryPressed: () => _controller.getUserList()),
-          onEmpty: const EmptyWidget(message: "No user!")),
+        (state) => ListView.builder(
+          shrinkWrap: true,
+          itemCount: state?.length,
+          itemBuilder: (_, index) {
+            User user = state![index];
+            return userListItem(user).marginSymmetric(horizontal: 10);
+          },
+        ),
+        onLoading: const SpinKitIndicator(type: SpinKitType.circle),
+        onError: (error) => RetryDialog(
+          title: "$error",
+          onRetryPressed: () => _controller.getUserList(),
+        ),
+        onEmpty: const EmptyWidget(message: "No user!"),
+      ),
     );
   }
 }

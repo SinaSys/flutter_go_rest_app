@@ -1,6 +1,6 @@
-import 'package:layered_architecture/core/app_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:layered_architecture/core/app_extension.dart';
 
 import '../../../../common/controller/api_operation.dart';
 import '../../../../common/dialog/progress_dialog.dart';
@@ -52,9 +52,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        title: Text("${widget.mode.name.toCapital} post"),
-      ),
+      appBar: AppBar(title: Text("${widget.mode.name.toCapital} post")),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Form(
@@ -113,20 +111,21 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               switch (postController.apiStatus.value) {
                                 case ApiState.loading:
                                   return ProgressDialog(
-                                      title: "${widget.mode.name}ing post...",
-                                      isProgressed: true);
+                                    title: "${widget.mode.name}ing post...",
+                                    isProgressed: true,
+                                  );
                                 case ApiState.success:
                                   return ProgressDialog(
-                                      title:
-                                          "Successfully ${widget.mode.name}ed",
-                                      onPressed: () {
-                                        if (widget.mode == PostMode.update) {
-                                          pop(context, 3);
-                                        } else {
-                                          pop(context, 2);
-                                        }
-                                      },
-                                      isProgressed: false);
+                                    title: "Successfully ${widget.mode.name}ed",
+                                    onPressed: () {
+                                      if (widget.mode == PostMode.update) {
+                                        pop(context, 3);
+                                      } else {
+                                        pop(context, 2);
+                                      }
+                                    },
+                                    isProgressed: false,
+                                  );
                                 case ApiState.failure:
                                   return RetryDialog(
                                     title: postController.errorMessage.value,

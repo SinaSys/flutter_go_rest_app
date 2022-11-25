@@ -148,11 +148,16 @@ class _PostListScreenState extends State<PostListScreen> {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             const SizedBox(height: 10),
-                            Text(post.body,
-                                maxLines: 3, overflow: TextOverflow.ellipsis)
+                            Text(
+                              post.body,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                            )
                           ],
                         ),
                       ),
@@ -188,8 +193,9 @@ class _PostListScreenState extends State<PostListScreen> {
             (state) => userPostItem(state!),
             onLoading: const Center(child: SpinKitIndicator()),
             onError: (error) => RetryDialog(
-                title: "$error",
-                onRetryPressed: () => postController.getPosts(widget.user)),
+              title: "$error",
+              onRetryPressed: () => postController.getPosts(widget.user),
+            ),
             onEmpty: const EmptyWidget(message: "No post"),
           ),
         ],

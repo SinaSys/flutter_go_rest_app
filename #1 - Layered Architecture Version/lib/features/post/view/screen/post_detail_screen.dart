@@ -62,9 +62,10 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
               MaterialPageRoute(
                 builder: (_) {
                   return CreatePostScreen(
-                      user: widget.user!,
-                      post: widget.post,
-                      mode: PostMode.update);
+                    user: widget.user!,
+                    post: widget.post,
+                    mode: PostMode.update,
+                  );
                 },
               ),
             );
@@ -124,7 +125,9 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                             Text(
                               comment.name,
                               style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             IconButton(
                               splashRadius: 25,
@@ -153,9 +156,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
       onEmpty: const EmptyWidget(message: "No comment"),
       onError: (error) => RetryDialog(
         title: "$error",
-        onRetryPressed: () {
-          commentController.getUserComments(widget.post.id);
-        },
+        onRetryPressed: () => commentController.getUserComments(widget.post.id),
       ),
     );
   }
@@ -170,10 +171,12 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
             switch (postController.apiStatus.value) {
               case ApiState.loading:
                 return const ProgressDialog(
-                    title: "Deleting post...", isProgressed: true);
+                  title: "Deleting post...",
+                  isProgressed: true,
+                );
               case ApiState.success:
                 return ProgressDialog(
-                  title: "successfully deleted",
+                  title: "Successfully deleted",
                   onPressed: () => pop(context, 2),
                   isProgressed: false,
                 );
@@ -194,9 +197,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
       SnackBar(
         backgroundColor: const Color(0xFF556080),
         duration: const Duration(seconds: 3),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         content: Row(
           children: [
             const Icon(Icons.info, color: Color(0xFF2f87e8)),
@@ -295,11 +296,12 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                     bool isValid = formKey.currentState?.validate() ?? false;
                     if (isValid) {
                       Comment comment = Comment(
-                          id: 0,
-                          postId: widget.post.id,
-                          name: name,
-                          email: "user@testUser",
-                          body: commentBody);
+                        id: 0,
+                        postId: widget.post.id,
+                        name: name,
+                        email: "user@testUser",
+                        body: commentBody,
+                      );
 
                       commentController.createComment(comment);
 
@@ -374,7 +376,10 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
               padding: EdgeInsets.only(top: 15),
               child: Text(
                 "Comments",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             const Padding(

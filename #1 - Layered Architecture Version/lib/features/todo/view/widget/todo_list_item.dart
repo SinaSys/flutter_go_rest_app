@@ -26,9 +26,7 @@ class TodoListItem extends StatelessWidget {
       child: ListBody(
           children: items.mapWithIndex((index, item) {
         return Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           elevation: 5,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -48,13 +46,17 @@ class TodoListItem extends StatelessWidget {
                         item.title,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                            fontWeight: FontWeight.w700, fontSize: 17),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 17,
+                        ),
                       ),
                       const SizedBox(height: 3),
                       Text(
                         DateFormat("yyyy-MM-dd – kk:mm").format(item.dueOn),
                         style: const TextStyle(
-                            fontWeight: FontWeight.w500, color: Colors.black54),
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black54,
+                        ),
                       ),
                     ],
                   ),
