@@ -10,6 +10,7 @@ import '../../../../common/widget/empty_widget.dart';
 import '../../../../common/widget/spinkit_indicator.dart';
 import '../../../../core/app_asset.dart';
 import '../../../../core/app_extension.dart';
+import '../../../../core/app_style.dart';
 import '../../../comment/controller/comment_controller.dart';
 import '../../../user/data/model/user.dart';
 import '../../controller/post_controller.dart';
@@ -89,7 +90,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
         children: [
           Text(
             widget.post.title,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            style: headLine1.copyWith(fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 15),
           Text(widget.post.body, style: const TextStyle(fontSize: 16)),
@@ -122,13 +123,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              comment.name,
-                              style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                            Text(comment.name, style: headLine5),
                             IconButton(
                               splashRadius: 25,
                               padding: EdgeInsets.zero,
@@ -280,6 +275,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 ),
                 const SizedBox(height: 10),
                 TextInput(
+                  icon: const Icon(Icons.person, color: Color(0xFF556080)),
                   hint: "Name",
                   autovalidateMode: AutovalidateMode.disabled,
                   controller: nameEditingController,
@@ -374,13 +370,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
             postItem,
             const Padding(
               padding: EdgeInsets.only(top: 15),
-              child: Text(
-                "Comments",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: Text("Comments", style: headLine2),
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),

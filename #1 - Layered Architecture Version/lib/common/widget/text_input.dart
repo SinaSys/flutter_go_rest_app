@@ -8,6 +8,7 @@ class TextInput extends StatelessWidget {
       this.validator,
       this.maxLine,
       this.controller,
+      this.icon,
       this.autovalidateMode = AutovalidateMode.onUserInteraction,
       required this.hint})
       : super(key: key);
@@ -17,6 +18,7 @@ class TextInput extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final FormFieldValidator<String>? validator;
   final int? maxLine;
+  final Icon? icon;
   final TextEditingController? controller;
   final AutovalidateMode autovalidateMode;
 
@@ -28,7 +30,7 @@ class TextInput extends StatelessWidget {
       cursorColor: Colors.grey,
       initialValue: initialValue,
       maxLines: maxLine,
-      decoration: InputDecoration(hintText: hint),
+      decoration: InputDecoration(hintText: hint, prefixIcon: icon),
       onChanged: onChanged,
       validator: validator,
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/app_asset.dart';
+import '../../core/app_style.dart';
 
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({Key? key, required this.message}) : super(key: key);
@@ -13,10 +14,7 @@ class EmptyWidget extends StatelessWidget {
       child: Column(
         children: [
           Image.asset(AppAsset.emptyState),
-          Text(
-            message,
-            style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
-          ),
+          Text(message, style: headLine1),
         ],
       ),
     );

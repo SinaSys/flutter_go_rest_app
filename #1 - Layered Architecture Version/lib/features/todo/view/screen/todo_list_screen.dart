@@ -11,6 +11,7 @@ import '../../../../common/widget/spinkit_indicator.dart';
 import '../../../../common/widget/text_input.dart';
 import '../../../../common/dialog/retry_dialog.dart';
 import '../../../../common/dialog/progress_dialog.dart';
+import '../../../../core/app_style.dart';
 import '../../../user/data/model/user.dart';
 import '../../controller/todo_controller.dart';
 import '../../data/model/todo.dart';
@@ -46,17 +47,14 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
       padding: const EdgeInsets.only(left: 10),
       child: Row(
         children: [
-          const Text(
-            "Todo",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-          ),
+          const Text("Todo", style: headLine2),
           const SizedBox(width: 10),
           const Icon(Icons.archive_outlined, color: Color(0xFFF4511E)),
           Obx(
             () => Text(
               _controller.todosCount.string,
               style: const TextStyle(
-                  color: Colors.black87, fontWeight: FontWeight.bold),
+                  color: Colors.black54, fontWeight: FontWeight.bold),
             ).paddingAll(20),
           ),
           const Spacer(),

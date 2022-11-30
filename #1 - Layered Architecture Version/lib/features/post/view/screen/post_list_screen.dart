@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../../common/dialog/retry_dialog.dart';
 import '../../../../common/widget/empty_widget.dart';
 import '../../../../common/widget/spinkit_indicator.dart';
+import '../../../../core/app_style.dart';
 import '../../../user/data/model/user.dart';
 import '../../controller/post_controller.dart';
 import '../../data/model/post.dart';
@@ -79,13 +80,7 @@ class _PostListScreenState extends State<PostListScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  widget.user.name,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w700),
-                ),
+                Text(widget.user.name, maxLines: 2, style: headLine4),
                 const SizedBox(height: 5),
                 Obx(
                   () {
@@ -143,15 +138,7 @@ class _PostListScreenState extends State<PostListScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              post.title,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                            Text(post.title, maxLines: 2, style: headLine2),
                             const SizedBox(height: 10),
                             Text(
                               post.body,
@@ -184,10 +171,7 @@ class _PostListScreenState extends State<PostListScreen> {
           header,
           const Padding(
             padding: EdgeInsets.only(left: 20, top: 15),
-            child: Text(
-              "Posts",
-              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
-            ),
+            child: Text("Posts", style: headLine1),
           ),
           postController.obx(
             (state) => userPostItem(state!),

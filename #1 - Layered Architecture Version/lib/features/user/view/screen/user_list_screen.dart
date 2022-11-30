@@ -10,6 +10,7 @@ import '../../../../common/widget/empty_widget.dart';
 import '../../../../common/widget/popup_menu.dart';
 import '../../../../common/widget/spinkit_indicator.dart';
 import '../../../../core/app_extension.dart';
+import '../../../../core/app_style.dart';
 import '../../../post/view/screen/post_list_screen.dart';
 import '../../../todo/view/screen/todo_list_screen.dart';
 import '../../controller/user_controller.dart';
@@ -58,9 +59,7 @@ class _UserListScreenState extends State<UserListScreen> {
         late User user;
         bool isCreate = await createDialog(
           context: context,
-          userData: (User userValue) {
-            user = userValue;
-          },
+          userData: (User userValue) => user = userValue,
         );
 
         if (isCreate) {
@@ -73,7 +72,9 @@ class _UserListScreenState extends State<UserListScreen> {
                   switch (_controller.apiStatus.value) {
                     case ApiState.loading:
                       return const ProgressDialog(
-                          title: "Creating user...", isProgressed: true);
+                        title: "Creating user...",
+                        isProgressed: true,
+                      );
                     case ApiState.success:
                       return ProgressDialog(
                         title: "Successfully created",
@@ -109,24 +110,9 @@ class _UserListScreenState extends State<UserListScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  user.name,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    overflow: TextOverflow.ellipsis,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
+                Text(user.name, style: headLine4),
                 const SizedBox(height: 10),
-                Text(
-                  user.email,
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
-                    overflow: TextOverflow.ellipsis,
-                    fontWeight: FontWeight.w500,
-                  ),
-                )
+                Text(user.email, style: headLine6)
               ],
             ),
           ),

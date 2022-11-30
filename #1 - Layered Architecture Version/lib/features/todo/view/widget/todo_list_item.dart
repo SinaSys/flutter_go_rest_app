@@ -42,14 +42,7 @@ class TodoListItem extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        item.title,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 17,
-                        ),
-                      ),
+                      Text(item.title, style: headLine3, maxLines: 2),
                       const SizedBox(height: 3),
                       Text(
                         DateFormat("yyyy-MM-dd – kk:mm").format(item.dueOn),
