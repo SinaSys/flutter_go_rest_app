@@ -31,6 +31,12 @@ class ToDoListScreen extends StatefulWidget {
 class _ToDoListScreenState extends State<ToDoListScreen> {
   final ToDoController _controller = Get.put(ToDoController());
 
+  @override
+  void initState() {
+    _controller.getTodos(widget.user.id!);
+    super.initState();
+  }
+
   PreferredSizeWidget _appBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
@@ -273,7 +279,6 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _controller.getTodos(widget.user.id!);
     return Scaffold(
       appBar: _appBar(context),
       body: SafeArea(
