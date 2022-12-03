@@ -18,6 +18,7 @@ In this project, we are going to build a user management app using flutter. we h
 <br/><br/><br/>
 
 
+
 ## 🖼 Screenshots 
 User screen                |  Create-update User       |        Todo screen        |   Post screen
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
@@ -44,29 +45,26 @@ Error state                    |   Empty state             |  Warning dialog    
 
 
 
+## 🚀 Features
++ Performing CRUD operation using ```Dio``` and go rest api
++ Converting JSON string to an equivalent dart object and vice versa with ```json serializable```
++ Implementing Interceptors, Global configuration and timeout for api calls
++ Exception Handling with Dio interceptor and ```Dartz```(GetX version), ```freezed``` (Bloc version)
++ Displaying error type to the user through the alert dialogs
++ Colorize api info like request, response, body and exceptions in Debug console log
++ Read, create, update and delete user
++ Filter users by status activity or gender
++ Read, create, update and delete user todos
++ Filter todos by status 
++ Read, create, update and delete user posts
++ Display, create and delete user comments for each post 
++ Get date/time from user by Date/Time picker
++ Generic structure
++ State management with ```GetX``` | ```Cubit```
 
-
-## 🚀 Features 
-
-```
-• Performing CRUD operation using Dio and go rest api
-• Converting JSON string to an equivalent dart object and vice versa with json serializable
-• Implementing Interceptors, Global configuration and timeout for api calls
-• Exception Handling with Dio interceptor and Dartz
-• Displaying error type to the user through the alert dialogs
-• Colorize api info like request, response, body and exceptions in Debug console log
-• Read, create, update and delete user
-• Filter users by status activity or gender
-• Read, create, update and delete user todos
-• Filter todos by status 
-• Read, create, update and delete user posts
-• Display, create and delete user comments for each post 
-• Get date/time from user by Date/Time picker
-• State management with GetX 
-```
 
 <br/><br/>
-## 📂 Directory Structure
+## 📂 Directory Structure (GetX version)
 
 ```
 📂lib
@@ -121,6 +119,7 @@ Error state                    |   Empty state             |  Warning dialog    
      │    │          └──psot_api.dart
      │    └───📂view  
      │        └──📂screen
+     │           │──create_post_screen.dart
      │           │──post_detail_screen.dart
      │           └──post_list_screen.dart
      │───📂todo
@@ -157,21 +156,117 @@ Error state                    |   Empty state             |  Warning dialog    
 
 ```
 
+## 📂 Directory Structure (Cubit version)
 
-<br/><br/>
-## 📕 Dependencies
+```
+📂lib
+ │───main.dart  
+ │───📂common  
+ │   │───📂cubit
+ │   │   │──generic_cubit.dart
+ │   │   └──generic_cubit_state.dart
+ │   │───📂network
+ │   │   │──api_base.dart
+ │   │   │──api_result.dart
+ │   │   │──api_result.freezed.dart
+ │   │   │──dio_client.dart
+ │   │   │──dio_exception.dart
+ │   │   └──dio_interceptor.dart
+ │   │───📂widget
+ │   │   │──date_time_picker.dart
+ │   │   │──drop_down.dart
+ │   │   │──empty_widget.dart
+ │   │   │──popup_menu.dart
+ │   │   │──spinkit_indicator.dart
+ │   │   └──text_input.dart 
+ │   └───📂dialog
+ │       │──create_dialog.dart
+ │       │──delete_dialog.dart
+ │       │──progress_dialog.dart
+ │       └──retry_dialog.dart
+ │───📂core 
+ │   │──api_config.dart
+ │   │──app_asset.dart
+ │   │──app_extension.dart
+ │   │──app_string.dart
+ │   │──app_style.dart
+ │   └──app_theme.dart
+ └───📂featurs
+     │───📂comment
+     │    │───📂cubit
+     │    │   └──comment_cubit.dart
+     │    └───📂data
+     │        │───📂model
+     │        │   │──comment.dart
+     │        │   └──comment.g.dart
+     │        └───📂provider
+     │            └──📂remote
+     │               └──comment_api.dart
+     │───📂post
+     │    │───📂cubit
+     │    │   └──post_cubit.dart
+     │    │───📂data
+     │    │   │───📂model
+     │    │   │   │──post.dart
+     │    │   │   └──post.g.dart
+     │    │   └───📂provider
+     │    │       └──📂remote
+     │    │          └──psot_api.dart
+     │    └───📂view  
+     │        └──📂screen
+     │           │──create_post_screen.dart
+     │           │──post_detail_screen.dart
+     │           └──post_list_screen.dart
+     │───📂todo
+     │    │───📂cubit
+     │    │   └──todo_cubit.dart
+     │    │───📂data
+     │    │   │───📂model
+     │    │   │   │──todo.dart
+     │    │   │   └──todo.g.dart
+     │    │   └───📂provider
+     │    │       └──📂remote
+     │    │          └──todo_api.dart
+     │    └───📂view  
+     │        │──📂screen
+     │        │  └──todo_list_screen.dart
+     │        └──📂widget
+     │            │──circle_container.dart
+     │            └──todo_list_item.dart
+     └───📂user
+          │───📂cubit
+          │   └──user_cubit.dart
+          │───📂data
+          │   │───📂model
+          │   │   │──user.dart
+          │   │   └──user.g.dart
+          │   └───📂provider
+          │       └──📂remote
+          │          └──user_api.dart
+          └───📂view  
+              │──📂screen
+              │  └──user_list_screen.dart
+              └──📂widget
+                 └──status_container.dart
 
-|  Name |     Link      |
-| ---------------- | ------------- |
-| get              | https://pub.dev/packages/get |
-| dio     | https://pub.dev/packages/dio  |
-| json_annotation     |https://pub.dev/packages/json_annotation |
-| json_serializable     |https://pub.dev/packages/json_serializable |
-| build_runner     |https://pub.dev/packages/build_runner |
-| logger     |https://pub.dev/packages/logger |
-| dartz     |https://pub.dev/packages/dartz |
-| intl     |https://pub.dev/packages/intl |
-| flutter_spinkit     |https://pub.dev/packages/flutter_spinkit |
+```
+
+
+## Dependencies
+|       Name      | Layered architecture version  <br/> (GetX) | Layered architecture version  <br/> (Cubit) |
+| :-------------: |:------------------------------------------:|:-------------------------------------------:|
+| [flutter_bloc](https://pub.dev/packages/flutter_bloc)  |                     ✖️                     |                     ✔️                      | 
+| [GetX](https://pub.dev/packages/get)  |                     ✔️                     |                     ✖️                      | 
+| [dio](https://pub.dev/packages/dio)  |                     ✔️                     |                     ✔️                      | 
+| [freezed](https://pub.dev/packages/freezed)  |                     ✖️                     |                     ✔️                      | 
+| [json_annotation](https://pub.dev/packages/json_annotation)  |                     ✔️                     |                     ✔️                      | 
+| [json_serializable](https://pub.dev/packages/json_serializable)  |                     ✔️                     |                     ✔️                      | 
+| [build_runner](https://pub.dev/packages/build_runner)  |                     ✔️                     |                     ✔️                      | 
+| [logger](https://pub.dev/packages/logger)  |                     ✔️                     |                     ✔️                      | 
+| [dartz](https://pub.dev/packages/dartz)  |                     ✔️                     |                     ✖️                      |
+| [flutter_spinkit](https://pub.dev/packages/flutter_spinkit)  |                     ✔️                     |                     ✔️                      |
+
+  <br/>
 
 
 
