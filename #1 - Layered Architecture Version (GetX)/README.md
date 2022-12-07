@@ -49,7 +49,7 @@ Error state                    |   Empty state             |  Warning dialog    
 + Performing CRUD operation using ```Dio``` and go rest api
 + Converting JSON string to an equivalent dart object and vice versa with ```json serializable```
 + Implementing Interceptors, Global configuration and timeout for api calls
-+ Exception Handling with Dio interceptor and ```Dartz```(GetX version), ```freezed``` (Bloc version)
++ Exception Handling with Dio interceptor and ```Dartz```(GetX version), ```freezed``` (Bloc/Cubit version)
 + Displaying error type to the user through the alert dialogs
 + Colorize api info like request, response, body and exceptions in Debug console log
 + Read, create, update and delete user
@@ -60,7 +60,7 @@ Error state                    |   Empty state             |  Warning dialog    
 + Display, create and delete user comments for each post
 + Get date/time from user by Date/Time picker
 + Generic structure
-+ State management with ```GetX``` | ```Cubit```
++ State management with ```GetX``` | ```Bloc``` | ```Cubit```
 
 
 <br/><br/>
@@ -252,19 +252,120 @@ Error state                    |   Empty state             |  Warning dialog    
 ```
 
 
+
+## 📂 Directory Structure (Bloc version)
+
+```
+📂lib
+ │───main.dart  
+ │───📂common  
+ │   │───📂bloc
+ │   │   │──bloc_helper.dart
+ │   │   └──generic_bloc_state.dart
+ │   │───📂network
+ │   │   │──api_base.dart
+ │   │   │──api_result.dart
+ │   │   │──api_result.freezed.dart
+ │   │   │──dio_client.dart
+ │   │   │──dio_exception.dart
+ │   │   └──dio_interceptor.dart
+ │   │───📂widget
+ │   │   │──date_time_picker.dart
+ │   │   │──drop_down.dart
+ │   │   │──empty_widget.dart
+ │   │   │──popup_menu.dart
+ │   │   │──spinkit_indicator.dart
+ │   │   └──text_input.dart 
+ │   └───📂dialog
+ │       │──create_dialog.dart
+ │       │──delete_dialog.dart
+ │       │──progress_dialog.dart
+ │       └──retry_dialog.dart
+ │───📂core 
+ │   │──api_config.dart
+ │   │──app_asset.dart
+ │   │──app_extension.dart
+ │   │──app_string.dart
+ │   │──app_style.dart
+ │   └──app_theme.dart
+ └───📂featurs
+     │───📂comment
+     │    │───📂bloc
+     │    │   │──comment_bloc.dart
+     │    │   └──comment_event.dart
+     │    └───📂data
+     │        │───📂model
+     │        │   │──comment.dart
+     │        │   └──comment.g.dart
+     │        └───📂provider
+     │            └──📂remote
+     │               └──comment_api.dart
+     │───📂post
+     │    │───📂bloc
+     │    │   └──post_bloc.dart
+     │    │   │──post_event.dart
+     │    │───📂data
+     │    │   │───📂model
+     │    │   │   │──post.dart
+     │    │   │   └──post.g.dart
+     │    │   └───📂provider
+     │    │       └──📂remote
+     │    │          └──psot_api.dart
+     │    └───📂view  
+     │        └──📂screen
+     │           │──create_post_screen.dart
+     │           │──post_detail_screen.dart
+     │           └──post_list_screen.dart
+     │───📂todo
+     │    │───📂bloc
+     │    │   │──todo_bloc.dart
+     │    │   └──todo_event.dart
+     │    │───📂data
+     │    │   │───📂model
+     │    │   │   │──todo.dart
+     │    │   │   └──todo.g.dart
+     │    │   └───📂provider
+     │    │       └──📂remote
+     │    │          └──todo_api.dart
+     │    └───📂view  
+     │        │──📂screen
+     │        │  └──todo_list_screen.dart
+     │        └──📂widget
+     │            │──circle_container.dart
+     │            └──todo_list_item.dart
+     └───📂user
+          │───📂bloc
+          │   │──user_bloc.dart
+          │   └──user_event.dart
+          │───📂data
+          │   │───📂model
+          │   │   │──user.dart
+          │   │   └──user.g.dart
+          │   └───📂provider
+          │       └──📂remote
+          │          └──user_api.dart
+          └───📂view  
+              │──📂screen
+              │  └──user_list_screen.dart
+              └──📂widget
+                 └──status_container.dart
+
+```
+
+
 ## Dependencies
-|       Name      | Layered architecture version  <br/> (GetX) | Layered architecture version  <br/> (Cubit) |
-| :-------------: |:------------------------------------------:|:-------------------------------------------:|
-| [flutter_bloc](https://pub.dev/packages/flutter_bloc)  |                     ✖️                     |                     ✔️                      | 
-| [GetX](https://pub.dev/packages/get)  |                     ✔️                     |                     ✖️                      | 
-| [dio](https://pub.dev/packages/dio)  |                     ✔️                     |                     ✔️                      | 
-| [freezed](https://pub.dev/packages/freezed)  |                     ✖️                     |                     ✔️                      | 
-| [json_annotation](https://pub.dev/packages/json_annotation)  |                     ✔️                     |                     ✔️                      | 
-| [json_serializable](https://pub.dev/packages/json_serializable)  |                     ✔️                     |                     ✔️                      | 
-| [build_runner](https://pub.dev/packages/build_runner)  |                     ✔️                     |                     ✔️                      | 
-| [logger](https://pub.dev/packages/logger)  |                     ✔️                     |                     ✔️                      | 
-| [dartz](https://pub.dev/packages/dartz)  |                     ✔️                     |                     ✖️                      |
-| [flutter_spinkit](https://pub.dev/packages/flutter_spinkit)  |                     ✔️                     |                     ✔️                      |
+|       Name      | Layered architecture <br/> version  (GetX) | Layered architecture <br/> version  (Cubit) | Layered architecture <br/> version  (Bloc) |
+| :-------------: |:-------------------------------------:|:--------------------------------------:|:-------------------------------------:|
+| [flutter_bloc](https://pub.dev/packages/flutter_bloc)  |                  ✖️                   |                   ✔                    |                   ✔                   | 
+| [GetX](https://pub.dev/packages/get)  |                  ✔️                   |                   ✖️                   |                  ✖️                   | 
+| [dio](https://pub.dev/packages/dio)  |                  ✔️                   |                   ✔️                   |                  ✔️                   |
+| [freezed](https://pub.dev/packages/freezed)  |                  ✖️                   |                   ✔️                   |                  ✔️                   |
+| [json_annotation](https://pub.dev/packages/json_annotation)  |                  ✔️                   |                   ✔️                   |                  ✔️                   |
+| [json_serializable](https://pub.dev/packages/json_serializable)  |                  ✔️                   |                   ✔️                   |                  ✔️                   |
+| [build_runner](https://pub.dev/packages/build_runner)  |                  ✔️                   |                   ✔️                   |                  ✔️                   |
+| [logger](https://pub.dev/packages/logger)  |                  ✔️                   |                   ✔️                   |                  ✔️                   |
+| [dartz](https://pub.dev/packages/dartz)  |                  ✔️                   |                   ✖️                   |                  ✖️                   |
+| [flutter_spinkit](https://pub.dev/packages/flutter_spinkit)  |                  ✔️                   |                   ✔️                   |                  ✔️                   |
 
   <br/>
 
