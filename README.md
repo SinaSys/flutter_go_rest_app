@@ -66,6 +66,46 @@ Error state                    |   Empty state             |  Warning dialog    
 + State management with ```GetX``` | ```Bloc``` | ```Cubit```
 
 
+
+
+## 📚 Dependencies (Clean architecture version)
+|       Name      |  GetX |  Cubit |  Bloc |
+| :-------------: |:-------------------------------------------------------:|:--------------------------------------------------------:|:--------------------------------------------------------:|
+| [flutter_bloc](https://pub.dev/packages/flutter_bloc)  |✖️ | ✔  | ✔  |
+| [get_it](https://pub.dev/packages/get_it)  |✔️ | ✔  | ✔  | 
+| [GetX](https://pub.dev/packages/get)  |✔️ | ✖️ | ✖️ | 
+| [dio](https://pub.dev/packages/dio)  |✔️ | ✔️ | ✔️ | 
+| [freezed](https://pub.dev/packages/freezed)  |✖️ | ✔️ | ✔️ | 
+| [freezed_annotation](https://pub.dev/packages/freezed_annotation)  |✖ | ✔️ | ✔️ | 
+| [json_annotation](https://pub.dev/packages/json_annotation)  |✔️ | ✔️ | ✔️ | 
+| [json_serializable](https://pub.dev/packages/json_serializable)  |✔️ | ✔️ | ✔️ |
+| [build_runner](https://pub.dev/packages/build_runner)  |✔️ | ✔️ | ✔️ | 
+| [logger](https://pub.dev/packages/logger)  |✔️ | ✔️ | ✔️ | 
+| [dartz](https://pub.dev/packages/dartz)  |✔️ | ✖️ | ✖️ | 
+| [flutter_spinkit](https://pub.dev/packages/flutter_spinkit)  |✔️ | ✔️ | ✔️ |
+| [intl](https://pub.dev/packages/intl)  |✔️ | ✔️ | ✔️ |
+
+  <br/>
+
+## 📚 Dependencies (Simple layered architecture version)
+|       Name      |  GetX |  Cubit |  Bloc |
+| :-------------: |:-------------------------------------------------------:|:--------------------------------------------------------:|:--------------------------------------------------------:|
+| [flutter_bloc](https://pub.dev/packages/flutter_bloc)  |✖️ | ✔  | ✔  |
+| [GetX](https://pub.dev/packages/get)  |✔️ | ✖️ | ✖️ | 
+| [dio](https://pub.dev/packages/dio)  |✔️ | ✔️ | ✔️ | 
+| [freezed](https://pub.dev/packages/freezed)  |✖️ | ✔️ | ✔️ | 
+| [freezed_annotation](https://pub.dev/packages/freezed_annotation)  |✖ | ✔️ | ✔️ | 
+| [json_annotation](https://pub.dev/packages/json_annotation)  |✔️ | ✔️ | ✔️ | 
+| [json_serializable](https://pub.dev/packages/json_serializable)  |✔️ | ✔️ | ✔️ |
+| [build_runner](https://pub.dev/packages/build_runner)  |✔️ | ✔️ | ✔️ | 
+| [logger](https://pub.dev/packages/logger)  |✔️ | ✔️ | ✔️ | 
+| [dartz](https://pub.dev/packages/dartz)  |✔️ | ✖️ | ✖️ | 
+| [flutter_spinkit](https://pub.dev/packages/flutter_spinkit)  |✔️ | ✔️ | ✔️ |
+| [intl](https://pub.dev/packages/intl)  |✔️ | ✔️ | ✔️ |
+
+  <br/>
+
+
 <br/><br/>
 ## 📂 Directory Structure (Clean architecture version + Bloc)
 ```
@@ -803,25 +843,6 @@ Error state                    |   Empty state             |  Warning dialog    
                  └──status_container.dart
 
 ```
-
-
-## 📚 Dependencies
-|       Name      | Simple Layered <br/> Architecture <br/> version  (GetX) | Simple Layered <br/> Architecture <br/> version  (Cubit) | Simple Layered  <br/> Architecture <br/> version  (Bloc) | Clean Architecture <br/> version  (Bloc) |
-| :-------------: |:-------------------------------------------------------:|:--------------------------------------------------------:|:--------------------------------------------------------:|:----------------------------------------:|
-| [flutter_bloc](https://pub.dev/packages/flutter_bloc)  |                           ✖️                            |                            ✔                             |                            ✔                             |                    ✔                     | 
-| [get_it](https://pub.dev/packages/get_it)  |                           ✖️                            |                            ✖                             |                            ✖                             |                    ✔                     | 
-| [GetX](https://pub.dev/packages/get)  |                           ✔️                            |                            ✖️                            |                            ✖️                            |                    ✖️                    | 
-| [dio](https://pub.dev/packages/dio)  |                           ✔️                            |                            ✔️                            |                            ✔️                            |                    ✔️                    |
-| [freezed](https://pub.dev/packages/freezed)  |                           ✖️                            |                            ✔️                            |                            ✔️                            |                    ✔️                    |
-| [freezed_annotation](https://pub.dev/packages/freezed_annotation)  |                           ✖                            |                            ✔️                            |                            ✔️                            |                    ✔️                    |
-| [json_annotation](https://pub.dev/packages/json_annotation)  |                           ✔️                            |                            ✔️                            |                            ✔️                            |                    ✔️                    |
-| [json_serializable](https://pub.dev/packages/json_serializable)  |                           ✔️                            |                            ✔️                            |                            ✔️                            |                    ✔️                    |
-| [build_runner](https://pub.dev/packages/build_runner)  |                           ✔️                            |                            ✔️                            |                            ✔️                            |                    ✔️                    |
-| [logger](https://pub.dev/packages/logger)  |                           ✔️                            |                            ✔️                            |                            ✔️                            |                    ✔️                    |
-| [dartz](https://pub.dev/packages/dartz)  |                           ✔️                            |                            ✖️                            |                            ✖️                            |                    ✖️                    |
-| [flutter_spinkit](https://pub.dev/packages/flutter_spinkit)  |                           ✔️                            |                            ✔️                            |                            ✔️                            |                    ✔️                    |
-
-  <br/>
 
 
 
