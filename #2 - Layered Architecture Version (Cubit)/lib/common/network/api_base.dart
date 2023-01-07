@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:layered_architecture_cubit/common/network/api_result.dart';
+import 'api_result.dart';
 import 'dio_client.dart';
 import 'dio_exception.dart';
 
@@ -8,7 +8,7 @@ abstract class ApiBase<T> {
   final DioClient dioClient = DioClient();
   late final T data;
 
-  //Generic Method template for get data
+  //Generic Method template for getting data
   Future<ApiResult<List<T>>> getData(Future<Response<dynamic>> apiCallback,
       T Function(Map<String, dynamic> json) getJsonCallback) async {
     try {

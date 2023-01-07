@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:layered_architecture_cubit/core/app_extension.dart';
-import 'package:layered_architecture_cubit/features/todo/cubit/todo_cubit.dart';
+import '../../../../core/app_extension.dart';
 
 import '../../../../common/cubit/generic_cubit.dart';
 import '../../../../common/cubit/generic_cubit_state.dart';
@@ -16,6 +15,7 @@ import '../../../../common/dialog/progress_dialog.dart';
 import '../../../../core/app_style.dart';
 import '../../../user/cubit/user_cubit.dart';
 import '../../../user/data/model/user.dart';
+import '../../cubit/todo_cubit.dart';
 import '../../data/model/todo.dart';
 import '../widget/todo_list_item.dart';
 
@@ -258,7 +258,8 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                     ? true
                     : false;
               },
-              builder: (BuildContext context, GenericCubitState<List<ToDo>> state) {
+              builder:
+                  (BuildContext context, GenericCubitState<List<ToDo>> state) {
                 switch (state.status) {
                   case Status.empty:
                     return const SizedBox();
@@ -325,7 +326,8 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                     ? true
                     : false;
               },
-              builder: (BuildContext context, GenericCubitState<List<ToDo>> state) {
+              builder:
+                  (BuildContext context, GenericCubitState<List<ToDo>> state) {
                 switch (state.status) {
                   case Status.empty:
                     return const EmptyWidget(message: "No Todos");

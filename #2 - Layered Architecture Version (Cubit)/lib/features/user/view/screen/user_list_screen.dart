@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:layered_architecture_cubit/common/cubit/generic_cubit_state.dart';
 
 import '../../../../common/cubit/generic_cubit.dart';
+import '../../../../common/cubit/generic_cubit_state.dart';
 import '../../../../common/dialog/create_dialog.dart';
 import '../../../../common/dialog/delete_dialog.dart';
 import '../../../../common/dialog/progress_dialog.dart';

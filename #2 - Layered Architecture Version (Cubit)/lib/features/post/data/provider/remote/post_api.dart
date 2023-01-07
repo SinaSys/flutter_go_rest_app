@@ -5,6 +5,23 @@ import '../../../../user/data/model/user.dart';
 import '../../model/post.dart';
 
 class PostApi extends ApiBase<Post> {
+  Future<ApiResult<bool>> createPost(Post post) async {
+    return await requestMethodTemplate(
+        dioClient.dio!.post(ApiConfig.posts, data: post));
+  }
+
+  Future<ApiResult<bool>> deletePost(Post post) async {
+    return await requestMethodTemplate(
+      dioClient.dio!.delete("${ApiConfig.posts}/${post.id}"),
+    );
+  }
+
+  Future<ApiResult<bool>> updatePost(Post post) async {
+    return await requestMethodTemplate(
+      dioClient.dio!.put("${ApiConfig.posts}/${post.id}", data: post),
+    );
+  }
+
   Future<ApiResult<List<Post>>> getPosts(User user) async {
     final queryParameters = {'user_id': "${user.id}"};
 
@@ -14,22 +31,5 @@ class PostApi extends ApiBase<Post> {
     );
 
     return result;
-  }
-
-  Future<ApiResult<bool>> createPost(Post post) async {
-    return await requestMethodTemplate(
-        dioClient.dio!.post(ApiConfig.posts, data: post));
-  }
-
-  Future<ApiResult<bool>> updatePost(Post post) async {
-    return await requestMethodTemplate(
-      dioClient.dio!.put("${ApiConfig.posts}/${post.id}", data: post),
-    );
-  }
-
-  Future<ApiResult<bool>> deletePost(Post post) async {
-    return await requestMethodTemplate(
-      dioClient.dio!.delete("${ApiConfig.posts}/${post.id}"),
-    );
   }
 }

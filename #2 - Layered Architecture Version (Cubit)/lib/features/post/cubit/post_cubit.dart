@@ -1,27 +1,26 @@
-import 'package:layered_architecture_cubit/common/cubit/generic_cubit.dart';
-import 'package:layered_architecture_cubit/features/post/data/provider/remote/post_api.dart';
-
+import '../../../common/cubit/generic_cubit.dart';
 import '../../user/data/model/user.dart';
 import '../data/model/post.dart';
+import '../data/provider/remote/post_api.dart';
 
 class PostCubit extends GenericCubit<Post> {
-  final PostApi _postApi = PostApi();
+  final PostApi postApi = PostApi();
 
   String get getPostCount => "${state.data?.length ?? 0}";
 
   Future<void> getPosts(User user) async {
-    getItems(_postApi.getPosts(user));
+    getItems(postApi.getPosts(user));
   }
 
   void createPost(Post post) async {
-    createItem(_postApi.createPost(post));
+    createItem(postApi.createPost(post));
   }
 
   void updatePost(Post post) async {
-    updateItem(_postApi.updatePost(post));
+    updateItem(postApi.updatePost(post));
   }
 
   void deletePost(Post post) async {
-    deleteItem(_postApi.deletePost(post));
+    deleteItem(postApi.deletePost(post));
   }
 }

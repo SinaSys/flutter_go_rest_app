@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:layered_architecture_cubit/core/app_extension.dart';
-import 'package:layered_architecture_cubit/features/post/cubit/post_cubit.dart';
+import '../../../../core/app_extension.dart';
 
 import '../../../../common/cubit/generic_cubit.dart';
 import '../../../../common/cubit/generic_cubit_state.dart';
@@ -9,6 +8,7 @@ import '../../../../common/dialog/progress_dialog.dart';
 import '../../../../common/dialog/retry_dialog.dart';
 import '../../../../common/widget/text_input.dart';
 import '../../../user/data/model/user.dart';
+import '../../cubit/post_cubit.dart';
 import '../../data/model/post.dart';
 
 enum PostMode { create, update }

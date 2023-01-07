@@ -4,6 +4,24 @@ import '../../../../../core/api_config.dart';
 import '../../model/todo.dart';
 
 class ToDoApi extends ApiBase<ToDo> {
+  Future<ApiResult<bool>> createTodo(ToDo todo) async {
+    return await requestMethodTemplate(
+      dioClient.dio!.post(ApiConfig.todos, data: todo),
+    );
+  }
+
+  Future<ApiResult<bool>> updateTodo(ToDo todo) async {
+    return await requestMethodTemplate(
+      dioClient.dio!.put("${ApiConfig.todos}/${todo.id}", data: todo),
+    );
+  }
+
+  Future<ApiResult<bool>> deleteTodo(ToDo todo) async {
+    return await requestMethodTemplate(
+      dioClient.dio!.delete("${ApiConfig.todos}/${todo.id}"),
+    );
+  }
+
   Future<ApiResult<List<ToDo>>> getTodos(
     int userId, {
     TodoStatus? status,
@@ -21,23 +39,5 @@ class ToDoApi extends ApiBase<ToDo> {
     );
 
     return result;
-  }
-
-  Future<ApiResult<bool>> createTodo(ToDo todo) async {
-    return await requestMethodTemplate(
-      dioClient.dio!.post(ApiConfig.todos, data: todo),
-    );
-  }
-
-  Future<ApiResult<bool>> deleteTodo(ToDo todo) async {
-    return await requestMethodTemplate(
-      dioClient.dio!.delete("${ApiConfig.todos}/${todo.id}"),
-    );
-  }
-
-  Future<ApiResult<bool>> updateTodo(ToDo todo) async {
-    return await requestMethodTemplate(
-      dioClient.dio!.put("${ApiConfig.todos}/${todo.id}", data: todo),
-    );
   }
 }
