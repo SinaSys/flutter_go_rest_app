@@ -1,11 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:layered_architecture_bloc/common/bloc/generic_bloc_state.dart';
-import 'package:layered_architecture_bloc/features/comment/bloc/comment_bloc.dart';
-import 'package:layered_architecture_bloc/features/comment/bloc/comment_event.dart';
-import 'package:layered_architecture_bloc/features/post/bloc/post_bloc.dart';
-import 'package:layered_architecture_bloc/features/post/bloc/post_event.dart';
 
+import '../../../../common/bloc/generic_bloc_state.dart';
 import '../../../../common/dialog/progress_dialog.dart';
 import '../../../../common/dialog/retry_dialog.dart';
 import '../../../../common/widget/empty_widget.dart';
@@ -14,8 +10,12 @@ import '../../../../common/widget/text_input.dart';
 import '../../../../core/app_asset.dart';
 import '../../../../core/app_extension.dart';
 import '../../../../core/app_style.dart';
+import '../../../comment/bloc/comment_bloc.dart';
+import '../../../comment/bloc/comment_event.dart';
 import '../../../comment/data/model/comment.dart';
 import '../../../user/data/model/user.dart';
+import '../../bloc/post_bloc.dart';
+import '../../bloc/post_event.dart';
 import '../../data/model/post.dart';
 import 'create_post_screen.dart';
 

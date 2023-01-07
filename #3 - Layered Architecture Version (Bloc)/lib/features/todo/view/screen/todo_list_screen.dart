@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:layered_architecture_bloc/common/bloc/generic_bloc_state.dart';
-import 'package:layered_architecture_bloc/core/app_extension.dart';
-import 'package:layered_architecture_bloc/features/todo/bloc/todo_bloc.dart';
-import 'package:layered_architecture_bloc/features/todo/bloc/todo_event.dart';
+import '../../../../common/bloc/generic_bloc_state.dart';
+import '../../../../core/app_extension.dart';
 
 import '../../../../common/bloc/bloc_helper.dart';
 import '../../../../common/widget/date_time_picker.dart';
@@ -18,6 +16,8 @@ import '../../../../core/app_style.dart';
 
 import '../../../user/data/model/user.dart';
 
+import '../../bloc/todo_bloc.dart';
+import '../../bloc/todo_event.dart';
 import '../../data/model/todo.dart';
 import '../widget/todo_list_item.dart';
 

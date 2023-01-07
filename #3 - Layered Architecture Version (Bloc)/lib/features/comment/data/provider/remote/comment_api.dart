@@ -4,6 +4,13 @@ import '../../../../../core/api_config.dart';
 import '../../model/comment.dart';
 
 class CommentApi extends ApiBase<Comment> {
+  Future<ApiResult<bool>> createComment(Comment comment) async {
+    return await createItem(dioClient.dio!.post(ApiConfig.comments, data: comment));
+  }
+
+  Future<ApiResult<bool>> deleteComment(Comment comment) async {
+    return await deleteItem(dioClient.dio!.delete("${ApiConfig.comments}/${comment.id}"));
+  }
 
   Future<ApiResult<List<Comment>>> getUserComments(int postId) async {
     final queryParameters = {'post_id': "$postId"};
@@ -14,17 +21,5 @@ class CommentApi extends ApiBase<Comment> {
         Comment.fromJson);
 
     return result;
-  }
-
-  Future<ApiResult<bool>> createComment(Comment comment) async {
-    return await createItem(
-      dioClient.dio!.post(ApiConfig.comments, data: comment),
-    );
-  }
-
-  Future<ApiResult<bool>> deleteComment(Comment comment) async {
-    return await deleteItem(
-      dioClient.dio!.delete("${ApiConfig.comments}/${comment.id}"),
-    );
   }
 }

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:layered_architecture_bloc/common/bloc/generic_bloc_state.dart';
-import 'package:layered_architecture_bloc/features/user/bloc/user_bloc.dart';
-import 'package:layered_architecture_bloc/features/user/bloc/user_event.dart';
 
 import '../../../../common/bloc/bloc_helper.dart';
+import '../../../../common/bloc/generic_bloc_state.dart';
 import '../../../../common/dialog/create_dialog.dart';
 import '../../../../common/dialog/delete_dialog.dart';
 import '../../../../common/dialog/progress_dialog.dart';
@@ -16,6 +14,8 @@ import '../../../../core/app_extension.dart';
 import '../../../../core/app_style.dart';
 import '../../../post/view/screen/post_list_screen.dart';
 import '../../../todo/view/screen/todo_list_screen.dart';
+import '../../bloc/user_bloc.dart';
+import '../../bloc/user_event.dart';
 import '../../data/model/user.dart';
 import '../widget/status_container.dart';
 

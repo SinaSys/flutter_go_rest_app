@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:layered_architecture_bloc/features/todo/bloc/todo_event.dart';
-import 'package:layered_architecture_bloc/features/todo/data/model/todo.dart';
+import '../bloc/todo_event.dart';
 
 import '../../../common/bloc/bloc_helper.dart';
 import '../../../common/bloc/generic_bloc_state.dart';
+import '../data/model/todo.dart';
 import '../data/provider/remote/todo_api.dart';
 
 typedef Emit = Emitter<GenericBlocState<ToDo>>;

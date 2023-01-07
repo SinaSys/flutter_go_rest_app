@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:layered_architecture_bloc/core/app_extension.dart';
-import 'package:layered_architecture_bloc/features/post/bloc/post_event.dart';
-import 'package:layered_architecture_bloc/features/post/view/screen/post_detail_screen.dart';
+import '../../../../core/app_extension.dart';
+import '../../bloc/post_event.dart';
+import '../screen/post_detail_screen.dart';
 
 import '../../../../common/bloc/generic_bloc_state.dart';
 import '../../../../common/dialog/retry_dialog.dart';
@@ -175,8 +175,7 @@ class _PostListScreenState extends State<PostListScreen> {
             child: Text("Posts", style: headLine1),
           ),
           BlocBuilder<PostBloc, GenericBlocState<Post>>(
-            builder:
-                (BuildContext context, GenericBlocState<Post> state) {
+            builder: (BuildContext context, GenericBlocState<Post> state) {
               switch (state.status) {
                 case Status.empty:
                   return const EmptyWidget(message: "No post");

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:layered_architecture_bloc/core/app_extension.dart';
-import 'package:layered_architecture_bloc/features/post/bloc/post_bloc.dart';
-import 'package:layered_architecture_bloc/features/post/bloc/post_event.dart';
+import '../../../../core/app_extension.dart';
 
 import '../../../../common/bloc/generic_bloc_state.dart';
 import '../../../../common/dialog/progress_dialog.dart';
 import '../../../../common/dialog/retry_dialog.dart';
 import '../../../../common/widget/text_input.dart';
 import '../../../user/data/model/user.dart';
+import '../../bloc/post_bloc.dart';
+import '../../bloc/post_event.dart';
 import '../../data/model/post.dart';
 
 enum PostMode { create, update }
