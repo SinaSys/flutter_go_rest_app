@@ -1,10 +1,25 @@
 import 'package:dartz/dartz.dart';
-import 'package:layered_architecture/common/network/api_base.dart';
 
+import '../../../../../common/network/api_base.dart';
 import '../../../../../core/api_config.dart';
 import '../../model/user.dart';
 
 class UserApi extends ApiBase<User> {
+  //Create new user
+  Future<Either<String, bool>> createUser(User user) async {
+    return await requestMethodTemplate(dioClient.dio!.post(ApiConfig.users, data: user));
+  }
+
+  //Delete single suer
+  Future<Either<String, bool>> deleteUser(User user) async {
+    return await requestMethodTemplate(dioClient.dio!.delete("${ApiConfig.users}/${user.id}"));
+  }
+
+  //Update single suer
+  Future<Either<String, bool>> updateUser(User user) async {
+    return await requestMethodTemplate(dioClient.dio!.put("${ApiConfig.users}/${user.id}", data: user));
+  }
+
   //Get user list | Filter user list by gender or status
   Future<Either<String, List<User>>> getUserList({
     Gender? gender,
@@ -26,26 +41,5 @@ class UserApi extends ApiBase<User> {
     );
 
     return result;
-  }
-
-  //Create new user
-  Future<Either<String, bool>> createUser(User user) async {
-    return await requestMethodTemplate(
-      dioClient.dio!.post(ApiConfig.users, data: user),
-    );
-  }
-
-  //Delete single suer
-  Future<Either<String, bool>> deleteUser(User user) async {
-    return await requestMethodTemplate(
-      dioClient.dio!.delete("${ApiConfig.users}/${user.id}"),
-    );
-  }
-
-  //Update single suer
-  Future<Either<String, bool>> updateUser(User user) async {
-    return await requestMethodTemplate(
-      dioClient.dio!.put("${ApiConfig.users}/${user.id}", data: user),
-    );
   }
 }

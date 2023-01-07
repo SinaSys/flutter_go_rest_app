@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:layered_architecture/core/app_extension.dart';
+import '../../../../core/app_extension.dart';
 
 import '../../../../core/app_style.dart';
 import '../../data/model/todo.dart';

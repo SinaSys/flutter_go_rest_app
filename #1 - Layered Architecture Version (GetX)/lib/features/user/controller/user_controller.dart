@@ -4,8 +4,7 @@ import '../../../common/controller/api_operation.dart';
 import '../data/model/user.dart';
 import '../data/provider/remote/user_api.dart';
 
-class UserController extends GetxController
-    with StateMixin<List<User>>, ApiOperationMixin {
+class UserController extends GetxController with StateMixin<List<User>>, ApiOperationMixin {
   final UserApi _userApi = UserApi();
 
   @override
@@ -38,11 +37,11 @@ class UserController extends GetxController
     requestMethodTemplate(_userApi.createUser(user));
   }
 
-  void deleteUser(User user) {
-    requestMethodTemplate(_userApi.deleteUser(user));
-  }
-
   void updateUser(User user) {
     requestMethodTemplate(_userApi.updateUser(user));
+  }
+
+  void deleteUser(User user) {
+    requestMethodTemplate(_userApi.deleteUser(user));
   }
 }

@@ -1,5 +1,3 @@
-import 'package:layered_architecture/common/widget/text_input.dart';
-import 'package:layered_architecture/features/comment/data/model/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,10 +6,12 @@ import '../../../../common/dialog/progress_dialog.dart';
 import '../../../../common/dialog/retry_dialog.dart';
 import '../../../../common/widget/empty_widget.dart';
 import '../../../../common/widget/spinkit_indicator.dart';
+import '../../../../common/widget/text_input.dart';
 import '../../../../core/app_asset.dart';
 import '../../../../core/app_extension.dart';
 import '../../../../core/app_style.dart';
 import '../../../comment/controller/comment_controller.dart';
+import '../../../comment/data/model/comment.dart';
 import '../../../user/data/model/user.dart';
 import '../../controller/post_controller.dart';
 import '../../data/model/post.dart';

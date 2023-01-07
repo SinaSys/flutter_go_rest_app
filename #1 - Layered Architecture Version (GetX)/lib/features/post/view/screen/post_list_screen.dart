@@ -1,5 +1,5 @@
-import 'package:layered_architecture/core/app_extension.dart';
-import 'package:layered_architecture/features/post/view/screen/post_detail_screen.dart';
+import '../../../../core/app_extension.dart';
+import '../screen/post_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
