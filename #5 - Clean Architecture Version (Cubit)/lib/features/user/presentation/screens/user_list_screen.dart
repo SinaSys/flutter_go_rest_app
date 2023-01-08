@@ -1,4 +1,4 @@
-import '../../../../core/app/app_extension.dart';
+import '../../../../core/app_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,7 +11,7 @@ import '../../../../common/dialog/retry_dialog.dart';
 import '../../../../common/widget/empty_widget.dart';
 import '../../../../common/widget/popup_menu.dart';
 import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../core/app/app_style.dart';
+import '../../../../core/app_style.dart';
 import '../../../post/presentation/screens/post_list_screen.dart';
 import '../../../todo/presentation/screens/todo_list_screen.dart';
 import '../../data/models/user.dart';

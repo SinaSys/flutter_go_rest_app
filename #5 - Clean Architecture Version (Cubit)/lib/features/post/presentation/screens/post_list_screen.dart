@@ -1,6 +1,6 @@
 import '../screens/post_detail_screen.dart';
 
-import '../../../../core/app/app_extension.dart';
+import '../../../../core/app_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +9,7 @@ import '../../../../common/cubit/generic_cubit_state.dart';
 import '../../../../common/dialog/retry_dialog.dart';
 import '../../../../common/widget/empty_widget.dart';
 import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../core/app/app_style.dart';
+import '../../../../core/app_style.dart';
 import '../../../user/data/models/user.dart';
 import '../../data/models/post.dart';
 import '../cubit/post_cubit.dart';

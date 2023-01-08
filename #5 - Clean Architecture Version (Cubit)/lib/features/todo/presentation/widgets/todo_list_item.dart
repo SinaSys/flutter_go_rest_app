@@ -1,8 +1,8 @@
-import 'package:clean_architecture_cubit/core/app/app_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../../../../core/app_extension.dart';
 
-import '../../../../core/app/app_style.dart';
+import '../../../../core/app_style.dart';
 import '../../data/models/todo.dart';
 import 'circle_container.dart';
 

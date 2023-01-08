@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'dio_exception.dart';
-import '../../core/app/app_extension.dart';
+import '../../core/app_extension.dart';
 
 abstract class ApiHelper<T> {
   late final T data;

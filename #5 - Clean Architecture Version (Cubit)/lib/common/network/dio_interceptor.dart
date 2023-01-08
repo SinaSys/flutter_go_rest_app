@@ -1,6 +1,6 @@
-import 'package:clean_architecture_cubit/core/app/app_extension.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
+import '../../core/app_extension.dart';
 
 class DioInterceptor extends Interceptor {
   final Logger logger = Logger(
