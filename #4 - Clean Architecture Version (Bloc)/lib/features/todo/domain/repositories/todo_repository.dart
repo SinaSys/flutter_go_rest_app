@@ -1,6 +1,5 @@
-import 'package:clean_architecture_bloc/features/todo/data/models/todo.dart';
-
 import '../../../../common/network/api_result.dart';
+import '../../data/models/todo.dart';
 import '../entities/todo_entity.dart';
 
 abstract class TodoRepository {

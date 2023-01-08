@@ -1,5 +1,4 @@
-import 'package:clean_architecture_bloc/common/network/api_result.dart';
-
+import '../../../../common/network/api_result.dart';
 import '../../../../common/usecase/usecase.dart';
 import '../../data/models/user.dart';
 import '../repositories/user_repository.dart';

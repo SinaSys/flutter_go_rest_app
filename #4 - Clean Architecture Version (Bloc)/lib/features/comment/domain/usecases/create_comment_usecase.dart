@@ -1,8 +1,7 @@
-import 'package:clean_architecture_bloc/common/network/api_result.dart';
-import 'package:clean_architecture_bloc/features/comment/domain/repositories/comment_repository.dart';
-
+import '../../../../common/network/api_result.dart';
 import '../../../../common/usecase/usecase.dart';
 import '../../data/models/comment.dart';
+import '../repositories/comment_repository.dart';
 
 class CreateCommentUseCase implements UseCase<bool, CreateCommentParams> {
   final CommentRepository commentRepository;

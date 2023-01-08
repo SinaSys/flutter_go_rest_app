@@ -1,7 +1,8 @@
-import 'package:clean_architecture_bloc/features/comment/domain/entities/comment_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:flutter/foundation.dart' show immutable;
+
+import '../../domain/entities/comment_entity.dart';
 
 part 'comment.g.dart';
 

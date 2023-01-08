@@ -1,6 +1,6 @@
-import 'package:clean_architecture_bloc/core/app/app_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/app_extension.dart';
 
 import '../../../../common/bloc/generic_bloc_state.dart';
 import '../../../../common/widget/date_time_picker.dart';
@@ -11,7 +11,7 @@ import '../../../../common/widget/spinkit_indicator.dart';
 import '../../../../common/widget/text_input.dart';
 import '../../../../common/dialog/retry_dialog.dart';
 import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../core/app/app_style.dart';
+import '../../../../core/app_style.dart';
 import '../../../user/data/models/user.dart';
 import '../../data/models/todo.dart';
 import '../../domain/entities/todo_entity.dart';

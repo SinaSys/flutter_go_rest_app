@@ -1,17 +1,18 @@
-import 'package:clean_architecture_bloc/features/todo/domain/usecases/delete_todo_usecase.dart';
-import 'package:clean_architecture_bloc/features/todo/domain/usecases/get_todos_usecase.dart';
-import 'package:clean_architecture_bloc/features/todo/domain/usecases/update_todo_usecase.dart';
-import 'package:clean_architecture_bloc/features/todo/presentation/bloc/todo_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/todo_event.dart';
 
 import '../../../../common/bloc/bloc_helper.dart';
 import '../../../../common/bloc/generic_bloc_state.dart';
 import '../../data/models/todo.dart';
 import '../../domain/usecases/create_todo_usecase.dart';
+import '../../domain/usecases/delete_todo_usecase.dart';
+import '../../domain/usecases/get_todos_usecase.dart';
+import '../../domain/usecases/update_todo_usecase.dart';
 
 typedef Emit = Emitter<GenericBlocState<ToDo>>;
 
-class TodoBloc extends Bloc<TodoEvent, GenericBlocState<ToDo>> with BlocHelper<ToDo> {
+class TodoBloc extends Bloc<TodoEvent, GenericBlocState<ToDo>>
+    with BlocHelper<ToDo> {
   TodoBloc({
     required this.createTodoUseCase,
     required this.updateTodoUseCase,

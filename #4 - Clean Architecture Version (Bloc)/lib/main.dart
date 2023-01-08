@@ -4,7 +4,7 @@ import 'package:clean_architecture_bloc/features/todo/presentation/bloc/todo_blo
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'core/app/app_theme.dart';
+import 'core/app_theme.dart';
 import 'features/user/presentation/bloc/user_bloc.dart';
 import 'features/user/presentation/screens/user_list_screen.dart';
 import 'di.dart';

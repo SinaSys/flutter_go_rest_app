@@ -1,17 +1,17 @@
-import 'package:clean_architecture_bloc/features/post/domain/usecases/create_post_usecase.dart';
-import 'package:clean_architecture_bloc/features/post/domain/usecases/delete_post_usecase.dart';
-import 'package:clean_architecture_bloc/features/post/domain/usecases/get_posts_usecase.dart';
-import 'package:clean_architecture_bloc/features/post/domain/usecases/update_post_usecase.dart';
-import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import '../bloc/post_event.dart';
 import '../../../../common/bloc/bloc_helper.dart';
 import '../../../../common/bloc/generic_bloc_state.dart';
 import '../../data/models/post.dart';
+import '../../domain/usecases/create_post_usecase.dart';
+import '../../domain/usecases/delete_post_usecase.dart';
+import '../../domain/usecases/get_posts_usecase.dart';
+import '../../domain/usecases/update_post_usecase.dart';
 
 typedef Emit = Emitter<GenericBlocState<Post>>;
 
-class PostBloc extends Bloc<PostEvent, GenericBlocState<Post>> with BlocHelper<Post> {
+class PostBloc extends Bloc<PostEvent, GenericBlocState<Post>>
+    with BlocHelper<Post> {
   PostBloc({
     required this.getPostsUseCase,
     required this.createPostUseCase,

@@ -1,4 +1,4 @@
-import 'package:clean_architecture_bloc/core/app/app_extension.dart';
+import '../../../../core/app_extension.dart';
 import 'package:clean_architecture_bloc/features/post/presentation/screens/post_detail_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +7,7 @@ import '../../../../common/bloc/generic_bloc_state.dart';
 import '../../../../common/dialog/retry_dialog.dart';
 import '../../../../common/widget/empty_widget.dart';
 import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../core/app/app_style.dart';
+import '../../../../core/app_style.dart';
 import '../../../user/data/models/user.dart';
 import '../../data/models/post.dart';
 import '../bloc/post_bloc.dart';

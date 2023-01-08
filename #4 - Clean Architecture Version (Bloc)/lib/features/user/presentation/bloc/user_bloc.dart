@@ -1,17 +1,18 @@
-import 'package:clean_architecture_bloc/common/bloc/bloc_helper.dart';
-import 'package:clean_architecture_bloc/features/user/domain/usecases/create_user_usecase.dart';
-import 'package:clean_architecture_bloc/features/user/domain/usecases/delete_user_usecase.dart';
-import 'package:clean_architecture_bloc/features/user/domain/usecases/get_users_usecase.dart';
-import 'package:clean_architecture_bloc/features/user/domain/usecases/update_user_usecase.dart';
-import 'package:clean_architecture_bloc/features/user/presentation/bloc/user_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/user_event.dart';
 
+import '../../../../common/bloc/bloc_helper.dart';
 import '../../../../common/bloc/generic_bloc_state.dart';
 import '../../data/models/user.dart';
+import '../../domain/usecases/create_user_usecase.dart';
+import '../../domain/usecases/delete_user_usecase.dart';
+import '../../domain/usecases/get_users_usecase.dart';
+import '../../domain/usecases/update_user_usecase.dart';
 
 typedef Emit = Emitter<GenericBlocState<User>>;
 
-class UserBloc extends Bloc<UserEvent, GenericBlocState<User>> with BlocHelper<User> {
+class UserBloc extends Bloc<UserEvent, GenericBlocState<User>>
+    with BlocHelper<User> {
   UserBloc({
     required this.getUsersUseCase,
     required this.createUserUseCase,
