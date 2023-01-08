@@ -9,7 +9,7 @@ import '../../domain/usecases/delete_post_usecase.dart';
 import '../../domain/usecases/get_posts_usecase.dart';
 import '../../domain/usecases/update_post_usecase.dart';
 
-class PostController extends GetxController with StateMixin<List<Post>>, BaseController<Post> {
+class PostController extends GetxController with StateMixin<List<Post>>, BaseController {
   RxInt postLength = 0.obs;
 
   final GetPostsUseCase getPostsUseCase;

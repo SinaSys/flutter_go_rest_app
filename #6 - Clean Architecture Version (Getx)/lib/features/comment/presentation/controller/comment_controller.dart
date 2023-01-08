@@ -8,7 +8,7 @@ import '../../domain/usecases/delete_comment_usecase.dart';
 import '../../domain/usecases/get_comments_usecase.dart';
 
 class CommentController extends GetxController
-    with StateMixin<List<Comment>>, BaseController<Comment> {
+    with StateMixin<List<Comment>>, BaseController {
   final GetCommentsUseCase getCommentsUseCase;
   final CreateCommentUseCase createCommentUseCase;
   final DeleteCommentUseCase deleteCommentUseCase;

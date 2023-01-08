@@ -9,8 +9,7 @@ import '../../domain/usecases/delete_user_usecase.dart';
 import '../../domain/usecases/get_users_usecase.dart';
 import '../../domain/usecases/update_user_usecase.dart';
 
-class UserController extends GetxController
-    with StateMixin<List<User>>, BaseController<User> {
+class UserController extends GetxController with StateMixin<List<User>>, BaseController {
   final GetUsersUseCase getUsersUseCase;
   final CreateUserUseCase createUserUseCase;
   final UpdateUserUseCase updateUserUseCase;

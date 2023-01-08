@@ -3,7 +3,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 enum ApiState { loading, failure, success }
 
-mixin BaseController<T> {
+mixin BaseController {
   Rx<ApiState> apiStatus = ApiState.loading.obs;
   Rx<String> errorMessage = "".obs;
 
