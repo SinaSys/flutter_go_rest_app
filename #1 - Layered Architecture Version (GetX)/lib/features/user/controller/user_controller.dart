@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import '../../../common/controller/api_operation.dart';
+import '../../../common/controller/base_controller.dart';
 import '../data/model/user.dart';
 import '../data/provider/remote/user_api.dart';
 
-class UserController extends GetxController with StateMixin<List<User>>, ApiOperationMixin {
-  final UserApi _userApi = UserApi();
+class UserController extends GetxController with StateMixin<List<User>>, BaseController {
+  final UserApi userApi = UserApi();
 
   @override
   void onInit() {
@@ -13,11 +13,26 @@ class UserController extends GetxController with StateMixin<List<User>>, ApiOper
     super.onInit();
   }
 
-  Future<void> getUserList(
-      {Gender gender = Gender.all, UserStatus status = UserStatus.all}) async {
+  void createUser(User user) {
+    createItem(userApi.createUser(user));
+  }
+
+  void updateUser(User user) {
+    updateItem(userApi.updateUser(user));
+  }
+
+  void deleteUser(User user) {
+    deleteItem(userApi.deleteUser(user));
+  }
+
+  Future<void> getUserList({
+    Gender gender = Gender.all,
+    UserStatus status = UserStatus.all,
+  }) async {
+
     change(null, status: RxStatus.loading());
-    Either<String, List<User>> failureOrSuccess =
-        (await _userApi.getUserList(gender: gender, status: status));
+
+    Either<String, List<User>> failureOrSuccess = (await userApi.getUserList(gender: gender, status: status));
 
     failureOrSuccess.fold(
       (String failure) {
@@ -31,17 +46,5 @@ class UserController extends GetxController with StateMixin<List<User>>, ApiOper
         }
       },
     );
-  }
-
-  void createUser(User user) {
-    requestMethodTemplate(_userApi.createUser(user));
-  }
-
-  void updateUser(User user) {
-    requestMethodTemplate(_userApi.updateUser(user));
-  }
-
-  void deleteUser(User user) {
-    requestMethodTemplate(_userApi.deleteUser(user));
   }
 }

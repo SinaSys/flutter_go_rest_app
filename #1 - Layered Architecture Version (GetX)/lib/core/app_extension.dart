@@ -8,8 +8,15 @@ extension StringExtension on String {
     return AppAsset.female;
   }
 
-  String get toCapital {
-    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
+  String get toCapital => "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
+}
+
+extension IntegetExtension on int? {
+  bool get success {
+    if (this == 200 || this == 201 || this == 204) {
+      return true;
+    }
+    return false;
   }
 }
 
@@ -41,7 +48,6 @@ extension MapExtension on Map {
     }
   }
 }
-
 
 //Helper functions
 void pop(BuildContext context, int returnedLevel) {

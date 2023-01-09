@@ -1,20 +1,34 @@
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 
-import '../../../common/controller/api_operation.dart';
+import '../../../common/controller/base_controller.dart';
 import '../../user/data/model/user.dart';
 import '../data/model/post.dart';
 import '../data/provider/remote/post_api.dart';
 
-
-class PostController extends GetxController with StateMixin<List<Post>>,ApiOperationMixin {
-  final PostApi _postApi = PostApi();
+class PostController extends GetxController with StateMixin<List<Post>>, BaseController {
+  final PostApi postApi = PostApi();
 
   RxInt postLength = 0.obs;
 
+  void createPost(Post post) {
+    createItem(postApi.createPost(post));
+  }
+
+  void updatePost(Post post) async {
+    updateItem(postApi.updatePost(post));
+  }
+
+  void deletePost(Post post) async {
+    deleteItem(postApi.deletePost(post));
+  }
+
   Future<void> getPosts(User user) async {
+
     change(null, status: RxStatus.loading());
-    Either<String, List<Post>> failureOrSuccess = await _postApi.getPosts(user);
+
+    Either<String, List<Post>> failureOrSuccess = await postApi.getPosts(user);
+
     failureOrSuccess.fold(
       (String failure) {
         change(null, status: RxStatus.error(failure));
@@ -26,20 +40,7 @@ class PostController extends GetxController with StateMixin<List<Post>>,ApiOpera
         } else {
           change(posts, status: RxStatus.success());
         }
-
       },
     );
-  }
-
-  void createPost(Post post) {
-    requestMethodTemplate(_postApi.createPost(post));
-  }
-
-  void updatePost(Post post) async {
-    requestMethodTemplate(_postApi.updatePost(post));
-  }
-
-  void deletePost(Post post) async {
-    requestMethodTemplate(_postApi.deletePost(post));
   }
 }

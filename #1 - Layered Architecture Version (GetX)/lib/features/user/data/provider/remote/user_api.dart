@@ -5,19 +5,20 @@ import '../../../../../core/api_config.dart';
 import '../../model/user.dart';
 
 class UserApi extends ApiBase<User> {
+
   //Create new user
   Future<Either<String, bool>> createUser(User user) async {
-    return await requestMethodTemplate(dioClient.dio!.post(ApiConfig.users, data: user));
+    return await makePostRequest(dioClient.dio!.post(ApiConfig.users, data: user));
   }
 
   //Delete single suer
   Future<Either<String, bool>> deleteUser(User user) async {
-    return await requestMethodTemplate(dioClient.dio!.delete("${ApiConfig.users}/${user.id}"));
+    return await makeDeleteRequest(dioClient.dio!.delete("${ApiConfig.users}/${user.id}"));
   }
 
   //Update single suer
   Future<Either<String, bool>> updateUser(User user) async {
-    return await requestMethodTemplate(dioClient.dio!.put("${ApiConfig.users}/${user.id}", data: user));
+    return await makePutRequest(dioClient.dio!.put("${ApiConfig.users}/${user.id}", data: user));
   }
 
   //Get user list | Filter user list by gender or status
@@ -35,7 +36,7 @@ class UserApi extends ApiBase<User> {
       queryParameters.addAll({'status': status.name});
     }
 
-    Future<Either<String, List<User>>> result = getData(
+    Future<Either<String, List<User>>> result = makeGetRequest(
       dioClient.dio!.get(ApiConfig.users, queryParameters: queryParameters),
       User.fromJson,
     );

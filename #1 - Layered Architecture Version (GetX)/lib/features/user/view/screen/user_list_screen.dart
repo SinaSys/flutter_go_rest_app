@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../common/controller/api_operation.dart';
+import '../../../../common/controller/base_controller.dart';
 import '../../../../common/dialog/create_dialog.dart';
 import '../../../../common/dialog/delete_dialog.dart';
 import '../../../../common/dialog/progress_dialog.dart';
