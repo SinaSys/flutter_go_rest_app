@@ -1,5 +1,4 @@
 import '../../../../core/app_extension.dart';
-import 'package:clean_architecture_bloc/features/post/presentation/screens/post_detail_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +12,7 @@ import '../../data/models/post.dart';
 import '../bloc/post_bloc.dart';
 import '../bloc/post_event.dart';
 import 'create_post_screen.dart';
+import 'post_detail_screen.dart';
 
 class PostListScreen extends StatefulWidget {
   const PostListScreen({Key? key, required this.user}) : super(key: key);

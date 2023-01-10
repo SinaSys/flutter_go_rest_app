@@ -1,10 +1,10 @@
-import 'package:clean_architecture_bloc/features/comment/presentation/bloc/comment_bloc.dart';
-import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_bloc.dart';
-import 'package:clean_architecture_bloc/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/app_theme.dart';
+import 'features/comment/presentation/bloc/comment_bloc.dart';
+import 'features/post/presentation/bloc/post_bloc.dart';
+import 'features/todo/presentation/bloc/todo_bloc.dart';
 import 'features/user/presentation/bloc/user_bloc.dart';
 import 'features/user/presentation/screens/user_list_screen.dart';
 import 'di.dart';
