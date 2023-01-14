@@ -1,7 +1,7 @@
+import 'package:clean_architecture_bloc/common/network/api_config.dart';
+import 'package:clean_architecture_bloc/common/network/dio_interceptor.dart';
 import 'package:dio/dio.dart';
 
-import 'api_config.dart';
-import '../../common/network/dio_interceptor.dart';
 
 class DioClient {
   final Dio dio;

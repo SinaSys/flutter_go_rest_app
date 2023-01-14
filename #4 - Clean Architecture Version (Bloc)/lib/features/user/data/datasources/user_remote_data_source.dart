@@ -1,9 +1,9 @@
-import '../../../../common/network/api_config.dart';
-import '../../../../common/network/api_helper.dart';
-import '../../../../common/network/dio_client.dart';
-import '../../../../di.dart';
-import '../../domain/entities/user_entity.dart';
-import '../models/user.dart';
+import 'package:clean_architecture_bloc/common/network/api_config.dart';
+import 'package:clean_architecture_bloc/common/network/api_helper.dart';
+import 'package:clean_architecture_bloc/common/network/dio_client.dart';
+import 'package:clean_architecture_bloc/di.dart';
+import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
+import 'package:clean_architecture_bloc/features/user/domain/entities/user_entity.dart';
 
 abstract class UserRemoteDataSource {
   Future<List<User>> getUsers({Gender? gender, UserStatus? status});

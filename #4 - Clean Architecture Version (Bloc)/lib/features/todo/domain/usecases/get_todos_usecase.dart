@@ -1,8 +1,8 @@
-import '../../../../common/network/api_result.dart';
-import '../../../../common/usecase/usecase.dart';
-import '../../data/models/todo.dart';
-import '../entities/todo_entity.dart';
-import '../repositories/todo_repository.dart';
+import 'package:clean_architecture_bloc/common/network/api_result.dart';
+import 'package:clean_architecture_bloc/common/usecase/usecase.dart';
+import 'package:clean_architecture_bloc/features/todo/data/models/todo.dart';
+import 'package:clean_architecture_bloc/features/todo/domain/entities/todo_entity.dart';
+import 'package:clean_architecture_bloc/features/todo/domain/repositories/todo_repository.dart';
 
 class GetTodoUseCase implements UseCase<List<ToDo>, GetTodoParams> {
   final TodoRepository todoRepository;

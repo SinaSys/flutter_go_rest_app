@@ -1,7 +1,7 @@
+import 'package:clean_architecture_bloc/core/app_extension.dart';
+import 'package:clean_architecture_bloc/common/network/dio_exception.dart';
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'dio_exception.dart';
-import '../../core/app_extension.dart';
 
 abstract class ApiHelper<T> {
   late final T data;

@@ -1,4 +1,4 @@
-import '../../data/models/comment.dart';
+import 'package:clean_architecture_bloc/features/comment/data/models/comment.dart';
 
 abstract class CommentEvent {}
 

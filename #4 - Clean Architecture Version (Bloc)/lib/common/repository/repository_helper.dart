@@ -1,7 +1,6 @@
+import 'package:clean_architecture_bloc/common/network/api_result.dart';
+import 'package:clean_architecture_bloc/common/network/dio_exception.dart';
 import 'package:dio/dio.dart';
-
-import '../network/api_result.dart';
-import '../network/dio_exception.dart';
 
 mixin RepositoryHelper<T> {
   Future<ApiResult<List<T>>> checkItemsFailOrSuccess(Future<List<T>> apiCallback) async {
@@ -14,7 +13,8 @@ mixin RepositoryHelper<T> {
     }
   }
 
-  Future<ApiResult<bool>> checkItemFailOrSuccess(Future<bool> apiCallback) async {
+  Future<ApiResult<bool>> checkItemFailOrSuccess(
+      Future<bool> apiCallback) async {
     try {
       await apiCallback;
       return const ApiResult.success(true);

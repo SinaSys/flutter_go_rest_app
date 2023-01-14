@@ -1,5 +1,5 @@
-import '../../data/models/todo.dart';
-import '../../domain/entities/todo_entity.dart';
+import 'package:clean_architecture_bloc/features/todo/data/models/todo.dart';
+import 'package:clean_architecture_bloc/features/todo/domain/entities/todo_entity.dart';
 
 /// Events should be named in the past tense because events are things
 /// that have already occurred from the bloc's perspective.

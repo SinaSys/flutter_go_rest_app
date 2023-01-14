@@ -1,9 +1,8 @@
-import '../../../../common/network/api_helper.dart';
-
-import '../../../../common/network/api_config.dart';
-import '../../../../common/network/dio_client.dart';
-import '../../../../di.dart';
-import '../models/comment.dart';
+import 'package:clean_architecture_bloc/common/network/api_config.dart';
+import 'package:clean_architecture_bloc/common/network/api_helper.dart';
+import 'package:clean_architecture_bloc/common/network/dio_client.dart';
+import 'package:clean_architecture_bloc/di.dart';
+import 'package:clean_architecture_bloc/features/comment/data/models/comment.dart';
 
 abstract class CommentRemoteDataSource {
   Future<List<Comment>> getComments(int postId);

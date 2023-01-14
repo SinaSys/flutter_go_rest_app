@@ -1,5 +1,5 @@
-import '../../data/models/user.dart';
-import '../../domain/entities/user_entity.dart';
+import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
+import 'package:clean_architecture_bloc/features/user/domain/entities/user_entity.dart';
 
 /// Events should be named in the past tense because events are things
 /// that have already occurred from the bloc's perspective.

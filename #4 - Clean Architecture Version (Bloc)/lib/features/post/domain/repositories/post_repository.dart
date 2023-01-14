@@ -1,6 +1,6 @@
-import '../../../../common/network/api_result.dart';
-import '../../../user/data/models/user.dart';
-import '../../data/models/post.dart';
+import 'package:clean_architecture_bloc/common/network/api_result.dart';
+import 'package:clean_architecture_bloc/features/post/data/models/post.dart';
+import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
 
 abstract class PostRepository {
   Future<ApiResult<List<Post>>> getPosts(User user);

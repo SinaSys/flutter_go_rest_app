@@ -1,9 +1,9 @@
-import '../../../../common/network/api_config.dart';
-import '../../../../common/network/api_helper.dart';
-import '../../../../common/network/dio_client.dart';
-import '../../../../di.dart';
-import '../../domain/entities/todo_entity.dart';
-import '../models/todo.dart';
+import 'package:clean_architecture_bloc/common/network/api_config.dart';
+import 'package:clean_architecture_bloc/common/network/api_helper.dart';
+import 'package:clean_architecture_bloc/common/network/dio_client.dart';
+import 'package:clean_architecture_bloc/di.dart';
+import 'package:clean_architecture_bloc/features/todo/data/models/todo.dart';
+import 'package:clean_architecture_bloc/features/todo/domain/entities/todo_entity.dart';
 
 abstract class TodoRemoteDataSource {
   Future<List<ToDo>> getTodos(int userId, {TodoStatus? status});
@@ -15,9 +15,7 @@ abstract class TodoRemoteDataSource {
   Future<bool> deleteTodo(ToDo todo);
 }
 
-class TodoRemoteDataSourceImpl
-    with ApiHelper<ToDo>
-    implements TodoRemoteDataSource {
+class TodoRemoteDataSourceImpl with ApiHelper<ToDo> implements TodoRemoteDataSource {
   final DioClient dioClient = getIt<DioClient>();
 
   @override

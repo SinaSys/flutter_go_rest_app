@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../core/app_extension.dart';
+import 'package:clean_architecture_bloc/core/app_extension.dart';
 
 class DropDown<T> extends StatefulWidget {
   const DropDown(

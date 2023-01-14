@@ -2,8 +2,6 @@ import 'package:flutter/foundation.dart' show immutable;
 
 enum Status { empty, loading, failure, success }
 
-enum ApiOperation { select, create, update, delete }
-
 @immutable
 class GenericBlocState<T> {
   final List<T>? data;

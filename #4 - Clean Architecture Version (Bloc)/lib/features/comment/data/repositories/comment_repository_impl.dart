@@ -1,11 +1,10 @@
-import '../../../../common/network/api_result.dart';
-import '../../../../common/repository/repository_helper.dart';
-import '../../domain/repositories/comment_repository.dart';
-import '../datasources/comment_remote_data_source.dart';
-import '../models/comment.dart';
+import 'package:clean_architecture_bloc/common/network/api_result.dart';
+import 'package:clean_architecture_bloc/common/repository/repository_helper.dart';
+import 'package:clean_architecture_bloc/features/comment/data/datasources/comment_remote_data_source.dart';
+import 'package:clean_architecture_bloc/features/comment/data/models/comment.dart';
+import 'package:clean_architecture_bloc/features/comment/domain/repositories/comment_repository.dart';
 
-class CommentRepositoryImpl extends CommentRepository
-    with RepositoryHelper<Comment> {
+class CommentRepositoryImpl extends CommentRepository with RepositoryHelper<Comment> {
   final CommentRemoteDataSource remoteDataSource;
 
   CommentRepositoryImpl({required this.remoteDataSource});

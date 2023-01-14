@@ -1,15 +1,14 @@
+import 'package:clean_architecture_bloc/common/bloc/generic_bloc_state.dart';
+import 'package:clean_architecture_bloc/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_bloc/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_bloc/common/widget/text_input.dart';
+import 'package:clean_architecture_bloc/core/app_extension.dart';
+import 'package:clean_architecture_bloc/features/post/data/models/post.dart';
+import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_bloc.dart';
+import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_event.dart';
+import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/app_extension.dart';
-
-import '../../../../common/bloc/generic_bloc_state.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/text_input.dart';
-import '../../../user/data/models/user.dart';
-import '../../data/models/post.dart';
-import '../bloc/post_bloc.dart';
-import '../bloc/post_event.dart';
 
 enum PostMode { create, update }
 
