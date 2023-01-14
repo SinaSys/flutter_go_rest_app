@@ -1,23 +1,22 @@
-import '../../../../core/app_extension.dart';
+import 'package:clean_architecture_cubit/common/cubit/generic_cubit.dart';
+import 'package:clean_architecture_cubit/common/cubit/generic_cubit_state.dart';
+import 'package:clean_architecture_cubit/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_cubit/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_cubit/common/widget/date_time_picker.dart';
+import 'package:clean_architecture_cubit/common/widget/drop_down.dart';
+import 'package:clean_architecture_cubit/common/widget/empty_widget.dart';
+import 'package:clean_architecture_cubit/common/widget/popup_menu.dart';
+import 'package:clean_architecture_cubit/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_cubit/common/widget/text_input.dart';
+import 'package:clean_architecture_cubit/core/app_style.dart';
+import 'package:clean_architecture_cubit/features/todo/data/models/todo.dart';
+import 'package:clean_architecture_cubit/features/todo/domain/entities/todo_entity.dart';
+import 'package:clean_architecture_cubit/features/todo/presentation/cubit/todo_cubit.dart';
+import 'package:clean_architecture_cubit/features/todo/presentation/widgets/todo_list_item.dart';
+import 'package:clean_architecture_cubit/features/user/data/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../common/cubit/generic_cubit.dart';
-import '../../../../common/cubit/generic_cubit_state.dart';
-import '../../../../common/widget/date_time_picker.dart';
-import '../../../../common/widget/drop_down.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/popup_menu.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../common/widget/text_input.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../core/app_style.dart';
-import '../../../user/data/models/user.dart';
-import '../../data/models/todo.dart';
-import '../../domain/entities/todo_entity.dart';
-import '../cubit/todo_cubit.dart';
-import '../widgets/todo_list_item.dart';
+import 'package:clean_architecture_cubit/core/app_extension.dart';
 
 enum Mode { create, update }
 
@@ -112,17 +111,6 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
       context: context,
       builder: (_) {
         return BlocBuilder<TodoCubit, GenericCubitState<List<ToDo>>>(
-          buildWhen: (prevState, curState) {
-            if (mode == Mode.create) {
-              return context.read<TodoCubit>().operation == ApiOperation.create
-                  ? true
-                  : false;
-            } else {
-              return context.read<TodoCubit>().operation == ApiOperation.update
-                  ? true
-                  : false;
-            }
-          },
           builder: (BuildContext context, GenericCubitState<List<ToDo>> state) {
             switch (state.status) {
               case Status.empty:
@@ -252,12 +240,6 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
           context: context,
           builder: (_) {
             return BlocBuilder<TodoCubit, GenericCubitState<List<ToDo>>>(
-              buildWhen: (prevState, curState) {
-                return context.read<TodoCubit>().operation ==
-                        ApiOperation.delete
-                    ? true
-                    : false;
-              },
               builder:
                   (BuildContext context, GenericCubitState<List<ToDo>> state) {
                 switch (state.status) {
