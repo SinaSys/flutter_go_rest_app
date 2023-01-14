@@ -1,5 +1,5 @@
-import '../../user/data/model/user.dart';
-import '../data/model/post.dart';
+import 'package:layered_architecture_bloc/features/post/data/model/post.dart';
+import 'package:layered_architecture_bloc/features/user/data/model/user.dart';
 
 abstract class PostEvent {}
 

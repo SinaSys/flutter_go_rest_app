@@ -1,28 +1,22 @@
-import '../../../../../common/network/api_base.dart';
-import '../../../../../common/network/api_result.dart';
-import '../../../../../core/api_config.dart';
-import '../../model/user.dart';
+import 'package:layered_architecture_bloc/features/user/data/model/user.dart';
+import 'package:layered_architecture_bloc/common/network/api_result.dart';
+import 'package:layered_architecture_bloc/common/network/api_base.dart';
+import 'package:layered_architecture_bloc/core/api_config.dart';
 
 class UserApi extends ApiBase<User> {
   //Create new user
   Future<ApiResult> createUser(User user) async {
-    return await createItem(
-      dioClient.dio!.post(ApiConfig.users, data: user),
-    );
+    return await createItem(dioClient.dio!.post(ApiConfig.users, data: user));
   }
 
   //Update single suer
   Future<ApiResult> updateUser(User user) async {
-    return await updateItem(
-      dioClient.dio!.put("${ApiConfig.users}/${user.id}", data: user),
-    );
+    return await updateItem(dioClient.dio!.put("${ApiConfig.users}/${user.id}", data: user));
   }
 
   //Delete single suer
   Future<ApiResult> deleteUser(User user) async {
-    return await deleteItem(
-      dioClient.dio!.delete("${ApiConfig.users}/${user.id}"),
-    );
+    return await deleteItem(dioClient.dio!.delete("${ApiConfig.users}/${user.id}"));
   }
 
   //Get user list | Filter user list by gender or status

@@ -1,5 +1,5 @@
+import 'package:layered_architecture_bloc/common/widget/spinkit_indicator.dart';
 import 'package:flutter/material.dart';
-import '../widget/spinkit_indicator.dart';
 
 class ProgressDialog extends StatelessWidget {
   const ProgressDialog({

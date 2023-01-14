@@ -1,18 +1,17 @@
+import 'package:layered_architecture_bloc/features/post/view/screen/create_post_screen.dart';
+import 'package:layered_architecture_bloc/features/post/view/screen/post_detail_screen.dart';
+import 'package:layered_architecture_bloc/common/bloc/generic_bloc_state.dart';
+import 'package:layered_architecture_bloc/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture_bloc/common/widget/empty_widget.dart';
+import 'package:layered_architecture_bloc/common/widget/spinkit_indicator.dart';
+import 'package:layered_architecture_bloc/core/app_extension.dart';
+import 'package:layered_architecture_bloc/core/app_style.dart';
+import 'package:layered_architecture_bloc/features/post/bloc/post_bloc.dart';
+import 'package:layered_architecture_bloc/features/post/bloc/post_event.dart';
+import 'package:layered_architecture_bloc/features/post/data/model/post.dart';
+import 'package:layered_architecture_bloc/features/user/data/model/user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/app_extension.dart';
-import '../../bloc/post_event.dart';
-import '../screen/post_detail_screen.dart';
-
-import '../../../../common/bloc/generic_bloc_state.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../core/app_style.dart';
-import '../../../user/data/model/user.dart';
-import '../../bloc/post_bloc.dart';
-import '../../data/model/post.dart';
-import 'create_post_screen.dart';
 
 class PostListScreen extends StatefulWidget {
   const PostListScreen({Key? key, required this.user}) : super(key: key);

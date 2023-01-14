@@ -1,7 +1,7 @@
-import '../../../../../common/network/api_base.dart';
-import '../../../../../common/network/api_result.dart';
-import '../../../../../core/api_config.dart';
-import '../../model/comment.dart';
+import 'package:layered_architecture_bloc/features/comment/data/model/comment.dart';
+import 'package:layered_architecture_bloc/common/network/api_base.dart';
+import 'package:layered_architecture_bloc/common/network/api_result.dart';
+import 'package:layered_architecture_bloc/core/api_config.dart';
 
 class CommentApi extends ApiBase<Comment> {
   Future<ApiResult<bool>> createComment(Comment comment) async {

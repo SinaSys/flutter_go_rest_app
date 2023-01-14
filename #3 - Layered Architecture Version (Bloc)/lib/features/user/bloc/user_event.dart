@@ -1,4 +1,4 @@
-import '../data/model/user.dart';
+import 'package:layered_architecture_bloc/features/user/data/model/user.dart';
 
 /// Events should be named in the past tense because events are things
 /// that have already occurred from the bloc's perspective.

@@ -1,15 +1,14 @@
-import 'package:flutter/material.dart';
+import 'package:layered_architecture_bloc/common/bloc/generic_bloc_state.dart';
+import 'package:layered_architecture_bloc/features/post/bloc/post_event.dart';
+import 'package:layered_architecture_bloc/common/dialog/progress_dialog.dart';
+import 'package:layered_architecture_bloc/features/post/data/model/post.dart';
+import 'package:layered_architecture_bloc/features/post/bloc/post_bloc.dart';
+import 'package:layered_architecture_bloc/features/user/data/model/user.dart';
+import 'package:layered_architecture_bloc/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture_bloc/common/widget/text_input.dart';
+import 'package:layered_architecture_bloc/core/app_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/app_extension.dart';
-
-import '../../../../common/bloc/generic_bloc_state.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/text_input.dart';
-import '../../../user/data/model/user.dart';
-import '../../bloc/post_bloc.dart';
-import '../../bloc/post_event.dart';
-import '../../data/model/post.dart';
+import 'package:flutter/material.dart';
 
 enum PostMode { create, update }
 

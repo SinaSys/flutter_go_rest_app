@@ -1,4 +1,4 @@
-import '../data/model/comment.dart';
+import 'package:layered_architecture_bloc/features/comment/data/model/comment.dart';
 
 abstract class CommentEvent {}
 
@@ -8,13 +8,13 @@ class CommentFetched extends CommentEvent {
   CommentFetched(this.postId);
 }
 
-class  CommentCreated extends CommentEvent {
+class CommentCreated extends CommentEvent {
   final Comment comment;
 
   CommentCreated(this.comment);
 }
 
-class  CommentDeleted extends CommentEvent {
+class CommentDeleted extends CommentEvent {
   final Comment comment;
 
   CommentDeleted(this.comment);
