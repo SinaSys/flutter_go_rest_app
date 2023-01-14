@@ -1,6 +1,6 @@
+import 'package:mvvm_bloc/common/bloc/generic_bloc_state.dart';
+import 'package:mvvm_bloc/common/network/api_result.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../network/api_result.dart';
-import 'generic_bloc_state.dart';
 
 enum ApiOperation { select, create, update, delete }
 
@@ -26,8 +26,8 @@ mixin BlocHelper<T> {
     _checkFailureOrSuccess(failureOrSuccess, emit);
   }
 
-  Future<void> getItems(
-      Future<ApiResult<List<T>>> apiCallback, Emit<T> emit) async {
+  Future<void> getItems(Future<ApiResult<List<T>>> apiCallback, Emit<T> emit) async {
+    operation = ApiOperation.select;
     emit(GenericBlocState.loading());
     ApiResult<List<T>> failureOrSuccess = await apiCallback;
 
@@ -46,14 +46,17 @@ mixin BlocHelper<T> {
   }
 
   Future<void> createItem(Future<ApiResult> apiCallback, Emit<T> emit) async {
+    operation = ApiOperation.create;
     await _apiOperationTemplate(apiCallback, emit);
   }
 
   Future<void> updateItem(Future<ApiResult> apiCallback, Emit<T> emit) async {
+    operation = ApiOperation.update;
     await _apiOperationTemplate(apiCallback, emit);
   }
 
   Future<void> deleteItem(Future<ApiResult> apiCallback, Emit<T> emit) async {
+    operation = ApiOperation.delete;
     await _apiOperationTemplate(apiCallback, emit);
   }
 }
