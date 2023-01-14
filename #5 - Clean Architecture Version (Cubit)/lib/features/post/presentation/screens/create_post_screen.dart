@@ -1,15 +1,13 @@
-import '../../../../core/app_extension.dart';
+import 'package:clean_architecture_cubit/common/cubit/generic_cubit_state.dart';
+import 'package:clean_architecture_cubit/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_cubit/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_cubit/common/widget/text_input.dart';
+import 'package:clean_architecture_cubit/core/app_extension.dart';
+import 'package:clean_architecture_cubit/features/post/data/models/post.dart';
+import 'package:clean_architecture_cubit/features/post/presentation/cubit/post_cubit.dart';
+import 'package:clean_architecture_cubit/features/user/data/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../common/cubit/generic_cubit.dart';
-import '../../../../common/cubit/generic_cubit_state.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/text_input.dart';
-import '../../../user/data/models/user.dart';
-import '../../data/models/post.dart';
-import '../cubit/post_cubit.dart';
 
 enum PostMode { create, update }
 

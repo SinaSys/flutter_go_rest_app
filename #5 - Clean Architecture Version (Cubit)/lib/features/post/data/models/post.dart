@@ -1,7 +1,6 @@
+import 'package:clean_architecture_cubit/features/post/domain/entities/post_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/foundation.dart' show immutable;
-
-import '../../domain/entities/post_entity.dart';
 
 part 'post.g.dart';
 

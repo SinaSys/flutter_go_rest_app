@@ -1,12 +1,11 @@
-import '../../../../common/network/api_config.dart';
-import '../../../../common/network/api_helper.dart';
-import '../../../../common/network/dio_client.dart';
-import '../../../../di.dart';
-import '../../../user/data/models/user.dart';
-import '../models/post.dart';
+import 'package:clean_architecture_cubit/common/network/api_config.dart';
+import 'package:clean_architecture_cubit/common/network/api_helper.dart';
+import 'package:clean_architecture_cubit/common/network/dio_client.dart';
+import 'package:clean_architecture_cubit/features/post/data/models/post.dart';
+import 'package:clean_architecture_cubit/features/user/data/models/user.dart';
+import 'package:clean_architecture_cubit/di.dart';
 
 abstract class PostRemoteDataSource {
-
   Future<List<Post>> getUsers(User user);
 
   Future<bool> createPost(Post post);
@@ -17,7 +16,6 @@ abstract class PostRemoteDataSource {
 }
 
 class PostRemoteDataSourceImpl with ApiHelper<Post> implements PostRemoteDataSource {
-
   final DioClient dioClient = getIt<DioClient>();
 
   @override

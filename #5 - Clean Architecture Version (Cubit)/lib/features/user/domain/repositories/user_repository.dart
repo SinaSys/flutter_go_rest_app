@@ -1,9 +1,8 @@
-import '../../../../common/network/api_result.dart';
-import '../../data/models/user.dart';
-import '../entities/user_entity.dart';
+import 'package:clean_architecture_cubit/common/network/api_result.dart';
+import 'package:clean_architecture_cubit/features/user/data/models/user.dart';
+import 'package:clean_architecture_cubit/features/user/domain/entities/user_entity.dart';
 
 abstract class UserRepository {
-
   Future<ApiResult<List<User>>> getUsers({Gender? gender, UserStatus? status});
 
   Future<ApiResult<bool>> createUser(User user);

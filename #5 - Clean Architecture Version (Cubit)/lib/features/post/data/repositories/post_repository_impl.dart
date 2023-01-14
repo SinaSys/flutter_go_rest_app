@@ -1,12 +1,11 @@
-import '../../../../common/network/api_result.dart';
-import '../../../../common/repository/repository_helper.dart';
-import '../../../user/data/models/user.dart';
-import '../../domain/repositories/post_repository.dart';
-import '../datasources/post_remote_data_source.dart';
-import '../models/post.dart';
+import 'package:clean_architecture_cubit/common/network/api_result.dart';
+import 'package:clean_architecture_cubit/common/repository/repository_helper.dart';
+import 'package:clean_architecture_cubit/features/post/data/datasources/post_remote_data_source.dart';
+import 'package:clean_architecture_cubit/features/post/data/models/post.dart';
+import 'package:clean_architecture_cubit/features/post/domain/repositories/post_repository.dart';
+import 'package:clean_architecture_cubit/features/user/data/models/user.dart';
 
 class PostRepositoryImpl extends PostRepository with RepositoryHelper<Post> {
-
   final PostRemoteDataSource remoteDataSource;
 
   PostRepositoryImpl({required this.remoteDataSource});

@@ -1,7 +1,7 @@
-import '../../../../common/network/api_result.dart';
-import '../../../../common/usecase/usecase.dart';
-import '../../data/models/user.dart';
-import '../repositories/user_repository.dart';
+import 'package:clean_architecture_cubit/common/network/api_result.dart';
+import 'package:clean_architecture_cubit/common/usecase/usecase.dart';
+import 'package:clean_architecture_cubit/features/user/data/models/user.dart';
+import 'package:clean_architecture_cubit/features/user/domain/repositories/user_repository.dart';
 
 class UpdateUserUseCase implements UseCase<bool, UpdateUserParams> {
   final UserRepository userRepository;

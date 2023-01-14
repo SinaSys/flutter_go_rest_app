@@ -1,7 +1,7 @@
-import '../../../../common/network/api_result.dart';
-import '../../../../common/usecase/usecase.dart';
-import '../../data/models/comment.dart';
-import '../repositories/comment_repository.dart';
+import 'package:clean_architecture_cubit/common/network/api_result.dart';
+import 'package:clean_architecture_cubit/common/usecase/usecase.dart';
+import 'package:clean_architecture_cubit/features/comment/data/models/comment.dart';
+import 'package:clean_architecture_cubit/features/comment/domain/repositories/comment_repository.dart';
 
 class GetCommentsUseCase implements UseCase<List<Comment>, GetCommentsParams> {
   final CommentRepository commentRepository;

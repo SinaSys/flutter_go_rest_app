@@ -1,13 +1,12 @@
+import 'package:clean_architecture_cubit/core/app_theme.dart';
+import 'package:clean_architecture_cubit/di.dart';
+import 'package:clean_architecture_cubit/features/comment/presentation/cubit/comment_cubit.dart';
+import 'package:clean_architecture_cubit/features/post/presentation/cubit/post_cubit.dart';
+import 'package:clean_architecture_cubit/features/todo/presentation/cubit/todo_cubit.dart';
+import 'package:clean_architecture_cubit/features/user/presentation/cubit/user_cubit.dart';
+import 'package:clean_architecture_cubit/features/user/presentation/screens/user_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'core/app_theme.dart';
-import 'features/comment/presentation/cubit/comment_cubit.dart';
-import 'features/post/presentation/cubit/post_cubit.dart';
-import 'features/todo/presentation/cubit/todo_cubit.dart';
-import 'features/user/presentation/cubit/user_cubit.dart';
-import 'features/user/presentation/screens/user_list_screen.dart';
-import 'di.dart';
 
 void main() async {
   await init();

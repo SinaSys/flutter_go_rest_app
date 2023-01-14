@@ -1,6 +1,5 @@
+import 'package:clean_architecture_cubit/features/todo/domain/entities/todo_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../domain/entities/todo_entity.dart';
 
 part 'todo.g.dart';
 

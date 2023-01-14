@@ -1,10 +1,10 @@
-import '../../../../common/cubit/generic_cubit.dart';
-import '../../data/models/user.dart';
-import '../../domain/entities/user_entity.dart';
-import '../../domain/usecases/create_user_usecase.dart';
-import '../../domain/usecases/delete_user_usecase.dart';
-import '../../domain/usecases/get_users_usecase.dart';
-import '../../domain/usecases/update_user_usecase.dart';
+import 'package:clean_architecture_cubit/common/cubit/generic_cubit.dart';
+import 'package:clean_architecture_cubit/features/user/data/models/user.dart';
+import 'package:clean_architecture_cubit/features/user/domain/entities/user_entity.dart';
+import 'package:clean_architecture_cubit/features/user/domain/usecases/create_user_usecase.dart';
+import 'package:clean_architecture_cubit/features/user/domain/usecases/delete_user_usecase.dart';
+import 'package:clean_architecture_cubit/features/user/domain/usecases/get_users_usecase.dart';
+import 'package:clean_architecture_cubit/features/user/domain/usecases/update_user_usecase.dart';
 
 class UserCubit extends GenericCubit<User> {
   final GetUsersUseCase getUsersUseCase;
@@ -20,17 +20,14 @@ class UserCubit extends GenericCubit<User> {
   });
 
   Future<void> createUser(User user) async {
-    operation = ApiOperation.create;
     createItem(createUserUseCase.call(CreateUserParams(user)));
   }
 
   Future<void> updateUser(User user) async {
-    operation = ApiOperation.update;
     updateItem(updateUserUseCase.call(UpdateUserParams(user)));
   }
 
   Future<void> deleteUser(User user) async {
-    operation = ApiOperation.delete;
     deleteItem(deleteUserUseCase.call(DeleteUserParams(user)));
   }
 
