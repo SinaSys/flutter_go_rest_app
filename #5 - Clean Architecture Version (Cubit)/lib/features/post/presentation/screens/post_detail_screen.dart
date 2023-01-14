@@ -1,22 +1,21 @@
+import 'package:clean_architecture_cubit/common/cubit/generic_cubit.dart';
+import 'package:clean_architecture_cubit/common/cubit/generic_cubit_state.dart';
+import 'package:clean_architecture_cubit/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_cubit/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_cubit/common/widget/empty_widget.dart';
+import 'package:clean_architecture_cubit/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_cubit/common/widget/text_input.dart';
+import 'package:clean_architecture_cubit/core/app_asset.dart';
+import 'package:clean_architecture_cubit/core/app_extension.dart';
+import 'package:clean_architecture_cubit/core/app_style.dart';
+import 'package:clean_architecture_cubit/features/comment/data/models/comment.dart';
+import 'package:clean_architecture_cubit/features/comment/presentation/cubit/comment_cubit.dart';
+import 'package:clean_architecture_cubit/features/post/data/models/post.dart';
+import 'package:clean_architecture_cubit/features/post/presentation/cubit/post_cubit.dart';
+import 'package:clean_architecture_cubit/features/post/presentation/screens/create_post_screen.dart';
+import 'package:clean_architecture_cubit/features/user/data/models/user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../common/cubit/generic_cubit.dart';
-import '../../../../common/cubit/generic_cubit_state.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../common/widget/text_input.dart';
-import '../../../../core/app_asset.dart';
-import '../../../../core/app_extension.dart';
-import '../../../../core/app_style.dart';
-import '../../../comment/data/models/comment.dart';
-import '../../../comment/presentation/cubit/comment_cubit.dart';
-import '../../../user/data/models/user.dart';
-import '../../data/models/post.dart';
-import '../cubit/post_cubit.dart';
-import 'create_post_screen.dart';
 
 class PostDetailScreen extends StatefulWidget {
   const PostDetailScreen({Key? key, required this.post, this.user})
@@ -106,6 +105,11 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   Widget get commentItem {
     getUserComments();
     return BlocBuilder<CommentCubit, GenericCubitState<List<Comment>>>(
+      buildWhen: (prevState, curState) {
+        return context.read<CommentCubit>().operation == ApiOperation.select
+            ? true
+            : false;
+      },
       builder: (BuildContext context, GenericCubitState<List<Comment>> state) {
         switch (state.status) {
           case Status.empty:
