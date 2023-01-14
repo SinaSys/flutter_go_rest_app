@@ -1,22 +1,21 @@
+import 'package:mvvm_cubit/common/cubit/generic_cubit_state.dart';
+import 'package:mvvm_cubit/view/post/screen/create_post_screen.dart';
+import 'package:mvvm_cubit/viewmodel/comment/cubit/comment_cubit.dart';
+import 'package:mvvm_cubit/common/widget/spinkit_indicator.dart';
+import 'package:mvvm_cubit/viewmodel/post/cubit/post_cubit.dart';
+import 'package:mvvm_cubit/common/dialog/progress_dialog.dart';
+import 'package:mvvm_cubit/data/model/comment/comment.dart';
+import 'package:mvvm_cubit/common/dialog/retry_dialog.dart';
+import 'package:mvvm_cubit/common/cubit/generic_cubit.dart';
+import 'package:mvvm_cubit/common/widget/text_input.dart';
+import 'package:mvvm_cubit/data/model/post/post.dart';
+import 'package:mvvm_cubit/data/model/user/user.dart';
+import 'package:mvvm_cubit/core/app_extension.dart';
+import 'package:mvvm_cubit/common/widget/empty_widget.dart';
+import 'package:mvvm_cubit/core/app_asset.dart';
+import 'package:mvvm_cubit/core/app_style.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../common/cubit/generic_cubit.dart';
-import '../../../../common/cubit/generic_cubit_state.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../core/app_asset.dart';
-import '../../../../core/app_extension.dart';
-import '../../../../core/app_style.dart';
-import '../../../common/widget/text_input.dart';
-import '../../../data/model/comment/comment.dart';
-import '../../../data/model/post/post.dart';
-import '../../../data/model/user/user.dart';
-import '../../../viewmodel/comment/cubit/comment_cubit.dart';
-import '../../../viewmodel/post/cubit/post_cubit.dart';
-import 'create_post_screen.dart';
 
 class PostDetailScreen extends StatefulWidget {
   const PostDetailScreen({Key? key, required this.post, this.user})
@@ -106,6 +105,11 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   Widget get commentItem {
     getUserComments();
     return BlocBuilder<CommentCubit, GenericCubitState<List<Comment>>>(
+      buildWhen: (prevState, curState) {
+        return context.read<CommentCubit>().operation == ApiOperation.select
+            ? true
+            : false;
+      },
       builder: (BuildContext context, GenericCubitState<List<Comment>> state) {
         switch (state.status) {
           case Status.empty:
@@ -138,7 +142,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(comment.name, style: headLine5),
                                   IconButton(
@@ -243,7 +247,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                         context.read<CommentCubit>().deleteComment(comment));
               case Status.success:
                 WidgetsBinding.instance.addPostFrameCallback(
-                      (_) {
+                  (_) {
                     getUserComments();
                     Navigator.pop(context);
                     snackBar("Successfully deleted");
@@ -347,7 +351,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                                   );
                                 case Status.success:
                                   WidgetsBinding.instance.addPostFrameCallback(
-                                        (_) {
+                                    (_) {
                                       nameEditingController.clear();
                                       commentBodyEditingController.clear();
                                       snackBar("Successfully created");
