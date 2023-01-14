@@ -1,7 +1,7 @@
-import '../../../common/cubit/generic_cubit.dart';
-import '../../user/data/model/user.dart';
-import '../data/model/post.dart';
-import '../data/provider/remote/post_api.dart';
+import 'package:layered_architecture_cubit/features/post/data/provider/remote/post_api.dart';
+import 'package:layered_architecture_cubit/features/post/data/model/post.dart';
+import 'package:layered_architecture_cubit/common/cubit/generic_cubit.dart';
+import 'package:layered_architecture_cubit/features/user/data/model/user.dart';
 
 class PostCubit extends GenericCubit<Post> {
   final PostApi postApi = PostApi();

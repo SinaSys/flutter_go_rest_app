@@ -1,6 +1,6 @@
-import '../../../common/cubit/generic_cubit.dart';
-import '../data/model/comment.dart';
-import '../data/provider/remote/comment_api.dart';
+import 'package:layered_architecture_cubit/features/comment/data/provider/remote/comment_api.dart';
+import 'package:layered_architecture_cubit/features/comment/data/model/comment.dart';
+import 'package:layered_architecture_cubit/common/cubit/generic_cubit.dart';
 
 class CommentCubit extends GenericCubit<Comment> {
   final CommentApi commentApi = CommentApi();

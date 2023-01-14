@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-
 import 'package:flutter/foundation.dart' show immutable;
 
 part 'todo.g.dart';
@@ -39,4 +38,3 @@ enum TodoStatus {
 
   const TodoStatus(this.value);
 }
-

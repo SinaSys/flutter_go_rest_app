@@ -1,8 +1,7 @@
+import 'package:layered_architecture_cubit/features/user/data/model/user.dart';
+import 'package:layered_architecture_cubit/common/widget/text_input.dart';
+import 'package:layered_architecture_cubit/common/widget/drop_down.dart';
 import 'package:flutter/material.dart';
-
-import '../widget/drop_down.dart';
-import '../../features/user/data/model/user.dart';
-import '../widget/text_input.dart';
 
 enum Type { create, update }
 

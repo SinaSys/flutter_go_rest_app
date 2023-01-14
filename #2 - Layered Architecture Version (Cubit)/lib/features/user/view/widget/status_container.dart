@@ -1,5 +1,5 @@
+import 'package:layered_architecture_cubit/features/user/data/model/user.dart';
 import 'package:flutter/material.dart';
-import '../../data/model/user.dart';
 
 class StatusContainer extends StatelessWidget {
   const StatusContainer({Key? key, required this.status}) : super(key: key);

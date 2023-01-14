@@ -1,7 +1,6 @@
+import 'package:layered_architecture_cubit/core/app_asset.dart';
+import 'package:layered_architecture_cubit/core/app_style.dart';
 import 'package:flutter/material.dart';
-
-import '../../core/app_asset.dart';
-import '../../core/app_style.dart';
 
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({Key? key, required this.message}) : super(key: key);

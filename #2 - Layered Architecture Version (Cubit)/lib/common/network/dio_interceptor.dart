@@ -1,6 +1,6 @@
-import 'package:dio/dio.dart';
 import 'package:layered_architecture_cubit/core/app_extension.dart';
 import 'package:logger/logger.dart';
+import 'package:dio/dio.dart';
 
 class DioInterceptor extends Interceptor {
   final Logger logger = Logger(
@@ -14,8 +14,7 @@ class DioInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     logger.i('====================START====================');
     logger.i('HTTP method => ${options.method} ');
-    logger.i(
-        'Request => ${options.baseUrl}${options.path}${options.queryParameters.format}');
+    logger.i('Request => ${options.baseUrl}${options.path}${options.queryParameters.format}');
     logger.i('Header  => ${options.headers}');
     return super.onRequest(options, handler);
   }

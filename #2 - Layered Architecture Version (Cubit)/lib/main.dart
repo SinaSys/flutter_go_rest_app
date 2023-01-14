@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'core/app_theme.dart';
-import 'features/comment/cubit/comment_cubit.dart';
-import 'features/post/cubit/post_cubit.dart';
-import 'features/todo/cubit/todo_cubit.dart';
-import 'features/user/cubit/user_cubit.dart';
-import 'features/user/view/screen/user_list_screen.dart';
+import 'package:layered_architecture_cubit/features/comment/cubit/comment_cubit.dart';
+import 'package:layered_architecture_cubit/features/post/cubit/post_cubit.dart';
+import 'package:layered_architecture_cubit/features/todo/cubit/todo_cubit.dart';
+import 'package:layered_architecture_cubit/features/user/cubit/user_cubit.dart';
+import 'package:layered_architecture_cubit/features/user/view/screen/user_list_screen.dart';
+import 'package:layered_architecture_cubit/core/app_theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
 

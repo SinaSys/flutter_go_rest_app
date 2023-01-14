@@ -1,32 +1,26 @@
-import '../../../common/cubit/generic_cubit.dart';
-import '../data/model/user.dart';
-import '../data/provider/remote/user_api.dart';
-
-enum ApiOperation { select, create, update, delete }
+import 'package:layered_architecture_cubit/features/user/data/provider/remote/user_api.dart';
+import 'package:layered_architecture_cubit/features/user/data/model/user.dart';
+import 'package:layered_architecture_cubit/common/cubit/generic_cubit.dart';
 
 class UserCubit extends GenericCubit<User> {
   final UserApi userApi = UserApi();
+
+  Future<void> createUser(User user) async {
+    createItem(userApi.createUser(user));
+  }
+
+  Future<void> updateUser(User user) async {
+    updateItem(userApi.updateUser(user));
+  }
+
+  Future<void> deleteUser(User user) async {
+    deleteItem(userApi.deleteUser(user));
+  }
 
   Future<void> getUserList({
     Gender gender = Gender.all,
     UserStatus status = UserStatus.all,
   }) async {
-    operation = ApiOperation.select;
     getItems(userApi.getUserList(gender: gender, status: status));
-  }
-
-  Future<void> createUser(User user) async {
-    operation = ApiOperation.create;
-    createItem(userApi.createUser(user));
-  }
-
-  Future<void> deleteUser(User user) async {
-    operation = ApiOperation.delete;
-    deleteItem(userApi.deleteUser(user));
-  }
-
-  Future<void> updateUser(User user) async {
-    operation = ApiOperation.update;
-    updateItem(userApi.updateUser(user));
   }
 }
