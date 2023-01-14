@@ -1,23 +1,23 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:clean_architecture_bloc/common/bloc/bloc_helper.dart';
+import 'package:clean_architecture_bloc/common/bloc/generic_bloc_state.dart';
+import 'package:clean_architecture_bloc/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_bloc/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_bloc/common/widget/empty_widget.dart';
+import 'package:clean_architecture_bloc/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_bloc/common/widget/text_input.dart';
+import 'package:clean_architecture_bloc/core/app_asset.dart';
+import 'package:clean_architecture_bloc/core/app_extension.dart';
+import 'package:clean_architecture_bloc/core/app_style.dart';
+import 'package:clean_architecture_bloc/features/comment/data/models/comment.dart';
+import 'package:clean_architecture_bloc/features/comment/presentation/bloc/comment_bloc.dart';
+import 'package:clean_architecture_bloc/features/comment/presentation/bloc/comment_event.dart';
+import 'package:clean_architecture_bloc/features/post/data/models/post.dart';
+import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_bloc.dart';
+import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_event.dart';
+import 'package:clean_architecture_bloc/features/post/presentation/screens/create_post_screen.dart';
+import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../common/bloc/generic_bloc_state.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../common/widget/text_input.dart';
-import '../../../../core/app_asset.dart';
-import '../../../../core/app_extension.dart';
-import '../../../../core/app_style.dart';
-import '../../../comment/data/models/comment.dart';
-import '../../../comment/presentation/bloc/comment_bloc.dart';
-import '../../../comment/presentation/bloc/comment_event.dart';
-import '../../../user/data/models/user.dart';
-import '../../data/models/post.dart';
-import '../bloc/post_bloc.dart';
-import '../bloc/post_event.dart';
-import 'create_post_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PostDetailScreen extends StatefulWidget {
   const PostDetailScreen({Key? key, required this.post, this.user})
@@ -107,6 +107,11 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   Widget get commentItem {
     getUserComments();
     return BlocBuilder<CommentBloc, GenericBlocState<Comment>>(
+      buildWhen: (prevState, curState) {
+        return context.read<CommentBloc>().operation == ApiOperation.select
+            ? true
+            : false;
+      },
       builder: (BuildContext context, GenericBlocState<Comment> state) {
         switch (state.status) {
           case Status.empty:
