@@ -1,24 +1,22 @@
-import 'package:flutter/material.dart';
+import 'package:mvvm_bloc/common/bloc/bloc_helper.dart';
+import 'package:mvvm_bloc/common/dialog/progress_dialog.dart';
+import 'package:mvvm_bloc/common/widget/date_time_picker.dart';
+import 'package:mvvm_bloc/common/widget/drop_down.dart';
+import 'package:mvvm_bloc/common/widget/popup_menu.dart';
+import 'package:mvvm_bloc/common/widget/spinkit_indicator.dart';
+import 'package:mvvm_bloc/view/todo/widget/todo_list_item.dart';
+import 'package:mvvm_bloc/viewmodel/todo/bloc/todo_bloc.dart';
+import 'package:mvvm_bloc/viewmodel/todo/bloc/todo_event.dart';
+import 'package:mvvm_bloc/common/bloc/generic_bloc_state.dart';
+import 'package:mvvm_bloc/common/dialog/retry_dialog.dart';
+import 'package:mvvm_bloc/common/widget/empty_widget.dart';
+import 'package:mvvm_bloc/common/widget/text_input.dart';
+import 'package:mvvm_bloc/core/app_extension.dart';
+import 'package:mvvm_bloc/core/app_style.dart';
+import 'package:mvvm_bloc/data/model/todo/todo.dart';
+import 'package:mvvm_bloc/data/model/user/user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../common/bloc/bloc_helper.dart';
-import '../../../../common/widget/date_time_picker.dart';
-import '../../../../common/widget/drop_down.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/popup_menu.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../common/widget/text_input.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../core/app_style.dart';
-import '../../../core/app_extension.dart';
-
-import '../../../common/bloc/generic_bloc_state.dart';
-import '../../../data/model/todo/todo.dart';
-import '../../../data/model/user/user.dart';
-import '../../../viewmodel/todo/bloc/todo_bloc.dart';
-import '../../../viewmodel/todo/bloc/todo_event.dart';
-import '../widget/todo_list_item.dart';
+import 'package:flutter/material.dart';
 
 enum Mode { create, update }
 
@@ -113,17 +111,6 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
       context: context,
       builder: (_) {
         return BlocBuilder<TodoBloc, GenericBlocState<ToDo>>(
-          buildWhen: (prevState, curState) {
-            if (mode == Mode.create) {
-              return context.read<TodoBloc>().operation == ApiOperation.create
-                  ? true
-                  : false;
-            } else {
-              return context.read<TodoBloc>().operation == ApiOperation.update
-                  ? true
-                  : false;
-            }
-          },
           builder: (BuildContext context, GenericBlocState<ToDo> state) {
             switch (state.status) {
               case Status.empty:
@@ -253,11 +240,6 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
           context: context,
           builder: (_) {
             return BlocBuilder<TodoBloc, GenericBlocState<ToDo>>(
-              buildWhen: (prevState, curState) {
-                return context.read<TodoBloc>().operation == ApiOperation.delete
-                    ? true
-                    : false;
-              },
               builder: (BuildContext context, GenericBlocState<ToDo> state) {
                 switch (state.status) {
                   case Status.empty:
