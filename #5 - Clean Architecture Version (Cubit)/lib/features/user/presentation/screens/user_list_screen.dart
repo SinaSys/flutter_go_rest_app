@@ -1,23 +1,22 @@
-import '../../../../core/app_extension.dart';
+import 'package:clean_architecture_cubit/common/cubit/generic_cubit.dart';
+import 'package:clean_architecture_cubit/common/cubit/generic_cubit_state.dart';
+import 'package:clean_architecture_cubit/common/dialog/create_dialog.dart';
+import 'package:clean_architecture_cubit/common/dialog/delete_dialog.dart';
+import 'package:clean_architecture_cubit/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_cubit/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_cubit/common/widget/empty_widget.dart';
+import 'package:clean_architecture_cubit/common/widget/popup_menu.dart';
+import 'package:clean_architecture_cubit/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_cubit/core/app_extension.dart';
+import 'package:clean_architecture_cubit/core/app_style.dart';
+import 'package:clean_architecture_cubit/features/post/presentation/screens/post_list_screen.dart';
+import 'package:clean_architecture_cubit/features/todo/presentation/screens/todo_list_screen.dart';
+import 'package:clean_architecture_cubit/features/user/data/models/user.dart';
+import 'package:clean_architecture_cubit/features/user/domain/entities/user_entity.dart';
+import 'package:clean_architecture_cubit/features/user/presentation/cubit/user_cubit.dart';
+import 'package:clean_architecture_cubit/features/user/presentation/widgets/status_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../common/cubit/generic_cubit.dart';
-import '../../../../common/cubit/generic_cubit_state.dart';
-import '../../../../common/dialog/create_dialog.dart';
-import '../../../../common/dialog/delete_dialog.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/popup_menu.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../core/app_style.dart';
-import '../../../post/presentation/screens/post_list_screen.dart';
-import '../../../todo/presentation/screens/todo_list_screen.dart';
-import '../../data/models/user.dart';
-import '../../domain/entities/user_entity.dart';
-import '../cubit/user_cubit.dart';
-import '../widgets/status_container.dart';
 
 enum Operation { edit, delete, post, todo }
 
@@ -71,12 +70,6 @@ class _UserListScreenState extends State<UserListScreen> {
             context: context,
             builder: (_) {
               return BlocBuilder<UserCubit, GenericCubitState<List<User>>>(
-                buildWhen: (prevState, curState) {
-                  return context.read<UserCubit>().operation ==
-                          ApiOperation.create
-                      ? true
-                      : false;
-                },
                 builder: (BuildContext context,
                     GenericCubitState<List<User>> state) {
                   switch (state.status) {
@@ -166,11 +159,6 @@ class _UserListScreenState extends State<UserListScreen> {
         context: context,
         builder: (_) {
           return BlocBuilder<UserCubit, GenericCubitState<List<User>>>(
-            buildWhen: (prevState, curState) {
-              return context.read<UserCubit>().operation == ApiOperation.delete
-                  ? true
-                  : false;
-            },
             builder:
                 (BuildContext context, GenericCubitState<List<User>> state) {
               switch (state.status) {
@@ -222,11 +210,6 @@ class _UserListScreenState extends State<UserListScreen> {
         context: context,
         builder: (_) {
           return BlocBuilder<UserCubit, GenericCubitState<List<User>>>(
-            buildWhen: (prevState, curState) {
-              return context.read<UserCubit>().operation == ApiOperation.update
-                  ? true
-                  : false;
-            },
             builder:
                 (BuildContext context, GenericCubitState<List<User>> state) {
               switch (state.status) {
