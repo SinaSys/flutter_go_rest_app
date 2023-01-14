@@ -1,7 +1,6 @@
+import 'package:clean_architecture_getx/features/todo/domain/entities/todo_entity.dart';
 import 'package:clean_architecture_getx/features/todo/data/models/todo.dart';
 import 'package:dartz/dartz.dart';
-
-import '../entities/todo_entity.dart';
 
 abstract class TodoRepository {
   Future<Either<String, List<ToDo>>> getTodos(int userId, {TodoStatus? status});

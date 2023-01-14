@@ -1,9 +1,8 @@
+import 'package:clean_architecture_getx/common/widget/drop_down.dart';
+import 'package:clean_architecture_getx/common/widget/text_input.dart';
+import 'package:clean_architecture_getx/features/user/data/models/user.dart';
+import 'package:clean_architecture_getx/features/user/domain/entities/user_entity.dart';
 import 'package:flutter/material.dart';
-
-import '../../features/user/data/models/user.dart';
-import '../../features/user/domain/entities/user_entity.dart';
-import '../widget/drop_down.dart';
-import '../widget/text_input.dart';
 
 enum Type { create, update }
 

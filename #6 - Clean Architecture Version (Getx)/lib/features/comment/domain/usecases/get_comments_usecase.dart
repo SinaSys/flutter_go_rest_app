@@ -1,8 +1,7 @@
+import 'package:clean_architecture_getx/common/usecase/usecase.dart';
+import 'package:clean_architecture_getx/features/comment/data/models/comment.dart';
+import 'package:clean_architecture_getx/features/comment/domain/repositories/comment_repository.dart';
 import 'package:dartz/dartz.dart';
-
-import '../../../../common/usecase/usecase.dart';
-import '../../data/models/comment.dart';
-import '../repositories/comment_repository.dart';
 
 class GetCommentsUseCase implements UseCase<List<Comment>, GetCommentsParams> {
   final CommentRepository commentRepository;

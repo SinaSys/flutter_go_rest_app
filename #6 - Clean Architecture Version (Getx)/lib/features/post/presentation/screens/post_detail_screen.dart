@@ -1,22 +1,21 @@
+import 'package:clean_architecture_getx/features/post/presentation/controller/post_controller.dart';
+import 'package:clean_architecture_getx/features/comment/presentation/controller/comment_controller.dart';
+import 'package:clean_architecture_getx/features/post/presentation/screens/create_post_screen.dart';
+import 'package:clean_architecture_getx/features/comment/data/models/comment.dart';
+import 'package:clean_architecture_getx/common/controller/base_controller.dart';
+import 'package:clean_architecture_getx/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_getx/features/post/data/models/post.dart';
+import 'package:clean_architecture_getx/features/user/data/models/user.dart';
+import 'package:clean_architecture_getx/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_getx/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_getx/common/widget/empty_widget.dart';
+import 'package:clean_architecture_getx/common/widget/text_input.dart';
+import 'package:clean_architecture_getx/core/app_extension.dart';
+import 'package:clean_architecture_getx/core/app_asset.dart';
+import 'package:clean_architecture_getx/core/app_style.dart';
+import 'package:clean_architecture_getx/di.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../common/controller/base_controller.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../common/widget/text_input.dart';
-import '../../../../core/app/app_asset.dart';
-import '../../../../core/app/app_extension.dart';
-import '../../../../core/app/app_style.dart';
-import '../../../../di.dart';
-import '../../../comment/data/models/comment.dart';
-import '../../../comment/presentation/controller/comment_controller.dart';
-import '../../../user/data/models/user.dart';
-import '../../data/models/post.dart';
-import '../controller/post_controller.dart';
-import 'create_post_screen.dart';
 
 class PostDetailScreen extends StatefulWidget {
   const PostDetailScreen({Key? key, required this.post, this.user})

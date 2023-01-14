@@ -1,10 +1,9 @@
+import 'package:clean_architecture_getx/features/todo/presentation/widgets/circle_container.dart';
+import 'package:clean_architecture_getx/features/todo/data/models/todo.dart';
+import 'package:clean_architecture_getx/core/app_extension.dart';
+import 'package:clean_architecture_getx/core/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../../../core/app/app_extension.dart';
-
-import '../../../../core/app/app_style.dart';
-import '../../data/models/todo.dart';
-import 'circle_container.dart';
 
 class TodoListItem extends StatelessWidget {
   const TodoListItem({

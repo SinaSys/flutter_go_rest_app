@@ -1,7 +1,7 @@
+import 'package:clean_architecture_getx/features/user/presentation/screens/user_list_screen.dart';
+import 'package:clean_architecture_getx/core/app_theme.dart';
+import 'package:clean_architecture_getx/di.dart';
 import 'package:flutter/material.dart';
-import 'core/app/app_theme.dart';
-import 'features/user/presentation/screens/user_list_screen.dart';
-import 'di.dart';
 
 void main() async {
   await init();
@@ -21,4 +21,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

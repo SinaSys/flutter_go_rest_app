@@ -1,8 +1,7 @@
+import 'package:clean_architecture_getx/features/todo/domain/repositories/todo_repository.dart';
+import 'package:clean_architecture_getx/features/todo/data/models/todo.dart';
+import 'package:clean_architecture_getx/common/usecase/usecase.dart';
 import 'package:dartz/dartz.dart';
-
-import '../../../../common/usecase/usecase.dart';
-import '../../data/models/todo.dart';
-import '../repositories/todo_repository.dart';
 
 class DeleteTodoUseCase implements UseCase<bool, DeleteTodoParams> {
   final TodoRepository todoRepository;

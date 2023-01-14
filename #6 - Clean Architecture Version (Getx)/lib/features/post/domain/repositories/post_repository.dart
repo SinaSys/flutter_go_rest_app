@@ -1,7 +1,6 @@
+import 'package:clean_architecture_getx/features/post/data/models/post.dart';
+import 'package:clean_architecture_getx/features/user/data/models/user.dart';
 import 'package:dartz/dartz.dart';
-
-import '../../../user/data/models/user.dart';
-import '../../data/models/post.dart';
 
 abstract class PostRepository {
   Future<Either<String, List<Post>>> getPosts(User user);

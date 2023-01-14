@@ -1,14 +1,13 @@
-import 'package:dartz/dartz.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:clean_architecture_getx/features/todo/domain/entities/todo_entity.dart';
+import 'package:clean_architecture_getx/features/todo/domain/usecases/create_todo_usecase.dart';
+import 'package:clean_architecture_getx/features/todo/domain/usecases/delete_todo_usecase.dart';
+import 'package:clean_architecture_getx/features/todo/domain/usecases/get_todos_usecase.dart';
+import 'package:clean_architecture_getx/features/todo/domain/usecases/update_todo_usecase.dart';
+import 'package:clean_architecture_getx/common/controller/base_controller.dart';
+import 'package:clean_architecture_getx/features/todo/data/models/todo.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-
-import '../../../../common/controller/base_controller.dart';
-import '../../data/models/todo.dart';
-import '../../domain/entities/todo_entity.dart';
-import '../../domain/usecases/create_todo_usecase.dart';
-import '../../domain/usecases/delete_todo_usecase.dart';
-import '../../domain/usecases/get_todos_usecase.dart';
-import '../../domain/usecases/update_todo_usecase.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:dartz/dartz.dart';
 
 class ToDoController extends GetxController with StateMixin<List<ToDo>>, BaseController {
   List<ToDo> todoList = <ToDo>[].obs;

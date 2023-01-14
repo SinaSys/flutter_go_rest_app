@@ -1,9 +1,9 @@
-import '../../../../common/network/api_base.dart';
-import '../../../../common/network/api_config.dart';
-import '../../../../common/network/dio_client.dart';
-import '../../../../di.dart';
-import '../../../user/data/models/user.dart';
-import '../models/post.dart';
+import 'package:clean_architecture_getx/common/network/api_base.dart';
+import 'package:clean_architecture_getx/common/network/api_config.dart';
+import 'package:clean_architecture_getx/common/network/dio_client.dart';
+import 'package:clean_architecture_getx/di.dart';
+import 'package:clean_architecture_getx/features/post/data/models/post.dart';
+import 'package:clean_architecture_getx/features/user/data/models/user.dart';
 
 abstract class PostRemoteDataSource {
   Future<List<Post>> getUsers(User user);
@@ -15,7 +15,9 @@ abstract class PostRemoteDataSource {
   Future<bool> deletePost(Post post);
 }
 
-class PostRemoteDataSourceImpl with ApiBase<Post> implements PostRemoteDataSource {
+class PostRemoteDataSourceImpl
+    with ApiBase<Post>
+    implements PostRemoteDataSource {
   final DioClient dioClient = getIt<DioClient>();
 
   @override

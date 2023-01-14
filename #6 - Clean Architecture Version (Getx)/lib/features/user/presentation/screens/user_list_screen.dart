@@ -1,23 +1,23 @@
-import '../../../../core/app/app_extension.dart';
+import 'package:clean_architecture_getx/features/user/presentation/controller/user_controller.dart';
+import 'package:clean_architecture_getx/features/user/presentation/widgets/status_container.dart';
+import 'package:clean_architecture_getx/features/post/presentation/screens/post_list_screen.dart';
+import 'package:clean_architecture_getx/features/todo/presentation/screens/todo_list_screen.dart';
+import 'package:clean_architecture_getx/features/user/domain/entities/user_entity.dart';
+import 'package:clean_architecture_getx/common/controller/base_controller.dart';
+import 'package:clean_architecture_getx/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_getx/features/user/data/models/user.dart';
+import 'package:clean_architecture_getx/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_getx/common/dialog/create_dialog.dart';
+import 'package:clean_architecture_getx/common/dialog/delete_dialog.dart';
+import 'package:clean_architecture_getx/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_getx/common/widget/empty_widget.dart';
+import 'package:clean_architecture_getx/common/widget/popup_menu.dart';
+import 'package:clean_architecture_getx/core/app_extension.dart';
+import 'package:clean_architecture_getx/core/app_style.dart';
+import 'package:clean_architecture_getx/di.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../common/controller/base_controller.dart';
-import '../../../../common/dialog/create_dialog.dart';
-import '../../../../common/dialog/delete_dialog.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/popup_menu.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../core/app/app_style.dart';
-import '../../../../di.dart';
-import '../../../post/presentation/screens/post_list_screen.dart';
-import '../../../todo/presentation/screens/todo_list_screen.dart';
-import '../../data/models/user.dart';
-import '../../domain/entities/user_entity.dart';
-import '../controller/user_controller.dart';
-import '../widgets/status_container.dart';
 
 enum UserOperation { edit, delete, post, todo }
 

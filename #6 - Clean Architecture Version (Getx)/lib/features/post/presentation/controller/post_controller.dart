@@ -1,13 +1,12 @@
+import 'package:clean_architecture_getx/common/controller/base_controller.dart';
+import 'package:clean_architecture_getx/features/post/data/models/post.dart';
+import 'package:clean_architecture_getx/features/post/domain/usecases/create_post_usecase.dart';
+import 'package:clean_architecture_getx/features/post/domain/usecases/delete_post_usecase.dart';
+import 'package:clean_architecture_getx/features/post/domain/usecases/get_posts_usecase.dart';
+import 'package:clean_architecture_getx/features/post/domain/usecases/update_post_usecase.dart';
+import 'package:clean_architecture_getx/features/user/data/models/user.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
-
-import '../../../../common/controller/base_controller.dart';
-import '../../../user/data/models/user.dart';
-import '../../data/models/post.dart';
-import '../../domain/usecases/create_post_usecase.dart';
-import '../../domain/usecases/delete_post_usecase.dart';
-import '../../domain/usecases/get_posts_usecase.dart';
-import '../../domain/usecases/update_post_usecase.dart';
 
 class PostController extends GetxController with StateMixin<List<Post>>, BaseController {
   RxInt postLength = 0.obs;

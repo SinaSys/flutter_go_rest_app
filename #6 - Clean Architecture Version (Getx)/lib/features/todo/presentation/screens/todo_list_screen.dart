@@ -1,23 +1,22 @@
-import '../../../../core/app/app_extension.dart';
+import 'package:clean_architecture_getx/features/todo/presentation/controller/todo_controller.dart';
+import 'package:clean_architecture_getx/features/todo/presentation/widgets/todo_list_item.dart';
+import 'package:clean_architecture_getx/features/todo/domain/entities/todo_entity.dart';
+import 'package:clean_architecture_getx/common/controller/base_controller.dart';
+import 'package:clean_architecture_getx/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_getx/features/user/data/models/user.dart';
+import 'package:clean_architecture_getx/features/todo/data/models/todo.dart';
+import 'package:clean_architecture_getx/common/widget/date_time_picker.dart';
+import 'package:clean_architecture_getx/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_getx/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_getx/common/widget/empty_widget.dart';
+import 'package:clean_architecture_getx/common/widget/text_input.dart';
+import 'package:clean_architecture_getx/common/widget/popup_menu.dart';
+import 'package:clean_architecture_getx/common/widget/drop_down.dart';
+import 'package:clean_architecture_getx/core/app_extension.dart';
+import 'package:clean_architecture_getx/core/app_style.dart';
+import 'package:clean_architecture_getx/di.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../common/controller/base_controller.dart';
-import '../../../../common/widget/date_time_picker.dart';
-import '../../../../common/widget/drop_down.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/popup_menu.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../common/widget/text_input.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../core/app/app_style.dart';
-import '../../../../di.dart';
-import '../../../user/data/models/user.dart';
-import '../../data/models/todo.dart';
-import '../../domain/entities/todo_entity.dart';
-import '../controller/todo_controller.dart';
-import '../widgets/todo_list_item.dart';
 
 enum Mode { create, update }
 

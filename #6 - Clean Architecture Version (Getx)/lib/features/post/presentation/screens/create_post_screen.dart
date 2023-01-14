@@ -1,15 +1,14 @@
+import 'package:clean_architecture_getx/common/controller/base_controller.dart';
+import 'package:clean_architecture_getx/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_getx/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_getx/common/widget/text_input.dart';
+import 'package:clean_architecture_getx/core/app_extension.dart';
+import 'package:clean_architecture_getx/di.dart';
+import 'package:clean_architecture_getx/features/post/data/models/post.dart';
+import 'package:clean_architecture_getx/features/post/presentation/controller/post_controller.dart';
+import 'package:clean_architecture_getx/features/user/data/models/user.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/app/app_extension.dart';
 import 'package:get/get.dart';
-
-import '../../../../common/controller/base_controller.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/text_input.dart';
-import '../../../../di.dart';
-import '../../../user/data/models/user.dart';
-import '../../data/models/post.dart';
-import '../controller/post_controller.dart';
 
 enum PostMode { create, update }
 

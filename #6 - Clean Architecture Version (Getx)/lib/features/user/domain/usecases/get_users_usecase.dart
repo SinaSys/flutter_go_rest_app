@@ -1,9 +1,8 @@
+import 'package:clean_architecture_getx/common/usecase/usecase.dart';
+import 'package:clean_architecture_getx/features/user/data/models/user.dart';
+import 'package:clean_architecture_getx/features/user/domain/entities/user_entity.dart';
+import 'package:clean_architecture_getx/features/user/domain/repositories/user_repository.dart';
 import 'package:dartz/dartz.dart';
-
-import '../../../../common/usecase/usecase.dart';
-import '../../data/models/user.dart';
-import '../entities/user_entity.dart';
-import '../repositories/user_repository.dart';
 
 class GetUsersUseCase implements UseCase<List<User>, GetUsersParams> {
   final UserRepository userRepository;
@@ -12,7 +11,8 @@ class GetUsersUseCase implements UseCase<List<User>, GetUsersParams> {
 
   @override
   Future<Either<String, List<User>>> call(GetUsersParams params) async {
-    return await userRepository.getUsers(status: params.status, gender: params.gender);
+    return await userRepository.getUsers(
+        status: params.status, gender: params.gender);
   }
 }
 

@@ -1,9 +1,8 @@
+import 'package:clean_architecture_getx/features/post/domain/repositories/post_repository.dart';
+import 'package:clean_architecture_getx/features/post/data/models/post.dart';
+import 'package:clean_architecture_getx/common/usecase/usecase.dart';
+import 'package:clean_architecture_getx/features/user/data/models/user.dart';
 import 'package:dartz/dartz.dart';
-
-import '../../../../common/usecase/usecase.dart';
-import '../../../user/data/models/user.dart';
-import '../../data/models/post.dart';
-import '../repositories/post_repository.dart';
 
 class GetPostsUseCase implements UseCase<List<Post>, GetPostsParams> {
   final PostRepository postRepository;

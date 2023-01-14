@@ -1,13 +1,11 @@
-import 'dart:convert';
+import 'package:clean_architecture_getx/common/network/dio_exception.dart';
+import 'package:clean_architecture_getx/core/app_extension.dart';
 import 'package:dio/dio.dart';
-import 'dio_exception.dart';
-import '../../core/app/app_extension.dart';
+import 'dart:convert';
 
 abstract class ApiBase<T> {
-
   //Method template for checking whether api is success or not
-  Future<bool> _requestMethodTemplate(
-      Future<Response<dynamic>> apiCallback) async {
+  Future<bool> _requestMethodTemplate(Future<Response<dynamic>> apiCallback) async {
     final Response response = await apiCallback;
     if (response.statusCode.success) {
       return true;
@@ -16,22 +14,22 @@ abstract class ApiBase<T> {
     }
   }
 
-  //Generic Method template for create item on server
+  //Generic method template for create item on server
   Future<bool> makePostRequest(Future<Response<dynamic>> apiCallback) async {
     return _requestMethodTemplate(apiCallback);
   }
 
-  //Generic Method template for update item on server
+  //Generic method template for update item on server
   Future<bool> makePutRequest(Future<Response<dynamic>> apiCallback) async {
     return _requestMethodTemplate(apiCallback);
   }
 
-  //Generic Method template for delete item from server
+  //Generic method template for delete item from server
   Future<bool> makeDeleteRequest(Future<Response<dynamic>> apiCallback) async {
     return _requestMethodTemplate(apiCallback);
   }
 
-  //Generic Method template for get data from Api
+  //Generic method template for getting data from Api
   Future<List<T>> makeGetRequest(Future<Response<dynamic>> apiCallback,
       T Function(Map<String, dynamic> json) getJsonCallback) async {
     final Response response = await apiCallback;

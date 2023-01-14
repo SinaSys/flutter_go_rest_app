@@ -1,9 +1,9 @@
-import '../../../../common/network/api_base.dart';
-import '../../../../common/network/api_config.dart';
-import '../../../../common/network/dio_client.dart';
-import '../../../../di.dart';
-import '../../domain/entities/todo_entity.dart';
-import '../models/todo.dart';
+import 'package:clean_architecture_getx/features/todo/domain/entities/todo_entity.dart';
+import 'package:clean_architecture_getx/features/todo/data/models/todo.dart';
+import 'package:clean_architecture_getx/common/network/api_config.dart';
+import 'package:clean_architecture_getx/common/network/dio_client.dart';
+import 'package:clean_architecture_getx/common/network/api_base.dart';
+import 'package:clean_architecture_getx/di.dart';
 
 abstract class TodoRemoteDataSource {
   Future<List<ToDo>> getTodos(int userId, {TodoStatus? status});

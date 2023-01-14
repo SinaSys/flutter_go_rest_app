@@ -1,18 +1,16 @@
-import '../screens/post_detail_screen.dart';
-
-import '../../../../core/app/app_extension.dart';
+import 'package:clean_architecture_getx/features/post/presentation/controller/post_controller.dart';
+import 'package:clean_architecture_getx/features/post/presentation/screens/create_post_screen.dart';
+import 'package:clean_architecture_getx/features/post/presentation/screens/post_detail_screen.dart';
+import 'package:clean_architecture_getx/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_getx/features/post/data/models/post.dart';
+import 'package:clean_architecture_getx/features/user/data/models/user.dart';
+import 'package:clean_architecture_getx/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_getx/common/widget/empty_widget.dart';
+import 'package:clean_architecture_getx/core/app_extension.dart';
+import 'package:clean_architecture_getx/core/app_style.dart';
+import 'package:clean_architecture_getx/di.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../core/app/app_style.dart';
-import '../../../../di.dart';
-import '../../../user/data/models/user.dart';
-import '../../data/models/post.dart';
-import '../controller/post_controller.dart';
-import 'create_post_screen.dart';
 
 class PostListScreen extends StatefulWidget {
   const PostListScreen({Key? key, required this.user}) : super(key: key);

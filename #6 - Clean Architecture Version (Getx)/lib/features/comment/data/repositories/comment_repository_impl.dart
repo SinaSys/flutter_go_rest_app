@@ -1,9 +1,8 @@
+import 'package:clean_architecture_getx/common/repository/repository_helper.dart';
+import 'package:clean_architecture_getx/features/comment/data/datasources/comment_remote_data_source.dart';
+import 'package:clean_architecture_getx/features/comment/data/models/comment.dart';
+import 'package:clean_architecture_getx/features/comment/domain/repositories/comment_repository.dart';
 import 'package:dartz/dartz.dart';
-
-import '../../../../common/repository/repository_helper.dart';
-import '../../domain/repositories/comment_repository.dart';
-import '../datasources/comment_remote_data_source.dart';
-import '../models/comment.dart';
 
 class CommentRepositoryImpl extends CommentRepository with RepositoryHelper<Comment> {
   final CommentRemoteDataSource remoteDataSource;

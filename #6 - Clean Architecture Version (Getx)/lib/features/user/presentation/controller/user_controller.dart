@@ -1,13 +1,12 @@
-import 'package:dartz/dartz.dart';
+import 'package:clean_architecture_getx/common/controller/base_controller.dart';
+import 'package:clean_architecture_getx/features/user/data/models/user.dart';
+import 'package:clean_architecture_getx/features/user/domain/entities/user_entity.dart';
+import 'package:clean_architecture_getx/features/user/domain/usecases/create_user_usecase.dart';
+import 'package:clean_architecture_getx/features/user/domain/usecases/delete_user_usecase.dart';
+import 'package:clean_architecture_getx/features/user/domain/usecases/get_users_usecase.dart';
+import 'package:clean_architecture_getx/features/user/domain/usecases/update_user_usecase.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-
-import '../../../../common/controller/base_controller.dart';
-import '../../data/models/user.dart';
-import '../../domain/entities/user_entity.dart';
-import '../../domain/usecases/create_user_usecase.dart';
-import '../../domain/usecases/delete_user_usecase.dart';
-import '../../domain/usecases/get_users_usecase.dart';
-import '../../domain/usecases/update_user_usecase.dart';
+import 'package:dartz/dartz.dart';
 
 class UserController extends GetxController with StateMixin<List<User>>, BaseController {
   final GetUsersUseCase getUsersUseCase;
@@ -22,7 +21,6 @@ class UserController extends GetxController with StateMixin<List<User>>, BaseCon
     required this.deleteUserUseCase,
   });
 
-
   void createUser(User user) {
     createItem(createUserUseCase.call(CreateUserParams(user)));
   }
@@ -35,7 +33,8 @@ class UserController extends GetxController with StateMixin<List<User>>, BaseCon
     deleteItem(deleteUserUseCase.call(DeleteUserParams(user)));
   }
 
-  Future<void> getUserList({Gender gender = Gender.all, UserStatus status = UserStatus.all}) async {
+  Future<void> getUserList(
+      {Gender gender = Gender.all, UserStatus status = UserStatus.all}) async {
     change(null, status: RxStatus.loading());
     final Either<String, List<User>> failureOrSuccess = (await getUsersUseCase
         .call(GetUsersParams(status: status, gender: gender)));

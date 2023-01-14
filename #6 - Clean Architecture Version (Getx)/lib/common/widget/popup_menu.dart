@@ -1,4 +1,4 @@
-import '../../core/app/app_extension.dart';
+import 'package:clean_architecture_getx/core/app_extension.dart';
 import 'package:flutter/material.dart';
 
 class PopupMenu<T> extends StatelessWidget {

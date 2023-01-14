@@ -1,4 +1,4 @@
-import 'package:clean_architecture_getx/core/app/app_extension.dart';
+import 'package:clean_architecture_getx/core/app_extension.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
