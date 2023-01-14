@@ -1,23 +1,22 @@
+import 'package:layered_architecture_bloc/features/user/view/widget/status_container.dart';
+import 'package:layered_architecture_bloc/features/post/view/screen/post_list_screen.dart';
+import 'package:layered_architecture_bloc/features/todo/view/screen/todo_list_screen.dart';
+import 'package:layered_architecture_bloc/common/bloc/bloc_helper.dart';
+import 'package:layered_architecture_bloc/common/bloc/generic_bloc_state.dart';
+import 'package:layered_architecture_bloc/common/dialog/create_dialog.dart';
+import 'package:layered_architecture_bloc/common/dialog/delete_dialog.dart';
+import 'package:layered_architecture_bloc/common/dialog/progress_dialog.dart';
+import 'package:layered_architecture_bloc/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture_bloc/common/widget/empty_widget.dart';
+import 'package:layered_architecture_bloc/common/widget/popup_menu.dart';
+import 'package:layered_architecture_bloc/common/widget/spinkit_indicator.dart';
+import 'package:layered_architecture_bloc/core/app_extension.dart';
+import 'package:layered_architecture_bloc/core/app_style.dart';
+import 'package:layered_architecture_bloc/features/user/bloc/user_bloc.dart';
+import 'package:layered_architecture_bloc/features/user/bloc/user_event.dart';
+import 'package:layered_architecture_bloc/features/user/data/model/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../common/bloc/bloc_helper.dart';
-import '../../../../common/bloc/generic_bloc_state.dart';
-import '../../../../common/dialog/create_dialog.dart';
-import '../../../../common/dialog/delete_dialog.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/popup_menu.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../core/app_extension.dart';
-import '../../../../core/app_style.dart';
-import '../../../post/view/screen/post_list_screen.dart';
-import '../../../todo/view/screen/todo_list_screen.dart';
-import '../../bloc/user_bloc.dart';
-import '../../bloc/user_event.dart';
-import '../../data/model/user.dart';
-import '../widget/status_container.dart';
 
 enum Operation { edit, delete, post, todo }
 
@@ -71,12 +70,6 @@ class _UserListScreenState extends State<UserListScreen> {
             context: context,
             builder: (_) {
               return BlocBuilder<UserBloc, GenericBlocState<User>>(
-                buildWhen: (prevState, curState) {
-                  return context.read<UserBloc>().operation ==
-                          ApiOperation.create
-                      ? true
-                      : false;
-                },
                 builder: (BuildContext context, GenericBlocState<User> state) {
                   switch (state.status) {
                     case Status.empty:
@@ -165,11 +158,6 @@ class _UserListScreenState extends State<UserListScreen> {
         context: context,
         builder: (_) {
           return BlocBuilder<UserBloc, GenericBlocState<User>>(
-            buildWhen: (prevState, curState) {
-              return context.read<UserBloc>().operation == ApiOperation.delete
-                  ? true
-                  : false;
-            },
             builder: (BuildContext context, GenericBlocState<User> state) {
               switch (state.status) {
                 case Status.empty:
@@ -220,11 +208,6 @@ class _UserListScreenState extends State<UserListScreen> {
         context: context,
         builder: (_) {
           return BlocBuilder<UserBloc, GenericBlocState<User>>(
-            buildWhen: (prevState, curState) {
-              return context.read<UserBloc>().operation == ApiOperation.update
-                  ? true
-                  : false;
-            },
             builder: (BuildContext context, GenericBlocState<User> state) {
               switch (state.status) {
                 case Status.empty:
