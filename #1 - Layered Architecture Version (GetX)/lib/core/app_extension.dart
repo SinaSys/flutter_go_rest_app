@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'app_asset.dart';
+import 'package:layered_architecture/core/app_asset.dart';
 
 extension StringExtension on String {
   String get getGenderWidget {
@@ -8,7 +7,8 @@ extension StringExtension on String {
     return AppAsset.female;
   }
 
-  String get toCapital => "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
+  String get toCapital =>
+      "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
 }
 
 extension IntegetExtension on int? {

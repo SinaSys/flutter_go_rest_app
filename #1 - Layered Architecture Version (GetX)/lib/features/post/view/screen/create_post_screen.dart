@@ -1,14 +1,13 @@
+import 'package:layered_architecture/features/post/controller/post_controller.dart';
+import 'package:layered_architecture/common/controller/base_controller.dart';
+import 'package:layered_architecture/features/user/data/model/user.dart';
+import 'package:layered_architecture/features/post/data/model/post.dart';
+import 'package:layered_architecture/common/dialog/progress_dialog.dart';
+import 'package:layered_architecture/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture/common/widget/text_input.dart';
+import 'package:layered_architecture/core/app_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../core/app_extension.dart';
-import '../../../../common/controller/base_controller.dart';
-
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/text_input.dart';
-import '../../../user/data/model/user.dart';
-import '../../controller/post_controller.dart';
-import '../../data/model/post.dart';
 
 enum PostMode { create, update }
 

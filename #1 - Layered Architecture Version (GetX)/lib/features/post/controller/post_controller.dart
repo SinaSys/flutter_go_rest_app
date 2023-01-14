@@ -1,10 +1,9 @@
+import 'package:layered_architecture/features/post/data/provider/remote/post_api.dart';
+import 'package:layered_architecture/common/controller/base_controller.dart';
+import 'package:layered_architecture/features/post/data/model/post.dart';
+import 'package:layered_architecture/features/user/data/model/user.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
-
-import '../../../common/controller/base_controller.dart';
-import '../../user/data/model/user.dart';
-import '../data/model/post.dart';
-import '../data/provider/remote/post_api.dart';
 
 class PostController extends GetxController with StateMixin<List<Post>>, BaseController {
   final PostApi postApi = PostApi();
@@ -24,7 +23,6 @@ class PostController extends GetxController with StateMixin<List<Post>>, BaseCon
   }
 
   Future<void> getPosts(User user) async {
-
     change(null, status: RxStatus.loading());
 
     Either<String, List<Post>> failureOrSuccess = await postApi.getPosts(user);

@@ -1,7 +1,6 @@
+import 'package:layered_architecture/core/app_string.dart';
+import 'package:layered_architecture/core/app_style.dart';
 import 'package:flutter/material.dart';
-
-import 'app_string.dart';
-import 'app_style.dart';
 
 class AppTheme {
   AppTheme._();

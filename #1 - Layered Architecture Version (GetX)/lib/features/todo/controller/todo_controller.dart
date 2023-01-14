@@ -1,9 +1,8 @@
+import 'package:layered_architecture/common/controller/base_controller.dart';
+import 'package:layered_architecture/features/todo/data/model/todo.dart';
+import 'package:layered_architecture/features/todo/data/provider/remote/todo_api.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
-
-import '../../../common/controller/base_controller.dart';
-import '../data/model/todo.dart';
-import '../data/provider/remote/todo_api.dart';
 
 class ToDoController extends GetxController with StateMixin<List<ToDo>>, BaseController {
   final ToDoApi todoApi = ToDoApi();
@@ -23,10 +22,10 @@ class ToDoController extends GetxController with StateMixin<List<ToDo>>, BaseCon
   }
 
   Future<void> getTodos(int userId, {Status? status}) async {
-
     change(null, status: RxStatus.loading());
 
-    Either<String, List<ToDo>> failureOrSuccess = await todoApi.getTodos(userId, status: status);
+    Either<String, List<ToDo>> failureOrSuccess =
+        await todoApi.getTodos(userId, status: status);
 
     failureOrSuccess.fold(
       (String failure) {

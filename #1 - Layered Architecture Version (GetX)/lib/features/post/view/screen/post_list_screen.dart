@@ -1,16 +1,15 @@
-import '../../../../core/app_extension.dart';
-import '../screen/post_detail_screen.dart';
+import 'package:layered_architecture/features/post/view/screen/create_post_screen.dart';
+import 'package:layered_architecture/features/post/view/screen/post_detail_screen.dart';
+import 'package:layered_architecture/features/post/controller/post_controller.dart';
+import 'package:layered_architecture/common/widget/spinkit_indicator.dart';
+import 'package:layered_architecture/features/user/data/model/user.dart';
+import 'package:layered_architecture/features/post/data/model/post.dart';
+import 'package:layered_architecture/common/widget/empty_widget.dart';
+import 'package:layered_architecture/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture/core/app_extension.dart';
+import 'package:layered_architecture/core/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../core/app_style.dart';
-import '../../../user/data/model/user.dart';
-import '../../controller/post_controller.dart';
-import '../../data/model/post.dart';
-import 'create_post_screen.dart';
 
 class PostListScreen extends StatefulWidget {
   const PostListScreen({Key? key, required this.user}) : super(key: key);

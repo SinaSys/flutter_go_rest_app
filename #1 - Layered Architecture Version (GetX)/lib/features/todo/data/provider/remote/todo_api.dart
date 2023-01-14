@@ -1,11 +1,9 @@
+import 'package:layered_architecture/features/todo/data/model/todo.dart';
+import 'package:layered_architecture/common/network/api_base.dart';
+import 'package:layered_architecture/core/api_config.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../../../../common/network/api_base.dart';
-import '../../../../../core/api_config.dart';
-import '../../model/todo.dart';
-
 class ToDoApi extends ApiBase<ToDo> {
-
   Future<Either<String, bool>> createTodo(ToDo todo) async {
     return await makePostRequest(dioClient.dio!.post(ApiConfig.todos, data: todo),
     );

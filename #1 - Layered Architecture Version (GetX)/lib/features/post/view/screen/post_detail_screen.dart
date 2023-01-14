@@ -1,21 +1,20 @@
+import 'package:layered_architecture/common/widget/empty_widget.dart';
+import 'package:layered_architecture/common/widget/spinkit_indicator.dart';
+import 'package:layered_architecture/core/app_asset.dart';
+import 'package:layered_architecture/core/app_style.dart';
+import 'package:layered_architecture/features/comment/controller/comment_controller.dart';
+import 'package:layered_architecture/features/comment/data/model/comment.dart';
+import 'package:layered_architecture/features/post/controller/post_controller.dart';
+import 'package:layered_architecture/common/controller/base_controller.dart';
+import 'package:layered_architecture/features/post/view/screen/create_post_screen.dart';
+import 'package:layered_architecture/features/user/data/model/user.dart';
+import 'package:layered_architecture/features/post/data/model/post.dart';
+import 'package:layered_architecture/common/dialog/progress_dialog.dart';
+import 'package:layered_architecture/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture/common/widget/text_input.dart';
+import 'package:layered_architecture/core/app_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../common/controller/base_controller.dart';
-
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../common/widget/text_input.dart';
-import '../../../../core/app_asset.dart';
-import '../../../../core/app_extension.dart';
-import '../../../../core/app_style.dart';
-import '../../../comment/controller/comment_controller.dart';
-import '../../../comment/data/model/comment.dart';
-import '../../../user/data/model/user.dart';
-import '../../controller/post_controller.dart';
-import '../../data/model/post.dart';
-import 'create_post_screen.dart';
 
 class PostDetailScreen extends StatefulWidget {
   const PostDetailScreen({Key? key, required this.post, this.user})

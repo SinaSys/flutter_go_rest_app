@@ -1,11 +1,9 @@
+import 'package:layered_architecture/features/user/data/model/user.dart';
+import 'package:layered_architecture/common/network/api_base.dart';
+import 'package:layered_architecture/core/api_config.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../../../../common/network/api_base.dart';
-import '../../../../../core/api_config.dart';
-import '../../model/user.dart';
-
 class UserApi extends ApiBase<User> {
-
   //Create new user
   Future<Either<String, bool>> createUser(User user) async {
     return await makePostRequest(dioClient.dio!.post(ApiConfig.users, data: user));

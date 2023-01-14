@@ -1,12 +1,10 @@
+import 'package:layered_architecture/features/user/data/model/user.dart';
+import 'package:layered_architecture/features/post/data/model/post.dart';
+import 'package:layered_architecture/common/network/api_base.dart';
+import 'package:layered_architecture/core/api_config.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../../../../common/network/api_base.dart';
-import '../../../../../core/api_config.dart';
-import '../../../../user/data/model/user.dart';
-import '../../model/post.dart';
-
 class PostApi extends ApiBase<Post> {
-
   Future<Either<String, bool>> createPost(Post post) async {
     return await makePostRequest(dioClient.dio!.post(ApiConfig.posts, data: post));
   }

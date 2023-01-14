@@ -1,6 +1,5 @@
+import 'package:layered_architecture/core/app_string.dart';
 import 'package:dio/dio.dart';
-
-import '../../core/app_string.dart';
 
 class DioExceptions implements Exception {
   late String message;

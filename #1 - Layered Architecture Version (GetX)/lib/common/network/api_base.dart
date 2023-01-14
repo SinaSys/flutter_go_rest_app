@@ -1,13 +1,10 @@
-import 'dart:convert';
-
+import 'package:layered_architecture/common/network/dio_exception.dart';
+import 'package:layered_architecture/common/network/dio_client.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-
-import 'dio_client.dart';
-import 'dio_exception.dart';
+import 'dart:convert';
 
 abstract class ApiBase<T> {
-
   //dioClient will be used in child classes
   final DioClient dioClient = DioClient();
 
@@ -39,7 +36,8 @@ abstract class ApiBase<T> {
   }
 
   //Generic Method template for getting data from server
-  Future<Either<String, List<T>>> makeGetRequest(Future<Response<dynamic>> apiCallback,
+  Future<Either<String, List<T>>> makeGetRequest(
+      Future<Response<dynamic>> apiCallback,
       T Function(Map<String, dynamic> json) getJsonCallback) async {
     try {
       final Response response = await apiCallback;
@@ -55,5 +53,4 @@ abstract class ApiBase<T> {
       return left(errorMessage);
     }
   }
-
 }

@@ -1,7 +1,6 @@
+import 'package:layered_architecture/common/network/dio_interceptor.dart';
+import 'package:layered_architecture/core/api_config.dart';
 import 'package:dio/dio.dart';
-
-import '../../core/api_config.dart';
-import '../../common/network/dio_interceptor.dart';
 
 class DioClient {
   static final DioClient _instance = DioClient._internal();
