@@ -35,7 +35,6 @@ class UserCubit extends GenericCubit<User> {
     Gender gender = Gender.all,
     UserStatus status = UserStatus.all,
   }) async {
-    operation = ApiOperation.select;
     getItems(getUsersUseCase.call(GetUsersParams(status: status, gender: gender)));
   }
 }

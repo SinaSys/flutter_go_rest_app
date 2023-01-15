@@ -1,10 +1,10 @@
-import 'package:clean_architecture_cubit/common/cubit/generic_cubit.dart';
-import 'package:clean_architecture_cubit/features/post/data/models/post.dart';
 import 'package:clean_architecture_cubit/features/post/domain/usecases/create_post_usecase.dart';
 import 'package:clean_architecture_cubit/features/post/domain/usecases/delete_post_usecase.dart';
-import 'package:clean_architecture_cubit/features/post/domain/usecases/get_posts_usecase.dart';
 import 'package:clean_architecture_cubit/features/post/domain/usecases/update_post_usecase.dart';
+import 'package:clean_architecture_cubit/features/post/domain/usecases/get_posts_usecase.dart';
+import 'package:clean_architecture_cubit/features/post/data/models/post.dart';
 import 'package:clean_architecture_cubit/features/user/data/models/user.dart';
+import 'package:clean_architecture_cubit/common/cubit/generic_cubit.dart';
 
 class PostCubit extends GenericCubit<Post> {
   PostCubit({
