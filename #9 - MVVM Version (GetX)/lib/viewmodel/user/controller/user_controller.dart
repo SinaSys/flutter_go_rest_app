@@ -1,12 +1,11 @@
-import 'package:dartz/dartz.dart';
+import 'package:mvvm_getx/common/controller/base_controller.dart';
+import 'package:mvvm_getx/repository/user/user_repository.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:mvvm_getx/data/model/user/user.dart';
+import 'package:dartz/dartz.dart';
+import 'package:get/get.dart';
 
-import '../../../common/controller/base_controller.dart';
-import '../../../data/model/user/user.dart';
-import '../../../repository/user/user_repository.dart';
-
-class UserController extends GetxController
-    with StateMixin<List<User>>, BaseController {
+class UserController extends GetxController with StateMixin<List<User>>, BaseController {
   final UserRepository userRepository;
 
   UserController({required this.userRepository});

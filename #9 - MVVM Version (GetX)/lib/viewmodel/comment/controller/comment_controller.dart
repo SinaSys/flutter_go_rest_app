@@ -1,9 +1,8 @@
+import 'package:mvvm_getx/repository/comment/comment_repository.dart';
+import 'package:mvvm_getx/common/controller/base_controller.dart';
+import 'package:mvvm_getx/data/model/comment/comment.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
-
-import '../../../common/controller/base_controller.dart';
-import '../../../data/model/comment/comment.dart';
-import '../../../repository/comment/comment_repository.dart';
 
 class CommentController extends GetxController with StateMixin<List<Comment>>, BaseController {
   final CommentRepository commentRepository;
@@ -20,7 +19,8 @@ class CommentController extends GetxController with StateMixin<List<Comment>>, B
 
   Future<void> getUserComments(int postId) async {
     change(null, status: RxStatus.loading());
-    final Either<String, List<Comment>> failureOrSuccess = (await commentRepository.getComments(postId));
+    final Either<String, List<Comment>> failureOrSuccess =
+        (await commentRepository.getComments(postId));
 
     failureOrSuccess.fold(
       (String failure) {

@@ -1,7 +1,7 @@
-import '../../../../../core/api_config.dart';
-import '../../../common/network/api_helper.dart';
-import '../../../common/network/dio_client.dart';
-import '../../model/todo/todo.dart';
+import 'package:mvvm_getx/common/network/api_helper.dart';
+import 'package:mvvm_getx/common/network/dio_client.dart';
+import 'package:mvvm_getx/data/model/todo/todo.dart';
+import 'package:mvvm_getx/core/api_config.dart';
 
 class ToDoApi with ApiHelper<ToDo> {
   final DioClient dioClient;

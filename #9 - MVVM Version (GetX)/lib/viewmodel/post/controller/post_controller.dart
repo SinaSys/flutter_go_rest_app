@@ -1,15 +1,11 @@
+import 'package:mvvm_getx/common/controller/base_controller.dart';
 import 'package:dartz/dartz.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_notifier.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:get/get.dart';
+import 'package:mvvm_getx/data/model/post/post.dart';
+import 'package:mvvm_getx/data/model/user/user.dart';
+import 'package:mvvm_getx/repository/post/post_repository.dart';
 
-import '../../../common/controller/base_controller.dart';
-import '../../../data/model/post/post.dart';
-import '../../../data/model/user/user.dart';
-import '../../../repository/post/post_repository.dart';
-
-class PostController extends GetxController
-    with StateMixin<List<Post>>, BaseController {
+class PostController extends GetxController with StateMixin<List<Post>>, BaseController {
   RxInt postLength = 0.obs;
 
   final PostRepository postRepository;

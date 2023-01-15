@@ -1,22 +1,21 @@
+import 'package:mvvm_getx/viewmodel/todo/controller/todo_controller.dart';
+import 'package:mvvm_getx/common/controller/base_controller.dart';
+import 'package:mvvm_getx/common/widget/spinkit_indicator.dart';
+import 'package:mvvm_getx/common/dialog/progress_dialog.dart';
+import 'package:mvvm_getx/common/widget/date_time_picker.dart';
+import 'package:mvvm_getx/view/todo/widget/todo_list_item.dart';
+import 'package:mvvm_getx/common/dialog/retry_dialog.dart';
+import 'package:mvvm_getx/common/widget/empty_widget.dart';
+import 'package:mvvm_getx/common/widget/drop_down.dart';
+import 'package:mvvm_getx/common/widget/popup_menu.dart';
+import 'package:mvvm_getx/common/widget/text_input.dart';
+import 'package:mvvm_getx/core/app_extension.dart';
+import 'package:mvvm_getx/data/model/todo/todo.dart';
+import 'package:mvvm_getx/data/model/user/user.dart';
+import 'package:mvvm_getx/core/app_style.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm_getx/di.dart';
 import 'package:get/get.dart';
-import '../../../common/controller/base_controller.dart';
-import '../../../core/app_extension.dart';
-
-import '../../../../common/widget/date_time_picker.dart';
-import '../../../../common/widget/drop_down.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/popup_menu.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../common/widget/text_input.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../core/app_style.dart';
-import '../../../data/model/todo/todo.dart';
-import '../../../data/model/user/user.dart';
-import '../../../di.dart';
-import '../../../viewmodel/todo/controller/todo_controller.dart';
-import '../widget/todo_list_item.dart';
 
 enum Mode { create, update }
 

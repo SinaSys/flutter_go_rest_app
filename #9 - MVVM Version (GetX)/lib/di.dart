@@ -1,19 +1,18 @@
-import 'package:dio/dio.dart';
-import 'package:get_it/get_it.dart';
-import 'repository/user/user_repository.dart';
+import 'package:mvvm_getx/viewmodel/comment/controller/comment_controller.dart';
+import 'package:mvvm_getx/viewmodel/post/controller/post_controller.dart';
+import 'package:mvvm_getx/viewmodel/todo/controller/todo_controller.dart';
+import 'package:mvvm_getx/viewmodel/user/controller/user_controller.dart';
+import 'package:mvvm_getx/repository/comment/comment_repository.dart';
+import 'package:mvvm_getx/repository/post/post_repository.dart';
+import 'package:mvvm_getx/data/api/comment/comment_api.dart';
+import 'package:mvvm_getx/common/network/dio_client.dart';
+import 'package:mvvm_getx/data/api/post/post_api.dart';
+import 'package:mvvm_getx/data/api/todo/todo_api.dart';
+import 'package:mvvm_getx/data/api/user/user_api.dart';
 import 'repository/todo/todo_repository.dart';
-import 'repository/post/post_repository.dart';
-import 'repository/comment/comment_repository.dart';
-import 'viewmodel/user/controller/user_controller.dart';
-import 'viewmodel/todo/controller/todo_controller.dart';
-import 'viewmodel/post/controller/post_controller.dart';
-import 'viewmodel/comment/controller/comment_controller.dart';
-
-import 'common/network/dio_client.dart';
-import 'data/api/comment/comment_api.dart';
-import 'data/api/post/post_api.dart';
-import 'data/api/todo/todo_api.dart';
-import 'data/api/user/user_api.dart';
+import 'repository/user/user_repository.dart';
+import 'package:get_it/get_it.dart';
+import 'package:dio/dio.dart';
 
 final getIt = GetIt.instance;
 

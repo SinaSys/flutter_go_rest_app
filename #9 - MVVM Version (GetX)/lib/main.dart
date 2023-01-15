@@ -1,8 +1,7 @@
+import 'package:mvvm_getx/view/user/screens/user_list_screen.dart';
+import 'package:mvvm_getx/core/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'view/user/screens/user_list_screen.dart';
-
-import 'core/app_theme.dart';
-import 'di.dart';
+import 'package:mvvm_getx/di.dart';
 
 void main() async {
   await init();

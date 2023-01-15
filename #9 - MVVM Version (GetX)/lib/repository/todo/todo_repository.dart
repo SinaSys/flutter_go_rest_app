@@ -1,16 +1,14 @@
+import 'package:mvvm_getx/common/repository/repository_helper.dart';
+import 'package:mvvm_getx/data/api/todo/todo_api.dart';
+import 'package:mvvm_getx/data/model/todo/todo.dart';
 import 'package:dartz/dartz.dart';
-
-import '../../common/repository/repository_helper.dart';
-import '../../data/api/todo/todo_api.dart';
-import '../../data/model/todo/todo.dart';
 
 class TodoRepository with RepositoryHelper<ToDo> {
   final ToDoApi todoApi;
 
   const TodoRepository({required this.todoApi});
 
-  Future<Either<String, List<ToDo>>> getTodos(int userId,
-      {TodoStatus? status}) async {
+  Future<Either<String, List<ToDo>>> getTodos(int userId, {TodoStatus? status}) async {
     return checkItemsFailOrSuccess(todoApi.getTodos(userId, status: status));
   }
 

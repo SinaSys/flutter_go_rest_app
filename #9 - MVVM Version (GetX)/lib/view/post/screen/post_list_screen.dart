@@ -1,17 +1,16 @@
+import 'package:mvvm_getx/viewmodel/post/controller/post_controller.dart';
+import 'package:mvvm_getx/view/post/screen/post_detail_screen.dart';
+import 'package:mvvm_getx/view/post/screen/create_post_screen.dart';
+import 'package:mvvm_getx/common/widget/spinkit_indicator.dart';
+import 'package:mvvm_getx/common/dialog/retry_dialog.dart';
+import 'package:mvvm_getx/common/widget/empty_widget.dart';
+import 'package:mvvm_getx/core/app_extension.dart';
+import 'package:mvvm_getx/data/model/post/post.dart';
+import 'package:mvvm_getx/data/model/user/user.dart';
+import 'package:mvvm_getx/core/app_style.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm_getx/di.dart';
 import 'package:get/get.dart';
-import '../screen/post_detail_screen.dart';
-import '../../../core/app_extension.dart';
-
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../di.dart';
-import '../../../core/app_style.dart';
-import '../../../data/model/post/post.dart';
-import '../../../data/model/user/user.dart';
-import '../../../viewmodel/post/controller/post_controller.dart';
-import 'create_post_screen.dart';
 
 class PostListScreen extends StatefulWidget {
   const PostListScreen({Key? key, required this.user}) : super(key: key);

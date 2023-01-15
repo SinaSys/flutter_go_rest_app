@@ -1,22 +1,21 @@
+import 'package:mvvm_getx/viewmodel/user/controller/user_controller.dart';
+import 'package:mvvm_getx/view/post/screen/post_list_screen.dart';
+import 'package:mvvm_getx/view/todo/screen/todo_list_screen.dart';
+import 'package:mvvm_getx/view/user/widgets/status_container.dart';
+import 'package:mvvm_getx/common/controller/base_controller.dart';
+import 'package:mvvm_getx/common/widget/spinkit_indicator.dart';
+import 'package:mvvm_getx/common/dialog/progress_dialog.dart';
+import 'package:mvvm_getx/common/dialog/create_dialog.dart';
+import 'package:mvvm_getx/common/dialog/delete_dialog.dart';
+import 'package:mvvm_getx/common/widget/empty_widget.dart';
+import 'package:mvvm_getx/common/dialog/retry_dialog.dart';
+import 'package:mvvm_getx/common/widget/popup_menu.dart';
+import 'package:mvvm_getx/data/model/user/user.dart';
+import 'package:mvvm_getx/core/app_extension.dart';
+import 'package:mvvm_getx/core/app_style.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm_getx/di.dart';
 import 'package:get/get.dart';
-import '../../../common/controller/base_controller.dart';
-import '../../../core/app_extension.dart';
-
-import '../../../../common/dialog/create_dialog.dart';
-import '../../../../common/dialog/delete_dialog.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/popup_menu.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../core/app_style.dart';
-import '../../../data/model/user/user.dart';
-import '../../../di.dart';
-import '../../../viewmodel/user/controller/user_controller.dart';
-import '../../post/screen/post_list_screen.dart';
-import '../../todo/screen/todo_list_screen.dart';
-import '../widgets/status_container.dart';
 
 enum UserOperation { edit, delete, post, todo }
 

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
-
-import '../../core/api_config.dart';
-import '../../common/network/dio_interceptor.dart';
+import 'package:mvvm_getx/core/api_config.dart';
+import 'package:mvvm_getx/common/network/dio_interceptor.dart';
 
 class DioClient {
   final Dio dio;
