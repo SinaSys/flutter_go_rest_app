@@ -1,8 +1,7 @@
+import 'package:mvvm_cubit/common/widget/drop_down.dart';
+import 'package:mvvm_cubit/common/widget/text_input.dart';
+import 'package:mvvm_cubit/data/model/user/user.dart';
 import 'package:flutter/material.dart';
-
-import '../../data/model/user/user.dart';
-import '../widget/drop_down.dart';
-import '../widget/text_input.dart';
 
 enum Type { create, update }
 

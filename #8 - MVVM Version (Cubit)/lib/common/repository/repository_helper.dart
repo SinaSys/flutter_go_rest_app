@@ -1,7 +1,6 @@
+import 'package:mvvm_cubit/common/network/dio_exception.dart';
+import 'package:mvvm_cubit/common/network/api_result.dart';
 import 'package:dio/dio.dart';
-
-import '../network/api_result.dart';
-import '../network/dio_exception.dart';
 
 mixin RepositoryHelper<T> {
   Future<ApiResult<List<T>>> checkItemsFailOrSuccess(

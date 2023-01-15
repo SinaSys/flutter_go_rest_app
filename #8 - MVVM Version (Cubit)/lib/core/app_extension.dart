@@ -1,6 +1,5 @@
+import 'package:mvvm_cubit/core/app_asset.dart';
 import 'package:flutter/material.dart';
-
-import 'app_asset.dart';
 
 extension StringExtension on String {
   String get getGenderWidget {

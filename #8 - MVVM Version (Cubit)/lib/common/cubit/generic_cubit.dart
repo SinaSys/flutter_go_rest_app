@@ -1,9 +1,7 @@
+import 'package:mvvm_cubit/common/cubit/generic_cubit_state.dart';
+import 'package:mvvm_cubit/common/network/api_result.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../network/api_result.dart';
-import 'generic_cubit_state.dart';
-
-enum Status { empty, loading, failure, success }
 
 enum ApiOperation { select, create, update, delete }
 
@@ -23,7 +21,29 @@ class GenericCubit<T> extends Cubit<GenericCubitState<List<T>>> {
     );
   }
 
+  _apiOperationTemplate(Future<ApiResult> apiCallback) async {
+    emit(GenericCubitState.loading());
+    ApiResult failureOrSuccess = await apiCallback;
+    _checkFailureOrSuccess(failureOrSuccess);
+  }
+
+  Future<void> createItem(Future<ApiResult> apiCallback) async {
+    operation = ApiOperation.create;
+    _apiOperationTemplate(apiCallback);
+  }
+
+  Future<void> updateItem(Future<ApiResult> apiCallback) async {
+    operation = ApiOperation.update;
+    _apiOperationTemplate(apiCallback);
+  }
+
+  Future<void> deleteItem(Future<ApiResult> apiCallback) async {
+    operation = ApiOperation.delete;
+    _apiOperationTemplate(apiCallback);
+  }
+
   Future<void> getItems(Future<ApiResult<List<T>>> apiCallback) async {
+    operation = ApiOperation.select;
     emit(GenericCubitState.loading());
     ApiResult<List<T>> failureOrSuccess = await apiCallback;
 
@@ -39,23 +59,5 @@ class GenericCubit<T> extends Cubit<GenericCubitState<List<T>>> {
         }
       },
     );
-  }
-
-  Future<void> createItem(Future<ApiResult> apiCallback) async {
-    emit(GenericCubitState.loading());
-    ApiResult failureOrSuccess = await apiCallback;
-    _checkFailureOrSuccess(failureOrSuccess);
-  }
-
-  Future<void> deleteItem(Future<ApiResult> apiCallback) async {
-    emit(GenericCubitState.loading());
-    ApiResult failureOrSuccess = await apiCallback;
-    _checkFailureOrSuccess(failureOrSuccess);
-  }
-
-  Future<void> updateItem(Future<ApiResult> apiCallback) async {
-    emit(GenericCubitState.loading());
-    ApiResult failureOrSuccess = await apiCallback;
-    _checkFailureOrSuccess(failureOrSuccess);
   }
 }

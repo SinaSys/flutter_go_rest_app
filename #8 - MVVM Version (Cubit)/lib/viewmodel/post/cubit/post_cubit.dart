@@ -1,7 +1,7 @@
-import '../../../common/cubit/generic_cubit.dart';
-import '../../../data/model/post/post.dart';
-import '../../../data/model/user/user.dart';
-import '../../../repository/post/post_repository.dart';
+import 'package:mvvm_cubit/repository/post/post_repository.dart';
+import 'package:mvvm_cubit/common/cubit/generic_cubit.dart';
+import 'package:mvvm_cubit/data/model/post/post.dart';
+import 'package:mvvm_cubit/data/model/user/user.dart';
 
 class PostCubit extends GenericCubit<Post> {
   final PostRepository postRepository;

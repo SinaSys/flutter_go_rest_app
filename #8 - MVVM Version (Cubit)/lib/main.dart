@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'view/user/screen/user_list_screen.dart';
-import 'viewmodel/user/cubit/user_cubit.dart';
-import 'viewmodel/todo/cubit/todo_cubit.dart';
-import 'viewmodel/post/cubit/post_cubit.dart';
-import 'viewmodel/comment/cubit/comment_cubit.dart';
-import 'core/app_theme.dart';
+import 'package:mvvm_cubit/viewmodel/comment/cubit/comment_cubit.dart';
+import 'package:mvvm_cubit/view/user/screen/user_list_screen.dart';
+import 'package:mvvm_cubit/viewmodel/post/cubit/post_cubit.dart';
+import 'package:mvvm_cubit/viewmodel/todo/cubit/todo_cubit.dart';
+import 'package:mvvm_cubit/viewmodel/user/cubit/user_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mvvm_cubit/core/app_theme.dart';
+import 'package:flutter/material.dart';
 
 import 'di.dart';
 

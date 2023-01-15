@@ -1,10 +1,7 @@
-import 'dart:convert';
-
+import 'package:mvvm_cubit/common/network/dio_exception.dart';
+import 'package:mvvm_cubit/core/app_extension.dart';
 import 'package:dio/dio.dart';
-
-import 'dio_exception.dart';
-
-import '../../core/app_extension.dart';
+import 'dart:convert';
 
 abstract class ApiHelper<T> {
   late final T data;
@@ -19,22 +16,22 @@ abstract class ApiHelper<T> {
     }
   }
 
-  //Generic Method template for create item on server
+  //Generic method template for create item on server
   Future<bool> makePostRequest(Future<Response<dynamic>> apiCallback) async {
     return _requestMethodTemplate(apiCallback);
   }
 
-  //Generic Method template for update item on server
+  //Generic method template for update item on server
   Future<bool> makePutRequest(Future<Response<dynamic>> apiCallback) async {
     return _requestMethodTemplate(apiCallback);
   }
 
-  //Generic Method template for delete item from server
+  //Generic method template for delete item from server
   Future<bool> makeDeleteRequest(Future<Response<dynamic>> apiCallback) async {
     return _requestMethodTemplate(apiCallback);
   }
 
-  //Generic Method template for get data from Api
+  //Generic method template for getting data from Api
   Future<List<T>> makeGetRequest(Future<Response<dynamic>> apiCallback,
       T Function(Map<String, dynamic> json) getJsonCallback) async {
     final Response response = await apiCallback;

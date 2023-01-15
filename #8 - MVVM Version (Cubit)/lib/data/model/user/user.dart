@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-
 import 'package:flutter/foundation.dart' show immutable;
 
 part 'user.g.dart';

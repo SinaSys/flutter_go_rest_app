@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart' show immutable;
-import 'generic_cubit.dart';
+
+enum Status { empty, loading, failure, success }
 
 @immutable
 class GenericCubitState<T> {
@@ -15,6 +16,5 @@ class GenericCubitState<T> {
 
   factory GenericCubitState.failure(String error) => GenericCubitState(error: error, status: Status.failure);
 
-  factory GenericCubitState.success(T? data)=> GenericCubitState(data: data, status: Status.success);
-
+  factory GenericCubitState.success(T? data) => GenericCubitState(data: data, status: Status.success);
 }

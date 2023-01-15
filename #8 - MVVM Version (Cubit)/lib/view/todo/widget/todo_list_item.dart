@@ -1,8 +1,8 @@
+import 'package:mvvm_cubit/core/app_extension.dart';
+import 'package:mvvm_cubit/core/app_style.dart';
+import 'package:mvvm_cubit/data/model/todo/todo.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../../core/app_extension.dart';
-import '../../../../core/app_style.dart';
-import '../../../data/model/todo/todo.dart';
 import 'circle_container.dart';
 
 class TodoListItem extends StatelessWidget {

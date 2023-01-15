@@ -1,7 +1,7 @@
-import '../../common/network/api_result.dart';
-import '../../common/repository/repository_helper.dart';
-import '../../data/api/user/user_api.dart';
-import '../../data/model/user/user.dart';
+import 'package:mvvm_cubit/common/repository/repository_helper.dart';
+import 'package:mvvm_cubit/common/network/api_result.dart';
+import 'package:mvvm_cubit/data/api/user/user_api.dart';
+import 'package:mvvm_cubit/data/model/user/user.dart';
 
 class UserRepository with RepositoryHelper<User> {
   final UserApi userApi;

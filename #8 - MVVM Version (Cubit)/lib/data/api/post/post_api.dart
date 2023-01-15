@@ -1,8 +1,8 @@
-import '../../../../../core/api_config.dart';
-import '../../../common/network/api_helper.dart';
-import '../../../common/network/dio_client.dart';
-import '../../model/post/post.dart';
-import '../../model/user/user.dart';
+import 'package:mvvm_cubit/common/network/api_helper.dart';
+import 'package:mvvm_cubit/common/network/dio_client.dart';
+import 'package:mvvm_cubit/data/model/user/user.dart';
+import 'package:mvvm_cubit/data/model/post/post.dart';
+import 'package:mvvm_cubit/core/api_config.dart';
 
 class PostApi with ApiHelper<Post> {
   final DioClient dioClient;

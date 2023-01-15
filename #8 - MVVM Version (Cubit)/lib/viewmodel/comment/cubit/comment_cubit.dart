@@ -1,6 +1,6 @@
-import '../../../common/cubit/generic_cubit.dart';
-import '../../../data/model/comment/comment.dart';
-import '../../../repository/comment/comment_repository.dart';
+import 'package:mvvm_cubit/repository/comment/comment_repository.dart';
+import 'package:mvvm_cubit/common/cubit/generic_cubit.dart';
+import 'package:mvvm_cubit/data/model/comment/comment.dart';
 
 class CommentCubit extends GenericCubit<Comment> {
   final CommentRepository commentRepository;

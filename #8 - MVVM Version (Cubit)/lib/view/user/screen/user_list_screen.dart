@@ -1,21 +1,21 @@
-import 'package:flutter/material.dart';
+import 'package:mvvm_cubit/common/cubit/generic_cubit_state.dart';
+import 'package:mvvm_cubit/view/post/screen/post_list_screen.dart';
+import 'package:mvvm_cubit/view/todo/screen/todo_list_screen.dart';
+import 'package:mvvm_cubit/view/user/widget/status_container.dart';
+import 'package:mvvm_cubit/viewmodel/user/cubit/user_cubit.dart';
+import 'package:mvvm_cubit/common/widget/spinkit_indicator.dart';
+import 'package:mvvm_cubit/common/dialog/progress_dialog.dart';
+import 'package:mvvm_cubit/common/cubit/generic_cubit.dart';
+import 'package:mvvm_cubit/common/dialog/create_dialog.dart';
+import 'package:mvvm_cubit/common/dialog/retry_dialog.dart';
+import 'package:mvvm_cubit/common/dialog/delete_dialog.dart';
+import 'package:mvvm_cubit/common/widget/empty_widget.dart';
+import 'package:mvvm_cubit/common/widget/popup_menu.dart';
+import 'package:mvvm_cubit/data/model/user/user.dart';
+import 'package:mvvm_cubit/core/app_extension.dart';
+import 'package:mvvm_cubit/core/app_style.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/app_extension.dart';
-import '../../../../common/cubit/generic_cubit.dart';
-import '../../../../common/dialog/create_dialog.dart';
-import '../../../../common/dialog/delete_dialog.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/empty_widget.dart';
-import '../../../../common/widget/popup_menu.dart';
-import '../../../../common/widget/spinkit_indicator.dart';
-import '../../../../core/app_style.dart';
-import '../../../common/cubit/generic_cubit_state.dart';
-import '../../../data/model/user/user.dart';
-import '../../../viewmodel/user/cubit/user_cubit.dart';
-import '../../post/screen/post_list_screen.dart';
-import '../../todo/screen/todo_list_screen.dart';
-import '../widget/status_container.dart';
+import 'package:flutter/material.dart';
 
 enum Operation { edit, delete, post, todo }
 
@@ -69,12 +69,6 @@ class _UserListScreenState extends State<UserListScreen> {
             context: context,
             builder: (_) {
               return BlocBuilder<UserCubit, GenericCubitState<List<User>>>(
-                buildWhen: (prevState, curState) {
-                  return context.read<UserCubit>().operation ==
-                          ApiOperation.create
-                      ? true
-                      : false;
-                },
                 builder: (BuildContext context,
                     GenericCubitState<List<User>> state) {
                   switch (state.status) {
@@ -164,11 +158,6 @@ class _UserListScreenState extends State<UserListScreen> {
         context: context,
         builder: (_) {
           return BlocBuilder<UserCubit, GenericCubitState<List<User>>>(
-            buildWhen: (prevState, curState) {
-              return context.read<UserCubit>().operation == ApiOperation.delete
-                  ? true
-                  : false;
-            },
             builder:
                 (BuildContext context, GenericCubitState<List<User>> state) {
               switch (state.status) {
@@ -220,11 +209,6 @@ class _UserListScreenState extends State<UserListScreen> {
         context: context,
         builder: (_) {
           return BlocBuilder<UserCubit, GenericCubitState<List<User>>>(
-            buildWhen: (prevState, curState) {
-              return context.read<UserCubit>().operation == ApiOperation.update
-                  ? true
-                  : false;
-            },
             builder:
                 (BuildContext context, GenericCubitState<List<User>> state) {
               switch (state.status) {

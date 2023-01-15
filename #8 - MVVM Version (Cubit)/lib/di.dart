@@ -1,19 +1,18 @@
-import 'package:dio/dio.dart';
+import 'package:mvvm_cubit/repository/comment/comment_repository.dart';
+import 'package:mvvm_cubit/viewmodel/comment/cubit/comment_cubit.dart';
+import 'package:mvvm_cubit/repository/todo/todo_repository.dart';
+import 'package:mvvm_cubit/repository/user/user_repository.dart';
+import 'package:mvvm_cubit/viewmodel/post/cubit/post_cubit.dart';
+import 'package:mvvm_cubit/viewmodel/todo/cubit/todo_cubit.dart';
+import 'package:mvvm_cubit/viewmodel/user/cubit/user_cubit.dart';
+import 'package:mvvm_cubit/data/api/comment/comment_api.dart';
+import 'package:mvvm_cubit/repository/post/post_repository.dart';
+import 'package:mvvm_cubit/common/network/dio_client.dart';
+import 'package:mvvm_cubit/data/api/post/post_api.dart';
+import 'package:mvvm_cubit/data/api/todo/todo_api.dart';
+import 'package:mvvm_cubit/data/api/user/user_api.dart';
 import 'package:get_it/get_it.dart';
-
-import 'common/network/dio_client.dart';
-import 'data/api/comment/comment_api.dart';
-import 'data/api/post/post_api.dart';
-import 'data/api/todo/todo_api.dart';
-import 'data/api/user/user_api.dart';
-import 'repository/user/user_repository.dart';
-import 'repository/todo/todo_repository.dart';
-import 'repository/post/post_repository.dart';
-import 'repository/comment/comment_repository.dart';
-import 'viewmodel/user/cubit/user_cubit.dart';
-import 'viewmodel/todo/cubit/todo_cubit.dart';
-import 'viewmodel/post/cubit/post_cubit.dart';
-import 'viewmodel/comment/cubit/comment_cubit.dart';
+import 'package:dio/dio.dart';
 
 final getIt = GetIt.instance;
 
@@ -58,18 +57,14 @@ Future<void> init() async {
   );
 
   //User Bloc
-  getIt.registerFactory(
-      () => UserCubit(userRepository: getIt<UserRepository>()));
+  getIt.registerFactory(() => UserCubit(userRepository: getIt<UserRepository>()));
 
   //_Todo Bloc
-  getIt.registerFactory(
-      () => TodoCubit(todoRepository: getIt<TodoRepository>()));
+  getIt.registerFactory(() => TodoCubit(todoRepository: getIt<TodoRepository>()));
 
   //Post Bloc
-  getIt.registerFactory(
-      () => PostCubit(postRepository: getIt<PostRepository>()));
+  getIt.registerFactory(() => PostCubit(postRepository: getIt<PostRepository>()));
 
   //Comment Bloc
-  getIt.registerFactory(
-      () => CommentCubit(commentRepository: getIt<CommentRepository>()));
+  getIt.registerFactory(() => CommentCubit(commentRepository: getIt<CommentRepository>()));
 }

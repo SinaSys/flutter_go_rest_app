@@ -1,7 +1,7 @@
-import '../../../../../core/api_config.dart';
-import '../../../common/network/api_helper.dart';
-import '../../../common/network/dio_client.dart';
-import '../../model/user/user.dart';
+import 'package:mvvm_cubit/common/network/api_helper.dart';
+import 'package:mvvm_cubit/common/network/dio_client.dart';
+import 'package:mvvm_cubit/data/model/user/user.dart';
+import 'package:mvvm_cubit/core/api_config.dart';
 
 class UserApi with ApiHelper<User> {
   final DioClient dioClient;
