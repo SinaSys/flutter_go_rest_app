@@ -1,14 +1,14 @@
-import 'package:flutter/material.dart';
+import 'package:mvvm_bloc/common/bloc/generic_bloc_state.dart';
+import 'package:mvvm_bloc/common/dialog/progress_dialog.dart';
+import 'package:mvvm_bloc/common/dialog/retry_dialog.dart';
+import 'package:mvvm_bloc/common/widget/text_input.dart';
+import 'package:mvvm_bloc/core/app_extension.dart';
+import 'package:mvvm_bloc/data/model/post/post.dart';
+import 'package:mvvm_bloc/data/model/user/user.dart';
+import 'package:mvvm_bloc/viewmodel/post/bloc/post_bloc.dart';
+import 'package:mvvm_bloc/viewmodel/post/bloc/post_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../common/bloc/generic_bloc_state.dart';
-import '../../../../common/dialog/progress_dialog.dart';
-import '../../../../common/dialog/retry_dialog.dart';
-import '../../../../common/widget/text_input.dart';
-import '../../../data/model/post/post.dart';
-import '../../../data/model/user/user.dart';
-import '../../../viewmodel/post/bloc/post_bloc.dart';
-import '../../../viewmodel/post/bloc/post_event.dart';
-import '../../../core/app_extension.dart';
+import 'package:flutter/material.dart';
 
 enum PostMode { create, update }
 

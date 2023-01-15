@@ -1,8 +1,7 @@
-
-import '../../common/network/api_result.dart';
-import '../../common/repository/repository_helper.dart';
-import '../../data/api/todo/todo_api.dart';
-import '../../data/model/todo/todo.dart';
+import 'package:mvvm_bloc/common/repository/repository_helper.dart';
+import 'package:mvvm_bloc/common/network/api_result.dart';
+import 'package:mvvm_bloc/data/api/todo/todo_api.dart';
+import 'package:mvvm_bloc/data/model/todo/todo.dart';
 
 class TodoRepository with RepositoryHelper<ToDo> {
   final ToDoApi todoApi;

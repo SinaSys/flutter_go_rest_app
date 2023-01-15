@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:mvvm_bloc/viewmodel/comment/bloc/comment_bloc.dart';
 import 'package:mvvm_bloc/view/user/screen/user_list_screen.dart';
-import 'viewmodel/user/bloc/user_bloc.dart';
-import 'viewmodel/todo/bloc/todo_bloc.dart';
-import 'viewmodel/post/bloc/post_bloc.dart';
-import 'viewmodel/comment/bloc/comment_bloc.dart';
-
-import 'core/app_theme.dart';
+import 'package:mvvm_bloc/viewmodel/post/bloc/post_bloc.dart';
+import 'package:mvvm_bloc/viewmodel/todo/bloc/todo_bloc.dart';
+import 'package:mvvm_bloc/viewmodel/user/bloc/user_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';
+import 'core/app_theme.dart';
 
 import 'di.dart';
 

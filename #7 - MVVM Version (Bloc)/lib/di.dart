@@ -1,20 +1,18 @@
+import 'package:mvvm_bloc/repository/comment/comment_repository.dart';
+import 'package:mvvm_bloc/viewmodel/comment/bloc/comment_bloc.dart';
+import 'package:mvvm_bloc/repository/post/post_repository.dart';
+import 'package:mvvm_bloc/repository/todo/todo_repository.dart';
+import 'package:mvvm_bloc/repository/user/user_repository.dart';
+import 'package:mvvm_bloc/viewmodel/post/bloc/post_bloc.dart';
+import 'package:mvvm_bloc/viewmodel/todo/bloc/todo_bloc.dart';
+import 'package:mvvm_bloc/viewmodel/user/bloc/user_bloc.dart';
+import 'package:mvvm_bloc/data/api/comment/comment_api.dart';
+import 'package:mvvm_bloc/common/network/dio_client.dart';
+import 'package:mvvm_bloc/data/api/post/post_api.dart';
+import 'package:mvvm_bloc/data/api/todo/todo_api.dart';
+import 'package:mvvm_bloc/data/api/user/user_api.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'repository/user/user_repository.dart';
-import 'repository/todo/todo_repository.dart';
-import 'repository/post/post_repository.dart';
-import 'repository/comment/comment_repository.dart';
-
-import 'viewmodel/user/bloc/user_bloc.dart';
-import 'viewmodel/todo/bloc/todo_bloc.dart';
-import 'viewmodel/post/bloc/post_bloc.dart';
-import 'viewmodel/comment/bloc/comment_bloc.dart';
-
-import 'common/network/dio_client.dart';
-import 'data/api/comment/comment_api.dart';
-import 'data/api/post/post_api.dart';
-import 'data/api/todo/todo_api.dart';
-import 'data/api/user/user_api.dart';
 
 final getIt = GetIt.instance;
 

@@ -1,7 +1,7 @@
-import '../../../common/network/api_helper.dart';
-import '../../../common/network/dio_client.dart';
-import '../../../core/api_config.dart';
-import '../../model/comment/comment.dart';
+import 'package:mvvm_bloc/data/model/comment/comment.dart';
+import 'package:mvvm_bloc/common/network/api_helper.dart';
+import 'package:mvvm_bloc/common/network/dio_client.dart';
+import 'package:mvvm_bloc/core/api_config.dart';
 
 class CommentApi with ApiHelper<Comment> {
   final DioClient dioClient;
@@ -20,8 +20,7 @@ class CommentApi with ApiHelper<Comment> {
     final queryParameters = {'post_id': "$postId"};
 
     return await makeGetRequest(
-        dioClient.dio
-            .get(ApiConfig.comments, queryParameters: queryParameters),
+        dioClient.dio.get(ApiConfig.comments, queryParameters: queryParameters),
         Comment.fromJson);
   }
 }

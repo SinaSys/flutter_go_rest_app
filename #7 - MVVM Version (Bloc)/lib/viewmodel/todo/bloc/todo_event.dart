@@ -1,4 +1,4 @@
-import '../../../data/model/todo/todo.dart';
+import 'package:mvvm_bloc/data/model/todo/todo.dart';
 
 /// Events should be named in the past tense because events are things
 /// that have already occurred from the bloc's perspective.

@@ -1,7 +1,7 @@
-import '../../../../common/repository/repository_helper.dart';
-import '../../common/network/api_result.dart';
-import '../../data/api/comment/comment_api.dart';
-import '../../data/model/comment/comment.dart';
+import 'package:mvvm_bloc/common/repository/repository_helper.dart';
+import 'package:mvvm_bloc/data/api/comment/comment_api.dart';
+import 'package:mvvm_bloc/data/model/comment/comment.dart';
+import 'package:mvvm_bloc/common/network/api_result.dart';
 
 class CommentRepository with RepositoryHelper<Comment> {
   final CommentApi commentApi;

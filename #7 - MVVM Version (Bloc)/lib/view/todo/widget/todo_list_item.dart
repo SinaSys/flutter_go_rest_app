@@ -1,11 +1,9 @@
+import 'package:mvvm_bloc/view/todo/widget/circle_container.dart';
+import 'package:mvvm_bloc/data/model/todo/todo.dart';
+import 'package:mvvm_bloc/core/app_extension.dart';
+import 'package:mvvm_bloc/core/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-import '../../../../core/app_style.dart';
-import '../../../core/app_extension.dart';
-
-import '../../../data/model/todo/todo.dart';
-import 'circle_container.dart';
 
 class TodoListItem extends StatelessWidget {
   const TodoListItem({

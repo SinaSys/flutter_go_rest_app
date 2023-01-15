@@ -1,8 +1,8 @@
-import '../../common/network/api_result.dart';
-import '../../common/repository/repository_helper.dart';
-import '../../data/api/post/post_api.dart';
-import '../../data/model/post/post.dart';
-import '../../data/model/user/user.dart';
+import 'package:mvvm_bloc/common/repository/repository_helper.dart';
+import 'package:mvvm_bloc/common/network/api_result.dart';
+import 'package:mvvm_bloc/data/api/post/post_api.dart';
+import 'package:mvvm_bloc/data/model/post/post.dart';
+import 'package:mvvm_bloc/data/model/user/user.dart';
 
 class PostRepository with RepositoryHelper<Post> {
   final PostApi postApi;

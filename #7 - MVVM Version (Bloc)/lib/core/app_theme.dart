@@ -1,7 +1,6 @@
+import 'package:mvvm_bloc/core/app_style.dart';
+import 'package:mvvm_bloc/core/app_string.dart';
 import 'package:flutter/material.dart';
-
-import 'app_string.dart';
-import 'app_style.dart';
 
 class AppTheme {
   AppTheme._();

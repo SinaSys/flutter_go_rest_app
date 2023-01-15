@@ -1,5 +1,5 @@
-import '../../../data/model/post/post.dart';
-import '../../../data/model/user/user.dart';
+import 'package:mvvm_bloc/data/model/post/post.dart';
+import 'package:mvvm_bloc/data/model/user/user.dart';
 
 abstract class PostEvent {}
 
