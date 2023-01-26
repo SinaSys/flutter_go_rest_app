@@ -181,17 +181,11 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                   },
                 ),
                 const SizedBox(height: 15),
-                StatefulBuilder(
-                  builder: (BuildContext context, StateSetter setState) {
-                    return DropDown<TodoStatus>(
-                      initialItem: todoStatus,
-                      items: const [TodoStatus.pending, TodoStatus.completed],
-                      onChanged: (TodoStatus value) {
-                        setState(() {
-                          status = value;
-                        });
-                      },
-                    );
+                DropDown<TodoStatus>(
+                  initialItem: todoStatus,
+                  items: const [TodoStatus.pending, TodoStatus.completed],
+                  onChanged: (TodoStatus value) {
+                    status = value;
                   },
                 ),
                 const SizedBox(height: 15),
