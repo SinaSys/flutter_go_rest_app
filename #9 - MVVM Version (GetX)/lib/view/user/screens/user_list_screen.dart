@@ -64,6 +64,7 @@ class _UserListScreenState extends State<UserListScreen> {
 
         if (isCreate) {
           _controller.createUser(user);
+          if (!mounted) return;
           showDialog(
             context: context,
             builder: (_) {
@@ -145,6 +146,7 @@ class _UserListScreenState extends State<UserListScreen> {
     bool isAccepted = await deleteDialog(context);
     if (isAccepted) {
       _controller.deleteUser(user);
+      if (!mounted) return;
       showDialog(
         context: context,
         builder: (_) {
@@ -191,6 +193,7 @@ class _UserListScreenState extends State<UserListScreen> {
 
     if (isUpdate) {
       _controller.updateUser(userObj);
+      if (!mounted) return;
       showDialog(
         context: context,
         builder: (_) {
