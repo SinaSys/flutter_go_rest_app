@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class TextInput extends StatelessWidget {
-  const TextInput(
-      {Key? key,
-      this.initialValue,
-      this.onChanged,
-      this.validator,
-      this.maxLine,
-      this.controller,
-      this.icon,
-      this.autovalidateMode = AutovalidateMode.onUserInteraction,
-      required this.hint})
-      : super(key: key);
+  const TextInput({
+    this.initialValue,
+    this.onChanged,
+    this.validator,
+    this.maxLine,
+    this.controller,
+    this.icon,
+    this.autovalidateMode = AutovalidateMode.onUserInteraction,
+    required this.hint,
+    Key? key,
+  }) : super(key: key);
 
   final String? initialValue;
   final String hint;
@@ -25,6 +25,7 @@ class TextInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textInputAction: TextInputAction.next,
       controller: controller,
       autovalidateMode: autovalidateMode,
       cursorColor: Colors.grey,
