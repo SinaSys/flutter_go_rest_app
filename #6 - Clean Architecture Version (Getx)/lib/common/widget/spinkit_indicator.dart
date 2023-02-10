@@ -14,10 +14,7 @@ class SpinKitIndicator extends StatelessWidget {
     Widget widget;
     switch (type) {
       case SpinKitType.wave:
-        widget = const SpinKitWave(
-          color: Color(0xFFF4511E),
-          size: 50.0,
-        );
+        widget = const SpinKitWave(color: Color(0xFFF4511E), size: 50.0);
         break;
       case SpinKitType.circle:
         widget = const SpinKitFadingCircle(

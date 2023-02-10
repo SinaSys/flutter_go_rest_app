@@ -2,12 +2,12 @@ import 'package:clean_architecture_getx/core/app_extension.dart';
 import 'package:flutter/material.dart';
 
 class PopupMenu<T> extends StatelessWidget {
-  const PopupMenu(
-      {Key? key,
-      required this.items,
-      required this.onChanged,
-      this.icon = Icons.more_vert})
-      : super(key: key);
+  const PopupMenu({
+    Key? key,
+    required this.items,
+    required this.onChanged,
+    this.icon = Icons.more_vert,
+  }) : super(key: key);
 
   final List<T> items;
   final ValueChanged<T> onChanged;
@@ -34,9 +34,7 @@ class PopupMenu<T> extends StatelessWidget {
             .map(
               (T item) => PopupMenuItem<T>(
                 value: item,
-                child: InkWell(
-                  child: Text(checkType(item)),
-                ),
+                child: InkWell(child: Text(checkType(item))),
               ),
             )
             .toList();

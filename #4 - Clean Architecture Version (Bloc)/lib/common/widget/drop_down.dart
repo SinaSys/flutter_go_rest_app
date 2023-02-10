@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:clean_architecture_bloc/core/app_extension.dart';
 
 class DropDown<T> extends StatefulWidget {
-  const DropDown(
-      {Key? key,
-      required this.onChanged,
-      required this.items,
-      this.initialItem})
-      : super(key: key);
+  const DropDown({
+    Key? key,
+    required this.onChanged,
+    required this.items,
+    this.initialItem,
+  }) : super(key: key);
 
   final ValueChanged<T> onChanged;
   final List<T> items;

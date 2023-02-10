@@ -7,9 +7,7 @@ Future<dynamic> deleteDialog(BuildContext context) {
       return AlertDialog(
         shape: const RoundedRectangleBorder(
           side: BorderSide(color: Colors.redAccent, width: 2.0),
-          borderRadius: BorderRadius.all(
-            Radius.circular(15.0),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(15.0)),
         ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -36,7 +34,8 @@ Future<dynamic> deleteDialog(BuildContext context) {
                 const SizedBox(width: 10),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.redAccent),
+                    backgroundColor: Colors.redAccent,
+                  ),
                   onPressed: () {
                     Navigator.pop(context, true);
                   },

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class RetryDialog extends StatelessWidget {
-  const RetryDialog(
-      {Key? key, required this.title, required this.onRetryPressed})
-      : super(key: key);
+  const RetryDialog({
+    Key? key,
+    required this.title,
+    required this.onRetryPressed,
+  }) : super(key: key);
 
   final String title;
   final VoidCallback onRetryPressed;
@@ -13,9 +15,7 @@ class RetryDialog extends StatelessWidget {
     return AlertDialog(
       shape: const RoundedRectangleBorder(
         side: BorderSide(color: Colors.redAccent, width: 2.0),
-        borderRadius: BorderRadius.all(
-          Radius.circular(15.0),
-        ),
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
       ),
       title: Row(
         children: const [

@@ -11,7 +11,7 @@ class AppString {
   static const unknownError = "Something went wrong";
   static const duplicateEmail = "Email has already been taken";
 
-  //status code
+  //Status code
   static const badRequest = "Bad request";
   static const unauthorized = "Unauthorized";
   static const forbidden = "Forbidden";
