@@ -1,6 +1,6 @@
 import 'package:clean_architecture_getx/common/network/api_config.dart';
 import 'package:clean_architecture_getx/common/network/dio_interceptor.dart';
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' show Dio, ResponseType;
 
 class DioClient {
   final Dio dio;
