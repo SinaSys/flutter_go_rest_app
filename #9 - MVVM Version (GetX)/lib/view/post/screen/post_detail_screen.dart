@@ -31,6 +31,8 @@ class PostDetailScreen extends StatefulWidget {
 class _PostDetailScreenState extends State<PostDetailScreen> {
   final CommentController commentController = getIt<CommentController>();
   final PostController postController = getIt<PostController>();
+  FocusNode userNameFocusNode = FocusNode();
+  FocusNode commentBodyFocusNode = FocusNode();
 
   final formKey = GlobalKey<FormState>();
   TextEditingController nameEditingController = TextEditingController();
@@ -263,6 +265,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
               children: [
                 TextInput(
                   hint: "Write a comment",
+                  focusNode: userNameFocusNode,
                   maxLine: 3,
                   autovalidateMode: AutovalidateMode.disabled,
                   controller: commentBodyEditingController,
@@ -277,6 +280,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 const SizedBox(height: 10),
                 TextInput(
                   icon: const Icon(Icons.person, color: Color(0xFF556080)),
+                  focusNode: commentBodyFocusNode,
                   hint: "Name",
                   autovalidateMode: AutovalidateMode.disabled,
                   controller: nameEditingController,
@@ -291,6 +295,8 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 ElevatedButton(
                   onPressed: () {
                     bool isValid = formKey.currentState?.validate() ?? false;
+                    userNameFocusNode.unfocus();
+                    commentBodyFocusNode.unfocus();
                     if (isValid) {
                       Comment comment = Comment(
                         id: 0,
@@ -357,6 +363,8 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   void dispose() {
     nameEditingController.dispose();
     commentBodyEditingController.dispose();
+    userNameFocusNode.dispose();
+    commentBodyFocusNode.dispose();
     super.dispose();
   }
 
