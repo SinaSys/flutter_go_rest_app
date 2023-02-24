@@ -1,5 +1,6 @@
 import 'package:mvvm_getx/core/app_string.dart';
-import 'package:dio/dio.dart';
+import 'dart:io' show SocketException;
+import 'package:dio/dio.dart' show DioError, DioErrorType;
 
 class DioExceptions implements Exception {
   late String message;
@@ -9,13 +10,13 @@ class DioExceptions implements Exception {
       case DioErrorType.cancel:
         message = AppString.cancelRequest;
         break;
-      case DioErrorType.connectTimeout:
+      case DioErrorType.connectionTimeout:
         message = AppString.connectionTimeOut;
         break;
       case DioErrorType.receiveTimeout:
         message = AppString.receiveTimeOut;
         break;
-      case DioErrorType.response:
+      case DioErrorType.badResponse:
         message = _handleError(
           dioError.response?.statusCode,
           dioError.response?.data,
@@ -24,8 +25,8 @@ class DioExceptions implements Exception {
       case DioErrorType.sendTimeout:
         message = AppString.sendTimeOut;
         break;
-      case DioErrorType.other:
-        if (dioError.message.contains("Socket")) {
+      case DioErrorType.unknown:
+        if (dioError.error is SocketException) {
           message = AppString.socketException;
           break;
         }
