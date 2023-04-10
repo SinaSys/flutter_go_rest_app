@@ -3,9 +3,9 @@
 ![](https://github.com/SinaSys/flutter_go_rest_app/blob/master/screenshots/go_rest.jpg?raw=true)
 
 
-
-In this project, we are going to build a user management app using flutter. we have used [go rest](https://gorest.co.in/) api to make http request methods. This API provides all sorts of methods that we wanted: GET, POST, PUT and DELETE. We will call all End-points (users/todos/posts/comments) provided to us by go rest api using the Dio package in our app. We have performed different operations like select, add, edit, and remove user and also user posts/todos and comments.
+In this project, we are going to build a user management app using Flutter. We have used the [Go REST](https://gorest.co.in/) API to make HTTP request methods. This API provides all sorts of methods that we need: GET, POST, PUT, and DELETE. We will call all endpoints (users/todos/posts/comments) provided to us by the Go REST API using the Dio package in our app. We have performed different operations like selecting, adding, editing, and removing users, as well as user posts, todos, and comments.
 <br/><br/><br/>
+
 
 
 ## 🖼 Screenshots 
