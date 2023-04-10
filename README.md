@@ -71,11 +71,12 @@ files inside each feature folder, ensuring that they belong to the correct layer
 
 ## ❗️ Api limitation
 
-• In user endpoint there are ten user objects by default. If you delete any of them, it will be replaced with new json object. This means that the length of user list will always equal to ten and you can't create more than ten user objects. This will also be true for when you want to add query parameter to the users.
 
-• Request methods PUT, POST, PATCH, DELETE needs access token, which needs to be passed with "Authorization" header as Bearer token that I have already put my own token inside app, but if you get Unauthorized Error (401) go to this [link](https://gorest.co.in/consumer/login) and get new token and replace it with old token in api_config file inside core directory.
+• The user endpoint contains ten user objects by default. If any of them are deleted, they will be replaced with a new JSON object. This means that the length of the user list will always be ten, and it is not possible to create more than ten user objects. This also applies if you want to add query parameters to the users.
 
-• The data are not permanent and will be changed or deleted every 20 minutes to 1 hour.
+• To use the request methods PUT, POST, PATCH, and DELETE, you need to provide an access token. This token must be passed with the "Authorization" header as a Bearer token. I have already included my own token in the app. However, if you receive an Unauthorized Error (401), please go to this [link](https://gorest.co.in/consumer/login) to obtain a new token and replace the old token in the api_config file located in the core directory.
+
+• Please note that the data is not permanent and will be changed or deleted every 20 minutes to 1 hour.
 <br/><br/><br/>
 
 
