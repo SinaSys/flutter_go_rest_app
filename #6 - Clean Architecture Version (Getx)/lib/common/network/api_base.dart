@@ -3,7 +3,7 @@ import 'package:clean_architecture_getx/core/app_extension.dart';
 import 'package:dio/dio.dart';
 import 'dart:convert';
 
-abstract class ApiBase<T> {
+abstract mixin class ApiBase<T> {
   //Method template for checking whether api is success or not
   Future<bool> _requestMethodTemplate(Future<Response<dynamic>> apiCallback) async {
     final Response response = await apiCallback;
