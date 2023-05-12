@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
         BlocProvider<CommentBloc>(create: (context) => CommentBloc()),
       ],
       child: MaterialApp(
-        useInheritedMediaQuery: true,
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightAppTheme,
         home: const UserListScreen(),
