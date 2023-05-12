@@ -17,8 +17,8 @@ class RetryDialog extends StatelessWidget {
         side: BorderSide(color: Colors.redAccent, width: 2.0),
         borderRadius: BorderRadius.all(Radius.circular(15.0)),
       ),
-      title: Row(
-        children: const [
+      title: const Row(
+        children: [
           Icon(Icons.warning, color: Colors.redAccent),
           SizedBox(width: 15),
           Text("Error")
