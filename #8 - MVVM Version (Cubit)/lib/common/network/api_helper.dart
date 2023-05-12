@@ -3,7 +3,7 @@ import 'package:mvvm_cubit/core/app_extension.dart';
 import 'package:dio/dio.dart';
 import 'dart:convert';
 
-abstract class ApiHelper<T> {
+abstract mixin class ApiHelper<T> {
   late final T data;
 
   Future<bool> _requestMethodTemplate(
