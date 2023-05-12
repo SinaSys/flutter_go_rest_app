@@ -9,9 +9,9 @@ Future<dynamic> deleteDialog(BuildContext context) {
           side: BorderSide(color: Colors.redAccent, width: 2.0),
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
         ),
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Icon(Icons.warning_rounded, color: Colors.redAccent, size: 40),
             SizedBox(width: 10),
             Text("Warning", textAlign: TextAlign.center),

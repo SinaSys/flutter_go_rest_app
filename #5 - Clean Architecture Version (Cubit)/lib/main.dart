@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
         BlocProvider<CommentCubit>(create: (context) => getIt<CommentCubit>()),
       ],
       child: MaterialApp(
-        useInheritedMediaQuery: true,
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightAppTheme,
         home: const UserListScreen(),
