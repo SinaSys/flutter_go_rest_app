@@ -3,7 +3,7 @@ import 'package:clean_architecture_bloc/common/network/dio_exception.dart';
 import 'dart:convert';
 import 'package:dio/dio.dart';
 
-abstract class ApiHelper<T> {
+abstract mixin class ApiHelper<T> {
   late final T data;
 
   Future<bool> _requestMethodTemplate(Future<Response<dynamic>> apiCallback) async {
