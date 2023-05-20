@@ -1,3 +1,6 @@
+import 'package:flutter/foundation.dart' show immutable;
+
+@immutable
 class CommentEntity {
   const CommentEntity({
     required this.id,
