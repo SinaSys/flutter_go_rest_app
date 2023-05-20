@@ -1,8 +1,10 @@
-import 'package:clean_architecture_bloc/common/network/api_result.dart';
+import 'package:flutter/foundation.dart' show immutable;
 import 'package:clean_architecture_bloc/common/usecase/usecase.dart';
+import 'package:clean_architecture_bloc/common/network/api_result.dart';
 import 'package:clean_architecture_bloc/features/comment/data/models/comment.dart';
 import 'package:clean_architecture_bloc/features/comment/domain/repositories/comment_repository.dart';
 
+@immutable
 class CreateCommentUseCase implements UseCase<bool, CreateCommentParams> {
   final CommentRepository commentRepository;
 
@@ -14,8 +16,9 @@ class CreateCommentUseCase implements UseCase<bool, CreateCommentParams> {
   }
 }
 
+@immutable
 class CreateCommentParams {
   final Comment comment;
 
-  CreateCommentParams(this.comment);
+  const CreateCommentParams(this.comment);
 }
