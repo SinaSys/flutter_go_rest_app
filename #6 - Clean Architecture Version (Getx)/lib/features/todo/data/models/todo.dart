@@ -1,6 +1,6 @@
-import 'package:clean_architecture_getx/features/todo/domain/entities/todo_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/foundation.dart' show immutable;
+import 'package:clean_architecture_getx/features/todo/domain/entities/todo_entity.dart';
 
 part 'todo.g.dart';
 
