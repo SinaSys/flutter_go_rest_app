@@ -1,9 +1,11 @@
-import 'package:clean_architecture_getx/features/post/domain/repositories/post_repository.dart';
-import 'package:clean_architecture_getx/features/post/data/models/post.dart';
+import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart' show immutable;
 import 'package:clean_architecture_getx/common/usecase/usecase.dart';
 import 'package:clean_architecture_getx/features/user/data/models/user.dart';
-import 'package:dartz/dartz.dart';
+import 'package:clean_architecture_getx/features/post/data/models/post.dart';
+import 'package:clean_architecture_getx/features/post/domain/repositories/post_repository.dart';
 
+@immutable
 class GetPostsUseCase implements UseCase<List<Post>, GetPostsParams> {
   final PostRepository postRepository;
 
@@ -15,8 +17,9 @@ class GetPostsUseCase implements UseCase<List<Post>, GetPostsParams> {
   }
 }
 
+@immutable
 class GetPostsParams {
   final User user;
 
-  GetPostsParams({required this.user});
+  const GetPostsParams({required this.user});
 }

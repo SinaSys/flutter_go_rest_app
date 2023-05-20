@@ -1,9 +1,10 @@
+import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart' show immutable;
 import 'package:clean_architecture_getx/common/usecase/usecase.dart';
 import 'package:clean_architecture_getx/features/user/data/models/user.dart';
 import 'package:clean_architecture_getx/features/user/domain/repositories/user_repository.dart';
-import 'package:dartz/dartz.dart';
 
-
+@immutable
 class DeleteUserUseCase implements UseCase<bool, DeleteUserParams> {
   final UserRepository userRepository;
 
@@ -15,8 +16,9 @@ class DeleteUserUseCase implements UseCase<bool, DeleteUserParams> {
   }
 }
 
+@immutable
 class DeleteUserParams {
   final User user;
 
-  DeleteUserParams(this.user);
+  const DeleteUserParams(this.user);
 }

@@ -1,8 +1,10 @@
+import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart' show immutable;
 import 'package:clean_architecture_getx/common/usecase/usecase.dart';
 import 'package:clean_architecture_getx/features/post/data/models/post.dart';
 import 'package:clean_architecture_getx/features/post/domain/repositories/post_repository.dart';
-import 'package:dartz/dartz.dart';
 
+@immutable
 class DeletePostUseCase implements UseCase<bool, DeletePostParams> {
   final PostRepository postRepository;
 
@@ -14,8 +16,9 @@ class DeletePostUseCase implements UseCase<bool, DeletePostParams> {
   }
 }
 
+@immutable
 class DeletePostParams {
   final Post post;
 
-  DeletePostParams(this.post);
+  const DeletePostParams(this.post);
 }

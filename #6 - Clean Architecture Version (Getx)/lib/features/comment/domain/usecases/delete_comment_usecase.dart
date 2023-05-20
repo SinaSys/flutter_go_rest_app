@@ -1,8 +1,10 @@
+import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart' show immutable;
 import 'package:clean_architecture_getx/common/usecase/usecase.dart';
 import 'package:clean_architecture_getx/features/comment/data/models/comment.dart';
 import 'package:clean_architecture_getx/features/comment/domain/repositories/comment_repository.dart';
-import 'package:dartz/dartz.dart';
 
+@immutable
 class DeleteCommentUseCase implements UseCase<bool, DeleteCommentParams> {
   final CommentRepository commentRepository;
 
@@ -14,8 +16,9 @@ class DeleteCommentUseCase implements UseCase<bool, DeleteCommentParams> {
   }
 }
 
+@immutable
 class DeleteCommentParams {
   final Comment comment;
 
-  DeleteCommentParams(this.comment);
+  const DeleteCommentParams(this.comment);
 }

@@ -1,13 +1,14 @@
+import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart' show immutable;
 import 'package:clean_architecture_getx/common/usecase/usecase.dart';
 import 'package:clean_architecture_getx/features/todo/data/models/todo.dart';
 import 'package:clean_architecture_getx/features/todo/domain/repositories/todo_repository.dart';
-import 'package:dartz/dartz.dart';
 
-
+@immutable
 class UpdateTodoUseCase implements UseCase<bool, UpdateTodoParams> {
   final TodoRepository todoRepository;
 
-  UpdateTodoUseCase(this.todoRepository);
+  const UpdateTodoUseCase(this.todoRepository);
 
   @override
   Future<Either<String, bool>> call(UpdateTodoParams params) async {
@@ -15,8 +16,9 @@ class UpdateTodoUseCase implements UseCase<bool, UpdateTodoParams> {
   }
 }
 
+@immutable
 class UpdateTodoParams {
   final ToDo todo;
 
-  UpdateTodoParams(this.todo);
+  const UpdateTodoParams(this.todo);
 }

@@ -1,8 +1,10 @@
+import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart' show immutable;
 import 'package:clean_architecture_getx/common/usecase/usecase.dart';
 import 'package:clean_architecture_getx/features/post/data/models/post.dart';
 import 'package:clean_architecture_getx/features/post/domain/repositories/post_repository.dart';
-import 'package:dartz/dartz.dart';
 
+@immutable
 class CreatePostUseCase implements UseCase<bool, CreatePostParams> {
   final PostRepository postRepository;
 
@@ -14,8 +16,9 @@ class CreatePostUseCase implements UseCase<bool, CreatePostParams> {
   }
 }
 
+@immutable
 class CreatePostParams {
   final Post post;
 
-  CreatePostParams(this.post);
+  const CreatePostParams(this.post);
 }
