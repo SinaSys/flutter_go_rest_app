@@ -53,7 +53,7 @@ Error state                    |   Empty state             |  Warning dialog    
 + Display, create and delete user comments for each post 
 + Get date/time from user by Date/Time picker
 + Generic structure
-+ State management with ```GetX``` | ```Bloc``` | ```Cubit```
++ State management with ```GetX``` | ```Bloc``` | ```Cubit``` | ```RxDart```
 
   <br/>
 
@@ -81,30 +81,32 @@ files inside each feature folder, ensuring that they belong to the correct layer
 
 
 ## 🗂 Modules
-|               Version                |                                                           Bloc                                                            |                                                                                                         Cubit                                                                                                          |                                                           Getx                                                            |
-|:------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------:|
-|      Clean architecture version      | [Source](https://github.com/SinaSys/flutter_go_rest_app/tree/master/%234%20-%20Clean%20Architecture%20Version%20(Bloc))️  |                                                [Source](https://github.com/SinaSys/flutter_go_rest_app/tree/master/%235%20-%20Clean%20Architecture%20Version%20(Cubit))                                                |  [Source](https://github.com/SinaSys/flutter_go_rest_app/tree/master/%236%20-%20Clean%20Architecture%20Version%20(Getx))  |
+|               Version                |                                                           Bloc                                                            |                                                                                                         Cubit                                                                                                          |                                                           Getx                                                            |                                                            RxDart + Provider                                                             |
+|:------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------:|
+|      Clean architecture version      | [Source](https://github.com/SinaSys/flutter_go_rest_app/tree/master/%234%20-%20Clean%20Architecture%20Version%20(Bloc))️  |                                                [Source](https://github.com/SinaSys/flutter_go_rest_app/tree/master/%235%20-%20Clean%20Architecture%20Version%20(Cubit))                                                |  [Source](https://github.com/SinaSys/flutter_go_rest_app/tree/master/%236%20-%20Clean%20Architecture%20Version%20(Getx))  | [Source](https://github.com/SinaSys/flutter_go_rest_app/tree/master/%240%20-%20Clean%20Architecture%20Version%20(RxDart%20+%20Provider)) |
 | MVVM  architecture version           |   [Source](https://github.com/SinaSys/flutter_go_rest_app/tree/master/%237%20-%20MVVM%20Version%20(Bloc))|  [Source](https://github.com/SinaSys/flutter_go_rest_app/tree/master/%238%20-%20MVVM%20Version%20(Cubit))️                                                       |                                                        [Source](https://github.com/SinaSys/flutter_go_rest_app/tree/master/%239%20-%20MVVM%20Version%20(GetX))️                                                        | 
 | Simple layered architecture version | [Source](https://github.com/SinaSys/flutter_go_rest_app/tree/master/%233%20-%20Layered%20Architecture%20Version%20(Bloc)) |                                               [Source](https://github.com/SinaSys/flutter_go_rest_app/tree/master/%232%20-%20Layered%20Architecture%20Version%20(Cubit))                                               | [Source](https://github.com/SinaSys/flutter_go_rest_app/tree/master/%231%20-%20Layered%20Architecture%20Version%20(GetX)) | 
 
   <br/>
 
 ## 📚 Dependencies (Clean architecture version (Feature-first))
-|       Name      |  GetX |  Cubit |  Bloc |
-| :-------------: |:-------------------------------------------------------:|:--------------------------------------------------------:|:--------------------------------------------------------:|
-| [flutter_bloc](https://pub.dev/packages/flutter_bloc)  |✖️ | ✔  | ✔  |
-| [get_it](https://pub.dev/packages/get_it)  |✔️ | ✔  | ✔  | 
-| [GetX](https://pub.dev/packages/get)  |✔️ | ✖️ | ✖️ | 
-| [dio](https://pub.dev/packages/dio)  |✔️ | ✔️ | ✔️ | 
-| [freezed](https://pub.dev/packages/freezed)  |✖️ | ✔️ | ✔️ | 
-| [freezed_annotation](https://pub.dev/packages/freezed_annotation)  |✖ | ✔️ | ✔️ | 
-| [json_annotation](https://pub.dev/packages/json_annotation)  |✔️ | ✔️ | ✔️ | 
-| [json_serializable](https://pub.dev/packages/json_serializable)  |✔️ | ✔️ | ✔️ |
-| [build_runner](https://pub.dev/packages/build_runner)  |✔️ | ✔️ | ✔️ | 
-| [logger](https://pub.dev/packages/logger)  |✔️ | ✔️ | ✔️ | 
-| [dartz](https://pub.dev/packages/dartz)  |✔️ | ✖️ | ✖️ | 
-| [flutter_spinkit](https://pub.dev/packages/flutter_spinkit)  |✔️ | ✔️ | ✔️ |
-| [intl](https://pub.dev/packages/intl)  |✔️ | ✔️ | ✔️ |
+|                               Name                                |  GetX |  Cubit |  Bloc |   RxDart + Provider   |
+|:-----------------------------------------------------------------:|:-------------------------------------------------------:|:--------------------------------------------------------:|:--------------------------------------------------------:|:--------------------------------------------------------:|
+|       [flutter_bloc](https://pub.dev/packages/flutter_bloc)       |✖️ | ✔  | ✔  |✖  |
+|          [provider ](https://pub.dev/packages/provider)           |✖️ | ✖  | ✖  |✔  |
+|             [rxdart](https://pub.dev/packages/rxdart)             |✖️ | ✖  | ✖  |✔  |
+|             [get_it](https://pub.dev/packages/get_it)             |✔️ | ✔  | ✔  | ✔  |
+|               [GetX](https://pub.dev/packages/get)                |✔️ | ✖️ | ✖️ | ✖  |
+|                [dio](https://pub.dev/packages/dio)                |✔️ | ✔️ | ✔️ | ✔  |
+|            [freezed](https://pub.dev/packages/freezed)            |✖️ | ✔️ | ✔️ | ✔  |
+| [freezed_annotation](https://pub.dev/packages/freezed_annotation) |✖ | ✔️ | ✔️ | ✔  |
+|    [json_annotation](https://pub.dev/packages/json_annotation)    |✔️ | ✔️ | ✔️ | ✔  |
+|  [json_serializable](https://pub.dev/packages/json_serializable)  |✔️ | ✔️ | ✔️ |✔  |
+|       [build_runner](https://pub.dev/packages/build_runner)       |✔️ | ✔️ | ✔️ | ✔  |
+|             [logger](https://pub.dev/packages/logger)             |✔️ | ✔️ | ✔️ | ✔  |
+|              [dartz](https://pub.dev/packages/dartz)              |✔️ | ✖️ | ✖️ | ✖  |
+|    [flutter_spinkit](https://pub.dev/packages/flutter_spinkit)    |✔️ | ✔️ | ✔️ |✔  |
+|               [intl](https://pub.dev/packages/intl)               |✔️ | ✔️ | ✔️ |✔  |
 
   <br/>
 
@@ -451,6 +453,154 @@ files inside each feature folder, ensuring that they belong to the correct layer
 
 ```
 
+
+<br/><br/>
+## 📂 Directory Structure (Clean architecture version + RxDart + Provider)
+```
+📂lib
+│───main.dart  
+│───di.dart  
+│───📂common  
+│   │───📂bloc
+│   │   └──generic_bloc_state.dart
+│   │───📂usecase
+│   │   └──usecase.dart
+│   │───📂repository
+│   │   └──repository_helper.dart
+│   │───📂network
+│   │   │──api_config.dart
+│   │   │──api_helper.dart
+│   │   │──api_result.dart
+│   │   │──api_result.freezed.dart
+│   │   │──dio_client.dart
+│   │   │──dio_exception.dart
+│   │   └──dio_interceptor.dart
+│   │───📂widget
+│   │   │──date_time_picker.dart
+│   │   │──drop_down.dart
+│   │   │──empty_widget.dart
+│   │   │──popup_menu.dart
+│   │   │──spinkit_indicator.dart
+│   │   └──text_input.dart
+│   └───📂dialog
+│       │──create_dialog.dart
+│       │──delete_dialog.dart
+│       │──progress_dialog.dart
+│       └──retry_dialog.dart
+│───📂core
+│   │──app_asset.dart
+│   │──app_extension.dart
+│   │──app_string.dart
+│   │──app_style.dart
+│   └──app_theme.dart
+│
+└───📂features
+    │───📂user
+    │    │───📂data
+    │    │   │──📂datasources
+    │    │   │  └──user_remote_data_source.dart
+    │    │   │──📂models
+    │    │   │   │──user.dart
+    │    │   │   └──user.g.dart
+    │    │   └──📂repositories
+    │    │       └──user_repository_impl.dart
+    │    │───📂domain
+    │    │   │───📂entities
+    │    │   │   └──user_entity.dart
+    │    │   │───📂repositories
+    │    │   │   └──user_repository.dart
+    │    │   │───📂usecases
+    │    │   │   │──create_user_usecase.dart
+    │    │   │   │──delete_user_usecase.dart
+    │    │   │   │──get_users_usecase.dart
+    │    │   │   └──update_user_usecase.dart
+    │    └── 📂presentation
+    │        │───📂bloc
+    │        │   │──user_bloc.dart
+    │        │   └──user_event.dart
+    │        │───📂screens
+    │        │   └──user_list_screen.dart
+    │        └───📂widgets
+    │            └──status_container.dart
+    │
+    │───📂todo
+    │    │───📂data
+    │    │   │──📂datasources
+    │    │   │  └──todo_remote_data_source.dart
+    │    │   │──📂models
+    │    │   │   │──todo.dart
+    │    │   │   └──todo.g.dart
+    │    │   └──📂repositories
+    │    │       └──todo_repository_impl.dart
+    │    │───📂domain
+    │    │   │───📂entities
+    │    │   │   └──todo_entity.dart
+    │    │   │───📂repositories
+    │    │   │   └──todo_repository.dart
+    │    │   │───📂usecases
+    │    │   │   │──create_todo_usecase.dart
+    │    │   │   │──delete_todo_usecase.dart
+    │    │   │   │──get_todos_usecase.dart
+    │    │   │   └──update_todo_usecase.dart
+    │    └── 📂presentation
+    │        │───📂bloc
+    │        │   │──todo_bloc.dart
+    │        │   └──todo_event.dart
+    │        │───📂screens
+    │        │   └──todo_list_screen.dart
+    │        └───📂widgets
+    │            │──circle_container.dart
+    │            └──todo_list_item.dart
+    │───📂post
+    │    │───📂data
+    │    │   │──📂datasources
+    │    │   │  └──post_remote_data_source.dart
+    │    │   │──📂models
+    │    │   │   │──post.dart
+    │    │   │   └──post.g.dart
+    │    │   └──📂repositories
+    │    │       └──post_repository_impl.dart
+    │    │───📂domain
+    │    │   │───📂entities
+    │    │   │   └──post_entity.dart
+    │    │   │───📂repositories
+    │    │   │   └──post_repository.dart
+    │    │   │───📂usecases
+    │    │   │   │──create_post_usecase.dart
+    │    │   │   │──delete_post_usecase.dart
+    │    │   │   │──get_posts_usecase.dart
+    │    │   │   └──update_post_usecase.dart
+    │    └── 📂presentation
+    │        │───📂bloc
+    │        │   └──post_bloc.dart
+    │        └───📂screens
+    │            │──create_post_screen.dart
+    │            │──post_detail_screen.dart
+    │            └──post_list_screen.dart
+    └───📂comment
+         │───📂data
+         │   │──📂datasources
+         │   │  └──comment_remote_data_source.dart
+         │   │──📂models
+         │   │   │──comment.dart
+         │   │   └──comment.g.dart
+         │   └──📂repositories
+         │       └──comment_repository_impl.dart
+         │───📂domain
+         │   │───📂entities
+         │   │   └──comment_entity.dart
+         │   │───📂repositories
+         │   │   └──comment_repository.dart
+         │   │───📂usecases
+         │   │   │──create_comment_usecase.dart
+         │   │   │──delete_comment_usecase.dart
+         │   │   └──get_comments_usecase.dart
+         └── 📂presentation
+             └───📂bloc
+                 └──comment_bloc.dart
+
+
+```
 
 
 <br/><br/>
