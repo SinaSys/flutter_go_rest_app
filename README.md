@@ -1,8 +1,8 @@
 # 🔥 Go Rest app
 
 <p align="center">
-  <img src="https://img.shields.io/github/stars/SinaSys/flutter_go_rest_app">
-  <img src="https://img.shields.io/github/forks/SinaSys/flutter_go_rest_app">
+  <img src="https://img.shields.io/github/stars/SinaSys/flutter_go_rest_app?logo=apachespark">
+  <img src="https://img.shields.io/github/forks/SinaSys/flutter_go_rest_app?logo=automattic">
     <img src="https://img.shields.io/github/last-commit/SinaSys/flutter_go_rest_app?label=Last%20commit">
 
 </p>
