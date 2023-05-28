@@ -1,20 +1,20 @@
-import 'package:layered_architecture/common/widget/date_time_picker.dart';
-import 'package:layered_architecture/common/widget/drop_down.dart';
-import 'package:layered_architecture/common/widget/empty_widget.dart';
-import 'package:layered_architecture/common/widget/popup_menu.dart';
-import 'package:layered_architecture/common/widget/spinkit_indicator.dart';
+import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:layered_architecture/core/app_style.dart';
+import 'package:layered_architecture/core/app_extension.dart';
+import 'package:layered_architecture/common/widget/drop_down.dart';
+import 'package:layered_architecture/common/widget/text_input.dart';
+import 'package:layered_architecture/common/widget/popup_menu.dart';
+import 'package:layered_architecture/common/widget/empty_widget.dart';
+import 'package:layered_architecture/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture/common/dialog/progress_dialog.dart';
+import 'package:layered_architecture/features/todo/data/model/todo.dart';
+import 'package:layered_architecture/features/user/data/model/user.dart';
+import 'package:layered_architecture/common/widget/date_time_picker.dart';
+import 'package:layered_architecture/common/widget/spinkit_indicator.dart';
 import 'package:layered_architecture/common/controller/base_controller.dart';
 import 'package:layered_architecture/features/todo/controller/todo_controller.dart';
-import 'package:layered_architecture/features/todo/data/model/todo.dart';
 import 'package:layered_architecture/features/todo/view/widget/todo_list_item.dart';
-import 'package:layered_architecture/features/user/data/model/user.dart';
-import 'package:layered_architecture/common/dialog/progress_dialog.dart';
-import 'package:layered_architecture/common/dialog/retry_dialog.dart';
-import 'package:layered_architecture/common/widget/text_input.dart';
-import 'package:layered_architecture/core/app_extension.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 enum Mode { create, update }
 
@@ -110,23 +110,20 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
       builder: (_) {
         return Obx(
           () {
-            switch (controller.apiStatus.value) {
-              case ApiState.loading:
-                return ProgressDialog(
+            return switch (controller.apiStatus.value) {
+              ApiState.loading => ProgressDialog(
                   title: "${mode.name}ing task...",
                   isProgressed: true,
-                );
-              case ApiState.success:
-                return ProgressDialog(
+                ),
+              ApiState.success => ProgressDialog(
                   title: "Successfully ${mode.name}ed",
                   onPressed: () {
                     controller.getTodos(widget.user.id!);
                     Navigator.pop(context);
                   },
                   isProgressed: false,
-                );
-              case ApiState.failure:
-                return RetryDialog(
+                ),
+              ApiState.failure => RetryDialog(
                   title: controller.errorMessage.value,
                   onRetryPressed: () {
                     if (mode == Mode.create) {
@@ -135,8 +132,8 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                       controller.updateTodo(todo);
                     }
                   },
-                );
-            }
+                ),
+            };
           },
         );
       },
@@ -231,27 +228,24 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
           builder: (_) {
             return Obx(
               () {
-                switch (controller.apiStatus.value) {
-                  case ApiState.loading:
-                    return const ProgressDialog(
+                return switch (controller.apiStatus.value) {
+                  ApiState.loading => const ProgressDialog(
                       title: "Deleting task...",
                       isProgressed: true,
-                    );
-                  case ApiState.success:
-                    return ProgressDialog(
+                    ),
+                  ApiState.success => ProgressDialog(
                       title: "Successfully deleted",
                       onPressed: () {
                         controller.getTodos(widget.user.id!);
                         Navigator.pop(context);
                       },
                       isProgressed: false,
-                    );
-                  case ApiState.failure:
-                    return RetryDialog(
+                    ),
+                  ApiState.failure => RetryDialog(
                       title: controller.errorMessage.value,
                       onRetryPressed: () => controller.deleteTodo(todo),
-                    );
-                }
+                    ),
+                };
               },
             );
           },

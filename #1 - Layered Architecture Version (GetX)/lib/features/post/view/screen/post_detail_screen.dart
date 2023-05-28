@@ -1,20 +1,20 @@
-import 'package:layered_architecture/common/widget/empty_widget.dart';
-import 'package:layered_architecture/common/widget/spinkit_indicator.dart';
-import 'package:layered_architecture/core/app_asset.dart';
+import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:layered_architecture/core/app_style.dart';
-import 'package:layered_architecture/features/comment/controller/comment_controller.dart';
+import 'package:layered_architecture/core/app_asset.dart';
+import 'package:layered_architecture/core/app_extension.dart';
+import 'package:layered_architecture/common/widget/text_input.dart';
+import 'package:layered_architecture/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture/common/widget/empty_widget.dart';
+import 'package:layered_architecture/features/post/data/model/post.dart';
+import 'package:layered_architecture/features/user/data/model/user.dart';
+import 'package:layered_architecture/common/dialog/progress_dialog.dart';
+import 'package:layered_architecture/common/widget/spinkit_indicator.dart';
+import 'package:layered_architecture/common/controller/base_controller.dart';
 import 'package:layered_architecture/features/comment/data/model/comment.dart';
 import 'package:layered_architecture/features/post/controller/post_controller.dart';
-import 'package:layered_architecture/common/controller/base_controller.dart';
 import 'package:layered_architecture/features/post/view/screen/create_post_screen.dart';
-import 'package:layered_architecture/features/user/data/model/user.dart';
-import 'package:layered_architecture/features/post/data/model/post.dart';
-import 'package:layered_architecture/common/dialog/progress_dialog.dart';
-import 'package:layered_architecture/common/dialog/retry_dialog.dart';
-import 'package:layered_architecture/common/widget/text_input.dart';
-import 'package:layered_architecture/core/app_extension.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:layered_architecture/features/comment/controller/comment_controller.dart';
 
 class PostDetailScreen extends StatefulWidget {
   const PostDetailScreen({Key? key, required this.post, this.user})
@@ -162,24 +162,21 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
       builder: (_) {
         return Obx(
           () {
-            switch (postController.apiStatus.value) {
-              case ApiState.loading:
-                return const ProgressDialog(
+            return switch (postController.apiStatus.value) {
+              ApiState.loading => const ProgressDialog(
                   title: "Deleting post...",
                   isProgressed: true,
-                );
-              case ApiState.success:
-                return ProgressDialog(
+                ),
+              ApiState.success => ProgressDialog(
                   title: "Successfully deleted",
                   onPressed: () => pop(context, 2),
                   isProgressed: false,
-                );
-              case ApiState.failure:
-                return RetryDialog(
+                ),
+              ApiState.failure => RetryDialog(
                   title: postController.errorMessage.value,
                   onRetryPressed: () => postController.deletePost(post),
-                );
-            }
+                ),
+            };
           },
         );
       },
@@ -225,7 +222,6 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                     snackBar("Successfully deleted");
                   },
                 );
-                break;
               case ApiState.failure:
                 return RetryDialog(
                   title: commentController.errorMessage.value,

@@ -1,13 +1,13 @@
-import 'package:layered_architecture/features/post/controller/post_controller.dart';
-import 'package:layered_architecture/common/controller/base_controller.dart';
-import 'package:layered_architecture/features/user/data/model/user.dart';
-import 'package:layered_architecture/features/post/data/model/post.dart';
-import 'package:layered_architecture/common/dialog/progress_dialog.dart';
-import 'package:layered_architecture/common/dialog/retry_dialog.dart';
-import 'package:layered_architecture/common/widget/text_input.dart';
-import 'package:layered_architecture/core/app_extension.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:layered_architecture/core/app_extension.dart';
+import 'package:layered_architecture/common/widget/text_input.dart';
+import 'package:layered_architecture/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture/common/dialog/progress_dialog.dart';
+import 'package:layered_architecture/features/post/data/model/post.dart';
+import 'package:layered_architecture/features/user/data/model/user.dart';
+import 'package:layered_architecture/common/controller/base_controller.dart';
+import 'package:layered_architecture/features/post/controller/post_controller.dart';
 
 enum PostMode { create, update }
 
@@ -91,10 +91,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     bool isValid = formKey.currentState?.validate() ?? false;
                     if (isValid) {
                       Post post = Post(
-                          id: postId,
-                          body: postBody,
-                          title: postTitle,
-                          userId: widget.user.id!);
+                        id: postId,
+                        body: postBody,
+                        title: postTitle,
+                        userId: widget.user.id!,
+                      );
 
                       if (widget.mode == PostMode.create) {
                         postController.createPost(post);
@@ -107,14 +108,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         builder: (_) {
                           return Obx(
                             () {
-                              switch (postController.apiStatus.value) {
-                                case ApiState.loading:
-                                  return ProgressDialog(
+                              return switch (postController.apiStatus.value) {
+                                ApiState.loading => ProgressDialog(
                                     title: "${widget.mode.name}ing post...",
                                     isProgressed: true,
-                                  );
-                                case ApiState.success:
-                                  return ProgressDialog(
+                                  ),
+                                ApiState.success => ProgressDialog(
                                     title: "Successfully ${widget.mode.name}ed",
                                     onPressed: () {
                                       if (widget.mode == PostMode.update) {
@@ -124,9 +123,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                       }
                                     },
                                     isProgressed: false,
-                                  );
-                                case ApiState.failure:
-                                  return RetryDialog(
+                                  ),
+                                ApiState.failure => RetryDialog(
                                     title: postController.errorMessage.value,
                                     onRetryPressed: () {
                                       if (widget.mode == PostMode.create) {
@@ -135,8 +133,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                         postController.updatePost(post);
                                       }
                                     },
-                                  );
-                              }
+                                  ),
+                              };
                             },
                           );
                         },
