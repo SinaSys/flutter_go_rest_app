@@ -16,12 +16,6 @@ class ProgressDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      // shape: const RoundedRectangleBorder(
-      //   side: BorderSide(color: Color(0xFFF4511E), width: 1.0),
-      //   borderRadius: BorderRadius.all(
-      //     Radius.circular(15.0),
-      //   ),
-      // ),
       title: const Text("Please wait"),
       content: Column(
         mainAxisSize: MainAxisSize.min,

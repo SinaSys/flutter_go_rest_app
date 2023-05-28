@@ -28,14 +28,10 @@ Future<dynamic> createDialog({
     context: context,
     builder: (_) {
       return AlertDialog(
-        // shape: const RoundedRectangleBorder(
-        //   side: BorderSide(color: Color(0xFFF4511E), width: 1.0),
-        //   borderRadius: BorderRadius.all(
-        //     Radius.circular(15.0),
-        //   ),
-        // ),
-        title: Text(type == Type.create ? "Create new user" : "Update user",
-            textAlign: TextAlign.center),
+        title: Text(
+          type == Type.create ? "Create new user" : "Update user",
+          textAlign: TextAlign.center,
+        ),
         content: Form(
           key: formKey,
           child: SingleChildScrollView(
