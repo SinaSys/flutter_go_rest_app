@@ -1,7 +1,7 @@
-import 'package:layered_architecture_bloc/features/user/data/model/user.dart';
-import 'package:layered_architecture_bloc/common/widget/text_input.dart';
-import 'package:layered_architecture_bloc/common/widget/drop_down.dart';
 import 'package:flutter/material.dart';
+import 'package:layered_architecture_bloc/common/widget/drop_down.dart';
+import 'package:layered_architecture_bloc/common/widget/text_input.dart';
+import 'package:layered_architecture_bloc/features/user/data/model/user.dart';
 
 enum Type { create, update }
 
@@ -28,8 +28,10 @@ Future<dynamic> createDialog({
     context: context,
     builder: (_) {
       return AlertDialog(
-        title: Text(type == Type.create ? "Create new user" : "Update user",
-            textAlign: TextAlign.center),
+        title: Text(
+          type == Type.create ? "Create new user" : "Update user",
+          textAlign: TextAlign.center,
+        ),
         content: Form(
           key: formKey,
           child: SingleChildScrollView(
@@ -84,11 +86,12 @@ Future<dynamic> createDialog({
                       if (isValid) {
                         userData(
                           User(
-                              id: id,
-                              email: email,
-                              status: userStatus,
-                              name: userName,
-                              gender: gender),
+                            id: id,
+                            email: email,
+                            status: userStatus,
+                            name: userName,
+                            gender: gender,
+                          ),
                         );
                         Navigator.pop(context, true);
                       }
