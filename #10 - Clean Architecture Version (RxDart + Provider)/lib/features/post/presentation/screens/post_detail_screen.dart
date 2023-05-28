@@ -107,7 +107,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
       stream: context.read<CommentBloc>().comments,
       builder: (_, snapshot) {
         if (snapshot.hasData) {
-          final state = snapshot.data!;
+          final state = snapshot.requireData;
           switch (state.status) {
             case Status.empty:
               return const EmptyWidget(message: "No comment");
@@ -188,7 +188,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
           stream: context.read<PostBloc>().isPostDeleted,
           builder: (_, snapshot) {
             if (snapshot.hasData) {
-              final state = snapshot.data!;
+              final state = snapshot.requireData;
               switch (state.status) {
                 case Status.empty:
                   return const SizedBox();
@@ -257,7 +257,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
           stream: context.read<CommentBloc>().isCommentDeleted,
           builder: (_, snapshot) {
             if (snapshot.hasData) {
-              final state = snapshot.data!;
+              final state = snapshot.requireData;
               switch (state.status) {
                 case Status.empty:
                   return const SizedBox();
@@ -373,7 +373,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                                 context.read<CommentBloc>().isCommentCreated,
                             builder: (_, snapshot) {
                               if (snapshot.hasData) {
-                                final state = snapshot.data!;
+                                final state = snapshot.requireData;
                                 switch (state.status) {
                                   case Status.empty:
                                     return const EmptyWidget(

@@ -113,7 +113,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                 : context.read<PostBloc>().isPostUpdated,
                             builder: (_, snapshot) {
                               if (snapshot.hasData) {
-                                final state = snapshot.data!;
+                                final state = snapshot.requireData;
                                 switch (state.status) {
                                   case Status.empty:
                                     return const SizedBox();

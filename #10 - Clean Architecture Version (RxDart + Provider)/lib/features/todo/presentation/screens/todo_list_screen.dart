@@ -58,7 +58,7 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return Text(
-                        "${snapshot.data}",
+                        "${snapshot.requireData}",
                         style: const TextStyle(
                           color: Colors.black54,
                           fontWeight: FontWeight.bold,
@@ -127,7 +127,7 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
               : context.read<TodoBloc>().isTodoUpdated,
           builder: (_, snapshot) {
             if (snapshot.hasData) {
-              final todoState = snapshot.data!;
+              final todoState = snapshot.requireData;
               switch (todoState.status) {
                 case Status.empty:
                   return const SizedBox();
@@ -272,7 +272,7 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
               stream: context.read<TodoBloc>().isTodoDeleted,
               builder: (_, snapshot) {
                 if (snapshot.hasData) {
-                  final todoState = snapshot.data!;
+                  final todoState = snapshot.requireData;
                   switch (todoState.status) {
                     case Status.empty:
                       return const SizedBox();
@@ -346,7 +346,7 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                 stream: context.read<TodoBloc>().todoList,
                 builder: (_, snapshot) {
                   if (snapshot.hasData) {
-                    var todo = snapshot.data!;
+                    var todo = snapshot.requireData;
                     switch (todo.status) {
                       case Status.empty:
                         return const EmptyWidget(message: "No Todos");

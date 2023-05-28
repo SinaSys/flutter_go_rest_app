@@ -81,7 +81,7 @@ class _UserListScreenState extends State<UserListScreen> {
                 stream: context.read<UserBloc>().isUserCreated,
                 builder: (_, snapshot) {
                   if (snapshot.hasData) {
-                    final userState = snapshot.data!;
+                    final userState = snapshot.requireData;
                     switch (userState.status) {
                       case Status.empty:
                         return const SizedBox();
@@ -181,7 +181,7 @@ class _UserListScreenState extends State<UserListScreen> {
             stream: context.read<UserBloc>().isUserDeleted,
             builder: (_, snapshot) {
               if (snapshot.hasData) {
-                final userState = snapshot.data!;
+                final userState = snapshot.requireData;
                 switch (userState.status) {
                   case Status.empty:
                     return const SizedBox();
@@ -241,7 +241,7 @@ class _UserListScreenState extends State<UserListScreen> {
             stream: context.read<UserBloc>().isUserUpdated,
             builder: (_, snapshot) {
               if (snapshot.hasData) {
-                final userState = snapshot.data!;
+                final userState = snapshot.requireData;
                 switch (userState.status) {
                   case Status.empty:
                     return const SizedBox();
@@ -311,7 +311,7 @@ class _UserListScreenState extends State<UserListScreen> {
         stream: context.read<UserBloc>().userList,
         builder: (_, snapshot) {
           if (snapshot.hasData) {
-            final userState = snapshot.data!;
+            final userState = snapshot.requireData;
             switch (userState.status) {
               case Status.empty:
                 return const EmptyWidget(message: "No user!");

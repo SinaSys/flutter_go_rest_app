@@ -85,7 +85,7 @@ class _PostListScreenState extends State<PostListScreen> {
                   builder: (_, snapshot) {
                     if (snapshot.hasData) {
                       return Text(
-                        "${snapshot.data}",
+                        "${snapshot.requireData}",
                         style: const TextStyle(
                           color: Colors.black54,
                           fontWeight: FontWeight.w500,
@@ -182,7 +182,7 @@ class _PostListScreenState extends State<PostListScreen> {
             stream: context.read<PostBloc>().postList,
             builder: (_, snapshot) {
               if (snapshot.hasData) {
-                final state = snapshot.data!;
+                final state = snapshot.requireData;
                 switch (state.status) {
                   case Status.empty:
                     return const EmptyWidget(message: "No post");
