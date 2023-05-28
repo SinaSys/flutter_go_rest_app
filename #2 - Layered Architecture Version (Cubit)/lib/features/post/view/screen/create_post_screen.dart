@@ -1,13 +1,13 @@
-import 'package:layered_architecture_cubit/common/cubit/generic_cubit_state.dart';
-import 'package:layered_architecture_cubit/common/dialog/progress_dialog.dart';
-import 'package:layered_architecture_cubit/common/dialog/retry_dialog.dart';
-import 'package:layered_architecture_cubit/common/widget/text_input.dart';
-import 'package:layered_architecture_cubit/core/app_extension.dart';
-import 'package:layered_architecture_cubit/features/post/cubit/post_cubit.dart';
-import 'package:layered_architecture_cubit/features/post/data/model/post.dart';
-import 'package:layered_architecture_cubit/features/user/data/model/user.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:layered_architecture_cubit/core/app_extension.dart';
+import 'package:layered_architecture_cubit/common/widget/text_input.dart';
+import 'package:layered_architecture_cubit/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture_cubit/common/dialog/progress_dialog.dart';
+import 'package:layered_architecture_cubit/features/user/data/model/user.dart';
+import 'package:layered_architecture_cubit/features/post/data/model/post.dart';
+import 'package:layered_architecture_cubit/features/post/cubit/post_cubit.dart';
+import 'package:layered_architecture_cubit/common/cubit/generic_cubit_state.dart';
 
 enum PostMode { create, update }
 
@@ -105,18 +105,17 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         builder: (_) {
                           return BlocBuilder<PostCubit,
                               GenericCubitState<List<Post>>>(
-                            builder: (BuildContext context,
-                                GenericCubitState<List<Post>> state) {
-                              switch (state.status) {
-                                case Status.empty:
-                                  return const SizedBox();
-                                case Status.loading:
-                                  return ProgressDialog(
+                            builder: (
+                              BuildContext context,
+                              GenericCubitState<List<Post>> state,
+                            ) {
+                              return switch (state.status) {
+                                Status.empty => const SizedBox(),
+                                Status.loading => ProgressDialog(
                                     title: "${widget.mode.name}ing post...",
                                     isProgressed: true,
-                                  );
-                                case Status.failure:
-                                  return RetryDialog(
+                                  ),
+                                Status.failure => RetryDialog(
                                     title: state.error ?? "Error",
                                     onRetryPressed: () {
                                       if (widget.mode == PostMode.create) {
@@ -129,9 +128,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                             .updatePost(post);
                                       }
                                     },
-                                  );
-                                case Status.success:
-                                  return ProgressDialog(
+                                  ),
+                                Status.success => ProgressDialog(
                                     title: "Successfully ${widget.mode.name}ed",
                                     onPressed: () {
                                       if (widget.mode == PostMode.update) {
@@ -141,8 +139,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                       }
                                     },
                                     isProgressed: false,
-                                  );
-                              }
+                                  ),
+                              };
                             },
                           );
                         },

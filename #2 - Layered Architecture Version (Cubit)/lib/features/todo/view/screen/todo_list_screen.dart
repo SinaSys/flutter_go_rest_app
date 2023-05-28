@@ -1,21 +1,21 @@
-import 'package:layered_architecture_cubit/common/cubit/generic_cubit.dart';
-import 'package:layered_architecture_cubit/common/cubit/generic_cubit_state.dart';
-import 'package:layered_architecture_cubit/common/dialog/progress_dialog.dart';
-import 'package:layered_architecture_cubit/common/dialog/retry_dialog.dart';
-import 'package:layered_architecture_cubit/common/widget/date_time_picker.dart';
-import 'package:layered_architecture_cubit/common/widget/drop_down.dart';
-import 'package:layered_architecture_cubit/common/widget/empty_widget.dart';
-import 'package:layered_architecture_cubit/common/widget/popup_menu.dart';
-import 'package:layered_architecture_cubit/common/widget/spinkit_indicator.dart';
-import 'package:layered_architecture_cubit/common/widget/text_input.dart';
-import 'package:layered_architecture_cubit/core/app_extension.dart';
-import 'package:layered_architecture_cubit/core/app_style.dart';
-import 'package:layered_architecture_cubit/features/todo/cubit/todo_cubit.dart';
-import 'package:layered_architecture_cubit/features/todo/data/model/todo.dart';
-import 'package:layered_architecture_cubit/features/todo/view/widget/todo_list_item.dart';
-import 'package:layered_architecture_cubit/features/user/data/model/user.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:layered_architecture_cubit/core/app_style.dart';
+import 'package:layered_architecture_cubit/core/app_extension.dart';
+import 'package:layered_architecture_cubit/common/widget/drop_down.dart';
+import 'package:layered_architecture_cubit/common/widget/popup_menu.dart';
+import 'package:layered_architecture_cubit/common/widget/text_input.dart';
+import 'package:layered_architecture_cubit/common/cubit/generic_cubit.dart';
+import 'package:layered_architecture_cubit/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture_cubit/common/widget/empty_widget.dart';
+import 'package:layered_architecture_cubit/features/user/data/model/user.dart';
+import 'package:layered_architecture_cubit/features/todo/data/model/todo.dart';
+import 'package:layered_architecture_cubit/common/dialog/progress_dialog.dart';
+import 'package:layered_architecture_cubit/features/todo/cubit/todo_cubit.dart';
+import 'package:layered_architecture_cubit/common/widget/date_time_picker.dart';
+import 'package:layered_architecture_cubit/common/widget/spinkit_indicator.dart';
+import 'package:layered_architecture_cubit/common/cubit/generic_cubit_state.dart';
+import 'package:layered_architecture_cubit/features/todo/view/widget/todo_list_item.dart';
 
 enum Mode { create, update }
 
@@ -111,16 +111,13 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
       builder: (_) {
         return BlocBuilder<TodoCubit, GenericCubitState<List<ToDo>>>(
           builder: (BuildContext context, GenericCubitState<List<ToDo>> state) {
-            switch (state.status) {
-              case Status.empty:
-                return const SizedBox();
-              case Status.loading:
-                return ProgressDialog(
+            return switch (state.status) {
+              Status.empty => const SizedBox(),
+              Status.loading => ProgressDialog(
                   title: "${mode.name}ing task...",
                   isProgressed: true,
-                );
-              case Status.failure:
-                return RetryDialog(
+                ),
+              Status.failure => RetryDialog(
                   title: state.error ?? "Error",
                   onRetryPressed: () {
                     if (mode == Mode.create) {
@@ -129,17 +126,16 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                       context.read<TodoCubit>().updateTodo(todo);
                     }
                   },
-                );
-              case Status.success:
-                return ProgressDialog(
+                ),
+              Status.success => ProgressDialog(
                   title: "Successfully ${mode.name}ed",
                   onPressed: () {
                     context.read<TodoCubit>().getTodos(widget.user.id!);
                     Navigator.pop(context);
                   },
                   isProgressed: false,
-                );
-            }
+                ),
+            };
           },
         );
       },
@@ -241,30 +237,26 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
             return BlocBuilder<TodoCubit, GenericCubitState<List<ToDo>>>(
               builder:
                   (BuildContext context, GenericCubitState<List<ToDo>> state) {
-                switch (state.status) {
-                  case Status.empty:
-                    return const SizedBox();
-                  case Status.loading:
-                    return const ProgressDialog(
+                return switch (state.status) {
+                  Status.empty => const SizedBox(),
+                  Status.loading => const ProgressDialog(
                       title: "Deleting task...",
                       isProgressed: true,
-                    );
-                  case Status.failure:
-                    return RetryDialog(
+                    ),
+                  Status.failure => RetryDialog(
                       title: state.error ?? "Error",
                       onRetryPressed: () =>
                           context.read<TodoCubit>().deleteTodo(todo),
-                    );
-                  case Status.success:
-                    return ProgressDialog(
+                    ),
+                  Status.success => ProgressDialog(
                       title: "Successfully deleted",
                       onPressed: () {
                         context.read<TodoCubit>().getTodos(widget.user.id!);
                         Navigator.pop(context);
                       },
                       isProgressed: false,
-                    );
-                }
+                    ),
+                };
               },
             );
           },
@@ -309,20 +301,16 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
               },
               builder:
                   (BuildContext context, GenericCubitState<List<ToDo>> state) {
-                switch (state.status) {
-                  case Status.empty:
-                    return const EmptyWidget(message: "No Todos");
-                  case Status.loading:
-                    return const SpinKitIndicator();
-                  case Status.failure:
-                    return RetryDialog(
+                return switch (state.status) {
+                  Status.empty => const EmptyWidget(message: "No Todos"),
+                  Status.loading => const SpinKitIndicator(),
+                  Status.failure => RetryDialog(
                       title: state.error ?? "Error",
                       onRetryPressed: () =>
                           context.read<TodoCubit>().getTodos(widget.user.id!),
-                    );
-                  case Status.success:
-                    return taskList(state.data ?? []);
-                }
+                    ),
+                  Status.success => taskList(state.data ?? []),
+                };
               },
             )
           ],

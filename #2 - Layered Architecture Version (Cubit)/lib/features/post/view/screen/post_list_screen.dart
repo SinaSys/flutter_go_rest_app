@@ -1,16 +1,16 @@
-import 'package:layered_architecture_cubit/common/cubit/generic_cubit_state.dart';
-import 'package:layered_architecture_cubit/common/dialog/retry_dialog.dart';
-import 'package:layered_architecture_cubit/common/widget/empty_widget.dart';
-import 'package:layered_architecture_cubit/common/widget/spinkit_indicator.dart';
-import 'package:layered_architecture_cubit/core/app_extension.dart';
-import 'package:layered_architecture_cubit/core/app_style.dart';
-import 'package:layered_architecture_cubit/features/post/cubit/post_cubit.dart';
-import 'package:layered_architecture_cubit/features/post/data/model/post.dart';
-import 'package:layered_architecture_cubit/features/post/view/screen/create_post_screen.dart';
-import 'package:layered_architecture_cubit/features/post/view/screen/post_detail_screen.dart';
-import 'package:layered_architecture_cubit/features/user/data/model/user.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:layered_architecture_cubit/core/app_style.dart';
+import 'package:layered_architecture_cubit/core/app_extension.dart';
+import 'package:layered_architecture_cubit/common/widget/empty_widget.dart';
+import 'package:layered_architecture_cubit/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture_cubit/features/user/data/model/user.dart';
+import 'package:layered_architecture_cubit/features/post/data/model/post.dart';
+import 'package:layered_architecture_cubit/features/post/cubit/post_cubit.dart';
+import 'package:layered_architecture_cubit/common/widget/spinkit_indicator.dart';
+import 'package:layered_architecture_cubit/common/cubit/generic_cubit_state.dart';
+import 'package:layered_architecture_cubit/features/post/view/screen/post_detail_screen.dart';
+import 'package:layered_architecture_cubit/features/post/view/screen/create_post_screen.dart';
 
 class PostListScreen extends StatefulWidget {
   const PostListScreen({Key? key, required this.user}) : super(key: key);
@@ -175,19 +175,15 @@ class _PostListScreenState extends State<PostListScreen> {
           BlocBuilder<PostCubit, GenericCubitState<List<Post>>>(
             builder:
                 (BuildContext context, GenericCubitState<List<Post>> state) {
-              switch (state.status) {
-                case Status.empty:
-                  return const EmptyWidget(message: "No post");
-                case Status.loading:
-                  return const Center(child: SpinKitIndicator());
-                case Status.failure:
-                  return RetryDialog(
+              return switch (state.status) {
+                Status.empty => const EmptyWidget(message: "No post"),
+                Status.loading => const Center(child: SpinKitIndicator()),
+                Status.failure => RetryDialog(
                     title: state.error ?? "Error",
                     onRetryPressed: () => getData(),
-                  );
-                case Status.success:
-                  return userPostItem(state.data ?? []);
-              }
+                  ),
+                Status.success => userPostItem(state.data ?? []),
+              };
             },
           ),
         ],

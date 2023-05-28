@@ -1,21 +1,21 @@
-import 'package:layered_architecture_cubit/common/cubit/generic_cubit.dart';
-import 'package:layered_architecture_cubit/common/cubit/generic_cubit_state.dart';
-import 'package:layered_architecture_cubit/common/dialog/progress_dialog.dart';
-import 'package:layered_architecture_cubit/common/dialog/retry_dialog.dart';
-import 'package:layered_architecture_cubit/common/widget/empty_widget.dart';
-import 'package:layered_architecture_cubit/common/widget/spinkit_indicator.dart';
-import 'package:layered_architecture_cubit/common/widget/text_input.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:layered_architecture_cubit/core/app_style.dart';
 import 'package:layered_architecture_cubit/core/app_asset.dart';
 import 'package:layered_architecture_cubit/core/app_extension.dart';
-import 'package:layered_architecture_cubit/core/app_style.dart';
-import 'package:layered_architecture_cubit/features/comment/cubit/comment_cubit.dart';
-import 'package:layered_architecture_cubit/features/comment/data/model/comment.dart';
-import 'package:layered_architecture_cubit/features/post/cubit/post_cubit.dart';
+import 'package:layered_architecture_cubit/common/widget/text_input.dart';
+import 'package:layered_architecture_cubit/common/widget/empty_widget.dart';
+import 'package:layered_architecture_cubit/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture_cubit/common/cubit/generic_cubit.dart';
 import 'package:layered_architecture_cubit/features/post/data/model/post.dart';
-import 'package:layered_architecture_cubit/features/post/view/screen/create_post_screen.dart';
+import 'package:layered_architecture_cubit/common/dialog/progress_dialog.dart';
 import 'package:layered_architecture_cubit/features/user/data/model/user.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/material.dart';
+import 'package:layered_architecture_cubit/features/post/cubit/post_cubit.dart';
+import 'package:layered_architecture_cubit/common/widget/spinkit_indicator.dart';
+import 'package:layered_architecture_cubit/common/cubit/generic_cubit_state.dart';
+import 'package:layered_architecture_cubit/features/comment/data/model/comment.dart';
+import 'package:layered_architecture_cubit/features/comment/cubit/comment_cubit.dart';
+import 'package:layered_architecture_cubit/features/post/view/screen/create_post_screen.dart';
 
 class PostDetailScreen extends StatefulWidget {
   const PostDetailScreen({Key? key, required this.post, this.user})
@@ -111,17 +111,14 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
             : false;
       },
       builder: (BuildContext context, GenericCubitState<List<Comment>> state) {
-        switch (state.status) {
-          case Status.empty:
-            return const EmptyWidget(message: "No comment");
-          case Status.loading:
-            return const SpinKitIndicator();
-          case Status.failure:
-            return RetryDialog(
-                title: state.error ?? "Error",
-                onRetryPressed: () => getUserComments());
-          case Status.success:
-            return ListView.builder(
+        return switch (state.status) {
+          Status.empty => const EmptyWidget(message: "No comment"),
+          Status.loading => const SpinKitIndicator(),
+          Status.failure => RetryDialog(
+              title: state.error ?? "Error",
+              onRetryPressed: () => getUserComments(),
+            ),
+          Status.success => ListView.builder(
               shrinkWrap: true,
               itemCount: state.data?.length ?? 0,
               itemBuilder: (_, index) {
@@ -167,8 +164,8 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                   ],
                 );
               },
-            );
-        }
+            ),
+        };
       },
     );
   }
@@ -180,26 +177,23 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
       builder: (_) {
         return BlocBuilder<PostCubit, GenericCubitState<List<Post>>>(
           builder: (BuildContext context, GenericCubitState<List<Post>> state) {
-            switch (state.status) {
-              case Status.empty:
-                return const SizedBox();
-              case Status.loading:
-                return const ProgressDialog(
+            return switch (state.status) {
+              Status.empty => const SizedBox(),
+              Status.loading => const ProgressDialog(
                   title: "Deleting post...",
                   isProgressed: true,
-                );
-              case Status.failure:
-                return RetryDialog(
-                    title: state.error ?? "Error",
-                    onRetryPressed: () =>
-                        context.read<PostCubit>().deletePost(post));
-              case Status.success:
-                return ProgressDialog(
+                ),
+              Status.failure => RetryDialog(
+                  title: state.error ?? "Error",
+                  onRetryPressed: () =>
+                      context.read<PostCubit>().deletePost(post),
+                ),
+              Status.success => ProgressDialog(
                   title: "Successfully deleted",
                   onPressed: () => pop(context, 2),
                   isProgressed: false,
-                );
-            }
+                ),
+            };
           },
         );
       },
@@ -329,12 +323,15 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                         builder: (_) {
                           return BlocBuilder<CommentCubit,
                               GenericCubitState<List<Comment>>>(
-                            builder: (BuildContext context,
-                                GenericCubitState<List<Comment>> state) {
+                            builder: (
+                              BuildContext context,
+                              GenericCubitState<List<Comment>> state,
+                            ) {
                               switch (state.status) {
                                 case Status.empty:
                                   return const EmptyWidget(
-                                      message: "No comment");
+                                    message: "No comment",
+                                  );
                                 case Status.loading:
                                   return const ProgressDialog(
                                     title: "",

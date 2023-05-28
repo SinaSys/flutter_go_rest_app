@@ -1,21 +1,21 @@
-import 'package:layered_architecture_cubit/common/cubit/generic_cubit.dart';
-import 'package:layered_architecture_cubit/common/cubit/generic_cubit_state.dart';
-import 'package:layered_architecture_cubit/common/dialog/create_dialog.dart';
-import 'package:layered_architecture_cubit/common/dialog/delete_dialog.dart';
-import 'package:layered_architecture_cubit/common/dialog/progress_dialog.dart';
-import 'package:layered_architecture_cubit/common/dialog/retry_dialog.dart';
-import 'package:layered_architecture_cubit/common/widget/empty_widget.dart';
-import 'package:layered_architecture_cubit/common/widget/popup_menu.dart';
-import 'package:layered_architecture_cubit/common/widget/spinkit_indicator.dart';
-import 'package:layered_architecture_cubit/core/app_extension.dart';
-import 'package:layered_architecture_cubit/core/app_style.dart';
-import 'package:layered_architecture_cubit/features/post/view/screen/post_list_screen.dart';
-import 'package:layered_architecture_cubit/features/todo/view/screen/todo_list_screen.dart';
-import 'package:layered_architecture_cubit/features/user/cubit/user_cubit.dart';
-import 'package:layered_architecture_cubit/features/user/data/model/user.dart';
-import 'package:layered_architecture_cubit/features/user/view/widget/status_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:layered_architecture_cubit/core/app_style.dart';
+import 'package:layered_architecture_cubit/core/app_extension.dart';
+import 'package:layered_architecture_cubit/common/widget/popup_menu.dart';
+import 'package:layered_architecture_cubit/common/widget/empty_widget.dart';
+import 'package:layered_architecture_cubit/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture_cubit/common/cubit/generic_cubit.dart';
+import 'package:layered_architecture_cubit/common/dialog/delete_dialog.dart';
+import 'package:layered_architecture_cubit/common/dialog/create_dialog.dart';
+import 'package:layered_architecture_cubit/common/dialog/progress_dialog.dart';
+import 'package:layered_architecture_cubit/features/user/data/model/user.dart';
+import 'package:layered_architecture_cubit/features/user/cubit/user_cubit.dart';
+import 'package:layered_architecture_cubit/common/widget/spinkit_indicator.dart';
+import 'package:layered_architecture_cubit/common/cubit/generic_cubit_state.dart';
+import 'package:layered_architecture_cubit/features/post/view/screen/post_list_screen.dart';
+import 'package:layered_architecture_cubit/features/todo/view/screen/todo_list_screen.dart';
+import 'package:layered_architecture_cubit/features/user/view/widget/status_container.dart';
 
 enum Operation { edit, delete, post, todo }
 
@@ -71,30 +71,26 @@ class _UserListScreenState extends State<UserListScreen> {
               return BlocBuilder<UserCubit, GenericCubitState<List<User>>>(
                 builder: (BuildContext context,
                     GenericCubitState<List<User>> state) {
-                  switch (state.status) {
-                    case Status.empty:
-                      return const SizedBox();
-                    case Status.loading:
-                      return const ProgressDialog(
+                  return switch (state.status) {
+                    Status.empty => const SizedBox(),
+                    Status.loading => const ProgressDialog(
                         title: "Creating user...",
                         isProgressed: true,
-                      );
-                    case Status.failure:
-                      return RetryDialog(
+                      ),
+                    Status.failure => RetryDialog(
                         title: state.error ?? "Error",
                         onRetryPressed: () =>
                             context.read<UserCubit>().createUser(user),
-                      );
-                    case Status.success:
-                      return ProgressDialog(
+                      ),
+                    Status.success => ProgressDialog(
                         title: "Successfully created",
                         onPressed: () {
                           context.read<UserCubit>().getUserList();
                           Navigator.pop(context);
                         },
                         isProgressed: false,
-                      );
-                  }
+                      ),
+                  };
                 },
               );
             },
@@ -160,30 +156,26 @@ class _UserListScreenState extends State<UserListScreen> {
           return BlocBuilder<UserCubit, GenericCubitState<List<User>>>(
             builder:
                 (BuildContext context, GenericCubitState<List<User>> state) {
-              switch (state.status) {
-                case Status.empty:
-                  return const SizedBox();
-                case Status.loading:
-                  return const ProgressDialog(
+              return switch (state.status) {
+                Status.empty => const SizedBox(),
+                Status.loading => const ProgressDialog(
                     title: "Deleting user...",
                     isProgressed: true,
-                  );
-                case Status.failure:
-                  return RetryDialog(
+                  ),
+                Status.failure => RetryDialog(
                     title: state.error ?? "Error",
                     onRetryPressed: () =>
                         context.read<UserCubit>().deleteUser(user),
-                  );
-                case Status.success:
-                  return ProgressDialog(
+                  ),
+                Status.success => ProgressDialog(
                     title: "Successfully deleted",
                     onPressed: () {
                       context.read<UserCubit>().getUserList();
                       Navigator.pop(context);
                     },
                     isProgressed: false,
-                  );
-              }
+                  ),
+              };
             },
           );
         },
@@ -211,30 +203,26 @@ class _UserListScreenState extends State<UserListScreen> {
           return BlocBuilder<UserCubit, GenericCubitState<List<User>>>(
             builder:
                 (BuildContext context, GenericCubitState<List<User>> state) {
-              switch (state.status) {
-                case Status.empty:
-                  return const SizedBox();
-                case Status.loading:
-                  return const ProgressDialog(
+              return switch (state.status) {
+                Status.empty => const SizedBox(),
+                Status.loading => const ProgressDialog(
                     title: "Updating user...",
                     isProgressed: true,
-                  );
-                case Status.failure:
-                  return RetryDialog(
+                  ),
+                Status.failure => RetryDialog(
                     title: state.error ?? "Error",
                     onRetryPressed: () =>
                         context.read<UserCubit>().updateUser(userObj),
-                  );
-                case Status.success:
-                  return ProgressDialog(
+                  ),
+                Status.success => ProgressDialog(
                     title: "Successfully updated",
                     onPressed: () {
                       context.read<UserCubit>().getUserList();
                       Navigator.pop(context);
                     },
                     isProgressed: false,
-                  );
-              }
+                  ),
+              };
             },
           );
         },
@@ -270,26 +258,22 @@ class _UserListScreenState extends State<UserListScreen> {
               : false;
         },
         builder: (BuildContext context, GenericCubitState<List<User>> state) {
-          switch (state.status) {
-            case Status.empty:
-              return const EmptyWidget(message: "No user!");
-            case Status.loading:
-              return const SpinKitIndicator(type: SpinKitType.circle);
-            case Status.failure:
-              return RetryDialog(
+          return switch (state.status) {
+            Status.empty => const EmptyWidget(message: "No user!"),
+            Status.loading => const SpinKitIndicator(type: SpinKitType.circle),
+            Status.failure => RetryDialog(
                 title: state.error ?? "Error",
                 onRetryPressed: () => context.read<UserCubit>().getUserList(),
-              );
-            case Status.success:
-              return ListView.builder(
+              ),
+            Status.success => ListView.builder(
                 shrinkWrap: true,
                 itemCount: state.data?.length ?? 0,
                 itemBuilder: (_, index) {
                   User user = state.data![index];
                   return userListItem(user);
                 },
-              );
-          }
+              ),
+          };
         },
       ),
     );
