@@ -1,23 +1,23 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:layered_architecture_bloc/core/app_asset.dart';
+import 'package:layered_architecture_bloc/core/app_style.dart';
+import 'package:layered_architecture_bloc/core/app_extension.dart';
 import 'package:layered_architecture_bloc/common/bloc/bloc_helper.dart';
-import 'package:layered_architecture_bloc/features/post/view/screen/create_post_screen.dart';
-import 'package:layered_architecture_bloc/features/comment/data/model/comment.dart';
-import 'package:layered_architecture_bloc/common/bloc/generic_bloc_state.dart';
-import 'package:layered_architecture_bloc/features/comment/bloc/comment_bloc.dart';
-import 'package:layered_architecture_bloc/features/comment/bloc/comment_event.dart';
-import 'package:layered_architecture_bloc/features/post/bloc/post_bloc.dart';
-import 'package:layered_architecture_bloc/features/post/bloc/post_event.dart';
-import 'package:layered_architecture_bloc/common/widget/spinkit_indicator.dart';
-import 'package:layered_architecture_bloc/features/user/data/model/user.dart';
-import 'package:layered_architecture_bloc/features/post/data/model/post.dart';
-import 'package:layered_architecture_bloc/common/dialog/progress_dialog.dart';
+import 'package:layered_architecture_bloc/common/widget/text_input.dart';
 import 'package:layered_architecture_bloc/common/dialog/retry_dialog.dart';
 import 'package:layered_architecture_bloc/common/widget/empty_widget.dart';
-import 'package:layered_architecture_bloc/common/widget/text_input.dart';
-import 'package:layered_architecture_bloc/core/app_asset.dart';
-import 'package:layered_architecture_bloc/core/app_extension.dart';
-import 'package:layered_architecture_bloc/core/app_style.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/material.dart';
+import 'package:layered_architecture_bloc/features/post/bloc/post_bloc.dart';
+import 'package:layered_architecture_bloc/features/user/data/model/user.dart';
+import 'package:layered_architecture_bloc/features/post/data/model/post.dart';
+import 'package:layered_architecture_bloc/features/post/bloc/post_event.dart';
+import 'package:layered_architecture_bloc/common/dialog/progress_dialog.dart';
+import 'package:layered_architecture_bloc/common/bloc/generic_bloc_state.dart';
+import 'package:layered_architecture_bloc/common/widget/spinkit_indicator.dart';
+import 'package:layered_architecture_bloc/features/comment/bloc/comment_bloc.dart';
+import 'package:layered_architecture_bloc/features/comment/bloc/comment_event.dart';
+import 'package:layered_architecture_bloc/features/comment/data/model/comment.dart';
+import 'package:layered_architecture_bloc/features/post/view/screen/create_post_screen.dart';
 
 class PostDetailScreen extends StatefulWidget {
   const PostDetailScreen({Key? key, required this.post, this.user})
@@ -113,17 +113,14 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
             : false;
       },
       builder: (BuildContext context, GenericBlocState<Comment> state) {
-        switch (state.status) {
-          case Status.empty:
-            return const EmptyWidget(message: "No comment");
-          case Status.loading:
-            return const SpinKitIndicator();
-          case Status.failure:
-            return RetryDialog(
-                title: state.error ?? "Error",
-                onRetryPressed: () => getUserComments());
-          case Status.success:
-            return ListView.builder(
+        return switch (state.status) {
+          Status.empty => const EmptyWidget(message: "No comment"),
+          Status.loading => const SpinKitIndicator(),
+          Status.failure => RetryDialog(
+              title: state.error ?? "Error",
+              onRetryPressed: () => getUserComments(),
+            ),
+          Status.success => ListView.builder(
               shrinkWrap: true,
               itemCount: state.data?.length ?? 0,
               itemBuilder: (_, index) {
@@ -169,8 +166,8 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                   ],
                 );
               },
-            );
-        }
+            )
+        };
       },
     );
   }
@@ -182,27 +179,23 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
       builder: (_) {
         return BlocBuilder<PostBloc, GenericBlocState<Post>>(
           builder: (BuildContext context, GenericBlocState<Post> state) {
-            switch (state.status) {
-              case Status.empty:
-                return const SizedBox();
-              case Status.loading:
-                return const ProgressDialog(
+            return switch (state.status) {
+              Status.empty => const SizedBox(),
+              Status.loading => const ProgressDialog(
                   title: "Deleting post...",
                   isProgressed: true,
-                );
-              case Status.failure:
-                return RetryDialog(
+                ),
+              Status.failure => RetryDialog(
                   title: state.error ?? "Error",
                   onRetryPressed: () =>
                       context.read<PostBloc>().add(PostDeleted(post)),
-                );
-              case Status.success:
-                return ProgressDialog(
+                ),
+              Status.success => ProgressDialog(
                   title: "Successfully deleted",
                   onPressed: () => pop(context, 2),
                   isProgressed: false,
-                );
-            }
+                ),
+            };
           },
         );
       },

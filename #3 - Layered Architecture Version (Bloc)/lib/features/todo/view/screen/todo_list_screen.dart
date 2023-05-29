@@ -1,22 +1,22 @@
-import 'package:layered_architecture_bloc/common/bloc/bloc_helper.dart';
-import 'package:layered_architecture_bloc/common/bloc/generic_bloc_state.dart';
-import 'package:layered_architecture_bloc/common/dialog/progress_dialog.dart';
-import 'package:layered_architecture_bloc/common/dialog/retry_dialog.dart';
-import 'package:layered_architecture_bloc/common/widget/date_time_picker.dart';
-import 'package:layered_architecture_bloc/common/widget/drop_down.dart';
-import 'package:layered_architecture_bloc/common/widget/empty_widget.dart';
-import 'package:layered_architecture_bloc/common/widget/popup_menu.dart';
-import 'package:layered_architecture_bloc/common/widget/spinkit_indicator.dart';
-import 'package:layered_architecture_bloc/common/widget/text_input.dart';
-import 'package:layered_architecture_bloc/core/app_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:layered_architecture_bloc/core/app_style.dart';
+import 'package:layered_architecture_bloc/core/app_extension.dart';
+import 'package:layered_architecture_bloc/common/bloc/bloc_helper.dart';
+import 'package:layered_architecture_bloc/common/widget/drop_down.dart';
+import 'package:layered_architecture_bloc/common/widget/popup_menu.dart';
+import 'package:layered_architecture_bloc/common/widget/text_input.dart';
+import 'package:layered_architecture_bloc/common/widget/empty_widget.dart';
+import 'package:layered_architecture_bloc/common/dialog/retry_dialog.dart';
 import 'package:layered_architecture_bloc/features/todo/bloc/todo_bloc.dart';
 import 'package:layered_architecture_bloc/features/todo/bloc/todo_event.dart';
 import 'package:layered_architecture_bloc/features/todo/data/model/todo.dart';
-import 'package:layered_architecture_bloc/features/todo/view/widget/todo_list_item.dart';
 import 'package:layered_architecture_bloc/features/user/data/model/user.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/material.dart';
+import 'package:layered_architecture_bloc/common/dialog/progress_dialog.dart';
+import 'package:layered_architecture_bloc/common/bloc/generic_bloc_state.dart';
+import 'package:layered_architecture_bloc/common/widget/date_time_picker.dart';
+import 'package:layered_architecture_bloc/common/widget/spinkit_indicator.dart';
+import 'package:layered_architecture_bloc/features/todo/view/widget/todo_list_item.dart';
 
 enum Mode { create, update }
 
@@ -112,16 +112,13 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
       builder: (_) {
         return BlocBuilder<TodoBloc, GenericBlocState<ToDo>>(
           builder: (BuildContext context, GenericBlocState<ToDo> state) {
-            switch (state.status) {
-              case Status.empty:
-                return const SizedBox();
-              case Status.loading:
-                return ProgressDialog(
+            return switch (state.status) {
+              Status.empty => const SizedBox(),
+              Status.loading => ProgressDialog(
                   title: "${mode.name}ing task...",
                   isProgressed: true,
-                );
-              case Status.failure:
-                return RetryDialog(
+                ),
+              Status.failure => RetryDialog(
                   title: state.error ?? "Error",
                   onRetryPressed: () {
                     if (mode == Mode.create) {
@@ -130,17 +127,16 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                       context.read<TodoBloc>().add(TodoUpdated(todo));
                     }
                   },
-                );
-              case Status.success:
-                return ProgressDialog(
+                ),
+              Status.success => ProgressDialog(
                   title: "Successfully ${mode.name}ed",
                   onPressed: () {
                     context.read<TodoBloc>().add(TodoFetched(widget.user.id!));
                     Navigator.pop(context);
                   },
                   isProgressed: false,
-                );
-            }
+                ),
+            };
           },
         );
       },
@@ -241,22 +237,19 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
           builder: (_) {
             return BlocBuilder<TodoBloc, GenericBlocState<ToDo>>(
               builder: (BuildContext context, GenericBlocState<ToDo> state) {
-                switch (state.status) {
-                  case Status.empty:
-                    return const SizedBox();
-                  case Status.loading:
-                    return const ProgressDialog(
+                return switch (state.status) {
+                  Status.empty => const SizedBox(),
+                  Status.loading => const ProgressDialog(
                       title: "Deleting task...",
                       isProgressed: true,
-                    );
-                  case Status.failure:
-                    return RetryDialog(
+                    ),
+                  Status.failure => RetryDialog(
                       title: state.error ?? "Error",
-                      onRetryPressed: () =>
-                          context.read<TodoBloc>().add(TodoDeleted(todo)),
-                    );
-                  case Status.success:
-                    return ProgressDialog(
+                      onRetryPressed: () => context.read<TodoBloc>().add(
+                            TodoDeleted(todo),
+                          ),
+                    ),
+                  Status.success => ProgressDialog(
                       title: "Successfully deleted",
                       onPressed: () {
                         context
@@ -265,8 +258,8 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                         Navigator.pop(context);
                       },
                       isProgressed: false,
-                    );
-                }
+                    ),
+                };
               },
             );
           },
@@ -296,39 +289,37 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
     return Scaffold(
       appBar: _appBar(context),
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: ListView(
-          children: [
-            header(),
-            createTodo(),
-            BlocBuilder<TodoBloc, GenericBlocState<ToDo>>(
-              buildWhen: (prevState, curState) {
-                return context.read<TodoBloc>().operation == ApiOperation.select
-                    ? true
-                    : false;
-              },
-              builder: (BuildContext context, GenericBlocState<ToDo> state) {
-                switch (state.status) {
-                  case Status.empty:
-                    return const EmptyWidget(message: "No Todos");
-                  case Status.loading:
-                    return const SpinKitIndicator();
-                  case Status.failure:
-                    return RetryDialog(
-                      title: state.error ?? "Error",
-                      onRetryPressed: () => context
-                          .read<TodoBloc>()
-                          .add(TodoFetched(widget.user.id!)),
-                    );
-                  case Status.success:
-                    return taskList(state.data ?? []);
-                }
-              },
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: ListView(
+            children: [
+              header(),
+              createTodo(),
+              BlocBuilder<TodoBloc, GenericBlocState<ToDo>>(
+                buildWhen: (prevState, curState) {
+                  return context.read<TodoBloc>().operation ==
+                          ApiOperation.select
+                      ? true
+                      : false;
+                },
+                builder: (BuildContext context, GenericBlocState<ToDo> state) {
+                  return switch (state.status) {
+                    Status.empty => const EmptyWidget(message: "No Todos"),
+                    Status.loading => const SpinKitIndicator(),
+                    Status.failure => RetryDialog(
+                        title: state.error ?? "Error",
+                        onRetryPressed: () => context
+                            .read<TodoBloc>()
+                            .add(TodoFetched(widget.user.id!)),
+                      ),
+                    Status.success => taskList(state.data ?? []),
+                  };
+                },
+              )
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

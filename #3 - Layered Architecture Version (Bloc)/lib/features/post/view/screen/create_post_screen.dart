@@ -1,21 +1,24 @@
-import 'package:layered_architecture_bloc/common/bloc/generic_bloc_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:layered_architecture_bloc/core/app_extension.dart';
+import 'package:layered_architecture_bloc/common/widget/text_input.dart';
+import 'package:layered_architecture_bloc/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture_bloc/features/post/bloc/post_bloc.dart';
 import 'package:layered_architecture_bloc/features/post/bloc/post_event.dart';
 import 'package:layered_architecture_bloc/common/dialog/progress_dialog.dart';
 import 'package:layered_architecture_bloc/features/post/data/model/post.dart';
-import 'package:layered_architecture_bloc/features/post/bloc/post_bloc.dart';
 import 'package:layered_architecture_bloc/features/user/data/model/user.dart';
-import 'package:layered_architecture_bloc/common/dialog/retry_dialog.dart';
-import 'package:layered_architecture_bloc/common/widget/text_input.dart';
-import 'package:layered_architecture_bloc/core/app_extension.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/material.dart';
+import 'package:layered_architecture_bloc/common/bloc/generic_bloc_state.dart';
 
 enum PostMode { create, update }
 
 class CreatePostScreen extends StatefulWidget {
-  const CreatePostScreen(
-      {Key? key, required this.user, this.mode = PostMode.create, this.post})
-      : super(key: key);
+  const CreatePostScreen({
+    Key? key,
+    required this.user,
+    this.mode = PostMode.create,
+    this.post,
+  }) : super(key: key);
 
   final User user;
   final Post? post;
@@ -107,16 +110,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           return BlocBuilder<PostBloc, GenericBlocState<Post>>(
                             builder: (BuildContext context,
                                 GenericBlocState<Post> state) {
-                              switch (state.status) {
-                                case Status.empty:
-                                  return const SizedBox();
-                                case Status.loading:
-                                  return ProgressDialog(
+                              return switch (state.status) {
+                                Status.empty => const SizedBox(),
+                                Status.loading => ProgressDialog(
                                     title: "${widget.mode.name}ing post...",
                                     isProgressed: true,
-                                  );
-                                case Status.failure:
-                                  return RetryDialog(
+                                  ),
+                                Status.failure => RetryDialog(
                                     title: state.error ?? "Error",
                                     onRetryPressed: () {
                                       if (widget.mode == PostMode.create) {
@@ -129,9 +129,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                             .add(PostUpdated(post));
                                       }
                                     },
-                                  );
-                                case Status.success:
-                                  return ProgressDialog(
+                                  ),
+                                Status.success => ProgressDialog(
                                     title: "Successfully ${widget.mode.name}ed",
                                     onPressed: () {
                                       if (widget.mode == PostMode.update) {
@@ -141,8 +140,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                       }
                                     },
                                     isProgressed: false,
-                                  );
-                              }
+                                  ),
+                              };
                             },
                           );
                         },
