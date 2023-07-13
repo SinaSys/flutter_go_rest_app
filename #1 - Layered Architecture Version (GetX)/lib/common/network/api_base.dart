@@ -1,7 +1,7 @@
 import 'package:layered_architecture/common/network/dio_exception.dart';
 import 'package:layered_architecture/common/network/dio_client.dart';
+import 'package:dio/dio.dart' show Response, DioException;
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'dart:convert';
 
 abstract class ApiBase<T> {
@@ -14,24 +14,27 @@ abstract class ApiBase<T> {
     try {
       await apiCallback;
       return right(true);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();
       return left(errorMessage);
     }
   }
 
   //Generic method template for create item on server
-  Future<Either<String, bool>> makePostRequest(Future<Response<dynamic>> apiCallback) async {
+  Future<Either<String, bool>> makePostRequest(
+      Future<Response<dynamic>> apiCallback) async {
     return _checkFailureOrSuccess(apiCallback);
   }
 
   //Generic method template for update item on server
-  Future<Either<String, bool>> makePutRequest(Future<Response<dynamic>> apiCallback) async {
+  Future<Either<String, bool>> makePutRequest(
+      Future<Response<dynamic>> apiCallback) async {
     return _checkFailureOrSuccess(apiCallback);
   }
 
   //Generic method template for delete item from server
-  Future<Either<String, bool>> makeDeleteRequest(Future<Response<dynamic>> apiCallback) async {
+  Future<Either<String, bool>> makeDeleteRequest(
+      Future<Response<dynamic>> apiCallback) async {
     return _checkFailureOrSuccess(apiCallback);
   }
 
@@ -48,7 +51,7 @@ abstract class ApiBase<T> {
             ),
       );
       return right(dataList);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();
       return left(errorMessage);
     }

@@ -1,6 +1,6 @@
-import 'package:layered_architecture/core/app_extension.dart';
-import 'package:logger/logger.dart';
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
+import 'package:layered_architecture/core/app_extension.dart';
 
 class DioInterceptor extends Interceptor {
   final Logger logger = Logger(
@@ -14,13 +14,14 @@ class DioInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     logger.i('====================START====================');
     logger.i('HTTP method => ${options.method} ');
-    logger.i('Request => ${options.baseUrl}${options.path}${options.queryParameters.format}');
+    logger.i(
+        'Request => ${options.baseUrl}${options.path}${options.queryParameters.format}');
     logger.i('Header  => ${options.headers}');
     return super.onRequest(options, handler);
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     final options = err.requestOptions;
     logger.e(options.method); // Debug log
     logger.e('Error: ${err.error}, Message: ${err.message}'); // Error log
