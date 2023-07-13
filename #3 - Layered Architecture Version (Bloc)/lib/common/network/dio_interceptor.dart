@@ -1,6 +1,6 @@
-import 'package:layered_architecture_bloc/core/app_extension.dart';
-import 'package:logger/logger.dart';
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
+import 'package:layered_architecture_bloc/core/app_extension.dart';
 
 class DioInterceptor extends Interceptor {
   final Logger logger = Logger(
@@ -20,7 +20,7 @@ class DioInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     final options = err.requestOptions;
     logger.e(options.method); // Debug log
     logger.e('Error: ${err.error}, Message: ${err.message}'); // Error log
