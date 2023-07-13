@@ -1,13 +1,14 @@
-import 'package:clean_architecture_getx/common/network/dio_exception.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' show DioException;
+import 'package:clean_architecture_getx/common/network/dio_exception.dart';
+
 
 mixin RepositoryHelper<T> {
   Future<Either<String, List<T>>> checkItemsFailOrSuccess(Future<List<T>> apiCallback) async {
     try {
       final List<T> items = await apiCallback;
       return Right(items);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();
       return Left(errorMessage);
     }
@@ -17,7 +18,7 @@ mixin RepositoryHelper<T> {
     try {
       await apiCallback;
       return const Right(true);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();
       return Left(errorMessage);
     }
