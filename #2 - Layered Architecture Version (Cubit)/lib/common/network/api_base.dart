@@ -1,7 +1,7 @@
 import 'package:layered_architecture_cubit/common/network/dio_exception.dart';
 import 'package:layered_architecture_cubit/common/network/api_result.dart';
 import 'package:layered_architecture_cubit/common/network/dio_client.dart';
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' show Response, DioException;
 import 'dart:convert';
 
 abstract class ApiBase<T> {
@@ -13,7 +13,7 @@ abstract class ApiBase<T> {
     try {
       await apiCallback;
       return const ApiResult.success(true);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();
       return ApiResult.failure(errorMessage);
     }
@@ -47,7 +47,7 @@ abstract class ApiBase<T> {
             ),
       );
       return ApiResult.success(dataList);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();
       return ApiResult.failure(errorMessage);
     }
