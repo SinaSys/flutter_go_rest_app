@@ -65,7 +65,7 @@ Error state                    |   Empty state             |  Warning dialog    
   <br/>
 
 
-## 🤝 Feature-first and Layer-first
+## 🤝 Feature-first (Package-by-feature) and Layer-first (Package-by-layer)
 In this repository two architectural approaches have been used. 
 Feature-first (for clean architecture and simple layered architecture version)
 and Layer-first (for mvvm architecture version).
