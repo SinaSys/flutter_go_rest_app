@@ -1,27 +1,30 @@
-import 'package:clean_architecture_bloc/common/bloc/bloc_helper.dart';
-import 'package:clean_architecture_bloc/common/bloc/generic_bloc_state.dart';
-import 'package:clean_architecture_bloc/common/dialog/progress_dialog.dart';
-import 'package:clean_architecture_bloc/common/dialog/retry_dialog.dart';
-import 'package:clean_architecture_bloc/common/widget/empty_widget.dart';
-import 'package:clean_architecture_bloc/common/widget/spinkit_indicator.dart';
-import 'package:clean_architecture_bloc/common/widget/text_input.dart';
-import 'package:clean_architecture_bloc/core/app_asset.dart';
-import 'package:clean_architecture_bloc/core/app_extension.dart';
-import 'package:clean_architecture_bloc/core/app_style.dart';
-import 'package:clean_architecture_bloc/features/comment/data/models/comment.dart';
-import 'package:clean_architecture_bloc/features/comment/presentation/bloc/comment_bloc.dart';
-import 'package:clean_architecture_bloc/features/comment/presentation/bloc/comment_event.dart';
-import 'package:clean_architecture_bloc/features/post/data/models/post.dart';
-import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_bloc.dart';
-import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_event.dart';
-import 'package:clean_architecture_bloc/features/post/presentation/screens/create_post_screen.dart';
-import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:clean_architecture_bloc/core/app_asset.dart';
+import 'package:clean_architecture_bloc/core/app_style.dart';
+import 'package:clean_architecture_bloc/core/app_extension.dart';
+import 'package:clean_architecture_bloc/common/bloc/bloc_helper.dart';
+import 'package:clean_architecture_bloc/common/widget/text_input.dart';
+import 'package:clean_architecture_bloc/common/widget/empty_widget.dart';
+import 'package:clean_architecture_bloc/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_bloc/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_bloc/common/bloc/generic_bloc_state.dart';
+import 'package:clean_architecture_bloc/features/post/data/models/post.dart';
+import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
+import 'package:clean_architecture_bloc/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_bloc/features/comment/data/models/comment.dart';
+import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_bloc.dart';
+import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_event.dart';
+import 'package:clean_architecture_bloc/features/comment/presentation/bloc/comment_bloc.dart';
+import 'package:clean_architecture_bloc/features/comment/presentation/bloc/comment_event.dart';
+import 'package:clean_architecture_bloc/features/post/presentation/screens/create_post_screen.dart';
 
 class PostDetailScreen extends StatefulWidget {
-  const PostDetailScreen({Key? key, required this.post, this.user})
-      : super(key: key);
+  const PostDetailScreen({
+    super.key,
+    required this.post,
+    this.user,
+  });
 
   final Post post;
   final User? user;

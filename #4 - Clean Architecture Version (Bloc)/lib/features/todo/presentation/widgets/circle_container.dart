@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class CircleContainer extends StatelessWidget {
   const CircleContainer({
-    Key? key,
+    super.key,
     required this.color,
     this.isActive = false,
-  }) : super(key: key);
+  });
 
   final Color color;
   final bool isActive;

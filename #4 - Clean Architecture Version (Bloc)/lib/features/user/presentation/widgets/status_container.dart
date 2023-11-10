@@ -1,8 +1,11 @@
-import 'package:clean_architecture_bloc/features/user/domain/entities/user_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:clean_architecture_bloc/features/user/domain/entities/user_entity.dart';
 
 class StatusContainer extends StatelessWidget {
-  const StatusContainer({Key? key, required this.status}) : super(key: key);
+  const StatusContainer({
+    super.key,
+    required this.status,
+  });
 
   final UserStatus status;
 

@@ -3,11 +3,11 @@ import 'package:clean_architecture_bloc/core/app_extension.dart';
 
 class PopupMenu<T> extends StatelessWidget {
   const PopupMenu({
-    Key? key,
+    super.key,
     required this.items,
     required this.onChanged,
     this.icon = Icons.more_vert,
-  }) : super(key: key);
+  });
 
   final List<T> items;
   final ValueChanged<T> onChanged;

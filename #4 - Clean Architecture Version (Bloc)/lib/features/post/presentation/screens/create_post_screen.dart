@@ -1,21 +1,24 @@
-import 'package:clean_architecture_bloc/common/bloc/generic_bloc_state.dart';
-import 'package:clean_architecture_bloc/common/dialog/progress_dialog.dart';
-import 'package:clean_architecture_bloc/common/dialog/retry_dialog.dart';
-import 'package:clean_architecture_bloc/common/widget/text_input.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clean_architecture_bloc/core/app_extension.dart';
+import 'package:clean_architecture_bloc/common/widget/text_input.dart';
+import 'package:clean_architecture_bloc/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_bloc/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
+import 'package:clean_architecture_bloc/common/bloc/generic_bloc_state.dart';
 import 'package:clean_architecture_bloc/features/post/data/models/post.dart';
 import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_bloc.dart';
 import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_event.dart';
-import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 enum PostMode { create, update }
 
 class CreatePostScreen extends StatefulWidget {
-  const CreatePostScreen(
-      {Key? key, required this.user, this.mode = PostMode.create, this.post})
-      : super(key: key);
+  const CreatePostScreen({
+    super.key,
+    required this.user,
+    this.mode = PostMode.create,
+    this.post,
+  });
 
   final User user;
   final Post? post;

@@ -1,29 +1,29 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:clean_architecture_bloc/core/app_style.dart';
+import 'package:clean_architecture_bloc/core/app_extension.dart';
 import 'package:clean_architecture_bloc/common/bloc/bloc_helper.dart';
-import 'package:clean_architecture_bloc/common/bloc/generic_bloc_state.dart';
-import 'package:clean_architecture_bloc/common/dialog/create_dialog.dart';
-import 'package:clean_architecture_bloc/common/dialog/delete_dialog.dart';
-import 'package:clean_architecture_bloc/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_bloc/common/widget/popup_menu.dart';
 import 'package:clean_architecture_bloc/common/dialog/retry_dialog.dart';
 import 'package:clean_architecture_bloc/common/widget/empty_widget.dart';
-import 'package:clean_architecture_bloc/common/widget/popup_menu.dart';
+import 'package:clean_architecture_bloc/common/dialog/delete_dialog.dart';
+import 'package:clean_architecture_bloc/common/dialog/create_dialog.dart';
+import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
+import 'package:clean_architecture_bloc/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_bloc/common/bloc/generic_bloc_state.dart';
 import 'package:clean_architecture_bloc/common/widget/spinkit_indicator.dart';
-import 'package:clean_architecture_bloc/core/app_extension.dart';
-import 'package:clean_architecture_bloc/core/app_style.dart';
+import 'package:clean_architecture_bloc/features/user/presentation/bloc/user_bloc.dart';
+import 'package:clean_architecture_bloc/features/user/domain/entities/user_entity.dart';
+import 'package:clean_architecture_bloc/features/user/presentation/bloc/user_event.dart';
 import 'package:clean_architecture_bloc/features/post/presentation/screens/post_list_screen.dart';
 import 'package:clean_architecture_bloc/features/todo/presentation/screens/todo_list_screen.dart';
-import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
-import 'package:clean_architecture_bloc/features/user/domain/entities/user_entity.dart';
-import 'package:clean_architecture_bloc/features/user/presentation/bloc/user_bloc.dart';
-import 'package:clean_architecture_bloc/features/user/presentation/bloc/user_event.dart';
-import 'package:clean_architecture_bloc/features/user/presentation/widgets/status_container.dart';
-import 'package:flutter/material.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:clean_architecture_bloc/features/user/presentation/widgets/status_container.dart';
 
 enum Operation { edit, delete, post, todo }
 
 class UserListScreen extends StatefulWidget {
-  const UserListScreen({Key? key}) : super(key: key);
+  const UserListScreen({super.key});
 
   @override
   State<UserListScreen> createState() => _UserListScreenState();

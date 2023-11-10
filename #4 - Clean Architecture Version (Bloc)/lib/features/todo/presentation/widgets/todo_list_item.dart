@@ -1,17 +1,17 @@
-import 'package:clean_architecture_bloc/core/app_extension.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
 import 'package:clean_architecture_bloc/core/app_style.dart';
+import 'package:clean_architecture_bloc/core/app_extension.dart';
 import 'package:clean_architecture_bloc/features/todo/data/models/todo.dart';
 import 'package:clean_architecture_bloc/features/todo/presentation/widgets/circle_container.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class TodoListItem extends StatelessWidget {
   const TodoListItem({
-    Key? key,
+    super.key,
     required this.items,
     required this.onEditPressed,
     required this.onDeletePressed,
-  }) : super(key: key);
+  });
 
   final List<ToDo> items;
 
