@@ -1,9 +1,12 @@
-import 'package:layered_architecture/features/user/data/model/user.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:layered_architecture/features/user/data/model/user.dart';
 
 class StatusContainer extends StatelessWidget {
-  const StatusContainer({Key? key, required this.status}) : super(key: key);
+  const StatusContainer({
+    super.key,
+    required this.status,
+  });
 
   final UserStatus status;
 

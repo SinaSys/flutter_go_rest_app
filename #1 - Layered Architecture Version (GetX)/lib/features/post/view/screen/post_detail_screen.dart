@@ -17,8 +17,11 @@ import 'package:layered_architecture/features/post/view/screen/create_post_scree
 import 'package:layered_architecture/features/comment/controller/comment_controller.dart';
 
 class PostDetailScreen extends StatefulWidget {
-  const PostDetailScreen({Key? key, required this.post, this.user})
-      : super(key: key);
+  const PostDetailScreen({
+    super.key,
+    required this.post,
+    this.user,
+  });
 
   final Post post;
   final User? user;
@@ -258,7 +261,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 TextInput(
                   hint: "Write a comment",
                   maxLine: 3,
-                  autovalidateMode: AutovalidateMode.disabled,
+                  autoValidateMode: AutovalidateMode.disabled,
                   controller: commentBodyEditingController,
                   validator: (String? value) {
                     if (value!.isNotEmpty) return null;
@@ -272,7 +275,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 TextInput(
                   icon: const Icon(Icons.person, color: Color(0xFF556080)),
                   hint: "Name",
-                  autovalidateMode: AutovalidateMode.disabled,
+                  autoValidateMode: AutovalidateMode.disabled,
                   controller: nameEditingController,
                   validator: (String? value) {
                     if (value!.isNotEmpty) return null;

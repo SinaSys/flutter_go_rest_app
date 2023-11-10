@@ -19,7 +19,7 @@ import 'package:layered_architecture/features/user/view/widget/status_container.
 enum UserOperation { edit, delete, post, todo }
 
 class UserListScreen extends StatefulWidget {
-  const UserListScreen({Key? key}) : super(key: key);
+  const UserListScreen({super.key});
 
   @override
   State<UserListScreen> createState() => _UserListScreenState();

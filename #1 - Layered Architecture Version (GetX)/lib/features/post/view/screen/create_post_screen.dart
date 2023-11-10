@@ -12,9 +12,12 @@ import 'package:layered_architecture/features/post/controller/post_controller.da
 enum PostMode { create, update }
 
 class CreatePostScreen extends StatefulWidget {
-  const CreatePostScreen(
-      {Key? key, required this.user, this.mode = PostMode.create, this.post})
-      : super(key: key);
+  const CreatePostScreen({
+    super.key,
+    required this.user,
+    this.mode = PostMode.create,
+    this.post,
+  });
 
   final User user;
   final Post? post;
