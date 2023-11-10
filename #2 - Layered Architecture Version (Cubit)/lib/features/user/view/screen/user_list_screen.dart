@@ -20,7 +20,7 @@ import 'package:layered_architecture_cubit/features/user/view/widget/status_cont
 enum Operation { edit, delete, post, todo }
 
 class UserListScreen extends StatefulWidget {
-  const UserListScreen({Key? key}) : super(key: key);
+  const UserListScreen({super.key});
 
   @override
   State<UserListScreen> createState() => _UserListScreenState();

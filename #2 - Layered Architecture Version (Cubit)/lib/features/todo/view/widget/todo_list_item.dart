@@ -1,18 +1,18 @@
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../../../core/app_extension.dart';
+import 'package:flutter/material.dart';
+import 'package:layered_architecture_cubit/core/app_style.dart';
+import 'package:layered_architecture_cubit/core/app_extension.dart';
+import 'package:layered_architecture_cubit/features/todo/data/model/todo.dart';
 
-import '../../../../core/app_style.dart';
-import '../../data/model/todo.dart';
 import 'circle_container.dart';
 
 class TodoListItem extends StatelessWidget {
   const TodoListItem({
-    Key? key,
+    super.key,
     required this.items,
     required this.onEditPressed,
     required this.onDeletePressed,
-  }) : super(key: key);
+  });
 
   final List<ToDo> items;
 
