@@ -20,8 +20,11 @@ import 'package:layered_architecture_bloc/features/comment/data/model/comment.da
 import 'package:layered_architecture_bloc/features/post/view/screen/create_post_screen.dart';
 
 class PostDetailScreen extends StatefulWidget {
-  const PostDetailScreen({Key? key, required this.post, this.user})
-      : super(key: key);
+  const PostDetailScreen({
+    super.key,
+    required this.post,
+    this.user,
+  });
 
   final Post post;
   final User? user;

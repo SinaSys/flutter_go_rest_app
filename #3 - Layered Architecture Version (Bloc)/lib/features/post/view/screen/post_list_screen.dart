@@ -14,7 +14,10 @@ import 'package:layered_architecture_bloc/features/post/view/screen/create_post_
 import 'package:layered_architecture_bloc/features/post/view/screen/post_detail_screen.dart';
 
 class PostListScreen extends StatefulWidget {
-  const PostListScreen({Key? key, required this.user}) : super(key: key);
+  const PostListScreen({
+    super.key,
+    required this.user,
+  });
 
   final User user;
 

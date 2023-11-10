@@ -21,7 +21,7 @@ import 'package:layered_architecture_bloc/features/todo/view/screen/todo_list_sc
 enum Operation { edit, delete, post, todo }
 
 class UserListScreen extends StatefulWidget {
-  const UserListScreen({Key? key}) : super(key: key);
+  const UserListScreen({super.key});
 
   @override
   State<UserListScreen> createState() => _UserListScreenState();
