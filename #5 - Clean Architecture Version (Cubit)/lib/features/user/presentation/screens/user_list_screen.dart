@@ -1,27 +1,27 @@
-import 'package:clean_architecture_cubit/common/cubit/generic_cubit.dart';
-import 'package:clean_architecture_cubit/common/cubit/generic_cubit_state.dart';
-import 'package:clean_architecture_cubit/common/dialog/create_dialog.dart';
-import 'package:clean_architecture_cubit/common/dialog/delete_dialog.dart';
-import 'package:clean_architecture_cubit/common/dialog/progress_dialog.dart';
-import 'package:clean_architecture_cubit/common/dialog/retry_dialog.dart';
-import 'package:clean_architecture_cubit/common/widget/empty_widget.dart';
-import 'package:clean_architecture_cubit/common/widget/popup_menu.dart';
-import 'package:clean_architecture_cubit/common/widget/spinkit_indicator.dart';
-import 'package:clean_architecture_cubit/core/app_extension.dart';
-import 'package:clean_architecture_cubit/core/app_style.dart';
-import 'package:clean_architecture_cubit/features/post/presentation/screens/post_list_screen.dart';
-import 'package:clean_architecture_cubit/features/todo/presentation/screens/todo_list_screen.dart';
-import 'package:clean_architecture_cubit/features/user/data/models/user.dart';
-import 'package:clean_architecture_cubit/features/user/domain/entities/user_entity.dart';
-import 'package:clean_architecture_cubit/features/user/presentation/cubit/user_cubit.dart';
-import 'package:clean_architecture_cubit/features/user/presentation/widgets/status_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:clean_architecture_cubit/core/app_style.dart';
+import 'package:clean_architecture_cubit/core/app_extension.dart';
+import 'package:clean_architecture_cubit/common/widget/popup_menu.dart';
+import 'package:clean_architecture_cubit/common/widget/empty_widget.dart';
+import 'package:clean_architecture_cubit/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_cubit/common/cubit/generic_cubit.dart';
+import 'package:clean_architecture_cubit/common/dialog/delete_dialog.dart';
+import 'package:clean_architecture_cubit/common/dialog/create_dialog.dart';
+import 'package:clean_architecture_cubit/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_cubit/features/user/data/models/user.dart';
+import 'package:clean_architecture_cubit/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_cubit/common/cubit/generic_cubit_state.dart';
+import 'package:clean_architecture_cubit/features/user/domain/entities/user_entity.dart';
+import 'package:clean_architecture_cubit/features/user/presentation/cubit/user_cubit.dart';
+import 'package:clean_architecture_cubit/features/post/presentation/screens/post_list_screen.dart';
+import 'package:clean_architecture_cubit/features/todo/presentation/screens/todo_list_screen.dart';
+import 'package:clean_architecture_cubit/features/user/presentation/widgets/status_container.dart';
 
 enum Operation { edit, delete, post, todo }
 
 class UserListScreen extends StatefulWidget {
-  const UserListScreen({Key? key}) : super(key: key);
+  const UserListScreen({super.key});
 
   @override
   State<UserListScreen> createState() => _UserListScreenState();

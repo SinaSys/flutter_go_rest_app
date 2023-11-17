@@ -1,25 +1,28 @@
-import 'package:clean_architecture_cubit/common/cubit/generic_cubit.dart';
-import 'package:clean_architecture_cubit/common/cubit/generic_cubit_state.dart';
-import 'package:clean_architecture_cubit/common/dialog/progress_dialog.dart';
-import 'package:clean_architecture_cubit/common/dialog/retry_dialog.dart';
-import 'package:clean_architecture_cubit/common/widget/empty_widget.dart';
-import 'package:clean_architecture_cubit/common/widget/spinkit_indicator.dart';
-import 'package:clean_architecture_cubit/common/widget/text_input.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:clean_architecture_cubit/core/app_style.dart';
 import 'package:clean_architecture_cubit/core/app_asset.dart';
 import 'package:clean_architecture_cubit/core/app_extension.dart';
-import 'package:clean_architecture_cubit/core/app_style.dart';
-import 'package:clean_architecture_cubit/features/comment/data/models/comment.dart';
-import 'package:clean_architecture_cubit/features/comment/presentation/cubit/comment_cubit.dart';
-import 'package:clean_architecture_cubit/features/post/data/models/post.dart';
-import 'package:clean_architecture_cubit/features/post/presentation/cubit/post_cubit.dart';
-import 'package:clean_architecture_cubit/features/post/presentation/screens/create_post_screen.dart';
+import 'package:clean_architecture_cubit/common/widget/text_input.dart';
+import 'package:clean_architecture_cubit/common/widget/empty_widget.dart';
+import 'package:clean_architecture_cubit/common/cubit/generic_cubit.dart';
+import 'package:clean_architecture_cubit/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_cubit/common/dialog/progress_dialog.dart';
 import 'package:clean_architecture_cubit/features/user/data/models/user.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/material.dart';
+import 'package:clean_architecture_cubit/features/post/data/models/post.dart';
+import 'package:clean_architecture_cubit/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_cubit/common/cubit/generic_cubit_state.dart';
+import 'package:clean_architecture_cubit/features/comment/data/models/comment.dart';
+import 'package:clean_architecture_cubit/features/post/presentation/cubit/post_cubit.dart';
+import 'package:clean_architecture_cubit/features/comment/presentation/cubit/comment_cubit.dart';
+import 'package:clean_architecture_cubit/features/post/presentation/screens/create_post_screen.dart';
 
 class PostDetailScreen extends StatefulWidget {
-  const PostDetailScreen({Key? key, required this.post, this.user})
-      : super(key: key);
+  const PostDetailScreen({
+    super.key,
+    required this.post,
+    this.user,
+  });
 
   final Post post;
   final User? user;

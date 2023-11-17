@@ -1,27 +1,30 @@
-import 'package:clean_architecture_cubit/common/cubit/generic_cubit.dart';
-import 'package:clean_architecture_cubit/common/cubit/generic_cubit_state.dart';
-import 'package:clean_architecture_cubit/common/dialog/progress_dialog.dart';
-import 'package:clean_architecture_cubit/common/dialog/retry_dialog.dart';
-import 'package:clean_architecture_cubit/common/widget/date_time_picker.dart';
-import 'package:clean_architecture_cubit/common/widget/drop_down.dart';
-import 'package:clean_architecture_cubit/common/widget/empty_widget.dart';
-import 'package:clean_architecture_cubit/common/widget/popup_menu.dart';
-import 'package:clean_architecture_cubit/common/widget/spinkit_indicator.dart';
-import 'package:clean_architecture_cubit/common/widget/text_input.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clean_architecture_cubit/core/app_style.dart';
+import 'package:clean_architecture_cubit/core/app_extension.dart';
+import 'package:clean_architecture_cubit/common/widget/drop_down.dart';
+import 'package:clean_architecture_cubit/common/widget/text_input.dart';
+import 'package:clean_architecture_cubit/common/widget/popup_menu.dart';
+import 'package:clean_architecture_cubit/common/cubit/generic_cubit.dart';
+import 'package:clean_architecture_cubit/common/widget/empty_widget.dart';
+import 'package:clean_architecture_cubit/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_cubit/common/dialog/progress_dialog.dart';
 import 'package:clean_architecture_cubit/features/todo/data/models/todo.dart';
+import 'package:clean_architecture_cubit/features/user/data/models/user.dart';
+import 'package:clean_architecture_cubit/common/widget/date_time_picker.dart';
+import 'package:clean_architecture_cubit/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_cubit/common/cubit/generic_cubit_state.dart';
 import 'package:clean_architecture_cubit/features/todo/domain/entities/todo_entity.dart';
 import 'package:clean_architecture_cubit/features/todo/presentation/cubit/todo_cubit.dart';
 import 'package:clean_architecture_cubit/features/todo/presentation/widgets/todo_list_item.dart';
-import 'package:clean_architecture_cubit/features/user/data/models/user.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:clean_architecture_cubit/core/app_extension.dart';
 
 enum Mode { create, update }
 
 class ToDoListScreen extends StatefulWidget {
-  const ToDoListScreen({Key? key, required this.user}) : super(key: key);
+  const ToDoListScreen({
+    super.key,
+    required this.user,
+  });
 
   final User user;
 
