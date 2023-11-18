@@ -2,7 +2,10 @@ import 'package:clean_architecture_getx/features/user/domain/entities/user_entit
 import 'package:flutter/material.dart';
 
 class StatusContainer extends StatelessWidget {
-  const StatusContainer({Key? key, required this.status}) : super(key: key);
+  const StatusContainer({
+    super.key,
+    required this.status,
+  });
 
   final UserStatus status;
 
@@ -34,10 +37,11 @@ class StatusContainer extends StatelessWidget {
             child: Text(
               status.name,
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: status == UserStatus.inactive
-                      ? Colors.grey
-                      : Colors.black87),
+                fontWeight: FontWeight.bold,
+                color: status == UserStatus.inactive
+                    ? Colors.grey
+                    : Colors.black87,
+              ),
             ),
           )
         ],

@@ -1,25 +1,28 @@
-import 'package:clean_architecture_getx/features/post/presentation/controller/post_controller.dart';
-import 'package:clean_architecture_getx/features/comment/presentation/controller/comment_controller.dart';
-import 'package:clean_architecture_getx/features/post/presentation/screens/create_post_screen.dart';
-import 'package:clean_architecture_getx/features/comment/data/models/comment.dart';
-import 'package:clean_architecture_getx/common/controller/base_controller.dart';
-import 'package:clean_architecture_getx/common/widget/spinkit_indicator.dart';
+import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:clean_architecture_getx/di.dart';
+import 'package:clean_architecture_getx/core/app_style.dart';
+import 'package:clean_architecture_getx/core/app_asset.dart';
+import 'package:clean_architecture_getx/core/app_extension.dart';
+import 'package:clean_architecture_getx/common/widget/text_input.dart';
+import 'package:clean_architecture_getx/common/widget/empty_widget.dart';
+import 'package:clean_architecture_getx/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_getx/common/dialog/progress_dialog.dart';
 import 'package:clean_architecture_getx/features/post/data/models/post.dart';
 import 'package:clean_architecture_getx/features/user/data/models/user.dart';
-import 'package:clean_architecture_getx/common/dialog/progress_dialog.dart';
-import 'package:clean_architecture_getx/common/dialog/retry_dialog.dart';
-import 'package:clean_architecture_getx/common/widget/empty_widget.dart';
-import 'package:clean_architecture_getx/common/widget/text_input.dart';
-import 'package:clean_architecture_getx/core/app_extension.dart';
-import 'package:clean_architecture_getx/core/app_asset.dart';
-import 'package:clean_architecture_getx/core/app_style.dart';
-import 'package:clean_architecture_getx/di.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:clean_architecture_getx/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_getx/common/controller/base_controller.dart';
+import 'package:clean_architecture_getx/features/comment/data/models/comment.dart';
+import 'package:clean_architecture_getx/features/post/presentation/screens/create_post_screen.dart';
+import 'package:clean_architecture_getx/features/post/presentation/controller/post_controller.dart';
+import 'package:clean_architecture_getx/features/comment/presentation/controller/comment_controller.dart';
 
 class PostDetailScreen extends StatefulWidget {
-  const PostDetailScreen({Key? key, required this.post, this.user})
-      : super(key: key);
+  const PostDetailScreen({
+    super.key,
+    required this.post,
+    this.user,
+  });
 
   final Post post;
   final User? user;
@@ -264,7 +267,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 TextInput(
                   hint: "Write a comment",
                   maxLine: 3,
-                  autovalidateMode: AutovalidateMode.disabled,
+                  autoValidateMode: AutovalidateMode.disabled,
                   controller: commentBodyEditingController,
                   validator: (String? value) {
                     if (value!.isNotEmpty) return null;
@@ -278,7 +281,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 TextInput(
                   icon: const Icon(Icons.person, color: Color(0xFF556080)),
                   hint: "Name",
-                  autovalidateMode: AutovalidateMode.disabled,
+                  autoValidateMode: AutovalidateMode.disabled,
                   controller: nameEditingController,
                   validator: (String? value) {
                     if (value!.isNotEmpty) return null;

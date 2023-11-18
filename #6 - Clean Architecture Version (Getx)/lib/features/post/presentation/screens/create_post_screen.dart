@@ -1,21 +1,24 @@
-import 'package:clean_architecture_getx/common/controller/base_controller.dart';
-import 'package:clean_architecture_getx/common/dialog/progress_dialog.dart';
-import 'package:clean_architecture_getx/common/dialog/retry_dialog.dart';
-import 'package:clean_architecture_getx/common/widget/text_input.dart';
-import 'package:clean_architecture_getx/core/app_extension.dart';
-import 'package:clean_architecture_getx/di.dart';
-import 'package:clean_architecture_getx/features/post/data/models/post.dart';
-import 'package:clean_architecture_getx/features/post/presentation/controller/post_controller.dart';
-import 'package:clean_architecture_getx/features/user/data/models/user.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:clean_architecture_getx/di.dart';
+import 'package:clean_architecture_getx/core/app_extension.dart';
+import 'package:clean_architecture_getx/common/widget/text_input.dart';
+import 'package:clean_architecture_getx/common/dialog/retry_dialog.dart';
+import 'package:clean_architecture_getx/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_getx/features/user/data/models/user.dart';
+import 'package:clean_architecture_getx/features/post/data/models/post.dart';
+import 'package:clean_architecture_getx/common/controller/base_controller.dart';
+import 'package:clean_architecture_getx/features/post/presentation/controller/post_controller.dart';
 
 enum PostMode { create, update }
 
 class CreatePostScreen extends StatefulWidget {
-  const CreatePostScreen(
-      {Key? key, required this.user, this.mode = PostMode.create, this.post})
-      : super(key: key);
+  const CreatePostScreen({
+    super.key,
+    required this.user,
+    this.mode = PostMode.create,
+    this.post,
+  });
 
   final User user;
   final Post? post;
