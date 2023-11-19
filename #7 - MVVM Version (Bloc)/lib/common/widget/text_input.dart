@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TextInput extends StatelessWidget {
   const TextInput({
-    Key? key,
+    super.key,
     this.initialValue,
     this.onChanged,
     this.validator,
@@ -10,9 +10,9 @@ class TextInput extends StatelessWidget {
     this.controller,
     this.icon,
     this.focusNode,
-    this.autovalidateMode = AutovalidateMode.onUserInteraction,
+    this.autoValidateMode = AutovalidateMode.onUserInteraction,
     required this.hint,
-  }) : super(key: key);
+  });
 
   final String? initialValue;
   final String hint;
@@ -21,7 +21,7 @@ class TextInput extends StatelessWidget {
   final int? maxLine;
   final Icon? icon;
   final TextEditingController? controller;
-  final AutovalidateMode autovalidateMode;
+  final AutovalidateMode autoValidateMode;
   final FocusNode? focusNode;
 
   @override
@@ -30,7 +30,7 @@ class TextInput extends StatelessWidget {
       focusNode: focusNode,
       controller: controller,
       textInputAction: TextInputAction.next,
-      autovalidateMode: autovalidateMode,
+      autovalidateMode: autoValidateMode,
       cursorColor: Colors.grey,
       initialValue: initialValue,
       maxLines: maxLine,

@@ -1,13 +1,13 @@
-import 'package:mvvm_bloc/common/widget/spinkit_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm_bloc/common/widget/spinkit_indicator.dart';
 
 class ProgressDialog extends StatelessWidget {
   const ProgressDialog({
-    Key? key,
+    super.key,
     required this.title,
     required this.isProgressed,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   final String title;
   final bool isProgressed;

@@ -14,7 +14,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 class PostListScreen extends StatefulWidget {
-  const PostListScreen({Key? key, required this.user}) : super(key: key);
+  const PostListScreen({
+    super.key,
+    required this.user,
+  });
 
   final User user;
 

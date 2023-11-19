@@ -21,7 +21,10 @@ import 'package:flutter/material.dart';
 enum Mode { create, update }
 
 class ToDoListScreen extends StatefulWidget {
-  const ToDoListScreen({Key? key, required this.user}) : super(key: key);
+  const ToDoListScreen({
+    super.key,
+    required this.user,
+  });
 
   final User user;
 

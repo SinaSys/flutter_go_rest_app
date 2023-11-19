@@ -1,13 +1,13 @@
-import 'package:mvvm_bloc/core/app_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm_bloc/core/app_extension.dart';
 
 class PopupMenu<T> extends StatelessWidget {
-  const PopupMenu(
-      {Key? key,
-      required this.items,
-      required this.onChanged,
-      this.icon = Icons.more_vert})
-      : super(key: key);
+  const PopupMenu({
+    super.key,
+    required this.items,
+    required this.onChanged,
+    this.icon = Icons.more_vert,
+  });
 
   final List<T> items;
   final ValueChanged<T> onChanged;

@@ -1,8 +1,11 @@
-import 'package:mvvm_bloc/data/model/user/user.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm_bloc/data/model/user/user.dart';
 
 class StatusContainer extends StatelessWidget {
-  const StatusContainer({Key? key, required this.status}) : super(key: key);
+  const StatusContainer({
+    super.key,
+    required this.status,
+  });
 
   final UserStatus status;
 
@@ -34,10 +37,11 @@ class StatusContainer extends StatelessWidget {
             child: Text(
               status.name,
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: status == UserStatus.inactive
-                      ? Colors.grey
-                      : Colors.black87),
+                fontWeight: FontWeight.bold,
+                color: status == UserStatus.inactive
+                    ? Colors.grey
+                    : Colors.black87,
+              ),
             ),
           )
         ],
