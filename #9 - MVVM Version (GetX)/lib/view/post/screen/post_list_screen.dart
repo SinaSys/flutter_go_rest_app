@@ -13,7 +13,10 @@ import 'package:mvvm_getx/di.dart';
 import 'package:get/get.dart';
 
 class PostListScreen extends StatefulWidget {
-  const PostListScreen({Key? key, required this.user}) : super(key: key);
+  const PostListScreen({
+    super.key,
+    required this.user,
+  });
 
   final User user;
 

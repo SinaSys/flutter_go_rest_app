@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mvvm_getx/data/model/user/user.dart';
 
 class StatusContainer extends StatelessWidget {
-  const StatusContainer({Key? key, required this.status}) : super(key: key);
+  const StatusContainer({
+    super.key,
+    required this.status,
+  });
 
   final UserStatus status;
 

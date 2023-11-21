@@ -3,16 +3,15 @@ import 'package:mvvm_getx/data/model/todo/todo.dart';
 import 'package:mvvm_getx/core/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'circle_container.dart';
 
 class TodoListItem extends StatelessWidget {
   const TodoListItem({
-    Key? key,
+    super.key,
     required this.items,
     required this.onEditPressed,
     required this.onDeletePressed,
-  }) : super(key: key);
+  });
 
   final List<ToDo> items;
 

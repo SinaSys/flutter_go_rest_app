@@ -1,13 +1,13 @@
-import 'package:mvvm_getx/core/app_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm_getx/core/app_extension.dart';
 
 class DropDown<T> extends StatefulWidget {
-  const DropDown(
-      {Key? key,
-      required this.onChanged,
-      required this.items,
-      this.initialItem})
-      : super(key: key);
+  const DropDown({
+    super.key,
+    required this.onChanged,
+    required this.items,
+    this.initialItem,
+  });
 
   final ValueChanged<T> onChanged;
   final List<T> items;
