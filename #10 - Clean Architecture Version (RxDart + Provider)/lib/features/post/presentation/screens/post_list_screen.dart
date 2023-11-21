@@ -13,7 +13,10 @@ import 'package:clean_architecture_rxdart/features/post/presentation/screens/cre
 import 'package:clean_architecture_rxdart/features/post/presentation/screens/post_detail_screen.dart';
 
 class PostListScreen extends StatefulWidget {
-  const PostListScreen({Key? key, required this.user}) : super(key: key);
+  const PostListScreen({
+    super.key,
+    required this.user,
+  });
 
   final User user;
 

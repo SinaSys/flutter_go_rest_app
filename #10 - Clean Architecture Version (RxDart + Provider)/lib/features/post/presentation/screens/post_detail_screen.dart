@@ -17,8 +17,11 @@ import 'package:clean_architecture_rxdart/features/comment/presentation/bloc/com
 import 'package:clean_architecture_rxdart/features/post/presentation/screens/create_post_screen.dart';
 
 class PostDetailScreen extends StatefulWidget {
-  const PostDetailScreen({Key? key, required this.post, this.user})
-      : super(key: key);
+  const PostDetailScreen({
+    super.key,
+    required this.post,
+    this.user,
+  });
 
   final Post post;
   final User? user;
