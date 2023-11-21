@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TextInput extends StatelessWidget {
   const TextInput({
-    Key? key,
+    super.key,
     this.initialValue,
     this.onChanged,
     this.validator,
@@ -12,7 +12,7 @@ class TextInput extends StatelessWidget {
     this.focusNode,
     this.autoValidateMode = AutovalidateMode.onUserInteraction,
     required this.hint,
-  }) : super(key: key);
+  });
 
   final String? initialValue;
   final String hint;

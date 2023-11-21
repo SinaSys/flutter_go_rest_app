@@ -7,11 +7,11 @@ import 'circle_container.dart';
 
 class TodoListItem extends StatelessWidget {
   const TodoListItem({
-    Key? key,
+    super.key,
     required this.items,
     required this.onEditPressed,
     required this.onDeletePressed,
-  }) : super(key: key);
+  });
 
   final List<ToDo> items;
 

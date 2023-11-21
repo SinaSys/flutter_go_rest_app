@@ -6,7 +6,6 @@ import 'package:mvvm_cubit/viewmodel/user/cubit/user_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mvvm_cubit/core/app_theme.dart';
 import 'package:flutter/material.dart';
-
 import 'di.dart';
 
 void main() async {
@@ -15,7 +14,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
