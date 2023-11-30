@@ -43,6 +43,7 @@ dependencies:
   get_it: ^7.6.4
   get: ^4.6.6
   dartz: ^0.10.1
+  mockito: ^5.4.3
 
 
 
