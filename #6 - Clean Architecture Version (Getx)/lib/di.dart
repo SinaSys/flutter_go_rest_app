@@ -100,35 +100,43 @@ Future<void> init() async {
 
   // User repository
   getIt.registerLazySingleton<UserRepository>(
-      () => UserRepositoryImpl(remoteDataSource: getIt()));
+    () => UserRepositoryImpl(remoteDataSource: getIt()),
+  );
 
-// _Todo repository
+  // _Todo repository
   getIt.registerLazySingleton<TodoRepository>(
-      () => TodoRepositoryImpl(remoteDataSource: getIt()));
+    () => TodoRepositoryImpl(remoteDataSource: getIt()),
+  );
 
   // Post repository
   getIt.registerLazySingleton<PostRepository>(
-      () => PostRepositoryImpl(remoteDataSource: getIt()));
+    () => PostRepositoryImpl(remoteDataSource: getIt()),
+  );
 
   // Comment repository
   getIt.registerLazySingleton<CommentRepository>(
-      () => CommentRepositoryImpl(remoteDataSource: getIt()));
+    () => CommentRepositoryImpl(remoteDataSource: getIt()),
+  );
 
   // User remote data sources
   getIt.registerLazySingleton<UserRemoteDataSource>(
-      () => UserRemoteDataSourceImpl());
+    () => UserRemoteDataSourceImpl(dioClient: getIt<DioClient>()),
+  );
 
   // _Todo remote data sources
   getIt.registerLazySingleton<TodoRemoteDataSource>(
-      () => TodoRemoteDataSourceImpl());
+    () => TodoRemoteDataSourceImpl(dioClient: getIt<DioClient>()),
+  );
 
   // Post remote data sources
   getIt.registerLazySingleton<PostRemoteDataSource>(
-      () => PostRemoteDataSourceImpl());
+    () => PostRemoteDataSourceImpl(dioClient: getIt<DioClient>()),
+  );
 
   // Comment remote data sources
   getIt.registerLazySingleton<CommentRemoteDataSource>(
-      () => CommentRemoteDataSourceImpl());
+    () => CommentRemoteDataSourceImpl(dioClient: getIt<DioClient>()),
+  );
 
   //Dio
   getIt.registerLazySingleton<DioClient>(() => DioClient(getIt<Dio>()));
