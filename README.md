@@ -61,6 +61,7 @@ Error state                    |   Empty state             |  Warning dialog    
 + Get date/time from user by Date/Time picker
 + Generic structure
 + State management with ```GetX``` | ```Bloc``` | ```Cubit``` | ```RxDart```
++ Unit testing (Clean architecture version (GetX)) `
 
   <br/>
 
