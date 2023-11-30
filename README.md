@@ -61,7 +61,7 @@ Error state                    |   Empty state             |  Warning dialog    
 + Get date/time from user by Date/Time picker
 + Generic structure
 + State management with ```GetX``` | ```Bloc``` | ```Cubit``` | ```RxDart```
-+ Unit testing (Clean architecture version (GetX)) `
++ Unit testing (Clean architecture version (GetX))
 
   <br/>
 
@@ -98,23 +98,24 @@ files inside each feature folder, ensuring that they belong to the correct layer
   <br/>
 
 ## 📚 Dependencies (Clean architecture version (Feature-first))
-|                               Name                                |  GetX |  Cubit |  Bloc |   RxDart + Provider   |
-|:-----------------------------------------------------------------:|:-------------------------------------------------------:|:--------------------------------------------------------:|:--------------------------------------------------------:|:--------------------------------------------------------:|
-|       [flutter_bloc](https://pub.dev/packages/flutter_bloc)       |✖️ | ✔  | ✔  |✖  |
-|          [provider ](https://pub.dev/packages/provider)           |✖️ | ✖  | ✖  |✔  |
-|             [rxdart](https://pub.dev/packages/rxdart)             |✖️ | ✖  | ✖  |✔  |
-|             [get_it](https://pub.dev/packages/get_it)             |✔️ | ✔  | ✔  | ✔  |
-|               [GetX](https://pub.dev/packages/get)                |✔️ | ✖️ | ✖️ | ✖  |
-|                [dio](https://pub.dev/packages/dio)                |✔️ | ✔️ | ✔️ | ✔  |
-|            [freezed](https://pub.dev/packages/freezed)            |✖️ | ✔️ | ✔️ | ✔  |
-| [freezed_annotation](https://pub.dev/packages/freezed_annotation) |✖ | ✔️ | ✔️ | ✔  |
-|    [json_annotation](https://pub.dev/packages/json_annotation)    |✔️ | ✔️ | ✔️ | ✔  |
-|  [json_serializable](https://pub.dev/packages/json_serializable)  |✔️ | ✔️ | ✔️ |✔  |
-|       [build_runner](https://pub.dev/packages/build_runner)       |✔️ | ✔️ | ✔️ | ✔  |
-|             [logger](https://pub.dev/packages/logger)             |✔️ | ✔️ | ✔️ | ✔  |
-|              [dartz](https://pub.dev/packages/dartz)              |✔️ | ✖️ | ✖️ | ✖  |
-|    [flutter_spinkit](https://pub.dev/packages/flutter_spinkit)    |✔️ | ✔️ | ✔️ |✔  |
-|               [intl](https://pub.dev/packages/intl)               |✔️ | ✔️ | ✔️ |✔  |
+|                                  Name                                  |  GetX |  Cubit |  Bloc |   RxDart + Provider   |
+|:----------------------------------------------------------------------:|:-------------------------------------------------------:|:--------------------------------------------------------:|:--------------------------------------------------------:|:--------------------------------------------------------:|
+|         [flutter_bloc](https://pub.dev/packages/flutter_bloc)          |✖️ | ✔  | ✔  |✖  |
+|             [provider ](https://pub.dev/packages/provider)             |✖️ | ✖  | ✖  |✔  |
+|               [rxdart](https://pub.dev/packages/rxdart)                |✖️ | ✖  | ✖  |✔  |
+|               [get_it](https://pub.dev/packages/get_it)                |✔️ | ✔  | ✔  | ✔  |
+|                  [GetX](https://pub.dev/packages/get)                  |✔️ | ✖️ | ✖️ | ✖  |
+|                  [dio](https://pub.dev/packages/dio)                   |✔️ | ✔️ | ✔️ | ✔  |
+|              [freezed](https://pub.dev/packages/freezed)               |✖️ | ✔️ | ✔️ | ✔  |
+|   [freezed_annotation](https://pub.dev/packages/freezed_annotation)    |✖ | ✔️ | ✔️ | ✔  |
+|      [json_annotation](https://pub.dev/packages/json_annotation)       |✔️ | ✔️ | ✔️ | ✔  |
+|    [json_serializable](https://pub.dev/packages/json_serializable)     |✔️ | ✔️ | ✔️ |✔  |
+|         [build_runner](https://pub.dev/packages/build_runner)          |✔️ | ✔️ | ✔️ | ✔  |
+|               [logger](https://pub.dev/packages/logger)                |✔️ | ✔️ | ✔️ | ✔  |
+|                [dartz](https://pub.dev/packages/dartz)                 |✔️ | ✖️ | ✖️ | ✖  |
+|      [flutter_spinkit](https://pub.dev/packages/flutter_spinkit)       |✔️ | ✔️ | ✔️ |✔  |
+|                 [intl](https://pub.dev/packages/intl)                  |✔️ | ✔️ | ✔️ |✔  |
+|        [mockito](https://pub.dev/packages/mockito)                     |✔️ | ✖️ | ✖️ |✖  |
 
   <br/>
 
