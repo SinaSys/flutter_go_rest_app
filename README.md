@@ -1308,6 +1308,7 @@ files inside each feature folder, ensuring that they belong to the correct layer
  │   │   │──dio_exception.dart
  │   │   └──dio_interceptor.dart
  │   │───📂widget
+ │   │   │──async_widget.dart
  │   │   │──date_time_picker.dart
  │   │   │──drop_down.dart
  │   │   │──empty_widget.dart
