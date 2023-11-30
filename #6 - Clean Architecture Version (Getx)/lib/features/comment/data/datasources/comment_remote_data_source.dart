@@ -1,8 +1,7 @@
-import 'package:clean_architecture_getx/features/comment/data/models/comment.dart';
 import 'package:clean_architecture_getx/common/network/api_base.dart';
 import 'package:clean_architecture_getx/common/network/api_config.dart';
 import 'package:clean_architecture_getx/common/network/dio_client.dart';
-import 'package:clean_architecture_getx/di.dart';
+import 'package:clean_architecture_getx/features/comment/data/models/comment.dart';
 
 abstract class CommentRemoteDataSource {
   Future<List<Comment>> getComments(int postId);
@@ -13,16 +12,22 @@ abstract class CommentRemoteDataSource {
 }
 
 class CommentRemoteDataSourceImpl with ApiBase<Comment> implements CommentRemoteDataSource {
-  final DioClient dioClient = getIt<DioClient>();
+  final DioClient dioClient;
+
+  const CommentRemoteDataSourceImpl({required this.dioClient});
 
   @override
   Future<bool> createComment(Comment comment) async {
-    return await makePostRequest(dioClient.dio.post(ApiConfig.comments, data: comment));
+    return await makePostRequest(
+      dioClient.post(ApiConfig.comments, data: comment),
+    );
   }
 
   @override
   Future<bool> deleteComment(Comment comment) async {
-    return await makeDeleteRequest(dioClient.dio.delete("${ApiConfig.comments}/${comment.id}"));
+    return await makeDeleteRequest(
+      dioClient.delete("${ApiConfig.comments}/${comment.id}"),
+    );
   }
 
   @override
@@ -30,7 +35,8 @@ class CommentRemoteDataSourceImpl with ApiBase<Comment> implements CommentRemote
     final queryParameters = {'post_id': "$postId"};
 
     return await makeGetRequest(
-        dioClient.dio.get(ApiConfig.comments, queryParameters: queryParameters),
-        Comment.fromJson);
+      dioClient.get(ApiConfig.comments, queryParameters: queryParameters),
+      Comment.fromJson,
+    );
   }
 }

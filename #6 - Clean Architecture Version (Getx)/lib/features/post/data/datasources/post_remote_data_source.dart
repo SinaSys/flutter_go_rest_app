@@ -1,7 +1,6 @@
 import 'package:clean_architecture_getx/common/network/api_base.dart';
 import 'package:clean_architecture_getx/common/network/api_config.dart';
 import 'package:clean_architecture_getx/common/network/dio_client.dart';
-import 'package:clean_architecture_getx/di.dart';
 import 'package:clean_architecture_getx/features/post/data/models/post.dart';
 import 'package:clean_architecture_getx/features/user/data/models/user.dart';
 
@@ -15,24 +14,30 @@ abstract class PostRemoteDataSource {
   Future<bool> deletePost(Post post);
 }
 
-class PostRemoteDataSourceImpl
-    with ApiBase<Post>
-    implements PostRemoteDataSource {
-  final DioClient dioClient = getIt<DioClient>();
+class PostRemoteDataSourceImpl with ApiBase<Post> implements PostRemoteDataSource {
+  final DioClient dioClient;
+
+  const PostRemoteDataSourceImpl({required this.dioClient});
 
   @override
   Future<bool> createPost(Post post) async {
-    return await makePostRequest(dioClient.dio.post(ApiConfig.posts, data: post));
+    return await makePostRequest(
+      dioClient.post(ApiConfig.posts, data: post),
+    );
   }
 
   @override
   Future<bool> updatePost(Post post) async {
-    return await makePutRequest(dioClient.dio.put("${ApiConfig.posts}/${post.id}", data: post));
+    return await makePutRequest(
+      dioClient.put("${ApiConfig.posts}/${post.id}", data: post),
+    );
   }
 
   @override
   Future<bool> deletePost(Post post) async {
-    return await makeDeleteRequest(dioClient.dio.delete("${ApiConfig.posts}/${post.id}"));
+    return await makeDeleteRequest(
+      dioClient.delete("${ApiConfig.posts}/${post.id}"),
+    );
   }
 
   @override
@@ -40,7 +45,8 @@ class PostRemoteDataSourceImpl
     final queryParameters = {'user_id': "${user.id}"};
 
     return await makeGetRequest(
-        dioClient.dio.get(ApiConfig.posts, queryParameters: queryParameters),
-        Post.fromJson);
+      dioClient.get(ApiConfig.posts, queryParameters: queryParameters),
+      Post.fromJson,
+    );
   }
 }

@@ -1,9 +1,8 @@
-import 'package:clean_architecture_getx/features/user/domain/entities/user_entity.dart';
-import 'package:clean_architecture_getx/features/user/data/models/user.dart';
+import 'package:clean_architecture_getx/common/network/api_base.dart';
 import 'package:clean_architecture_getx/common/network/api_config.dart';
 import 'package:clean_architecture_getx/common/network/dio_client.dart';
-import 'package:clean_architecture_getx/common/network/api_base.dart';
-import 'package:clean_architecture_getx/di.dart';
+import 'package:clean_architecture_getx/features/user/data/models/user.dart';
+import 'package:clean_architecture_getx/features/user/domain/entities/user_entity.dart';
 
 abstract class UserRemoteDataSource {
   Future<List<User>> getUsers({Gender? gender, UserStatus? status});
@@ -16,21 +15,37 @@ abstract class UserRemoteDataSource {
 }
 
 class UserRemoteDataSourceImpl with ApiBase<User> implements UserRemoteDataSource {
-  final DioClient dioClient = getIt<DioClient>();
+  final DioClient dioClient;
+
+  const UserRemoteDataSourceImpl({required this.dioClient});
 
   @override
   Future<bool> createUser(User user) async {
-    return await makePostRequest(dioClient.dio.post(ApiConfig.users, data: user));
+    return await makePostRequest(
+      dioClient.post(
+        ApiConfig.users,
+        data: user,
+      ),
+    );
   }
 
   @override
   Future<bool> updateUser(User user) async {
-    return await makePutRequest(dioClient.dio.put("${ApiConfig.users}/${user.id}", data: user));
+    return await makePutRequest(
+      dioClient.put(
+        "${ApiConfig.users}/${user.id}",
+        data: user,
+      ),
+    );
   }
 
   @override
   Future<bool> deleteUser(User user) async {
-    return await makeDeleteRequest(dioClient.dio.delete("${ApiConfig.users}/${user.id}"));
+    return await makeDeleteRequest(
+      dioClient.delete(
+        "${ApiConfig.users}/${user.id}",
+      ),
+    );
   }
 
   @override
@@ -46,7 +61,8 @@ class UserRemoteDataSourceImpl with ApiBase<User> implements UserRemoteDataSourc
     }
 
     return await makeGetRequest(
-        dioClient.dio.get(ApiConfig.users, queryParameters: queryParameters),
-        User.fromJson);
+      dioClient.get(ApiConfig.users, queryParameters: queryParameters),
+      User.fromJson,
+    );
   }
 }
