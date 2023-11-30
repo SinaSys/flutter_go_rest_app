@@ -1,12 +1,13 @@
-import 'package:clean_architecture_getx/common/controller/base_controller.dart';
+import 'package:get/get.dart';
+import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:clean_architecture_getx/features/user/data/models/user.dart';
 import 'package:clean_architecture_getx/features/post/data/models/post.dart';
+import 'package:clean_architecture_getx/common/controller/base_controller.dart';
 import 'package:clean_architecture_getx/features/post/domain/usecases/create_post_usecase.dart';
 import 'package:clean_architecture_getx/features/post/domain/usecases/delete_post_usecase.dart';
 import 'package:clean_architecture_getx/features/post/domain/usecases/get_posts_usecase.dart';
 import 'package:clean_architecture_getx/features/post/domain/usecases/update_post_usecase.dart';
-import 'package:clean_architecture_getx/features/user/data/models/user.dart';
-import 'package:dartz/dartz.dart';
-import 'package:get/get.dart';
 
 class PostController extends GetxController with StateMixin<List<Post>>, BaseController {
   RxInt postLength = 0.obs;
@@ -16,6 +17,9 @@ class PostController extends GetxController with StateMixin<List<Post>>, BaseCon
   final UpdatePostUseCase updatePostUseCase;
   final DeletePostUseCase deletePostUseCase;
 
+  @visibleForTesting
+  late Either<String, List<Post>> failureOrSuccess;
+
   PostController({
     required this.getPostsUseCase,
     required this.createPostUseCase,
@@ -23,22 +27,21 @@ class PostController extends GetxController with StateMixin<List<Post>>, BaseCon
     required this.deletePostUseCase,
   });
 
-  void createPost(Post post) {
+  Future<void> createPost(Post post) async {
     createItem(createPostUseCase.call(CreatePostParams(post)));
   }
 
-  void updatePost(Post post) async {
+  Future<void> updatePost(Post post) async {
     updateItem(updatePostUseCase.call(UpdatePostParams(post)));
   }
 
-  void deletePost(Post post) async {
+  Future<void> deletePost(Post post) async {
     deleteItem(deletePostUseCase.call(DeletePostParams(post)));
   }
 
   Future<void> getPosts(User user) async {
     change(null, status: RxStatus.loading());
-    Either<String, List<Post>> failureOrSuccess =
-        (await getPostsUseCase.call(GetPostsParams(user: user)));
+    failureOrSuccess = (await getPostsUseCase.call(GetPostsParams(user: user)));
     failureOrSuccess.fold(
       (String failure) {
         change(null, status: RxStatus.error(failure));
