@@ -1,6 +1,6 @@
-import 'package:clean_architecture_getx/features/user/domain/entities/user_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/foundation.dart' show immutable;
+import 'package:clean_architecture_getx/features/user/domain/entities/user_entity.dart';
 
 part 'user.g.dart';
 
@@ -18,4 +18,12 @@ class User extends UserEntity {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
+
+  ///For unit testing
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is User && runtimeType == other.runtimeType;
+
+  ///For unit testing
+  @override
+  int get hashCode => 0;
 }

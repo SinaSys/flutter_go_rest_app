@@ -15,8 +15,15 @@ class Comment extends CommentEntity {
     required super.body,
   });
 
-  factory Comment.fromJson(Map<String, dynamic> json) =>
-      _$CommentFromJson(json);
+  factory Comment.fromJson(Map<String, dynamic> json) => _$CommentFromJson(json);
+
+  //For unit testing
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is Comment && runtimeType == other.runtimeType;
+
+  //For unit testing
+  @override
+  int get hashCode => 0;
 
   Map<String, dynamic> toJson() => _$CommentToJson(this);
 }

@@ -16,5 +16,13 @@ class Post extends PostEntity {
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
+  //For unit testing
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is Post && runtimeType == other.runtimeType;
+
+  //For unit testing
+  @override
+  int get hashCode => 0;
+
   Map<String, dynamic> toJson() => _$PostToJson(this);
 }
