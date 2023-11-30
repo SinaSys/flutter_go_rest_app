@@ -7,12 +7,11 @@ import 'package:layered_architecture/common/widget/text_input.dart';
 import 'package:layered_architecture/common/widget/popup_menu.dart';
 import 'package:layered_architecture/common/widget/empty_widget.dart';
 import 'package:layered_architecture/common/dialog/retry_dialog.dart';
-import 'package:layered_architecture/common/dialog/progress_dialog.dart';
+import 'package:layered_architecture/common/widget/async_widget.dart';
 import 'package:layered_architecture/features/todo/data/model/todo.dart';
 import 'package:layered_architecture/features/user/data/model/user.dart';
 import 'package:layered_architecture/common/widget/date_time_picker.dart';
 import 'package:layered_architecture/common/widget/spinkit_indicator.dart';
-import 'package:layered_architecture/common/controller/base_controller.dart';
 import 'package:layered_architecture/features/todo/controller/todo_controller.dart';
 import 'package:layered_architecture/features/todo/view/widget/todo_list_item.dart';
 
@@ -62,7 +61,9 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
             () => Text(
               controller.todosCount.string,
               style: const TextStyle(
-                  color: Colors.black54, fontWeight: FontWeight.bold),
+                color: Colors.black54,
+                fontWeight: FontWeight.bold,
+              ),
             ).paddingAll(20),
           ),
           const Spacer(),
@@ -113,43 +114,38 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
       builder: (_) {
         return Obx(
           () {
-            return switch (controller.apiStatus.value) {
-              ApiState.loading => ProgressDialog(
-                  title: "${mode.name}ing task...",
-                  isProgressed: true,
-                ),
-              ApiState.success => ProgressDialog(
-                  title: "Successfully ${mode.name}ed",
-                  onPressed: () {
-                    controller.getTodos(widget.user.id!);
-                    Navigator.pop(context);
-                  },
-                  isProgressed: false,
-                ),
-              ApiState.failure => RetryDialog(
-                  title: controller.errorMessage.value,
-                  onRetryPressed: () {
-                    if (mode == Mode.create) {
-                      controller.createTodo(todo);
-                    } else {
-                      controller.updateTodo(todo);
-                    }
-                  },
-                ),
-            };
+            return AsyncWidget(
+              apiState: controller.apiStatus.value,
+              progressStatusTitle: "${mode.name}ing task...",
+              failureStatusTitle: controller.errorMessage.value,
+              successStatusTitle: "Successfully ${mode.name}d",
+              onSuccessPressed: () {
+                Navigator.pop(context);
+                controller.getTodos(widget.user.id!);
+              },
+              onRetryPressed: () {
+                if (mode == Mode.create) {
+                  controller.createTodo(todo);
+                } else {
+                  controller.updateTodo(todo);
+                }
+              },
+            );
           },
         );
       },
     );
   }
 
-  void todoBottomSheet(BuildContext context,
-      {Mode mode = Mode.create,
-      //required for edit mode
-      int? todoId,
-      Status todoStatus = Status.pending,
-      required DateTime currentDateTime,
-      String? taskTitle}) {
+  void todoBottomSheet(
+    BuildContext context, {
+    Mode mode = Mode.create,
+    //require for edit mode
+    int? todoId,
+    Status todoStatus = Status.pending,
+    required DateTime currentDateTime,
+    String? taskTitle,
+  }) {
     final formKey = GlobalKey<FormState>();
     String title = taskTitle ?? "";
     DateTime dateTime = currentDateTime;
@@ -161,8 +157,7 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
       backgroundColor: Colors.white,
       builder: (_) {
         return Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Form(
             key: formKey,
             child: Column(
@@ -231,24 +226,17 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
           builder: (_) {
             return Obx(
               () {
-                return switch (controller.apiStatus.value) {
-                  ApiState.loading => const ProgressDialog(
-                      title: "Deleting task...",
-                      isProgressed: true,
-                    ),
-                  ApiState.success => ProgressDialog(
-                      title: "Successfully deleted",
-                      onPressed: () {
-                        controller.getTodos(widget.user.id!);
-                        Navigator.pop(context);
-                      },
-                      isProgressed: false,
-                    ),
-                  ApiState.failure => RetryDialog(
-                      title: controller.errorMessage.value,
-                      onRetryPressed: () => controller.deleteTodo(todo),
-                    ),
-                };
+                return AsyncWidget(
+                  apiState: controller.apiStatus.value,
+                  progressStatusTitle: "Deleting task...",
+                  failureStatusTitle: controller.errorMessage.value,
+                  successStatusTitle: "Successfully deleted",
+                  onSuccessPressed: () {
+                    Navigator.pop(context);
+                    controller.getTodos(widget.user.id!);
+                  },
+                  onRetryPressed: () => controller.deleteTodo(todo),
+                );
               },
             );
           },

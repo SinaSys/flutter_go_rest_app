@@ -4,13 +4,12 @@ import 'package:layered_architecture/core/app_style.dart';
 import 'package:layered_architecture/core/app_extension.dart';
 import 'package:layered_architecture/common/widget/popup_menu.dart';
 import 'package:layered_architecture/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture/common/widget/async_widget.dart';
 import 'package:layered_architecture/common/widget/empty_widget.dart';
 import 'package:layered_architecture/common/dialog/delete_dialog.dart';
 import 'package:layered_architecture/common/dialog/create_dialog.dart';
-import 'package:layered_architecture/common/dialog/progress_dialog.dart';
 import 'package:layered_architecture/features/user/data/model/user.dart';
 import 'package:layered_architecture/common/widget/spinkit_indicator.dart';
-import 'package:layered_architecture/common/controller/base_controller.dart';
 import 'package:layered_architecture/features/user/controller/user_controller.dart';
 import 'package:layered_architecture/features/todo/view/screen/todo_list_screen.dart';
 import 'package:layered_architecture/features/post/view/screen/post_list_screen.dart';
@@ -69,24 +68,17 @@ class _UserListScreenState extends State<UserListScreen> {
             builder: (_) {
               return Obx(
                 () {
-                  return switch (controller.apiStatus.value) {
-                    ApiState.loading => const ProgressDialog(
-                        title: "Creating user...",
-                        isProgressed: true,
-                      ),
-                    ApiState.success => ProgressDialog(
-                        title: "Successfully created",
-                        onPressed: () {
-                          controller.getUserList();
-                          Navigator.pop(context);
-                        },
-                        isProgressed: false,
-                      ),
-                    ApiState.failure => RetryDialog(
-                        title: controller.errorMessage.value,
-                        onRetryPressed: () => controller.createUser(user),
-                      ),
-                  };
+                  return AsyncWidget(
+                    apiState: controller.apiStatus.value,
+                    progressStatusTitle: "Creating user...",
+                    failureStatusTitle: controller.errorMessage.value,
+                    successStatusTitle: "Successfully created",
+                    onRetryPressed: () => controller.getUserList(),
+                    onSuccessPressed: () {
+                      Navigator.pop(context);
+                      controller.getUserList();
+                    },
+                  );
                 },
               );
             },
@@ -148,24 +140,17 @@ class _UserListScreenState extends State<UserListScreen> {
         builder: (_) {
           return Obx(
             () {
-              return switch (controller.apiStatus.value) {
-                ApiState.loading => const ProgressDialog(
-                    title: "Deleting user...",
-                    isProgressed: true,
-                  ),
-                ApiState.success => ProgressDialog(
-                    title: "Successfully deleted",
-                    onPressed: () {
-                      controller.getUserList();
-                      Navigator.pop(context);
-                    },
-                    isProgressed: false,
-                  ),
-                ApiState.failure => RetryDialog(
-                    title: controller.errorMessage.value,
-                    onRetryPressed: () => controller.deleteUser(user),
-                  ),
-              };
+              return AsyncWidget(
+                apiState: controller.apiStatus.value,
+                progressStatusTitle: "Deleting user...",
+                failureStatusTitle: controller.errorMessage.value,
+                successStatusTitle: "Successfully deleted",
+                onRetryPressed: () => controller.deleteUser(user),
+                onSuccessPressed: () {
+                  Navigator.pop(context);
+                  controller.getUserList();
+                },
+              );
             },
           );
         },
@@ -192,24 +177,17 @@ class _UserListScreenState extends State<UserListScreen> {
         builder: (_) {
           return Obx(
             () {
-              return switch (controller.apiStatus.value) {
-                ApiState.loading => const ProgressDialog(
-                    title: "Updating user...",
-                    isProgressed: true,
-                  ),
-                ApiState.success => ProgressDialog(
-                    title: "Successfully updated",
-                    onPressed: () {
-                      controller.getUserList();
-                      Navigator.pop(context);
-                    },
-                    isProgressed: false,
-                  ),
-                ApiState.failure => RetryDialog(
-                    title: controller.errorMessage.value,
-                    onRetryPressed: () => controller.updateUser(userObj),
-                  ),
-              };
+              return AsyncWidget(
+                apiState: controller.apiStatus.value,
+                progressStatusTitle: "Updating user...",
+                failureStatusTitle: controller.errorMessage.value,
+                successStatusTitle: "Successfully updated",
+                onRetryPressed: () => controller.updateUser(userObj),
+                onSuccessPressed: () {
+                  Navigator.pop(context);
+                  controller.getUserList();
+                },
+              );
             },
           );
         },

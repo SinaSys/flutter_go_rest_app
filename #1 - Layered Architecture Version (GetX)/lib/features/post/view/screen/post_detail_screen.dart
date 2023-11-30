@@ -5,12 +5,11 @@ import 'package:layered_architecture/core/app_asset.dart';
 import 'package:layered_architecture/core/app_extension.dart';
 import 'package:layered_architecture/common/widget/text_input.dart';
 import 'package:layered_architecture/common/dialog/retry_dialog.dart';
+import 'package:layered_architecture/common/widget/async_widget.dart';
 import 'package:layered_architecture/common/widget/empty_widget.dart';
 import 'package:layered_architecture/features/post/data/model/post.dart';
 import 'package:layered_architecture/features/user/data/model/user.dart';
-import 'package:layered_architecture/common/dialog/progress_dialog.dart';
 import 'package:layered_architecture/common/widget/spinkit_indicator.dart';
-import 'package:layered_architecture/common/controller/base_controller.dart';
 import 'package:layered_architecture/features/comment/data/model/comment.dart';
 import 'package:layered_architecture/features/post/controller/post_controller.dart';
 import 'package:layered_architecture/features/post/view/screen/create_post_screen.dart';
@@ -165,21 +164,17 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
       builder: (_) {
         return Obx(
           () {
-            return switch (postController.apiStatus.value) {
-              ApiState.loading => const ProgressDialog(
-                  title: "Deleting post...",
-                  isProgressed: true,
-                ),
-              ApiState.success => ProgressDialog(
-                  title: "Successfully deleted",
-                  onPressed: () => pop(context, 2),
-                  isProgressed: false,
-                ),
-              ApiState.failure => RetryDialog(
-                  title: postController.errorMessage.value,
-                  onRetryPressed: () => postController.deletePost(post),
-                ),
-            };
+            return AsyncWidget(
+              apiState: postController.apiStatus.value,
+              progressStatusTitle: "Deleting post...",
+              failureStatusTitle: postController.errorMessage.value,
+              successStatusTitle: "Successfully deleted",
+              onSuccessPressed: () {
+                pop(context, 2);
+                postController.getPosts(widget.user!);
+              },
+              onRetryPressed: () => postController.deletePost(post),
+            );
           },
         );
       },
@@ -211,13 +206,12 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
       builder: (_) {
         return Obx(
           () {
-            switch (commentController.apiStatus.value) {
-              case ApiState.loading:
-                return const ProgressDialog(
-                  title: "Deleting comment...",
-                  isProgressed: true,
-                );
-              case ApiState.success:
+            return AsyncWidget(
+              apiState: commentController.apiStatus.value,
+              progressStatusTitle: "Deleting comment...",
+              failureStatusTitle: postController.errorMessage.value,
+              successStatusTitle: "Successfully deleted",
+              onSuccessPressed: () {
                 WidgetsBinding.instance.addPostFrameCallback(
                   (_) {
                     commentController.getUserComments(widget.post.id);
@@ -225,14 +219,9 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                     snackBar("Successfully deleted");
                   },
                 );
-              case ApiState.failure:
-                return RetryDialog(
-                  title: commentController.errorMessage.value,
-                  onRetryPressed: () =>
-                      commentController.deleteComment(comment),
-                );
-            }
-            return const SizedBox();
+              },
+              onRetryPressed: () => commentController.deleteComment(comment),
+            );
           },
         );
       },
@@ -304,33 +293,24 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                         builder: (_) {
                           return Obx(
                             () {
-                              switch (commentController.apiStatus.value) {
-                                case ApiState.loading:
-                                  return const ProgressDialog(
-                                    title: "",
-                                    isProgressed: true,
-                                  );
-                                case ApiState.success:
+                              return AsyncWidget(
+                                apiState: commentController.apiStatus.value,
+                                progressStatusTitle: "",
+                                failureStatusTitle: commentController.errorMessage.value,
+                                successStatusTitle: "Successfully created",
+                                onSuccessPressed: () {
                                   WidgetsBinding.instance.addPostFrameCallback(
                                     (_) {
                                       nameEditingController.clear();
                                       commentBodyEditingController.clear();
                                       snackBar("Successfully created");
                                       Navigator.pop(context);
-                                      commentController
-                                          .getUserComments(widget.post.id);
+                                      commentController.getUserComments(widget.post.id);
                                     },
                                   );
-                                  break;
-                                case ApiState.failure:
-                                  return RetryDialog(
-                                    title: commentController.errorMessage.value,
-                                    onRetryPressed: () {
-                                      commentController.createComment(comment);
-                                    },
-                                  );
-                              }
-                              return const SizedBox();
+                                },
+                                onRetryPressed: () => commentController.createComment(comment),
+                              );
                             },
                           );
                         },

@@ -89,7 +89,9 @@ class _PostListScreenState extends State<PostListScreen> {
                     return Text(
                       "Posts :${postController.postLength}",
                       style: const TextStyle(
-                          fontWeight: FontWeight.w500, color: Colors.black54),
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black54,
+                      ),
                     );
                   },
                 )
@@ -121,8 +123,7 @@ class _PostListScreenState extends State<PostListScreen> {
                   ),
                 );
 
-                if (resultFromPostDetailScreen != null &&
-                    resultFromPostDetailScreen) {
+                if (resultFromPostDetailScreen != null && resultFromPostDetailScreen) {
                   postController.getPosts(widget.user);
                 }
               },
