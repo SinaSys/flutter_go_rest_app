@@ -171,7 +171,8 @@ files inside each feature folder, ensuring that they belong to the correct layer
 │───📂common  
 │   │───📂bloc
 │   │   │──bloc_helper.dart
-│   │   └──generic_bloc_state.dart
+│   │   │──generic_bloc_state.dart
+│   │   └──generic_bloc_builder.dart
 │   │───📂usecase
 │   │   └──usecase.dart
 │   │───📂repository
