@@ -4,20 +4,16 @@ import 'package:clean_architecture_bloc/core/app_style.dart';
 import 'package:clean_architecture_bloc/core/app_extension.dart';
 import 'package:clean_architecture_bloc/common/bloc/bloc_helper.dart';
 import 'package:clean_architecture_bloc/common/widget/popup_menu.dart';
-import 'package:clean_architecture_bloc/common/dialog/retry_dialog.dart';
 import 'package:clean_architecture_bloc/common/widget/empty_widget.dart';
 import 'package:clean_architecture_bloc/common/dialog/delete_dialog.dart';
 import 'package:clean_architecture_bloc/common/dialog/create_dialog.dart';
 import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
-import 'package:clean_architecture_bloc/common/dialog/progress_dialog.dart';
-import 'package:clean_architecture_bloc/common/bloc/generic_bloc_state.dart';
-import 'package:clean_architecture_bloc/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_bloc/common/bloc/generic_bloc_builder.dart';
 import 'package:clean_architecture_bloc/features/user/presentation/bloc/user_bloc.dart';
 import 'package:clean_architecture_bloc/features/user/domain/entities/user_entity.dart';
 import 'package:clean_architecture_bloc/features/user/presentation/bloc/user_event.dart';
 import 'package:clean_architecture_bloc/features/post/presentation/screens/post_list_screen.dart';
 import 'package:clean_architecture_bloc/features/todo/presentation/screens/todo_list_screen.dart';
-
 import 'package:clean_architecture_bloc/features/user/presentation/widgets/status_container.dart';
 
 enum Operation { edit, delete, post, todo }
@@ -71,32 +67,15 @@ class _UserListScreenState extends State<UserListScreen> {
           showDialog(
             context: context,
             builder: (_) {
-              return BlocBuilder<UserBloc, GenericBlocState<User>>(
-                builder: (BuildContext context, GenericBlocState<User> state) {
-                  switch (state.status) {
-                    case Status.empty:
-                      return const SizedBox();
-                    case Status.loading:
-                      return const ProgressDialog(
-                        title: "Creating user...",
-                        isProgressed: true,
-                      );
-                    case Status.failure:
-                      return RetryDialog(
-                        title: state.error ?? "Error",
-                        onRetryPressed: () =>
-                            context.read<UserBloc>().add(UserCreated(user)),
-                      );
-                    case Status.success:
-                      return ProgressDialog(
-                        title: "Successfully created",
-                        onPressed: () {
-                          context.read<UserBloc>().add(UsersFetched());
-                          Navigator.pop(context);
-                        },
-                        isProgressed: false,
-                      );
-                  }
+              return GenericBlocBuilder<UserBloc, User>(
+                successStatusTitle: 'Successfully created',
+                progressStatusTitle: "Creating user...",
+                onRetryPressed: () {
+                  context.read<UserBloc>().add(UserCreated(user));
+                },
+                onSuccessPressed: () {
+                  context.read<UserBloc>().add(UsersFetched());
+                  Navigator.pop(context);
                 },
               );
             },
@@ -159,32 +138,15 @@ class _UserListScreenState extends State<UserListScreen> {
       showDialog(
         context: context,
         builder: (_) {
-          return BlocBuilder<UserBloc, GenericBlocState<User>>(
-            builder: (BuildContext context, GenericBlocState<User> state) {
-              switch (state.status) {
-                case Status.empty:
-                  return const SizedBox();
-                case Status.loading:
-                  return const ProgressDialog(
-                    title: "Deleting user...",
-                    isProgressed: true,
-                  );
-                case Status.failure:
-                  return RetryDialog(
-                    title: state.error ?? "Error",
-                    onRetryPressed: () =>
-                        context.read<UserBloc>().add(UserDeleted(user)),
-                  );
-                case Status.success:
-                  return ProgressDialog(
-                    title: "Successfully deleted",
-                    onPressed: () {
-                      context.read<UserBloc>().add(UsersFetched());
-                      Navigator.pop(context);
-                    },
-                    isProgressed: false,
-                  );
-              }
+          return GenericBlocBuilder<UserBloc, User>(
+            successStatusTitle: 'Successfully deleted',
+            progressStatusTitle: "Deleting user...",
+            onRetryPressed: () {
+              context.read<UserBloc>().add(UserDeleted(user));
+            },
+            onSuccessPressed: () {
+              context.read<UserBloc>().add(UsersFetched());
+              Navigator.pop(context);
             },
           );
         },
@@ -209,32 +171,15 @@ class _UserListScreenState extends State<UserListScreen> {
       showDialog(
         context: context,
         builder: (_) {
-          return BlocBuilder<UserBloc, GenericBlocState<User>>(
-            builder: (BuildContext context, GenericBlocState<User> state) {
-              switch (state.status) {
-                case Status.empty:
-                  return const SizedBox();
-                case Status.loading:
-                  return const ProgressDialog(
-                    title: "Updating user...",
-                    isProgressed: true,
-                  );
-                case Status.failure:
-                  return RetryDialog(
-                    title: state.error ?? "Error",
-                    onRetryPressed: () =>
-                        context.read<UserBloc>().add(UserUpdated(userObj)),
-                  );
-                case Status.success:
-                  return ProgressDialog(
-                    title: "Successfully updated",
-                    onPressed: () {
-                      context.read<UserBloc>().add(UsersFetched());
-                      Navigator.pop(context);
-                    },
-                    isProgressed: false,
-                  );
-              }
+          return GenericBlocBuilder<UserBloc, User>(
+            successStatusTitle: 'Successfully updated',
+            progressStatusTitle: "Updating user...",
+            onRetryPressed: () {
+              context.read<UserBloc>().add(UserUpdated(userObj));
+            },
+            onSuccessPressed: () {
+              context.read<UserBloc>().add(UsersFetched());
+              Navigator.pop(context);
             },
           );
         },
@@ -263,33 +208,23 @@ class _UserListScreenState extends State<UserListScreen> {
     return Scaffold(
       floatingActionButton: floatingActionButton,
       appBar: _appBar,
-      body: BlocBuilder<UserBloc, GenericBlocState<User>>(
-        buildWhen: (prevState, curState) {
-          return context.read<UserBloc>().operation == ApiOperation.select
-              ? true
-              : false;
+      body: GenericBlocBuilder<UserBloc, User>(
+        buildWhen: (_, __) {
+          return context.read<UserBloc>().operation == ApiOperation.select ? true : false;
         },
-        builder: (BuildContext context, GenericBlocState<User> state) {
-          switch (state.status) {
-            case Status.empty:
-              return const EmptyWidget(message: "No user!");
-            case Status.loading:
-              return const SpinKitIndicator(type: SpinKitType.circle);
-            case Status.failure:
-              return RetryDialog(
-                  title: state.error ?? "Error",
-                  onRetryPressed: () =>
-                      context.read<UserBloc>().add(UsersFetched()));
-            case Status.success:
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount: state.data?.length ?? 0,
-                itemBuilder: (_, index) {
-                  User user = state.data![index];
-                  return userListItem(user);
-                },
-              );
-          }
+        emptyWidget: const EmptyWidget(message: "No user!"),
+        onRetryPressed: () {
+          context.read<UserBloc>().add(UsersFetched());
+        },
+        successWidget: (state) {
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: state.data?.length ?? 0,
+            itemBuilder: (_, index) {
+              User user = state.data![index];
+              return userListItem(user);
+            },
+          );
         },
       ),
     );

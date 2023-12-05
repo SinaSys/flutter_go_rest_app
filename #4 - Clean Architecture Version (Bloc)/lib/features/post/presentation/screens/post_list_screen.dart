@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clean_architecture_bloc/core/app_style.dart';
 import 'package:clean_architecture_bloc/core/app_extension.dart';
-import 'package:clean_architecture_bloc/common/dialog/retry_dialog.dart';
 import 'package:clean_architecture_bloc/common/widget/empty_widget.dart';
 import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
-import 'package:clean_architecture_bloc/common/bloc/generic_bloc_state.dart';
 import 'package:clean_architecture_bloc/features/post/data/models/post.dart';
-import 'package:clean_architecture_bloc/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_bloc/common/bloc/generic_bloc_builder.dart';
 import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_bloc.dart';
 import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_event.dart';
 import 'package:clean_architecture_bloc/features/post/presentation/screens/create_post_screen.dart';
@@ -90,7 +88,9 @@ class _PostListScreenState extends State<PostListScreen> {
                     return Text(
                       postBloc.getPostCount,
                       style: const TextStyle(
-                          color: Colors.black54, fontWeight: FontWeight.w500),
+                        color: Colors.black54,
+                        fontWeight: FontWeight.w500,
+                      ),
                     );
                   },
                 )
@@ -122,8 +122,7 @@ class _PostListScreenState extends State<PostListScreen> {
                   ),
                 );
 
-                if (resultFromPostDetailScreen != null &&
-                    resultFromPostDetailScreen) {
+                if (resultFromPostDetailScreen != null && resultFromPostDetailScreen) {
                   getData();
                 }
               },
@@ -176,23 +175,11 @@ class _PostListScreenState extends State<PostListScreen> {
             padding: EdgeInsets.only(left: 20, top: 15),
             child: Text("Posts", style: headLine1),
           ),
-          BlocBuilder<PostBloc, GenericBlocState<Post>>(
-            builder: (BuildContext context, GenericBlocState<Post> state) {
-              switch (state.status) {
-                case Status.empty:
-                  return const EmptyWidget(message: "No post");
-                case Status.loading:
-                  return const Center(child: SpinKitIndicator());
-                case Status.failure:
-                  return RetryDialog(
-                    title: state.error ?? "Error",
-                    onRetryPressed: () => getData(),
-                  );
-                case Status.success:
-                  return userPostItem(state.data ?? []);
-              }
-            },
-          ),
+          GenericBlocBuilder<PostBloc, Post>(
+            emptyWidget: const EmptyWidget(message: "No post"),
+            onRetryPressed: () => getData(),
+            successWidget: (state) => userPostItem(state.data ?? []),
+          )
         ],
       ),
     );

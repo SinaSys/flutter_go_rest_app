@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clean_architecture_bloc/core/app_extension.dart';
 import 'package:clean_architecture_bloc/common/widget/text_input.dart';
-import 'package:clean_architecture_bloc/common/dialog/retry_dialog.dart';
-import 'package:clean_architecture_bloc/common/dialog/progress_dialog.dart';
 import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
-import 'package:clean_architecture_bloc/common/bloc/generic_bloc_state.dart';
 import 'package:clean_architecture_bloc/features/post/data/models/post.dart';
+import 'package:clean_architecture_bloc/common/bloc/generic_bloc_builder.dart';
 import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_bloc.dart';
 import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_event.dart';
 
@@ -92,11 +90,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   onPressed: () {
                     bool isValid = formKey.currentState?.validate() ?? false;
                     if (isValid) {
-                      Post post = Post(
-                          id: postId,
-                          body: postBody,
-                          title: postTitle,
-                          userId: widget.user.id!);
+                      Post post = Post(id: postId, body: postBody, title: postTitle, userId: widget.user.id!);
 
                       if (widget.mode == PostMode.create) {
                         context.read<PostBloc>().add(PostCreated(post));
@@ -107,44 +101,21 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       showDialog(
                         context: context,
                         builder: (_) {
-                          return BlocBuilder<PostBloc, GenericBlocState<Post>>(
-                            builder: (BuildContext context,
-                                GenericBlocState<Post> state) {
-                              switch (state.status) {
-                                case Status.empty:
-                                  return const SizedBox();
-                                case Status.loading:
-                                  return ProgressDialog(
-                                    title: "${widget.mode.name}ing post...",
-                                    isProgressed: true,
-                                  );
-                                case Status.failure:
-                                  return RetryDialog(
-                                    title: state.error ?? "Error",
-                                    onRetryPressed: () {
-                                      if (widget.mode == PostMode.create) {
-                                        context
-                                            .read<PostBloc>()
-                                            .add(PostCreated(post));
-                                      } else {
-                                        context
-                                            .read<PostBloc>()
-                                            .add(PostUpdated(post));
-                                      }
-                                    },
-                                  );
-                                case Status.success:
-                                  return ProgressDialog(
-                                    title: "Successfully ${widget.mode.name}ed",
-                                    onPressed: () {
-                                      if (widget.mode == PostMode.update) {
-                                        pop(context, 3);
-                                      } else {
-                                        pop(context, 2);
-                                      }
-                                    },
-                                    isProgressed: false,
-                                  );
+                          return GenericBlocBuilder<PostBloc, Post>(
+                            progressStatusTitle: "${widget.mode.name}ing post...",
+                            successStatusTitle: "Successfully ${widget.mode.name}ed",
+                            onRetryPressed: () {
+                              if (widget.mode == PostMode.create) {
+                                context.read<PostBloc>().add(PostCreated(post));
+                              } else {
+                                context.read<PostBloc>().add(PostUpdated(post));
+                              }
+                            },
+                            onSuccessPressed: () {
+                              if (widget.mode == PostMode.update) {
+                                pop(context, 3);
+                              } else {
+                                pop(context, 2);
                               }
                             },
                           );

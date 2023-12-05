@@ -6,12 +6,9 @@ import 'package:clean_architecture_bloc/core/app_extension.dart';
 import 'package:clean_architecture_bloc/common/bloc/bloc_helper.dart';
 import 'package:clean_architecture_bloc/common/widget/text_input.dart';
 import 'package:clean_architecture_bloc/common/widget/empty_widget.dart';
-import 'package:clean_architecture_bloc/common/dialog/retry_dialog.dart';
-import 'package:clean_architecture_bloc/common/dialog/progress_dialog.dart';
-import 'package:clean_architecture_bloc/common/bloc/generic_bloc_state.dart';
 import 'package:clean_architecture_bloc/features/post/data/models/post.dart';
 import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
-import 'package:clean_architecture_bloc/common/widget/spinkit_indicator.dart';
+import 'package:clean_architecture_bloc/common/bloc/generic_bloc_builder.dart';
 import 'package:clean_architecture_bloc/features/comment/data/models/comment.dart';
 import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_bloc.dart';
 import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_event.dart';
@@ -109,71 +106,59 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
 
   Widget get commentItem {
     getUserComments();
-    return BlocBuilder<CommentBloc, GenericBlocState<Comment>>(
-      buildWhen: (prevState, curState) {
-        return context.read<CommentBloc>().operation == ApiOperation.select
-            ? true
-            : false;
+    return GenericBlocBuilder<CommentBloc, Comment>(
+      buildWhen: (_, __) {
+        return context.read<CommentBloc>().operation == ApiOperation.select ? true : false;
       },
-      builder: (BuildContext context, GenericBlocState<Comment> state) {
-        switch (state.status) {
-          case Status.empty:
-            return const EmptyWidget(message: "No comment");
-          case Status.loading:
-            return const SpinKitIndicator();
-          case Status.failure:
-            return RetryDialog(
-                title: state.error ?? "Error",
-                onRetryPressed: () => getUserComments());
-          case Status.success:
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: state.data?.length ?? 0,
-              itemBuilder: (_, index) {
-                Comment comment = state.data![index];
-                return Row(
-                  children: [
-                    const CircleAvatar(
-                      radius: 25,
-                      backgroundColor: Color(0xFFcad1e2),
-                      backgroundImage: AssetImage(AppAsset.user),
-                    ),
-                    Expanded(
-                      child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+      onRetryPressed: () => getUserComments(),
+      emptyWidget: const EmptyWidget(message: "No comment"),
+      successWidget: (state) {
+        return ListView.builder(
+          shrinkWrap: true,
+          itemCount: state.data?.length ?? 0,
+          itemBuilder: (_, index) {
+            Comment comment = state.data![index];
+            return Row(
+              children: [
+                const CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Color(0xFFcad1e2),
+                  backgroundImage: AssetImage(AppAsset.user),
+                ),
+                Expanded(
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(comment.name, style: headLine5),
-                                  IconButton(
-                                    splashRadius: 25,
-                                    padding: EdgeInsets.zero,
-                                    constraints: const BoxConstraints(),
-                                    onPressed: () => deleteComment(comment),
-                                    icon: const Icon(
-                                      Icons.clear,
-                                      color: Colors.redAccent,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(height: 8),
-                              Text(comment.body)
+                              Text(comment.name, style: headLine5),
+                              IconButton(
+                                splashRadius: 25,
+                                padding: EdgeInsets.zero,
+                                constraints: const BoxConstraints(),
+                                onPressed: () => deleteComment(comment),
+                                icon: const Icon(
+                                  Icons.clear,
+                                  color: Colors.redAccent,
+                                ),
+                              )
                             ],
                           ),
-                        ),
+                          const SizedBox(height: 8),
+                          Text(comment.body)
+                        ],
                       ),
-                    )
-                  ],
-                );
-              },
+                    ),
+                  ),
+                )
+              ],
             );
-        }
+          },
+        );
       },
     );
   }
@@ -183,30 +168,13 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     showDialog(
       context: context,
       builder: (_) {
-        return BlocBuilder<PostBloc, GenericBlocState<Post>>(
-          builder: (BuildContext context, GenericBlocState<Post> state) {
-            switch (state.status) {
-              case Status.empty:
-                return const SizedBox();
-              case Status.loading:
-                return const ProgressDialog(
-                  title: "Deleting post...",
-                  isProgressed: true,
-                );
-              case Status.failure:
-                return RetryDialog(
-                  title: state.error ?? "Error",
-                  onRetryPressed: () =>
-                      context.read<PostBloc>().add(PostDeleted(post)),
-                );
-              case Status.success:
-                return ProgressDialog(
-                  title: "Successfully deleted",
-                  onPressed: () => pop(context, 2),
-                  isProgressed: false,
-                );
-            }
+        return GenericBlocBuilder<PostBloc, Post>(
+          successStatusTitle: "Successfully deleted",
+          progressStatusTitle: "Deleting post...",
+          onRetryPressed: () {
+            context.read<PostBloc>().add(PostDeleted(post));
           },
+          onSuccessPressed: () => pop(context, 2),
         );
       },
     );
@@ -235,32 +203,20 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     showDialog(
       context: context,
       builder: (_) {
-        return BlocBuilder<CommentBloc, GenericBlocState<Comment>>(
-          builder: (BuildContext context, GenericBlocState<Comment> state) {
-            switch (state.status) {
-              case Status.empty:
-                return const SizedBox();
-              case Status.loading:
-                return const ProgressDialog(
-                  title: "Deleting comment...",
-                  isProgressed: true,
-                );
-              case Status.failure:
-                return RetryDialog(
-                  title: state.error ?? "Error",
-                  onRetryPressed: () =>
-                      context.read<CommentBloc>().add(CommentDeleted(comment)),
-                );
-              case Status.success:
-                WidgetsBinding.instance.addPostFrameCallback(
-                  (_) {
-                    getUserComments();
-                    Navigator.pop(context);
-                    snackBar("Successfully deleted");
-                  },
-                );
-                return const SizedBox();
-            }
+        return GenericBlocBuilder<CommentBloc, Comment>(
+          progressStatusTitle: "Deleting comment...",
+          onRetryPressed: () {
+            context.read<CommentBloc>().add(CommentDeleted(comment));
+          },
+          successWidget: (_) {
+            WidgetsBinding.instance.addPostFrameCallback(
+              (_) {
+                getUserComments();
+                Navigator.pop(context);
+                snackBar("Successfully deleted");
+              },
+            );
+            return const SizedBox();
           },
         );
       },
@@ -333,39 +289,22 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                       showDialog(
                         context: context,
                         builder: (_) {
-                          return BlocBuilder<CommentBloc,
-                              GenericBlocState<Comment>>(
-                            builder: (BuildContext context,
-                                GenericBlocState<Comment> state) {
-                              switch (state.status) {
-                                case Status.empty:
-                                  return const EmptyWidget(
-                                      message: "No comment");
-                                case Status.loading:
-                                  return const ProgressDialog(
-                                    title: "",
-                                    isProgressed: true,
-                                  );
-                                case Status.failure:
-                                  return RetryDialog(
-                                    title: state.error ?? "Error",
-                                    onRetryPressed: () {
-                                      context
-                                          .read<CommentBloc>()
-                                          .add(CommentCreated(comment));
-                                    },
-                                  );
-                                case Status.success:
-                                  WidgetsBinding.instance.addPostFrameCallback(
-                                    (_) {
-                                      nameEditingController.clear();
-                                      commentBodyEditingController.clear();
-                                      snackBar("Successfully created");
-                                      Navigator.pop(context);
-                                      getUserComments();
-                                    },
-                                  );
-                              }
+                          return GenericBlocBuilder<CommentBloc, Comment>(
+                            progressStatusTitle: "",
+                            emptyWidget: const EmptyWidget(message: "No comment"),
+                            onRetryPressed: () {
+                              context.read<CommentBloc>().add(CommentCreated(comment));
+                            },
+                            successWidget: (_) {
+                              WidgetsBinding.instance.addPostFrameCallback(
+                                (_) {
+                                  nameEditingController.clear();
+                                  commentBodyEditingController.clear();
+                                  snackBar("Successfully created");
+                                  Navigator.pop(context);
+                                  getUserComments();
+                                },
+                              );
                               return const SizedBox();
                             },
                           );

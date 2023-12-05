@@ -6,14 +6,11 @@ import 'package:clean_architecture_bloc/common/bloc/bloc_helper.dart';
 import 'package:clean_architecture_bloc/common/widget/drop_down.dart';
 import 'package:clean_architecture_bloc/common/widget/popup_menu.dart';
 import 'package:clean_architecture_bloc/common/widget/text_input.dart';
-import 'package:clean_architecture_bloc/common/dialog/retry_dialog.dart';
 import 'package:clean_architecture_bloc/common/widget/empty_widget.dart';
 import 'package:clean_architecture_bloc/features/user/data/models/user.dart';
-import 'package:clean_architecture_bloc/common/bloc/generic_bloc_state.dart';
-import 'package:clean_architecture_bloc/common/dialog/progress_dialog.dart';
 import 'package:clean_architecture_bloc/common/widget/date_time_picker.dart';
-import 'package:clean_architecture_bloc/common/widget/spinkit_indicator.dart';
 import 'package:clean_architecture_bloc/features/todo/data/models/todo.dart';
+import 'package:clean_architecture_bloc/common/bloc/generic_bloc_builder.dart';
 import 'package:clean_architecture_bloc/features/todo/domain/entities/todo_entity.dart';
 import 'package:clean_architecture_bloc/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:clean_architecture_bloc/features/todo/presentation/bloc/todo_event.dart';
@@ -61,7 +58,9 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                 child: Text(
                   todoBloc.getTodoCount,
                   style: const TextStyle(
-                      color: Colors.black54, fontWeight: FontWeight.bold),
+                    color: Colors.black54,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               );
             },
@@ -70,9 +69,7 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
           PopupMenu<TodoStatus>(
             items: TodoStatus.values,
             onChanged: (TodoStatus status) {
-              context
-                  .read<TodoBloc>()
-                  .add(TodoFetched(widget.user.id!, status: status));
+              context.read<TodoBloc>().add(TodoFetched(widget.user.id!, status: status));
             },
           )
         ],
@@ -114,50 +111,34 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
     showDialog(
       context: context,
       builder: (_) {
-        return BlocBuilder<TodoBloc, GenericBlocState<ToDo>>(
-          builder: (BuildContext context, GenericBlocState<ToDo> state) {
-            switch (state.status) {
-              case Status.empty:
-                return const SizedBox();
-              case Status.loading:
-                return ProgressDialog(
-                  title: "${mode.name}ing task...",
-                  isProgressed: true,
-                );
-              case Status.failure:
-                return RetryDialog(
-                  title: state.error ?? "Error",
-                  onRetryPressed: () {
-                    if (mode == Mode.create) {
-                      context.read<TodoBloc>().add(TodoCreated(todo));
-                    } else {
-                      context.read<TodoBloc>().add(TodoUpdated(todo));
-                    }
-                  },
-                );
-              case Status.success:
-                return ProgressDialog(
-                  title: "Successfully ${mode.name}ed",
-                  onPressed: () {
-                    context.read<TodoBloc>().add(TodoFetched(widget.user.id!));
-                    Navigator.pop(context);
-                  },
-                  isProgressed: false,
-                );
+        return GenericBlocBuilder<TodoBloc, ToDo>(
+          successStatusTitle: "Successfully ${mode.name}d",
+          progressStatusTitle: "${mode.name}ing task...",
+          onRetryPressed: () {
+            if (mode == Mode.create) {
+              context.read<TodoBloc>().add(TodoCreated(todo));
+            } else {
+              context.read<TodoBloc>().add(TodoUpdated(todo));
             }
+          },
+          onSuccessPressed: () {
+            context.read<TodoBloc>().add(TodoFetched(widget.user.id!));
+            Navigator.pop(context);
           },
         );
       },
     );
   }
 
-  void todoBottomSheet(BuildContext context,
-      {Mode mode = Mode.create,
-      //required for edit mode
-      int? todoId,
-      TodoStatus todoStatus = TodoStatus.pending,
-      required DateTime currentDateTime,
-      String? taskTitle}) {
+  void todoBottomSheet(
+    BuildContext context, {
+    Mode mode = Mode.create,
+    //required for edit mode
+    int? todoId,
+    TodoStatus todoStatus = TodoStatus.pending,
+    required DateTime currentDateTime,
+    String? taskTitle,
+  }) {
     final formKey = GlobalKey<FormState>();
     String title = taskTitle ?? "";
     DateTime dateTime = currentDateTime;
@@ -169,14 +150,12 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
       backgroundColor: Colors.white,
       builder: (_) {
         return Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: SingleChildScrollView(
             child: Form(
                 key: formKey,
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -210,8 +189,7 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () async {
-                            bool isValid =
-                                formKey.currentState?.validate() ?? false;
+                            bool isValid = formKey.currentState?.validate() ?? false;
                             if (isValid) {
                               ToDo todo = ToDo(
                                 id: todoId,
@@ -243,34 +221,15 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
         showDialog(
           context: context,
           builder: (_) {
-            return BlocBuilder<TodoBloc, GenericBlocState<ToDo>>(
-              builder: (BuildContext context, GenericBlocState<ToDo> state) {
-                switch (state.status) {
-                  case Status.empty:
-                    return const SizedBox();
-                  case Status.loading:
-                    return const ProgressDialog(
-                      title: "Deleting task...",
-                      isProgressed: true,
-                    );
-                  case Status.failure:
-                    return RetryDialog(
-                      title: state.error ?? "Error",
-                      onRetryPressed: () =>
-                          context.read<TodoBloc>().add(TodoDeleted(todo)),
-                    );
-                  case Status.success:
-                    return ProgressDialog(
-                      title: "Successfully deleted",
-                      onPressed: () {
-                        context
-                            .read<TodoBloc>()
-                            .add(TodoFetched(widget.user.id!));
-                        Navigator.pop(context);
-                      },
-                      isProgressed: false,
-                    );
-                }
+            return GenericBlocBuilder<TodoBloc, ToDo>(
+              successStatusTitle: "Successfully deleted",
+              progressStatusTitle: "Deleting task...",
+              onRetryPressed: () {
+                context.read<TodoBloc>().add(TodoDeleted(todo));
+              },
+              onSuccessPressed: () {
+                context.read<TodoBloc>().add(TodoFetched(widget.user.id!));
+                Navigator.pop(context);
               },
             );
           },
@@ -300,39 +259,26 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
     return Scaffold(
       appBar: _appBar(context),
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: ListView(
-          children: [
-            header(),
-            createTodo(),
-            BlocBuilder<TodoBloc, GenericBlocState<ToDo>>(
-              buildWhen: (prevState, curState) {
-                return context.read<TodoBloc>().operation == ApiOperation.select
-                    ? true
-                    : false;
-              },
-              builder: (BuildContext context, GenericBlocState<ToDo> state) {
-                switch (state.status) {
-                  case Status.empty:
-                    return const EmptyWidget(message: "No Todos");
-                  case Status.loading:
-                    return const SpinKitIndicator();
-                  case Status.failure:
-                    return RetryDialog(
-                      title: state.error ?? "Error",
-                      onRetryPressed: () => context
-                          .read<TodoBloc>()
-                          .add(TodoFetched(widget.user.id!)),
-                    );
-                  case Status.success:
-                    return taskList(state.data ?? []);
-                }
-              },
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: ListView(
+            children: [
+              header(),
+              createTodo(),
+              GenericBlocBuilder<TodoBloc, ToDo>(
+                buildWhen: (_, __) {
+                  return context.read<TodoBloc>().operation == ApiOperation.select ? true : false;
+                },
+                emptyWidget: const EmptyWidget(message: "No Todos!"),
+                successWidget: (state) => taskList(state.data ?? []),
+                onRetryPressed: () {
+                  context.read<TodoBloc>().add(TodoFetched(widget.user.id!));
+                },
+              )
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }
