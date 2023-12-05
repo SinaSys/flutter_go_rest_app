@@ -7,7 +7,6 @@ class AppString {
   static const receiveTimeOut = "Receive timeout in connection with API server";
   static const sendTimeOut = "Send timeout in connection with API server";
   static const socketException = "Check your internet connection";
-  static const unexpectedError = "Unexpected error occurred";
   static const unknownError = "Something went wrong";
   static const duplicateEmail = "Email has already been taken";
 
