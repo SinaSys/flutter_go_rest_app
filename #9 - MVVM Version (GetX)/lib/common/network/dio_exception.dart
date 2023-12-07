@@ -1,4 +1,3 @@
-import 'dart:io' show SocketException;
 import 'package:mvvm_getx/core/app_string.dart';
 import 'package:dio/dio.dart' show DioException, DioExceptionType;
 
@@ -25,12 +24,8 @@ class DioExceptions implements Exception {
       case DioExceptionType.sendTimeout:
         message = AppString.sendTimeOut;
         break;
-      case DioExceptionType.unknown:
-        if (dioException.error is SocketException) {
-          message = AppString.socketException;
-          break;
-        }
-        message = AppString.unexpectedError;
+      case DioExceptionType.connectionError:
+        message = AppString.socketException;
         break;
       default:
         message = AppString.unknownError;
