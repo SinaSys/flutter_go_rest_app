@@ -2,11 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'user_remote_data_source_test.mocks.dart';
 import '../../../../test_utils/data/test_data.dart';
 import 'package:clean_architecture_getx/common/network/api_config.dart';
 import 'package:clean_architecture_getx/common/network/dio_client.dart';
 import 'package:clean_architecture_getx/features/user/data/models/user.dart';
-import '../../../todo/data/datasources/todo_remote_data_source_test.mocks.dart';
+import 'package:clean_architecture_getx/features/user/domain/entities/user_entity.dart';
 import 'package:clean_architecture_getx/features/user/data/datasources/user_remote_data_source.dart';
 
 @GenerateMocks([DioClient])
@@ -189,6 +190,126 @@ void main() {
           } catch (_) {
             expect(users, isEmpty);
           }
+        },
+      );
+
+      test(
+        'Should return list of users contain male gender, if query parameter with male value is added',
+        () async {
+          Map<String, String> queryParameters = <String, String>{};
+
+          queryParameters.addAll({'gender': Gender.male.name});
+
+          when(mockDioClient.get(ApiConfig.users, queryParameters: queryParameters)).thenAnswer(
+            (_) async {
+              return Response<List<User>>(
+                requestOptions: RequestOptions(),
+                statusCode: 200,
+                data: [tUserDummyObject],
+              );
+            },
+          );
+
+          List<User> users = await userRemoteDataSourceImpl.getUsers(gender: Gender.male);
+
+          expect(users, [tUserDummyObject]);
+        },
+      );
+
+      test(
+        'Should return list of users contain female gender, if query parameter with female value is added',
+        () async {
+          Map<String, String> queryParameters = <String, String>{};
+
+          queryParameters.addAll({'gender': Gender.female.name});
+
+          User userObjectContainFemale = tUserDummyObject.copyWith(gender: Gender.female);
+
+          when(mockDioClient.get(ApiConfig.users, queryParameters: queryParameters)).thenAnswer(
+            (_) async {
+              return Response<List<User>>(
+                requestOptions: RequestOptions(),
+                statusCode: 200,
+                data: [userObjectContainFemale],
+              );
+            },
+          );
+
+          List<User> users = await userRemoteDataSourceImpl.getUsers(gender: Gender.female);
+
+          expect(users, [userObjectContainFemale]);
+        },
+      );
+
+      test(
+        'Should return list of inactive users, if query parameter with inactive value is added',
+        () async {
+          Map<String, String> queryParameters = <String, String>{};
+
+          queryParameters.addAll({'status': UserStatus.inactive.name});
+
+          when(mockDioClient.get(ApiConfig.users, queryParameters: queryParameters)).thenAnswer(
+            (_) async {
+              return Response<List<User>>(
+                requestOptions: RequestOptions(),
+                statusCode: 200,
+                data: [tUserDummyObject],
+              );
+            },
+          );
+
+          List<User> users = await userRemoteDataSourceImpl.getUsers(status: UserStatus.inactive);
+
+          expect(users, [tUserDummyObject]);
+        },
+      );
+
+      test(
+        'Should return list of active users, if query parameter with active value is added',
+        () async {
+          Map<String, String> queryParameters = <String, String>{};
+
+          queryParameters.addAll({'status': UserStatus.active.name});
+
+          User userObjectContainActiveUsers = tUserDummyObject.copyWith(status: UserStatus.active);
+
+          when(mockDioClient.get(ApiConfig.users, queryParameters: queryParameters)).thenAnswer(
+            (_) async {
+              return Response<List<User>>(
+                requestOptions: RequestOptions(),
+                statusCode: 200,
+                data: [userObjectContainActiveUsers],
+              );
+            },
+          );
+
+          List<User> users = await userRemoteDataSourceImpl.getUsers(status: UserStatus.active);
+
+          expect(users, [userObjectContainActiveUsers]);
+        },
+      );
+
+      test(
+        'Should return list of inactive male users, if query parameter with male and inactive value is added',
+        () async {
+          Map<String, String> queryParameters = <String, String>{};
+
+          queryParameters.addAll({'status': UserStatus.inactive.name});
+          queryParameters.addAll({'gender': Gender.male.name});
+
+          when(mockDioClient.get(ApiConfig.users, queryParameters: queryParameters)).thenAnswer(
+            (_) async {
+              return Response<List<User>>(
+                requestOptions: RequestOptions(),
+                statusCode: 200,
+                data: [tUserDummyObject],
+              );
+            },
+          );
+
+          List<User> users = await userRemoteDataSourceImpl.getUsers(status: UserStatus.inactive, gender: Gender.male);
+
+          expect(users, [tUserDummyObject]);
         },
       );
     },
