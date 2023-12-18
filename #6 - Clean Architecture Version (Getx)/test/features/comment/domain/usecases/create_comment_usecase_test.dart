@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'create_comment_usecase.mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'create_comment_usecase_test.mocks.dart';
 import '../../../../test_utils/data/test_data.dart';
-import 'package:clean_architecture_getx/features/comment/domain/repositories/comment_repository.dart';
 import 'package:clean_architecture_getx/features/comment/domain/usecases/create_comment_usecase.dart';
+import 'package:clean_architecture_getx/features/comment/domain/repositories/comment_repository.dart';
 
 @GenerateMocks([CommentRepository])
 void main() {
