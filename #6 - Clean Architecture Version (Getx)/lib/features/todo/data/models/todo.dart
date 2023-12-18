@@ -17,6 +17,8 @@ class ToDo extends TodoEntity {
 
   factory ToDo.fromJson(Map<String, dynamic> json) => _$ToDoFromJson(json);
 
+  Map<String, dynamic> toJson() => _$ToDoToJson(this);
+
   ///For unit testing
   @override
   bool operator ==(Object other) => identical(this, other) || other is ToDo && runtimeType == other.runtimeType;
@@ -25,5 +27,20 @@ class ToDo extends TodoEntity {
   @override
   int get hashCode => 0;
 
-  Map<String, dynamic> toJson() => _$ToDoToJson(this);
+  ///For unit testing
+  ToDo copyWith({
+    int? id,
+    int? userId,
+    String? title,
+    DateTime? dueOn,
+    TodoStatus? status,
+  }) {
+    return ToDo(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      title: title ?? this.title,
+      dueOn: dueOn ?? this.dueOn,
+      status: status ?? this.status,
+    );
+  }
 }
