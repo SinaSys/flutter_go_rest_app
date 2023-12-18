@@ -7,6 +7,7 @@ import '../../../../test_utils/data/test_data.dart';
 import 'package:clean_architecture_getx/common/network/api_config.dart';
 import 'package:clean_architecture_getx/common/network/dio_client.dart';
 import 'package:clean_architecture_getx/features/todo/data/models/todo.dart';
+import 'package:clean_architecture_getx/features/todo/domain/entities/todo_entity.dart';
 import 'package:clean_architecture_getx/features/todo/data/datasources/todo_remote_data_source.dart';
 
 @GenerateMocks([DioClient])
@@ -188,6 +189,64 @@ void main() {
           } catch (_) {
             expect(todos, isEmpty);
           }
+        },
+      );
+
+      test(
+        'should return list of pending todos, if query parameter with pending value is added',
+        () async {
+          Map<String, String> queryParameters = <String, String>{'user_id': "$tDummyId"};
+
+          queryParameters.addAll({'status': TodoStatus.pending.name});
+
+          when(
+            mockDioClient.get(
+              ApiConfig.todos,
+              queryParameters: queryParameters,
+            ),
+          ).thenAnswer(
+            (_) async {
+              return Response<List<ToDo>>(
+                requestOptions: RequestOptions(),
+                statusCode: 200,
+                data: [tTodoDummyObject],
+              );
+            },
+          );
+
+          List<ToDo> todos = await todoRemoteDataSourceImpl.getTodos(tDummyId, status: TodoStatus.pending);
+
+          expect(todos, [tTodoDummyObject]);
+        },
+      );
+
+      test(
+        'should return list of complete todos, if query parameter with complete value is added',
+        () async {
+          Map<String, String> queryParameters = <String, String>{'user_id': "$tDummyId"};
+
+          queryParameters.addAll({'status': TodoStatus.completed.name});
+
+          ToDo todoObjectWithCompleteTodos = tTodoDummyObject.copyWith(status: TodoStatus.completed);
+
+          when(
+            mockDioClient.get(
+              ApiConfig.todos,
+              queryParameters: queryParameters,
+            ),
+          ).thenAnswer(
+            (_) async {
+              return Response<List<ToDo>>(
+                requestOptions: RequestOptions(),
+                statusCode: 200,
+                data: [todoObjectWithCompleteTodos],
+              );
+            },
+          );
+
+          List<ToDo> todos = await todoRemoteDataSourceImpl.getTodos(tDummyId, status: TodoStatus.completed);
+
+          expect(todos, [todoObjectWithCompleteTodos]);
         },
       );
     },
