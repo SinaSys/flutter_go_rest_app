@@ -26,4 +26,21 @@ class User extends UserEntity {
   ///For unit testing
   @override
   int get hashCode => 0;
+
+  ///For unit testing
+  User copyWith({
+    int? id,
+    String? name,
+    String? email,
+    Gender? gender,
+    UserStatus? status,
+  }) {
+    return User(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      gender: gender ?? this.gender,
+      status: status ?? this.status,
+    );
+  }
 }
