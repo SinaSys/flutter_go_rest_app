@@ -87,6 +87,10 @@ files inside each feature folder, ensuring that they belong to the correct layer
 • Please note that the data is not permanent and will be changed or deleted every 20 minutes to 1 hour.
 <br/><br/><br/>
 
+## 🧪 Coverage (Clean Architecture Version (GetX))
+  <img src="https://github.com/SinaSys/flutter_go_rest_app/blob/master/screenshots/coverage.png?raw=true">
+<br/><br/><br/>
+
 
 ## 🗂 Modules
 |               Version                |                                                           Bloc                                                            |                                                                                                         Cubit                                                                                                          |                                                           Getx                                                            |                                                            RxDart + Provider                                                             |
