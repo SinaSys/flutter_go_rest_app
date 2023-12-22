@@ -765,6 +765,14 @@ root
      │──📂test_utils
      │   └─── 📂data
      │        └───test_data.dart
+     │──📂common
+     │   │─── 📂network
+     │   │    └───dio_exception_test.dart
+     │   └─── 📂repository
+     │        └─── 📂repository_helper_test.dart
+     │──📂core
+     │   └───app_extension_test.dart
+     │   
      └──📂features
          │───📂user
          │    │───📂data
