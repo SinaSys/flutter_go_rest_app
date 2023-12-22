@@ -622,7 +622,6 @@ files inside each feature folder, ensuring that they belong to the correct layer
 ```
 root 
  │── 📂coverage
- │
  │── 📂lib
  │   │───main.dart  
  │   │───di.dart  
@@ -771,7 +770,7 @@ root
      │   │─── 📂network
      │   │    └───dio_exception_test.dart
      │   └─── 📂repository
-     │        └─── 📂repository_helper_test.dart
+     │        └───repository_helper_test.dart
      │──📂core
      │   └───app_extension_test.dart
      │   
