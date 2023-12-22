@@ -621,6 +621,8 @@ files inside each feature folder, ensuring that they belong to the correct layer
 ## 📂 Directory Structure (Clean architecture version + GetX)
 ```
 root 
+ │── 📂coverage
+ │
  │── 📂lib
  │   │───main.dart  
  │   │───di.dart  
