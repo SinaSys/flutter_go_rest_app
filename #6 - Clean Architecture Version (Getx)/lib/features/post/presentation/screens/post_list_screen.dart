@@ -105,64 +105,62 @@ class _PostListScreenState extends State<PostListScreen> {
   }
 
   Widget userPostItem(List<Post> posts) {
-    return Expanded(
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: posts.length,
-        itemBuilder: (_, index) {
-          Post post = posts[index];
-          return Center(
-            child: GestureDetector(
-              onTap: () async {
-                var resultFromPostDetailScreen = await Navigator.push(
-                  _,
-                  MaterialPageRoute(
-                    builder: (_) {
-                      return PostDetailScreen(
-                        post: post,
-                        user: widget.user,
-                      );
-                    },
-                  ),
-                );
-
-                if (resultFromPostDetailScreen != null && resultFromPostDetailScreen) {
-                  postController.getPosts(widget.user);
-                }
-              },
-              child: Card(
-                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: posts.length,
+      itemBuilder: (_, index) {
+        Post post = posts[index];
+        return Center(
+          child: GestureDetector(
+            onTap: () async {
+              var resultFromPostDetailScreen = await Navigator.push(
+                _,
+                MaterialPageRoute(
+                  builder: (_) {
+                    return PostDetailScreen(
+                      post: post,
+                      user: widget.user,
+                    );
+                  },
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(post.title, maxLines: 2, style: headLine2),
-                            const SizedBox(height: 10),
-                            Text(
-                              post.body,
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                            )
-                          ],
-                        ),
+              );
+
+              if (resultFromPostDetailScreen != null && resultFromPostDetailScreen) {
+                postController.getPosts(widget.user);
+              }
+            },
+            child: Card(
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(post.title, maxLines: 2, style: headLine2),
+                          const SizedBox(height: 10),
+                          Text(
+                            post.body,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          )
+                        ],
                       ),
-                      const Icon(Icons.arrow_forward_ios_sharp)
-                    ],
-                  ),
+                    ),
+                    const Icon(Icons.arrow_forward_ios_sharp)
+                  ],
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -171,8 +169,7 @@ class _PostListScreenState extends State<PostListScreen> {
     return Scaffold(
       floatingActionButton: floatingActionButton(context),
       appBar: appBar,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: ListView(
         children: [
           header,
           const Padding(
