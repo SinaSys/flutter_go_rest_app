@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:clean_architecture_getx/di.dart';
 import 'package:clean_architecture_getx/core/app_extension.dart';
 import 'package:clean_architecture_getx/common/widget/text_input.dart';
-import 'package:clean_architecture_getx/common/dialog/retry_dialog.dart';
-import 'package:clean_architecture_getx/common/dialog/progress_dialog.dart';
+import 'package:clean_architecture_getx/common/widget/async_widget.dart';
 import 'package:clean_architecture_getx/features/user/data/models/user.dart';
 import 'package:clean_architecture_getx/features/post/data/models/post.dart';
-import 'package:clean_architecture_getx/common/controller/base_controller.dart';
 import 'package:clean_architecture_getx/features/post/presentation/controller/post_controller.dart';
 
 enum PostMode { create, update }
@@ -94,11 +92,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   onPressed: () {
                     bool isValid = formKey.currentState?.validate() ?? false;
                     if (isValid) {
-                      Post post = Post(
-                          id: postId,
-                          body: postBody,
-                          title: postTitle,
-                          userId: widget.user.id!);
+                      Post post = Post(id: postId, body: postBody, title: postTitle, userId: widget.user.id!);
 
                       if (widget.mode == PostMode.create) {
                         postController.createPost(post);
@@ -111,36 +105,26 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         builder: (_) {
                           return Obx(
                             () {
-                              switch (postController.apiStatus.value) {
-                                case ApiState.loading:
-                                  return ProgressDialog(
-                                    title: "${widget.mode.name}ing post...",
-                                    isProgressed: true,
-                                  );
-                                case ApiState.success:
-                                  return ProgressDialog(
-                                    title: "Successfully ${widget.mode.name}ed",
-                                    onPressed: () {
-                                      if (widget.mode == PostMode.update) {
-                                        pop(context, 3);
-                                      } else {
-                                        pop(context, 2);
-                                      }
-                                    },
-                                    isProgressed: false,
-                                  );
-                                case ApiState.failure:
-                                  return RetryDialog(
-                                    title: postController.errorMessage.value,
-                                    onRetryPressed: () {
-                                      if (widget.mode == PostMode.create) {
-                                        postController.createPost(post);
-                                      } else {
-                                        postController.updatePost(post);
-                                      }
-                                    },
-                                  );
-                              }
+                              return AsyncWidget(
+                                apiState: postController.apiStatus.value,
+                                progressStatusTitle: "${widget.mode.name}ing post...",
+                                failureStatusTitle: postController.errorMessage.value,
+                                successStatusTitle: "Successfully ${widget.mode.name}d",
+                                onSuccessPressed: () {
+                                  if (widget.mode == PostMode.update) {
+                                    pop(context, 3);
+                                  } else {
+                                    pop(context, 2);
+                                  }
+                                },
+                                onRetryPressed: () {
+                                  if (widget.mode == PostMode.create) {
+                                    postController.createPost(post);
+                                  } else {
+                                    postController.updatePost(post);
+                                  }
+                                },
+                              );
                             },
                           );
                         },

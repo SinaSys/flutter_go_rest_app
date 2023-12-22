@@ -3,11 +3,10 @@ import 'package:clean_architecture_getx/features/user/presentation/widgets/statu
 import 'package:clean_architecture_getx/features/post/presentation/screens/post_list_screen.dart';
 import 'package:clean_architecture_getx/features/todo/presentation/screens/todo_list_screen.dart';
 import 'package:clean_architecture_getx/features/user/domain/entities/user_entity.dart';
-import 'package:clean_architecture_getx/common/controller/base_controller.dart';
 import 'package:clean_architecture_getx/common/widget/spinkit_indicator.dart';
 import 'package:clean_architecture_getx/features/user/data/models/user.dart';
-import 'package:clean_architecture_getx/common/dialog/progress_dialog.dart';
 import 'package:clean_architecture_getx/common/dialog/create_dialog.dart';
+import 'package:clean_architecture_getx/common/widget/async_widget.dart';
 import 'package:clean_architecture_getx/common/dialog/delete_dialog.dart';
 import 'package:clean_architecture_getx/common/dialog/retry_dialog.dart';
 import 'package:clean_architecture_getx/common/widget/empty_widget.dart';
@@ -15,7 +14,6 @@ import 'package:clean_architecture_getx/common/widget/popup_menu.dart';
 import 'package:clean_architecture_getx/core/app_extension.dart';
 import 'package:clean_architecture_getx/core/app_style.dart';
 import 'package:clean_architecture_getx/di.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,12 +27,12 @@ class UserListScreen extends StatefulWidget {
 }
 
 class _UserListScreenState extends State<UserListScreen> {
-  final UserController _controller = getIt<UserController>();
+  final UserController controller = getIt<UserController>();
 
   PreferredSizeWidget get _appBar {
     return AppBar(
       leading: IconButton(
-        onPressed: _controller.getUserList,
+        onPressed: controller.getUserList,
         icon: const Icon(Icons.refresh),
       ),
       actions: [
@@ -42,13 +40,13 @@ class _UserListScreenState extends State<UserListScreen> {
           icon: Icons.filter_list_outlined,
           items: UserStatus.values,
           onChanged: (UserStatus value) {
-            _controller.getUserList(status: value);
+            controller.getUserList(status: value);
           },
         ),
         PopupMenu<Gender>(
           icon: Icons.filter_alt_outlined,
           items: Gender.values,
-          onChanged: (Gender value) => _controller.getUserList(gender: value),
+          onChanged: (Gender value) => controller.getUserList(gender: value),
         )
       ],
       title: const Text("Users"),
@@ -65,34 +63,24 @@ class _UserListScreenState extends State<UserListScreen> {
         );
 
         if (isCreate) {
-          _controller.createUser(user);
+          controller.createUser(user);
           if (!mounted) return;
           showDialog(
             context: context,
             builder: (_) {
               return Obx(
                 () {
-                  switch (_controller.apiStatus.value) {
-                    case ApiState.loading:
-                      return const ProgressDialog(
-                        title: "Creating user...",
-                        isProgressed: true,
-                      );
-                    case ApiState.success:
-                      return ProgressDialog(
-                        title: "Successfully created",
-                        onPressed: () {
-                          _controller.getUserList();
-                          Navigator.pop(context);
-                        },
-                        isProgressed: false,
-                      );
-                    case ApiState.failure:
-                      return RetryDialog(
-                        title: _controller.errorMessage.value,
-                        onRetryPressed: () => _controller.createUser(user),
-                      );
-                  }
+                  return AsyncWidget(
+                    apiState: controller.apiStatus.value,
+                    progressStatusTitle: "Creating user...",
+                    failureStatusTitle: controller.errorMessage.value,
+                    successStatusTitle: "Successfully created",
+                    onRetryPressed: () => controller.getUserList(),
+                    onSuccessPressed: () {
+                      Navigator.pop(context);
+                      controller.getUserList();
+                    },
+                  );
                 },
               );
             },
@@ -147,34 +135,24 @@ class _UserListScreenState extends State<UserListScreen> {
   void deleteUser(User user) async {
     bool isAccepted = await deleteDialog(context);
     if (isAccepted) {
-      _controller.deleteUser(user);
+      controller.deleteUser(user);
       if (!mounted) return;
       showDialog(
         context: context,
         builder: (_) {
           return Obx(
             () {
-              switch (_controller.apiStatus.value) {
-                case ApiState.loading:
-                  return const ProgressDialog(
-                    title: "Deleting user...",
-                    isProgressed: true,
-                  );
-                case ApiState.success:
-                  return ProgressDialog(
-                    title: "Successfully deleted",
-                    onPressed: () {
-                      _controller.getUserList();
-                      Navigator.pop(context);
-                    },
-                    isProgressed: false,
-                  );
-                case ApiState.failure:
-                  return RetryDialog(
-                    title: _controller.errorMessage.value,
-                    onRetryPressed: () => _controller.deleteUser(user),
-                  );
-              }
+              return AsyncWidget(
+                apiState: controller.apiStatus.value,
+                progressStatusTitle: "Deleting user...",
+                failureStatusTitle: controller.errorMessage.value,
+                successStatusTitle: "Successfully deleted",
+                onRetryPressed: () => controller.deleteUser(user),
+                onSuccessPressed: () {
+                  Navigator.pop(context);
+                  controller.getUserList();
+                },
+              );
             },
           );
         },
@@ -194,34 +172,24 @@ class _UserListScreenState extends State<UserListScreen> {
     );
 
     if (isUpdate) {
-      _controller.updateUser(userObj);
+      controller.updateUser(userObj);
       if (!mounted) return;
       showDialog(
         context: context,
         builder: (_) {
           return Obx(
             () {
-              switch (_controller.apiStatus.value) {
-                case ApiState.loading:
-                  return const ProgressDialog(
-                    title: "Updating user...",
-                    isProgressed: true,
-                  );
-                case ApiState.success:
-                  return ProgressDialog(
-                    title: "Successfully updated",
-                    onPressed: () {
-                      _controller.getUserList();
-                      Navigator.pop(context);
-                    },
-                    isProgressed: false,
-                  );
-                case ApiState.failure:
-                  return RetryDialog(
-                    title: _controller.errorMessage.value,
-                    onRetryPressed: () => _controller.updateUser(userObj),
-                  );
-              }
+              return AsyncWidget(
+                apiState: controller.apiStatus.value,
+                progressStatusTitle: "Updating user...",
+                failureStatusTitle: controller.errorMessage.value,
+                successStatusTitle: "Successfully updated",
+                onRetryPressed: () => controller.updateUser(userObj),
+                onSuccessPressed: () {
+                  Navigator.pop(context);
+                  controller.getUserList();
+                },
+              );
             },
           );
         },
@@ -241,7 +209,7 @@ class _UserListScreenState extends State<UserListScreen> {
 
   @override
   void initState() {
-    _controller.getUserList();
+    controller.getUserList();
     super.initState();
   }
 
@@ -250,7 +218,7 @@ class _UserListScreenState extends State<UserListScreen> {
     return Scaffold(
       floatingActionButton: floatingActionButton,
       appBar: _appBar,
-      body: _controller.obx(
+      body: controller.obx(
         (state) => ListView.builder(
           shrinkWrap: true,
           itemCount: state?.length,
@@ -262,7 +230,7 @@ class _UserListScreenState extends State<UserListScreen> {
         onLoading: const SpinKitIndicator(type: SpinKitType.circle),
         onError: (error) => RetryDialog(
           title: "$error",
-          onRetryPressed: () => _controller.getUserList(),
+          onRetryPressed: () => controller.getUserList(),
         ),
         onEmpty: const EmptyWidget(message: "No user!"),
       ),
