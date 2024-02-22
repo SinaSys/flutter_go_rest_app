@@ -44,6 +44,7 @@ dependencies:
   get_it: ^7.6.4
   get: ^4.6.6
   dartz: ^0.10.1
+  freezed: ^2.4.7
 
 dev_dependencies:
   flutter_test:
@@ -57,7 +58,6 @@ dev_dependencies:
   flutter_lints: ^3.0.1
   build_runner: ^2.4.6
   json_serializable: ^6.7.1
-  freezed: ^2.4.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
