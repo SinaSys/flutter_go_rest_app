@@ -15,7 +15,7 @@ abstract class TodoRemoteDataSource {
   Future<bool> deleteTodo(ToDo todo);
 }
 
-class TodoRemoteDataSourceImpl with ApiHelper<ToDo> implements TodoRemoteDataSource {
+class TodoRemoteDataSourceImpl with ApiHelper implements TodoRemoteDataSource {
   final DioClient dioClient = getIt<DioClient>();
 
   @override
