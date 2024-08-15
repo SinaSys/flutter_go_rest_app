@@ -1,11 +1,9 @@
-import 'package:clean_architecture_bloc/core/app_extension.dart';
-import 'package:clean_architecture_bloc/common/network/dio_exception.dart';
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:clean_architecture_bloc/core/app_extension.dart';
+import 'package:clean_architecture_bloc/common/network/dio_exception.dart';
 
-abstract mixin class ApiHelper<T> {
-  late final T data;
-
+abstract mixin class ApiHelper {
   Future<bool> _requestMethodTemplate(Future<Response<dynamic>> apiCallback) async {
     final Response response = await apiCallback;
     if (response.statusCode.success) {
@@ -31,14 +29,14 @@ abstract mixin class ApiHelper<T> {
   }
 
   //Generic Method template for get data from Api
-  Future<List<T>> makeGetRequest(Future<Response<dynamic>> apiCallback,
-      T Function(Map<String, dynamic> json) getJsonCallback) async {
+  Future<List<T>> makeGetRequest<T>(
+    Future<Response<dynamic>> apiCallback,
+    T Function(Map<String, dynamic> json) getJsonCallback,
+  ) async {
     final Response response = await apiCallback;
 
     final List<T> items = List<T>.from(
-      json
-          .decode(json.encode(response.data))
-          .map((item) => getJsonCallback(item)),
+      json.decode(json.encode(response.data)).map((item) => getJsonCallback(item)),
     );
     if (response.statusCode.success) {
       return items;
