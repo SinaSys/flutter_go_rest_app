@@ -4,7 +4,7 @@ import 'package:layered_architecture/common/network/api_base.dart';
 import 'package:layered_architecture/core/api_config.dart';
 import 'package:dartz/dartz.dart';
 
-class PostApi extends ApiBase<Post> {
+class PostApi extends ApiBase {
   Future<Either<String, bool>> createPost(Post post) async {
     return await makePostRequest(dioClient.dio!.post(ApiConfig.posts, data: post));
   }

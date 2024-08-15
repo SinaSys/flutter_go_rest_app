@@ -3,7 +3,7 @@ import 'package:layered_architecture/common/network/api_base.dart';
 import 'package:layered_architecture/core/api_config.dart';
 import 'package:dartz/dartz.dart';
 
-class ToDoApi extends ApiBase<ToDo> {
+class ToDoApi extends ApiBase {
   Future<Either<String, bool>> createTodo(ToDo todo) async {
     return await makePostRequest(dioClient.dio!.post(ApiConfig.todos, data: todo),
     );

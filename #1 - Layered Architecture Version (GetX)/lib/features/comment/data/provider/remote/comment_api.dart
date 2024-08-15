@@ -3,7 +3,7 @@ import 'package:layered_architecture/common/network/api_base.dart';
 import 'package:layered_architecture/core/api_config.dart';
 import 'package:dartz/dartz.dart';
 
-class CommentApi extends ApiBase<Comment> {
+class CommentApi extends ApiBase {
   Future<Either<String, bool>> createComment(Comment comment) async {
     return await makePostRequest(dioClient.dio!.post(ApiConfig.comments, data: comment));
   }
