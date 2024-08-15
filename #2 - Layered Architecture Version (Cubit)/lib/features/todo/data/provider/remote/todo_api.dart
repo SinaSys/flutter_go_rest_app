@@ -3,7 +3,7 @@ import 'package:layered_architecture_cubit/common/network/api_base.dart';
 import 'package:layered_architecture_cubit/common/network/api_result.dart';
 import 'package:layered_architecture_cubit/core/api_config.dart';
 
-class ToDoApi extends ApiBase<ToDo> {
+class ToDoApi extends ApiBase {
   Future<ApiResult<bool>> createTodo(ToDo todo) async {
     return await makePostRequest(dioClient.dio!.post(ApiConfig.todos, data: todo));
   }

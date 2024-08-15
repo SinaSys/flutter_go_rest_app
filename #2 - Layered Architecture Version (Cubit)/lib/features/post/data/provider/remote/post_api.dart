@@ -4,7 +4,7 @@ import 'package:layered_architecture_cubit/common/network/api_result.dart';
 import 'package:layered_architecture_cubit/common/network/api_base.dart';
 import 'package:layered_architecture_cubit/core/api_config.dart';
 
-class PostApi extends ApiBase<Post> {
+class PostApi extends ApiBase {
   Future<ApiResult<bool>> createPost(Post post) async {
     return await makePostRequest(dioClient.dio!.post(ApiConfig.posts, data: post));
   }
