@@ -3,7 +3,7 @@ import 'package:layered_architecture_bloc/common/network/api_result.dart';
 import 'package:layered_architecture_bloc/common/network/api_base.dart';
 import 'package:layered_architecture_bloc/core/api_config.dart';
 
-class UserApi extends ApiBase<User> {
+class UserApi extends ApiBase{
   //Create new user
   Future<ApiResult> createUser(User user) async {
     return await createItem(dioClient.dio!.post(ApiConfig.users, data: user));
