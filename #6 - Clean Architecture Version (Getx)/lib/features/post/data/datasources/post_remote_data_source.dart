@@ -14,7 +14,7 @@ abstract class PostRemoteDataSource {
   Future<bool> deletePost(Post post);
 }
 
-class PostRemoteDataSourceImpl with ApiBase<Post> implements PostRemoteDataSource {
+class PostRemoteDataSourceImpl with ApiBase implements PostRemoteDataSource {
   final DioClient dioClient;
 
   const PostRemoteDataSourceImpl({required this.dioClient});

@@ -14,7 +14,7 @@ abstract class UserRemoteDataSource {
   Future<bool> deleteUser(User user);
 }
 
-class UserRemoteDataSourceImpl with ApiBase<User> implements UserRemoteDataSource {
+class UserRemoteDataSourceImpl with ApiBase implements UserRemoteDataSource {
   final DioClient dioClient;
 
   const UserRemoteDataSourceImpl({required this.dioClient});

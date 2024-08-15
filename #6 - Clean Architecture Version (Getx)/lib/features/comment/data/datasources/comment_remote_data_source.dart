@@ -11,7 +11,7 @@ abstract class CommentRemoteDataSource {
   Future<bool> deleteComment(Comment comment);
 }
 
-class CommentRemoteDataSourceImpl with ApiBase<Comment> implements CommentRemoteDataSource {
+class CommentRemoteDataSourceImpl with ApiBase implements CommentRemoteDataSource {
   final DioClient dioClient;
 
   const CommentRemoteDataSourceImpl({required this.dioClient});

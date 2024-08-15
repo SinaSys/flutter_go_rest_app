@@ -14,7 +14,7 @@ abstract class TodoRemoteDataSource {
   Future<bool> deleteTodo(ToDo todo);
 }
 
-class TodoRemoteDataSourceImpl with ApiBase<ToDo> implements TodoRemoteDataSource {
+class TodoRemoteDataSourceImpl with ApiBase implements TodoRemoteDataSource {
   final DioClient dioClient;
 
   const TodoRemoteDataSourceImpl({required this.dioClient});
