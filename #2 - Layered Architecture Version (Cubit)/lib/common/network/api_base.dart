@@ -4,12 +4,12 @@ import 'package:layered_architecture_cubit/common/network/dio_client.dart';
 import 'package:dio/dio.dart' show Response, DioException;
 import 'dart:convert';
 
-abstract class ApiBase<T> {
+abstract class ApiBase {
   final DioClient dioClient = DioClient();
-  late final T data;
 
   Future<ApiResult<bool>> _requestMethodTemplate(
-      Future<Response<dynamic>> apiCallback) async {
+    Future<Response<dynamic>> apiCallback,
+  ) async {
     try {
       await apiCallback;
       return const ApiResult.success(true);
@@ -35,9 +35,10 @@ abstract class ApiBase<T> {
   }
 
   //Generic method template for getting data from Api
-  Future<ApiResult<List<T>>> makeGetRequest(
-      Future<Response<dynamic>> apiCallback,
-      T Function(Map<String, dynamic> json) getJsonCallback) async {
+  Future<ApiResult<List<T>>> makeGetRequest<T>(
+    Future<Response<dynamic>> apiCallback,
+    T Function(Map<String, dynamic> json) getJsonCallback,
+  ) async {
     try {
       final Response response = await apiCallback;
 
