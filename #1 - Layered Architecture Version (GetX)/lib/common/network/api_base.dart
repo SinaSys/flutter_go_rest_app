@@ -4,7 +4,7 @@ import 'package:dio/dio.dart' show Response, DioException;
 import 'package:dartz/dartz.dart';
 import 'dart:convert';
 
-abstract class ApiBase<T> {
+abstract class ApiBase {
   //dioClient will be used in child classes
   final DioClient dioClient = DioClient();
 
@@ -39,7 +39,7 @@ abstract class ApiBase<T> {
   }
 
   //Generic Method template for getting data from server
-  Future<Either<String, List<T>>> makeGetRequest(
+  Future<Either<String, List<T>>> makeGetRequest<T>(
       Future<Response<dynamic>> apiCallback,
       T Function(Map<String, dynamic> json) getJsonCallback) async {
     try {
