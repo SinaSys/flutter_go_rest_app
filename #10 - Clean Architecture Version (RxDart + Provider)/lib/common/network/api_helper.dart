@@ -3,8 +3,7 @@ import 'dart:convert' show json;
 import 'package:clean_architecture_rxdart/core/app_extension.dart';
 import 'package:clean_architecture_rxdart/common/network/dio_exception.dart';
 
-abstract mixin class ApiHelper<T> {
-  late final T data;
+abstract mixin class ApiHelper {
 
   Future<bool> _requestMethodTemplate(
       Future<Response<dynamic>> apiCallback) async {
@@ -32,7 +31,7 @@ abstract mixin class ApiHelper<T> {
   }
 
   //Generic Method template for get data from Api
-  Future<List<T>> makeGetRequest(Future<Response<dynamic>> apiCallback,
+  Future<List<T>> makeGetRequest<T>(Future<Response<dynamic>> apiCallback,
       T Function(Map<String, dynamic> json) getJsonCallback) async {
     final Response response = await apiCallback;
 
