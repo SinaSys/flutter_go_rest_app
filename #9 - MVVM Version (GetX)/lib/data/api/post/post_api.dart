@@ -4,7 +4,7 @@ import 'package:mvvm_getx/data/model/post/post.dart';
 import 'package:mvvm_getx/data/model/user/user.dart';
 import 'package:mvvm_getx/core/api_config.dart';
 
-class PostApi with ApiHelper<Post> {
+class PostApi with ApiHelper {
   final DioClient dioClient;
 
   PostApi({required this.dioClient});
