@@ -3,7 +3,7 @@ import 'package:mvvm_bloc/common/network/dio_client.dart';
 import 'package:mvvm_bloc/data/model/user/user.dart';
 import 'package:mvvm_bloc/core/api_config.dart';
 
-class UserApi with ApiHelper<User> {
+class UserApi with ApiHelper {
   final DioClient dioClient;
 
   UserApi({required this.dioClient});

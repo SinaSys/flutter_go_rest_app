@@ -3,7 +3,7 @@ import 'package:mvvm_bloc/common/network/dio_client.dart';
 import 'package:mvvm_bloc/data/model/todo/todo.dart';
 import 'package:mvvm_bloc/core/api_config.dart';
 
-class ToDoApi with ApiHelper<ToDo> {
+class ToDoApi with ApiHelper {
   final DioClient dioClient;
 
   ToDoApi({required this.dioClient});
