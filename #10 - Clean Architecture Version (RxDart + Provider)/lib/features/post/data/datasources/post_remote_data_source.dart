@@ -15,7 +15,7 @@ abstract class PostRemoteDataSource {
   Future<bool> deletePost(Post post);
 }
 
-class PostRemoteDataSourceImpl with ApiHelper<Post> implements PostRemoteDataSource {
+class PostRemoteDataSourceImpl with ApiHelper implements PostRemoteDataSource {
   final DioClient dioClient = getIt<DioClient>();
 
   @override

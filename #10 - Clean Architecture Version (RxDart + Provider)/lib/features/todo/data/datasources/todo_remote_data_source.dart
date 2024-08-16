@@ -15,9 +15,7 @@ abstract class TodoRemoteDataSource {
   Future<bool> deleteTodo(ToDo todo);
 }
 
-class TodoRemoteDataSourceImpl
-    with ApiHelper<ToDo>
-    implements TodoRemoteDataSource {
+class TodoRemoteDataSourceImpl with ApiHelper implements TodoRemoteDataSource {
   final DioClient dioClient = getIt<DioClient>();
 
   @override
@@ -46,9 +44,7 @@ class TodoRemoteDataSourceImpl
 
   @override
   Future<List<ToDo>> getTodos(int userId, {TodoStatus? status}) async {
-    Map<String, String> queryParameters = <String, String>{
-      'user_id': "$userId"
-    };
+    Map<String, String> queryParameters = <String, String>{'user_id': "$userId"};
 
     if (status != null && status != TodoStatus.all) {
       queryParameters.addAll({'status': status.name});

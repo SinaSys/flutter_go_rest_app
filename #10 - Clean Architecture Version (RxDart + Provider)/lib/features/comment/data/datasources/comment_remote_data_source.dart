@@ -13,7 +13,7 @@ abstract class CommentRemoteDataSource {
   Future<bool> deleteComment(Comment comment);
 }
 
-class CommentRemoteDataSourceImpl with ApiHelper<Comment> implements CommentRemoteDataSource {
+class CommentRemoteDataSourceImpl with ApiHelper implements CommentRemoteDataSource {
 
   final DioClient dioClient = getIt<DioClient>();
 
