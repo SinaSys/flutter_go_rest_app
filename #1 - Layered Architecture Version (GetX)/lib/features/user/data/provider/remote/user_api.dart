@@ -6,17 +6,25 @@ import 'package:dartz/dartz.dart';
 class UserApi extends ApiBase {
   //Create new user
   Future<Either<String, bool>> createUser(User user) async {
-    return await makePostRequest(dioClient.dio!.post(ApiConfig.users, data: user));
+    return await makePostRequest(
+      path: ApiConfig.users,
+      data: user,
+    );
   }
 
   //Delete single suer
   Future<Either<String, bool>> deleteUser(User user) async {
-    return await makeDeleteRequest(dioClient.dio!.delete("${ApiConfig.users}/${user.id}"));
+    return await makeDeleteRequest(
+      path: "${ApiConfig.users}/${user.id}",
+    );
   }
 
   //Update single suer
   Future<Either<String, bool>> updateUser(User user) async {
-    return await makePutRequest(dioClient.dio!.put("${ApiConfig.users}/${user.id}", data: user));
+    return await makePutRequest(
+      path: "${ApiConfig.users}/${user.id}",
+      data: user,
+    );
   }
 
   //Get user list | Filter user list by gender or status
@@ -35,8 +43,9 @@ class UserApi extends ApiBase {
     }
 
     Future<Either<String, List<User>>> result = makeGetRequest(
-      dioClient.dio!.get(ApiConfig.users, queryParameters: queryParameters),
-      User.fromJson,
+      path: ApiConfig.users,
+      queryParameters: queryParameters,
+      getJsonCallback: User.fromJson,
     );
 
     return result;

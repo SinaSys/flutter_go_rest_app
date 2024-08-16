@@ -5,17 +5,22 @@ import 'package:dartz/dartz.dart';
 
 class ToDoApi extends ApiBase {
   Future<Either<String, bool>> createTodo(ToDo todo) async {
-    return await makePostRequest(dioClient.dio!.post(ApiConfig.todos, data: todo),
+    return await makePostRequest(
+      path: ApiConfig.todos,
+      data: todo,
     );
   }
 
   Future<Either<String, bool>> updateTodo(ToDo todo) async {
-    return await makePutRequest(dioClient.dio!.put("${ApiConfig.todos}/${todo.id}", data: todo),
+    return await makePutRequest(
+      path: "${ApiConfig.todos}/${todo.id}",
+      data: todo,
     );
   }
 
   Future<Either<String, bool>> deleteTodo(ToDo todo) async {
-    return await makeDeleteRequest(dioClient.dio!.delete("${ApiConfig.todos}/${todo.id}"),
+    return await makeDeleteRequest(
+      path: "${ApiConfig.todos}/${todo.id}",
     );
   }
 
@@ -23,16 +28,15 @@ class ToDoApi extends ApiBase {
     int userId, {
     Status? status,
   }) async {
-    Map<String, String> queryParameters = <String, String>{
-      'user_id': "$userId"
-    };
+    Map<String, String> queryParameters = <String, String>{'user_id': "$userId"};
 
     if (status != null && status != Status.all) {
       queryParameters.addAll({'status': status.name});
     }
     Future<Either<String, List<ToDo>>> result = makeGetRequest(
-      dioClient.dio!.get(ApiConfig.todos, queryParameters: queryParameters),
-      ToDo.fromJson,
+      path: ApiConfig.todos,
+      queryParameters: queryParameters,
+      getJsonCallback: ToDo.fromJson,
     );
 
     return result;

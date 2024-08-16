@@ -5,12 +5,12 @@ import 'package:dartz/dartz.dart';
 import 'dart:convert';
 
 abstract class ApiBase {
+
   //dioClient will be used in child classes
   final DioClient dioClient = DioClient();
 
   //Method template for checking whether api call is success or not
-  Future<Either<String, bool>> _checkFailureOrSuccess(
-      Future<Response<dynamic>> apiCallback) async {
+  Future<Either<String, bool>> _checkFailureOrSuccess(Future<Response<dynamic>> apiCallback) async {
     try {
       await apiCallback;
       return right(true);
@@ -21,29 +21,31 @@ abstract class ApiBase {
   }
 
   //Generic method template for create item on server
-  Future<Either<String, bool>> makePostRequest(
-      Future<Response<dynamic>> apiCallback) async {
-    return _checkFailureOrSuccess(apiCallback);
+  Future<Either<String, bool>> makePostRequest<T>({required String path, required T data}) async {
+    return _checkFailureOrSuccess(dioClient.dio!.post(path, data: data));
   }
 
   //Generic method template for update item on server
-  Future<Either<String, bool>> makePutRequest(
-      Future<Response<dynamic>> apiCallback) async {
-    return _checkFailureOrSuccess(apiCallback);
+  Future<Either<String, bool>> makePutRequest<T>({required String path, required T data}) async {
+    return _checkFailureOrSuccess(dioClient.dio!.put(path, data: data));
   }
 
   //Generic method template for delete item from server
-  Future<Either<String, bool>> makeDeleteRequest(
-      Future<Response<dynamic>> apiCallback) async {
-    return _checkFailureOrSuccess(apiCallback);
+  Future<Either<String, bool>> makeDeleteRequest({required String path}) async {
+    return _checkFailureOrSuccess(dioClient.dio!.delete(path));
   }
 
   //Generic Method template for getting data from server
-  Future<Either<String, List<T>>> makeGetRequest<T>(
-      Future<Response<dynamic>> apiCallback,
-      T Function(Map<String, dynamic> json) getJsonCallback) async {
+  Future<Either<String, List<T>>> makeGetRequest<T>({
+    required String path,
+    Map<String, dynamic>? queryParameters,
+    required T Function(Map<String, dynamic> json) getJsonCallback,
+  }) async {
     try {
-      final Response response = await apiCallback;
+      final Response response = await dioClient.dio!.get(
+        path,
+        queryParameters: queryParameters,
+      );
 
       final List<T> dataList = List<T>.from(
         json.decode(json.encode(response.data)).map(
