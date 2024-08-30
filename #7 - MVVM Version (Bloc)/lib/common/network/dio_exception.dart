@@ -34,24 +34,16 @@ class DioExceptions implements Exception {
   }
 
   String _handleError(int? statusCode, dynamic error) {
-    switch (statusCode) {
-      case 400:
-        return AppString.badRequest;
-      case 401:
-        return AppString.unauthorized;
-      case 403:
-        return AppString.forbidden;
-      case 404:
-        return AppString.notFound;
-      case 422:
-        return AppString.duplicateEmail;
-      case 500:
-        return AppString.internalServerError;
-      case 502:
-        return AppString.badGateway;
-      default:
-        return AppString.unknownError;
-    }
+    return switch (statusCode) {
+      400 => AppString.badRequest,
+      401 => AppString.unauthorized,
+      403 => AppString.forbidden,
+      404 => AppString.notFound,
+      422 => AppString.duplicateEmail,
+      500 => AppString.internalServerError,
+      502 => AppString.badGateway,
+      _ => AppString.unknownError
+    };
   }
 
   @override
