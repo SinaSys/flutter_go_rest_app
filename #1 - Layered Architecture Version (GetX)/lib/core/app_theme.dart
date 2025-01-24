@@ -13,17 +13,21 @@ class AppTheme {
     ),
     dialogTheme: const DialogTheme(
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Color(0xFFF4511E), width: 1.0),
+        side: BorderSide(
+          color: Color(0xFFF4511E),
+          width: 1.0,
+        ),
         borderRadius: BorderRadius.all(
           Radius.circular(15.0),
         ),
       ),
     ),
     inputDecorationTheme: const InputDecorationTheme(
-        enabledBorder: enabledBorder,
-        focusedBorder: focusedBorder,
-        errorBorder: errorBorder,
-        border: inputBorder),
+      enabledBorder: enabledBorder,
+      focusedBorder: focusedBorder,
+      errorBorder: errorBorder,
+      border: inputBorder,
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFFF4511E),
@@ -44,26 +48,41 @@ class AppTheme {
     timePickerTheme: TimePickerThemeData(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        side: BorderSide(color: Colors.grey, width: 2),
+        side: BorderSide(
+          color: Colors.grey,
+          width: 2,
+        ),
       ),
       dialHandColor: const Color(0xFFF4511E),
-      hourMinuteColor: MaterialStateColor.resolveWith((states) =>
-          states.contains(MaterialState.selected)
-              ? const Color(0xFFF4511E)
-              : Colors.black12),
-      hourMinuteTextColor: MaterialStateColor.resolveWith((states) =>
-          states.contains(MaterialState.selected)
-              ? Colors.black54
-              : Colors.grey),
+      hourMinuteColor: WidgetStateColor.resolveWith(
+        (states) {
+          return switch (states.contains(WidgetState.selected)) {
+            true => const Color(0xFFF4511E),
+            false => Colors.black12
+          };
+        },
+      ),
+      hourMinuteTextColor: WidgetStateColor.resolveWith(
+        (states) {
+          return switch (states.contains(WidgetState.selected)) {
+            true => Colors.black54,
+            false => Colors.grey,
+          };
+        },
+      ),
       dayPeriodBorderSide: const BorderSide(color: Colors.grey),
       dayPeriodShape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
       ),
       dayPeriodColor: Colors.transparent,
-      dayPeriodTextColor: MaterialStateColor.resolveWith((states) =>
-          states.contains(MaterialState.selected)
-              ? const Color(0xFFF4511E)
-              : Colors.black12),
+      dayPeriodTextColor: WidgetStateColor.resolveWith(
+        (states) {
+          return switch (states.contains(WidgetState.selected)) {
+            true => const Color(0xFFF4511E),
+            false => Colors.black12,
+          };
+        },
+      ),
       hourMinuteShape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
         side: const BorderSide(color: Colors.black12),
