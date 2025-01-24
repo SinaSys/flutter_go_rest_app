@@ -31,21 +31,21 @@ class _DateTimePickerState extends State<DateTimePicker> {
     return await showDatePicker(
         builder: (_, child) {
           return Theme(
-              data: Theme.of(context).copyWith(
-                colorScheme: Theme.of(context).colorScheme.copyWith(
-                      surface: Colors.amber,
-                      primary: const Color(0xFFF4511E),
-                    ),
-                textButtonTheme: TextButtonThemeData(
-                  style: TextButton.styleFrom(
-                    foregroundColor: MaterialStateColor.resolveWith((states) =>
-                        states.contains(MaterialState.selected)
-                            ? const Color(0xFFF4511E)
-                            : Colors.black87),
+            data: Theme.of(context).copyWith(
+              colorScheme: Theme.of(context).colorScheme.copyWith(
+                    surface: Colors.amber,
+                    primary: const Color(0xFFF4511E),
+                  ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  foregroundColor: WidgetStateColor.resolveWith(
+                    (states) => states.contains(WidgetState.selected) ? const Color(0xFFF4511E) : Colors.black87,
                   ),
                 ),
               ),
-              child: child!);
+            ),
+            child: child!,
+          );
         },
         context: context,
         initialDate: date,
@@ -58,7 +58,12 @@ class _DateTimePickerState extends State<DateTimePicker> {
     if (newDate == null) return;
 
     date = DateTime(
-        newDate.year, newDate.month, newDate.day, date.hour, date.minute);
+      newDate.year,
+      newDate.month,
+      newDate.day,
+      date.hour,
+      date.minute,
+    );
 
     widget.selectedDateTime(date);
   }
@@ -66,15 +71,24 @@ class _DateTimePickerState extends State<DateTimePicker> {
   //Get time from date picker
   Future<TimeOfDay?> pickTime() async {
     return await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(hour: date.hour, minute: date.minute));
+      context: context,
+      initialTime: TimeOfDay(
+        hour: date.hour,
+        minute: date.minute,
+      ),
+    );
   }
 
   //Set the time that is taken from the user by time picker
   void setTime(TimeOfDay? newTime) {
     if (newTime == null) return;
-    date =
-        DateTime(date.year, date.month, date.day, newTime.hour, newTime.minute);
+    date = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      newTime.hour,
+      newTime.minute,
+    );
     widget.selectedDateTime(date);
   }
 
@@ -96,8 +110,10 @@ class _DateTimePickerState extends State<DateTimePicker> {
             },
             child: Text(
               "${date.year} / ${date.month} / ${date.day}",
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25.0,
+              ),
             ),
           ),
           const SizedBox(width: 15),
@@ -109,8 +125,10 @@ class _DateTimePickerState extends State<DateTimePicker> {
             },
             child: Text(
               "$hours : $minute",
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25.0,
+              ),
             ),
           )
         ],
