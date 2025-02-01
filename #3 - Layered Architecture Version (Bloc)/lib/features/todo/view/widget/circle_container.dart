@@ -17,7 +17,7 @@ class CircleContainer extends StatelessWidget {
       radius: 16,
       child: CircleAvatar(
         radius: 13,
-        backgroundColor: Colors.white.withOpacity(0.9),
+        backgroundColor: Colors.white.withValues(alpha: 0.9),
         child: CircleAvatar(
           radius: 10,
           backgroundColor: isActive ? color : color.withAlpha(1),
