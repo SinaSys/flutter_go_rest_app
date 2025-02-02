@@ -40,13 +40,13 @@ class AppTheme {
         side: BorderSide(color: Colors.grey, width: 2),
       ),
       dialHandColor: const Color(0xFFF4511E),
-      hourMinuteColor: MaterialStateColor.resolveWith(
-        (states) => states.contains(MaterialState.selected)
+      hourMinuteColor: WidgetStateColor.resolveWith(
+        (states) => states.contains(WidgetState.selected)
             ? const Color(0xFFF4511E)
             : Colors.black12,
       ),
-      hourMinuteTextColor: MaterialStateColor.resolveWith(
-        (states) => states.contains(MaterialState.selected)
+      hourMinuteTextColor: WidgetStateColor.resolveWith(
+        (states) => states.contains(WidgetState.selected)
             ? Colors.black54
             : Colors.grey,
       ),
@@ -55,8 +55,8 @@ class AppTheme {
         borderRadius: BorderRadius.circular(5),
       ),
       dayPeriodColor: Colors.transparent,
-      dayPeriodTextColor: MaterialStateColor.resolveWith(
-        (states) => states.contains(MaterialState.selected)
+      dayPeriodTextColor: WidgetStateColor.resolveWith(
+        (states) => states.contains(WidgetState.selected)
             ? const Color(0xFFF4511E)
             : Colors.black12,
       ),
