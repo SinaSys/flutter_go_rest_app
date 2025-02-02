@@ -28,6 +28,8 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 android {
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
+    namespace = "com.sinasys.gorest.clean_architecture_bloc"
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
