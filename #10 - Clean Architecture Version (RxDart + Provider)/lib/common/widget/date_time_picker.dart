@@ -38,10 +38,8 @@ class _DateTimePickerState extends State<DateTimePicker> {
                 ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                foregroundColor: MaterialStateColor.resolveWith(
-                  (states) => states.contains(MaterialState.selected)
-                      ? const Color(0xFFF4511E)
-                      : Colors.black87,
+                foregroundColor: WidgetStateColor.resolveWith(
+                  (states) => states.contains(WidgetState.selected) ? const Color(0xFFF4511E) : Colors.black87,
                 ),
               ),
             ),
