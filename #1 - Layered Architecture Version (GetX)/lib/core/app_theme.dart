@@ -11,7 +11,7 @@ class AppTheme {
       color: Color(0xFFF4511E),
       centerTitle: true,
     ),
-    dialogTheme: const DialogTheme(
+    dialogTheme: const DialogThemeData(
       shape: RoundedRectangleBorder(
         side: BorderSide(
           color: Color(0xFFF4511E),
