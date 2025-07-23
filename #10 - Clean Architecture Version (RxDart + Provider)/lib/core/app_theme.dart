@@ -8,7 +8,7 @@ class AppTheme {
   static ThemeData lightAppTheme = ThemeData(
     useMaterial3: false,
     appBarTheme: const AppBarTheme(color: Color(0xFFF4511E), centerTitle: true),
-    dialogTheme: const DialogTheme(
+    dialogTheme: const DialogThemeData(
       shape: RoundedRectangleBorder(
         side: BorderSide(color: Color(0xFFF4511E), width: 1.0),
         borderRadius: BorderRadius.all(Radius.circular(15.0)),
