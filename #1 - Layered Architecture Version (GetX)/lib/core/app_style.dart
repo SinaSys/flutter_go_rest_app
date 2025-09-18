@@ -1,4 +1,11 @@
+import 'package:logger/logger.dart';
 import 'package:flutter/material.dart';
+
+final Logger logger = Logger(
+  printer: PrettyPrinter(
+    methodCount: 0,
+  ),
+);
 
 const List<Color> colorList = [
   Color(0xFFF4511E),
@@ -74,5 +81,3 @@ const focusedErrorBorder = OutlineInputBorder(
     Radius.circular(10.0),
   ),
 );
-
-
