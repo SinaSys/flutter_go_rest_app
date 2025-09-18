@@ -7,8 +7,7 @@ extension StringExtension on String {
     return AppAsset.female;
   }
 
-  String get toCapital =>
-      "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
+  String get toCapital => "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
 }
 
 extension IntegetExtension on int? {
@@ -39,13 +38,11 @@ extension IterableExtension<T> on Iterable<T> {
 
 extension MapExtension on Map {
   String get format {
-    if (isEmpty) {
-      return "";
-    } else {
-      var firstKey = entries.first.key;
-      var mapValues = entries.first.value;
-      return "?$firstKey=$mapValues";
-    }
+    if (isEmpty) return "";
+
+    // map each entry to "key=value" and join them with "&"
+    final formatted = entries.map((e) => "${e.key}=${e.value}").join("&");
+    return "?$formatted";
   }
 }
 
