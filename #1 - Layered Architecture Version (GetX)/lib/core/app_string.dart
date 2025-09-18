@@ -20,4 +20,7 @@ class AppString {
   static const badGateway = "Bad gateway";
 
   static const appFont = "Roboto";
+  static const gorestEnv = "gorestEnv";
+  static const springEnv = "springEnv";
+
 }
