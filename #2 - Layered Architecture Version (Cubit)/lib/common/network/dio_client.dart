@@ -13,7 +13,7 @@ class DioClient {
     dio = Dio(
       BaseOptions(
         baseUrl: ApiConfig.baseUrl,
-        headers: ApiConfig.header,
+        headers: ApiConfig.headers,
         connectTimeout: ApiConfig.connectionTimeout,
         receiveTimeout: ApiConfig.receiveTimeout,
         responseType: ResponseType.json,
