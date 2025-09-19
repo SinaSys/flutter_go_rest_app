@@ -1,6 +1,6 @@
-import 'package:layered_architecture_bloc/common/network/dio_interceptor.dart';
-import 'package:layered_architecture_bloc/core/api_config.dart';
 import 'package:dio/dio.dart';
+import 'package:layered_architecture_bloc/core/api_config.dart';
+import 'package:layered_architecture_bloc/common/network/dio_interceptor.dart';
 
 //singleton class for DioClient
 class DioClient {
@@ -13,7 +13,7 @@ class DioClient {
     dio = Dio(
       BaseOptions(
         baseUrl: ApiConfig.baseUrl,
-        headers: ApiConfig.header,
+        headers: ApiConfig.headers,
         connectTimeout: ApiConfig.connectionTimeout,
         receiveTimeout: ApiConfig.receiveTimeout,
         responseType: ResponseType.json,
