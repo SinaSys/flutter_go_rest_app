@@ -1,15 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
-import 'package:layered_architecture_cubit/core/app_extension.dart';
+import 'package:layered_architecture_cubit/core/app_style.dart';
+import 'package:layered_architecture_cubit/core/app_style.dart' show logger;
 
 class DioInterceptor extends Interceptor {
-  final Logger logger = Logger(
-    printer: PrettyPrinter(
-      methodCount: 0,
-      printTime: false,
-    ),
-  );
-
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     logger.i('====================START====================');
@@ -29,8 +22,8 @@ class DioInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    logger.d('Response => StatusCode: ${response.statusCode}'); // Debug log
-    logger.d('Response => Body: ${response.data}'); // Debug log
+    logger.i('Response => StatusCode: ${response.statusCode}'); // Debug log
+    logger.i('Response => Body: ${response.data}'); // Debug log
     return super.onResponse(response, handler);
   }
 }
