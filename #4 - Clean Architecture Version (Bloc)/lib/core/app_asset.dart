@@ -5,4 +5,8 @@ class AppAsset {
   static const female = "asset/images/female.png";
   static const user = "asset/images/user.png";
   static const emptyState = "asset/images/empty_state.png";
+
+  // Configs
+  static const gorestConfig = "asset/config/gorest_config.json";
+  static const springConfig = "asset/config/spring_config.json";
 }
