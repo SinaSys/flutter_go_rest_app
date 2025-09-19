@@ -2,14 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clean_architecture_bloc/di.dart';
 import 'package:clean_architecture_bloc/core/app_theme.dart';
+import 'package:clean_architecture_bloc/core/app_config.dart';
+import 'package:clean_architecture_bloc/core/app_style.dart' show logger;
+import 'package:clean_architecture_bloc/core/app_string.dart' show AppString;
+import 'package:clean_architecture_bloc/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:clean_architecture_bloc/features/user/presentation/bloc/user_bloc.dart';
 import 'package:clean_architecture_bloc/features/post/presentation/bloc/post_bloc.dart';
-import 'package:clean_architecture_bloc/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:clean_architecture_bloc/features/comment/presentation/bloc/comment_bloc.dart';
 import 'package:clean_architecture_bloc/features/user/presentation/screens/user_list_screen.dart';
 
-void main() async {
-  await init();
+Future<void> main() async => await initApp();
+
+Future<void> initApp() async {
+  await initDi();
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  const backendStr = String.fromEnvironment(
+    'BACKEND',
+    defaultValue: AppString.gorestEnv,
+  );
+  final backend = BackendEnv.fromString(backendStr);
+
+  await ConfigLoader.load(backend);
+
+  logger.i('Running with backend: ${ConfigLoader.currentEnv}');
+
   runApp(const MyApp());
 }
 
