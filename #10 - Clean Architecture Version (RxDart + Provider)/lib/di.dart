@@ -35,7 +35,7 @@ import 'package:clean_architecture_rxdart/features/todo/domain/usecases/update_t
 
 final getIt = GetIt.instance;
 
-Future<void> init() async {
+Future<void> initDi() async {
   //UserBloc
   getIt.registerFactory(
     () => UserBloc(

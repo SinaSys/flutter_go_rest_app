@@ -1,15 +1,33 @@
-import 'package:mvvm_cubit/viewmodel/comment/cubit/comment_cubit.dart';
-import 'package:mvvm_cubit/view/user/screen/user_list_screen.dart';
-import 'package:mvvm_cubit/viewmodel/post/cubit/post_cubit.dart';
-import 'package:mvvm_cubit/viewmodel/todo/cubit/todo_cubit.dart';
-import 'package:mvvm_cubit/viewmodel/user/cubit/user_cubit.dart';
+import 'di.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mvvm_cubit/core/app_theme.dart';
-import 'package:flutter/material.dart';
-import 'di.dart';
+import 'package:mvvm_cubit/core/app_string.dart';
+import 'package:mvvm_cubit/core/app_config.dart';
+import 'package:mvvm_cubit/core/app_style.dart' show logger;
+import 'package:mvvm_cubit/viewmodel/todo/cubit/todo_cubit.dart';
+import 'package:mvvm_cubit/viewmodel/user/cubit/user_cubit.dart';
+import 'package:mvvm_cubit/viewmodel/post/cubit/post_cubit.dart';
+import 'package:mvvm_cubit/view/user/screen/user_list_screen.dart';
+import 'package:mvvm_cubit/viewmodel/comment/cubit/comment_cubit.dart';
 
-void main() async {
-  await init();
+Future<void> main() async => await initApp();
+
+Future<void> initApp() async {
+  await initDi();
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  const backendStr = String.fromEnvironment(
+    'BACKEND',
+    defaultValue: AppString.gorestEnv,
+  );
+  final backend = BackendEnv.fromString(backendStr);
+
+  await ConfigLoader.load(backend);
+
+  logger.i('Running with backend: ${ConfigLoader.currentEnv}');
+
   runApp(const MyApp());
 }
 

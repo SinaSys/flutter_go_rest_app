@@ -35,7 +35,7 @@ import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
 
-Future<void> init() async {
+Future<void> initDi() async {
   //UserController
   getIt.registerFactory(
     () => UserController(

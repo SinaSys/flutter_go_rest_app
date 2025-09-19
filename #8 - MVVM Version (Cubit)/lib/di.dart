@@ -16,7 +16,7 @@ import 'package:dio/dio.dart';
 
 final getIt = GetIt.instance;
 
-Future<void> init() async {
+Future<void> initDi() async {
   //Dio
   getIt.registerLazySingleton<Dio>(() => Dio());
   getIt.registerLazySingleton<DioClient>(() => DioClient(getIt<Dio>()));

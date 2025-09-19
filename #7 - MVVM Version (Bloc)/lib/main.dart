@@ -1,16 +1,33 @@
 import 'core/app_theme.dart';
+import 'package:mvvm_bloc/di.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm_bloc/core/app_config.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mvvm_bloc/core/app_string.dart';
+import 'package:mvvm_bloc/core/app_style.dart' show logger;
 import 'package:mvvm_bloc/viewmodel/post/bloc/post_bloc.dart';
 import 'package:mvvm_bloc/viewmodel/todo/bloc/todo_bloc.dart';
 import 'package:mvvm_bloc/viewmodel/user/bloc/user_bloc.dart';
 import 'package:mvvm_bloc/view/user/screen/user_list_screen.dart';
 import 'package:mvvm_bloc/viewmodel/comment/bloc/comment_bloc.dart';
 
-import 'di.dart';
+Future<void> main() async => await initApp();
 
-void main() async {
-  await init();
+Future<void> initApp() async {
+  await initDi();
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  const backendStr = String.fromEnvironment(
+    'BACKEND',
+    defaultValue: AppString.gorestEnv,
+  );
+  final backend = BackendEnv.fromString(backendStr);
+
+  await ConfigLoader.load(backend);
+
+  logger.i('Running with backend: ${ConfigLoader.currentEnv}');
+
   runApp(const MyApp());
 }
 
