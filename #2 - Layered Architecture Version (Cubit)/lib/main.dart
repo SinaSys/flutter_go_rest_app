@@ -1,13 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:layered_architecture_cubit/core/app_theme.dart';
-import 'package:layered_architecture_cubit/features/post/cubit/post_cubit.dart';
+import 'package:layered_architecture_cubit/core/app_config.dart';
+import 'package:layered_architecture_cubit/core/app_style.dart' show logger;
 import 'package:layered_architecture_cubit/features/todo/cubit/todo_cubit.dart';
 import 'package:layered_architecture_cubit/features/user/cubit/user_cubit.dart';
+import 'package:layered_architecture_cubit/features/post/cubit/post_cubit.dart';
+import 'package:layered_architecture_cubit/core/app_string.dart' show AppString;
 import 'package:layered_architecture_cubit/features/comment/cubit/comment_cubit.dart';
 import 'package:layered_architecture_cubit/features/user/view/screen/user_list_screen.dart';
 
-void main() => runApp(const MyApp());
+Future<void> main() async => await initApp();
+
+Future<void> initApp() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  const backendStr = String.fromEnvironment(
+    'BACKEND',
+    defaultValue: AppString.gorestEnv,
+  );
+  final backend = BackendEnv.fromString(backendStr);
+
+  await ConfigLoader.load(backend);
+
+  logger.i('Running with backend: ${ConfigLoader.currentEnv}');
+
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
