@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: gorest-backend
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/gorest"
+    username: "postgres"
+    password: "1234"
