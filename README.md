@@ -99,14 +99,45 @@ files inside each feature folder, ensuring that they belong to the correct layer
 
   <br/>
 
-## ❗️ Api limitation
 
 
-• The user endpoint contains ten user objects by default. If any of them are deleted, they will be replaced with a new JSON object. This means that the length of the user list will always be ten, and it is not possible to create more than ten user objects. This also applies if you want to add query parameters to the users.
+## ⚠️ API Limitations (GoREST)
 
-• To use the request methods PUT, POST, PATCH, and DELETE, you need to provide an access token. This token must be passed with the "Authorization" header as a Bearer token. I have already included my own token in the app. However, if you receive an Unauthorized Error (401), please go to this [link](https://gorest.co.in/consumer/login) to obtain a new token and replace the old token in the api_config file located in the core directory.
+When using the GoREST API, there are some important limitations to be aware of:
 
-• Please note that the data is not permanent and will be changed or deleted every 20 minutes to 1 hour.
+---
+
+### Fixed Number of Users
+- The `users` endpoint always contains **10 user objects** by default.  
+- If any of them are deleted, they are automatically replaced with new placeholder data.  
+- As a result:
+  - The user list will always remain 10 items long.  
+  - It is not possible to create more than 10 users.  
+  - Query parameters on the `users` endpoint are limited in functionality.  
+
+---
+
+### Authorization Required for Write Operations
+- To use **PUT, POST, PATCH, or DELETE** requests, an **access token** must be provided in the `Authorization` header as a **Bearer token**.  
+- A token has already been included in the app configuration.  
+- If a `401 Unauthorized` error occurs, a new token must be requested [here](https://gorest.co.in/) and updated in the `api_config` file located in the `core` directory.  
+
+---
+
+### Temporary Data
+- The API data is **not permanent**.  
+- It is refreshed or cleared every **20 minutes to 1 hour**, meaning any changes will not persist for long.  
+
+---
+
+## ✅ No Limitations with the Custom Backend
+
+When using the custom **Spring Boot backend**, all of the above limitations are removed:
+
+- Unlimited creation and management of users, posts, todos, and comments.  
+- No external access token is required.  
+- Data is stored in a **real PostgreSQL database** and persists permanently.  
+
 <br/><br/><br/>
 
 ## 🧪 Coverage (Clean Architecture Version (GetX))
