@@ -10,9 +10,31 @@
 ![](https://github.com/SinaSys/flutter_go_rest_app/blob/master/screenshots/go_rest.jpg?raw=true)
 
 
-In this project, we are going to build a user management app using Flutter. We have used the [Go REST](https://gorest.co.in/) API to make HTTP request methods. This API provides all sorts of methods that we need: GET, POST, PUT, and DELETE. We will call all endpoints (users/todos/posts/comments) provided to us by the Go REST API using the Dio package in our app. We have performed different operations like selecting, adding, editing, and removing users, as well as user posts, todos, and comments.
-<br/><br/><br/>
+# Flutter User Management App with Multi-Source Backend Support
 
+This project is a Flutter-based user management application that demonstrates full CRUD (Create, Read, Update, Delete) operations. The app interacts with a RESTful API to manage users and their associated data, including posts, todos, and comments.
+
+A key feature of this application is its flexible backend architecture. Developers can seamlessly switch between two data sources:
+1. The public **GoRest API** (`https://gorest.co.in/`)
+2. A custom, self-hosted backend built with **Spring Boot and Kotlin**
+
+This choice is managed through environment variables, putting the decision of which backend to use entirely in the hands of the user.
+
+## Features
+
+- **User Management:** Browse, add, edit, and delete user profiles.
+- **User Content:** View and manage detailed user information, including their posts, todos, and comments.
+- **API Operations:** Utilizes all standard HTTP methods (GET, POST, PUT, DELETE) to interact with the API endpoints.
+- **Backend Agnostic:** Configure the app to run against the free GoRest service or your own private Kotlin/Spring Boot backend for full control and offline development.
+
+## Technology Stack
+
+- **Frontend:** Flutter 
+- **Backend Options:**
+  - **GoRest API:** A free-to-use online REST API.
+  - **Custom Backend:** Spring Boot with Kotlin and PostgreSQL, replicating the GoRest functionality.
+
+<br/>
 
 
 ## 🖼 Screenshots 
