@@ -259,8 +259,56 @@ When using the custom **Spring Boot backend**, all of the above limitations are 
   <br/>
 
 
-
-
+<br/><br/>
+## 📂 Directory Structure (Backend)
+```
+┌─── GorestBackendApplication.kt
+│
+│───📂controller
+│    │── CommentController
+│    │── PostController
+│    │── TodoController
+│    └── UserController
+│
+│───📂converter
+│    └── Converter.kt
+│
+│───📂dto
+│    │── CommentDto
+│    │── PostDto
+│    │── TodoDto
+│    └── UserDto
+│
+│───📂entity
+│    │── CommentEntity
+│    │── PostEntity
+│    │── TodoEntity
+│    └── UserEntity
+│
+│───📂mapper
+│    │── CommentMapper.kt
+│    │── PostMapper.kt
+│    │── TodoMapper.kt
+│    └── UserMapper.kt
+│
+│───📂repository
+│    │── CommentRepository
+│    │── PostRepository
+│    │── TodoRepository
+│    └── UserRepository
+│
+│───📂service
+│    │── CommentService
+│    │── PostService
+│    │── TodoService
+│    └── UserService
+│
+└───📂validation
+    │── CustomException.kt
+    │── ErrorResponse
+    │── GlobalExceptionHandler.kt
+    └── GlobalExceptionHandler
+```
 
 <br/><br/>
 ## 📂 Directory Structure (Clean architecture version + Bloc)
