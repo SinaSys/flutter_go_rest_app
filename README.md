@@ -132,13 +132,13 @@ Error state                    |   Empty state             |  Warning dialog    
 
 
 ## 🤝 Feature-first (Package-by-feature) and Layer-first (Package-by-layer)
-In this repository two architectural approaches have been used. 
-Feature-first (for clean architecture and simple layered architecture version)
-and Layer-first (for mvvm architecture version).
+In this repository, two architectural approaches have been implemented: **Feature-First** and **Layer-First**.
 
-The feature-first approach demands that we create a new folder for every new feature that we add to our app.
-And inside that, we add the layers themselves as sub-folders. But in Layer-first approach, we add all the relevant
-files inside each feature folder, ensuring that they belong to the correct layer.
+- **Feature-First Approach** (used in the Clean Architecture and Simple Layered Architecture versions):  
+  A new folder is created for each feature added to the app. Inside each feature folder, the layers (e.g., data, domain, presentation) are organized as subfolders.
+
+- **Layer-First Approach** (used in the MVVM Architecture version):  
+  All files are grouped by their respective layers firs
 
   <br/>
 
