@@ -33,6 +33,49 @@ This choice is managed through environment variables, putting the decision of wh
 - **Backend Options:**
   - **GoRest API:** A free-to-use online REST API.
   - **Custom Backend:** Spring Boot with Kotlin and PostgreSQL, replicating the GoRest functionality.
+ 
+## Switching Between Backends
+
+The app supports multiple backend configurations through environment variables. By passing the `BACKEND` flag at runtime, you can select which backend the app should use:
+
+## Available Backends
+
+- **Run with GoREST backend:**
+  ```bash
+  flutter run --dart-define=BACKEND=gorestEnv
+
+- **Run with Custom Backend:**
+  ```bash
+  flutter run --dart-define=BACKEND=springEnv
+
+ ## Configuration Files
+Configuration details for each backend are stored in separate JSON files inside the `assets/config/` directory:
+
+- `gorest_config.json`
+- `spring_config.json`
+
+
+## Running on Emulator or Genymotion
+
+When using the custom Spring Boot backend, the `backend_url` in `spring_config.json` must point to the correct host depending on the environment:
+
+### Genymotion Emulator
+```json
+{
+  "backend_url": "http://10.0.3.2:8080"
+}
+```
+
+### Android Studio Emulator
+
+```json
+{
+  "backend_url": "http://10.0.2.2:8080"
+}
+```
+⚠️ **Make sure to update `spring_config.json` according to the emulator you are using, otherwise the app will not be able to connect to your Spring Boot backend.**
+
+
 
 <br/>
 
