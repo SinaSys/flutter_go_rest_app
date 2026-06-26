@@ -8,7 +8,7 @@ class AppTheme {
   static ThemeData lightAppTheme = ThemeData(
     useMaterial3: false,
     appBarTheme: const AppBarTheme(
-      color: Color(0xFFF4511E),
+      backgroundColor: Color(0xFFF4511E),
       centerTitle: true,
     ),
     dialogTheme: const DialogThemeData(
