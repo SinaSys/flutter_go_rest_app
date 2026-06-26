@@ -40,7 +40,7 @@ class _DropDownState<T> extends State<DropDown<T>> {
   Widget build(BuildContext context) {
     return Center(
       child: DropdownButtonFormField<T>(
-        value: selectedItem,
+        initialValue: selectedItem,
         onChanged: (T? currentItem) {
           widget.onChanged(currentItem as T);
           setState(() => selectedItem = currentItem);
